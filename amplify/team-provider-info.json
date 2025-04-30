@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-openlaughs-dev-13b80-authRole",
+      "UnauthRoleArn": "arn:aws:iam::553806908724:role/amplify-openlaughs-dev-13b80-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::553806908724:role/amplify-openlaughs-dev-13b80-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-openlaughs-dev-13b80-deployment",
+      "UnauthRoleName": "amplify-openlaughs-dev-13b80-unauthRole",
+      "StackName": "amplify-openlaughs-dev-13b80",
+      "StackId": "arn:aws:cloudformation:us-east-1:553806908724:stack/amplify-openlaughs-dev-13b80/32955020-260a-11f0-932e-0eb8826c64a5",
+      "AmplifyAppId": "dtnp2qcciqtir"
+    },
+    "categories": {
+      "auth": {
+        "openlaughs0fb0c848": {}
+      },
+      "api": {
+        "openlaughs": {}
+      }
+    }
+  }
+}
