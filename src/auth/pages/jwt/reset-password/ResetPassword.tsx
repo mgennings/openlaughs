@@ -37,7 +37,7 @@ const ResetPassword = () => {
       setHasErrors(undefined);
       try {
         if (!requestPasswordResetLink) {
-          throw new Error('JWTProvider is required for this form.');
+          throw new Error('AWSAmplifyProvider is required for this form.');
         }
         await requestPasswordResetLink(values.email);
         setHasErrors(false);

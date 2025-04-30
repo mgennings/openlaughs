@@ -45,7 +45,7 @@ const Login = () => {
 
       try {
         if (!login) {
-          throw new Error('JWTProvider is required for this form.');
+          throw new Error('AWSAmplifyProvider is required for this form.');
         }
 
         await login(values.email, values.password);

@@ -51,7 +51,7 @@ const Signup = () => {
       setLoading(true);
       try {
         if (!register) {
-          throw new Error('JWTProvider is required for this form.');
+          throw new Error('AWSAmplifyProvider is required for this form.');
         }
         await register(values.email, values.password, values.changepassword);
         navigate(from, { replace: true });
