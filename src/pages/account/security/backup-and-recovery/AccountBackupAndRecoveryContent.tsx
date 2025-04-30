@@ -1,4 +1,8 @@
-import { MiscFaq, MiscHighlightedPosts, IHighlightedPostsItems } from '@/partials/misc';
+import {
+  MiscFaq,
+  MiscHighlightedPosts,
+  IHighlightedPostsItems,
+} from '@/partials/misc';
 
 import { Backup, BackupSettings } from './blocks';
 
@@ -9,15 +13,15 @@ const AccountBackupAndRecoveryContent = () => {
       title: 'Securing Data Integrity: Backup Recovery Systems',
       summary:
         'Safeguard your data with our resilient backup recovery solutions. Detailed guides and expert strategies provide the roadmap to robust data protection and swift recovery.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'data',
       title: 'Restoration Assurance: Proactive Backup Resources',
       summary:
         'Prepare for the unexpected with proactive backup plans. Access our extensive resources for establishing a reliable recovery protocol, ensuring continuity and peace of mind.',
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (

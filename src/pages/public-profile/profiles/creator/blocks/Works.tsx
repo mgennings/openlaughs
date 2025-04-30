@@ -18,7 +18,7 @@ const Works = () => {
       authorName: 'Cody Fisher',
       authorAvatar: '300-6.png',
       likes: 24,
-      comments: 5
+      comments: 5,
     },
     {
       title: 'Timeless Elegance',
@@ -26,7 +26,7 @@ const Works = () => {
       authorName: 'Jenny Wilson',
       authorAvatar: '300-5.png',
       likes: 6,
-      comments: 1
+      comments: 1,
     },
     {
       title: 'Whispered Emotions',
@@ -34,7 +34,7 @@ const Works = () => {
       authorName: 'Wade Warren',
       authorAvatar: '300-14.png',
       likes: 187,
-      comments: 49
+      comments: 49,
     },
     {
       title: 'Golden Serenity',
@@ -42,7 +42,7 @@ const Works = () => {
       authorName: 'Albert Flores',
       authorAvatar: '300-11.png',
       likes: 60,
-      comments: 13
+      comments: 13,
     },
     {
       title: 'Wild Beauty',
@@ -50,7 +50,7 @@ const Works = () => {
       authorName: 'Devon Lane',
       authorAvatar: '300-16.png',
       likes: 625,
-      comments: 109
+      comments: 109,
     },
     {
       title: 'Mystic Shadows',
@@ -58,8 +58,8 @@ const Works = () => {
       authorName: 'Kathryn Murphy',
       authorAvatar: '300-1.png',
       likes: 37,
-      comments: 16
-    }
+      comments: 16,
+    },
   ];
 
   const renderItem = (item: IWorksItem, index: number) => {

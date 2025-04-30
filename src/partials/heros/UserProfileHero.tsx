@@ -12,7 +12,9 @@ const UserProfileHero = ({ image, name, info }: IUserProfileHeroProps) => {
     return info.map((item, index) => {
       return (
         <div className="flex gap-1.25 items-center" key={`info-${index}`}>
-          {item.icon && <KeenIcon icon={item.icon} className="text-gray-500 text-sm" />}
+          {item.icon && (
+            <KeenIcon icon={item.icon} className="text-gray-500 text-sm" />
+          )}
 
           {item.email ? (
             <a
@@ -39,7 +41,7 @@ const UserProfileHero = ({ image, name, info }: IUserProfileHeroProps) => {
           backgroundImage:
             getThemeMode() === 'dark'
               ? `url('${toAbsoluteUrl('/media/images/2600x1200/bg-1-dark.png')}')`
-              : `url('${toAbsoluteUrl('/media/images/2600x1200/bg-1.png')}')`
+              : `url('${toAbsoluteUrl('/media/images/2600x1200/bg-1.png')}')`,
         }}
       >
         <Container>
@@ -47,7 +49,9 @@ const UserProfileHero = ({ image, name, info }: IUserProfileHeroProps) => {
             {image}
 
             <div className="flex items-center gap-1.5">
-              <div className="text-lg leading-5 font-semibold text-gray-900">{name}</div>
+              <div className="text-lg leading-5 font-semibold text-gray-900">
+                {name}
+              </div>
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -36,7 +36,9 @@ const ActivitiesProductWebinar = () => {
 
             <div className="flex flex-wrap gap-7.5">
               <div className="flex items-center gap-1.5">
-                <span className="text-2sm font-medium text-gray-600">Code:</span>
+                <span className="text-2sm font-medium text-gray-600">
+                  Code:
+                </span>
                 <span className="text-2sm text-primary">#leaderdev-1</span>
               </div>
 
@@ -57,8 +59,9 @@ const ActivitiesProductWebinar = () => {
                     { filename: '300-2.png' },
                     {
                       fallback: '+24',
-                      variant: 'text-primary-inverse ring-primary-light bg-primary'
-                    }
+                      variant:
+                        'text-primary-inverse ring-primary-light bg-primary',
+                    },
                   ]}
                 />
               </div>

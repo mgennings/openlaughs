@@ -22,7 +22,7 @@ const ManageData = ({ className }: IManageDataProps) => {
         <a href="#" className="btn btn-sm btn-light btn-outline">
           Start
         </a>
-      )
+      ),
     },
     {
       title: 'Delete all of your data',
@@ -31,7 +31,7 @@ const ManageData = ({ className }: IManageDataProps) => {
         <a href="#" className="btn btn-sm btn-light btn-outline">
           Delete
         </a>
-      )
+      ),
     },
     {
       title: 'Auto Data Purge',
@@ -40,7 +40,7 @@ const ManageData = ({ className }: IManageDataProps) => {
         <div className="switch switch-sm">
           <input type="checkbox" name="param" value="1" readOnly />
         </div>
-      )
+      ),
     },
     {
       title: 'Export your data',
@@ -65,15 +65,20 @@ const ManageData = ({ className }: IManageDataProps) => {
             />
           </svg>
         </button>
-      )
-    }
+      ),
+    },
   ];
 
   const renderItem = (item: IManageDataItem, index: number) => {
     return (
-      <div key={index} className="card-group flex items-center justify-between py-4 gap-2.5">
+      <div
+        key={index}
+        className="card-group flex items-center justify-between py-4 gap-2.5"
+      >
         <div className="flex flex-col justify-center gap-1.5">
-          <span className="leading-none font-medium text-sm text-gray-900">{item.title}</span>
+          <span className="leading-none font-medium text-sm text-gray-900">
+            {item.title}
+          </span>
           <span className="text-2sm text-gray-700">{item.description}</span>
         </div>
 
@@ -94,4 +99,9 @@ const ManageData = ({ className }: IManageDataProps) => {
   );
 };
 
-export { ManageData, type IManageDataItem, type IManageDataItems, type IManageDataProps };
+export {
+  ManageData,
+  type IManageDataItem,
+  type IManageDataItems,
+  type IManageDataProps,
+};

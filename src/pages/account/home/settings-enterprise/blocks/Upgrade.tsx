@@ -26,7 +26,9 @@ const Upgrade = () => {
               stroke="stroke-brand-clarity"
               fill="fill-brand-light"
               size="size-[50px]"
-              badge={<KeenIcon icon="information-4" className="text-xl text-brand" />}
+              badge={
+                <KeenIcon icon="information-4" className="text-xl text-brand" />
+              }
             />
 
             <div className="flex flex-col gap-1.5">
@@ -37,12 +39,14 @@ const Upgrade = () => {
                 >
                   Upgrade your business info
                 </a>
-                <span className="badge badge-sm badge-outline">16 days left</span>
+                <span className="badge badge-sm badge-outline">
+                  16 days left
+                </span>
               </div>
 
               <div className="text-2sm text-gray-800">
-                Elevate business information for a standout profile. Utilize premium features,
-                ensuring success with enhanced details.
+                Elevate business information for a standout profile. Utilize
+                premium features, ensuring success with enhanced details.
                 <br />
                 Upgrade now for heightened visibility and broader impact.
               </div>

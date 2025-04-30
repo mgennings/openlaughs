@@ -12,7 +12,7 @@ import {
   BasicSettings,
   DeleteAccount,
   ExternalServicesIntegrations,
-  ExternalServicesManageApi
+  ExternalServicesManageApi,
 } from './blocks';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
@@ -23,14 +23,15 @@ import { useLayout } from '@/providers';
 const stickySidebarClasses: Record<string, string> = {
   'demo1-layout': 'top-[calc(var(--tw-header-height)+1rem)]',
   'demo2-layout': 'top-[calc(var(--tw-header-height)+1rem)]',
-  'demo3-layout': 'top-[calc(var(--tw-header-height)+var(--tw-navbar-height)+1rem)]',
+  'demo3-layout':
+    'top-[calc(var(--tw-header-height)+var(--tw-navbar-height)+1rem)]',
   'demo4-layout': 'top-[3rem]',
   'demo5-layout': 'top-[calc(var(--tw-header-height)+1.5rem)]',
   'demo6-layout': 'top-[3rem]',
   'demo7-layout': 'top-[calc(var(--tw-header-height)+1rem)]',
   'demo8-layout': 'top-[3rem]',
   'demo9-layout': 'top-[calc(var(--tw-header-height)+1rem)]',
-  'demo10-layout': 'top-[1.5rem]'
+  'demo10-layout': 'top-[1.5rem]',
 };
 
 const AccountSettingsSidebarContent = () => {
@@ -57,7 +58,8 @@ const AccountSettingsSidebarContent = () => {
 
   // Get the sticky class based on the current layout, provide a default if not found
   const stickyClass = currentLayout?.name
-    ? stickySidebarClasses[currentLayout.name] || 'top-[calc(var(--tw-header-height)+1rem)]'
+    ? stickySidebarClasses[currentLayout.name] ||
+      'top-[calc(var(--tw-header-height)+1rem)]'
     : 'top-[calc(var(--tw-header-height)+1rem)]';
 
   return (
@@ -65,7 +67,10 @@ const AccountSettingsSidebarContent = () => {
       {desktopMode && (
         <div className="w-[230px] shrink-0">
           <div
-            className={clsx('w-[230px]', sidebarSticky && `fixed z-10 start-auto ${stickyClass}`)}
+            className={clsx(
+              'w-[230px]',
+              sidebarSticky && `fixed z-10 start-auto ${stickyClass}`,
+            )}
           >
             <Scrollspy offset={100} targetRef={parentRef}>
               <AccountSettingsSidebar />

@@ -1,5 +1,11 @@
 import { useLayout } from '@/providers';
-import { Demo1LightSidebarPage, Demo2Page, Demo3Page, Demo4Page, Demo5Page } from '../';
+import {
+  Demo1LightSidebarPage,
+  Demo2Page,
+  Demo3Page,
+  Demo4Page,
+  Demo5Page,
+} from '../';
 
 const DefaultPage = () => {
   const { currentLayout } = useLayout();

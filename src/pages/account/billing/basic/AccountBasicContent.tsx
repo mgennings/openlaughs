@@ -9,22 +9,22 @@ const AccountBasicContent = () => {
       title: 'Tailor-Made Plans Selection and Efficient Billing Systems',
       summary:
         'Select the perfect plan for your needs, complemented by an efficient, user-friendly billing system for convenience.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'package',
       title: 'Customized Plans and Simple Billing Solutions',
       summary:
         'Offering an array of plans to suit diverse requirements, paired with straightforward, hassle-free billing processes.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'cheque',
       title: 'Comprehensive Plan Options with Streamlined Billing',
       summary:
         'Our plans are crafted to cater to various user demands, accompanied by streamlined billing for maximum efficiency and clarity.',
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (

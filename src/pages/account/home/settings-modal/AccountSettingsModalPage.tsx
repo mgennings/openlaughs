@@ -30,7 +30,7 @@ const AccountSettingsModalPage = () => {
         info={[
           { label: 'KeenThemes', icon: 'abstract-41' },
           { label: '', icon: '' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
+          { email: 'jenny@kteam.com', icon: 'sms' },
         ]}
       />
 
@@ -51,7 +51,10 @@ const AccountSettingsModalPage = () => {
       </Container>
 
       <Container>
-        <AccountSettingsModal open={settingsModalOpen} onOpenChange={handleSettingsModalClose} />
+        <AccountSettingsModal
+          open={settingsModalOpen}
+          onOpenChange={handleSettingsModalClose}
+        />
       </Container>
     </Fragment>
   );

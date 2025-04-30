@@ -23,7 +23,7 @@ const ProfileModalPage = () => {
         info={[
           { label: 'KeenThemes', icon: 'abstract-41' },
           { label: '', icon: '' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
+          { email: 'jenny@kteam.com', icon: 'sms' },
         ]}
       />
 

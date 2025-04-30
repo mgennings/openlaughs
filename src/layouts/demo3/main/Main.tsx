@@ -5,7 +5,15 @@ import { useMenuCurrentItem } from '@/components/menu';
 import { useMenus } from '@/providers';
 import { KeenIcon } from '@/components';
 import { Link } from 'react-router-dom';
-import { Header, Navbar, Sidebar, Footer, Toolbar, ToolbarActions, ToolbarHeading } from '..';
+import {
+  Header,
+  Navbar,
+  Sidebar,
+  Footer,
+  Toolbar,
+  ToolbarActions,
+  ToolbarHeading,
+} from '..';
 
 const Main = () => {
   const { pathname } = useLocation();
@@ -33,7 +41,10 @@ const Main = () => {
                   <Toolbar>
                     <ToolbarHeading />
                     <ToolbarActions>
-                      <Link to={'/account/home/get-started'} className="btn btn-sm btn-light">
+                      <Link
+                        to={'/account/home/get-started'}
+                        className="btn btn-sm btn-light"
+                      >
                         <KeenIcon icon="exit-down" className="!text-base" />
                         Export
                       </Link>

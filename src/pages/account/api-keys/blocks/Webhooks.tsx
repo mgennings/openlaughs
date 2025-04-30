@@ -4,9 +4,8 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
-
 
 const Webhooks = () => {
   const [webhooknameInput, setWebhookNameInput] = useState('CostaRicaHook');
@@ -17,8 +16,8 @@ const Webhooks = () => {
       </div>
       <div className="card-body grid gap-5">
         <p className="text-2sm text-gray-800">
-          Set up Webhooks to trigger actions on external services in real-time. Stay informed on
-          updates and changes to <br />
+          Set up Webhooks to trigger actions on external services in real-time.
+          Stay informed on updates and changes to <br />
           ensure seamless integration.
         </p>
 
@@ -36,8 +35,8 @@ const Webhooks = () => {
               className="input"
               type="text"
               value={webhooknameInput}
-              onChange={(e) => setWebhookNameInput(e.target.value)}
-            /> 
+              onChange={e => setWebhookNameInput(e.target.value)}
+            />
           </div>
         </div>
 
@@ -51,10 +50,10 @@ const Webhooks = () => {
               <SelectContent>
                 <SelectItem value="1">All Events</SelectItem>
                 <SelectItem value="2">Push Webhooks</SelectItem>
-                <SelectItem value="3">Pipe Webhook</SelectItem> 
-                <SelectItem value="4">Plugin Webhooks</SelectItem> 
+                <SelectItem value="3">Pipe Webhook</SelectItem>
+                <SelectItem value="4">Plugin Webhooks</SelectItem>
               </SelectContent>
-            </Select>   
+            </Select>
           </div>
         </div>
 

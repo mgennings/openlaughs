@@ -26,7 +26,7 @@ const ProfileNFTPage = () => {
         info={[
           { label: 'KeenThemes', icon: 'abstract' },
           { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
+          { email: 'jenny@kteam.com', icon: 'sms' },
         ]}
       />
 

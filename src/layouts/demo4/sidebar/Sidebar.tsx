@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useResponsive } from '@/hooks';
 import { SidebarPrimary, SidebarSecondary } from './';
@@ -9,7 +8,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '@/components/ui/sheet';
 
 const Sidebar = () => {

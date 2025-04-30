@@ -7,7 +7,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
 interface IAvatar {
@@ -49,7 +49,7 @@ const NetworkNFTContent = () => {
         image: '300-1.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Jenny Klabber',
       email: '@jenny',
@@ -57,17 +57,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '196 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '2972',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '5%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-12.png',
@@ -76,7 +76,7 @@ const NetworkNFTContent = () => {
           'flex items-center justify-center relative text-2.5xl text-danger size-20 ring-1 ring-danger-clarity bg-danger-light rounded-full',
         fallback: 'K',
         badgeClass:
-          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Kevin Warren',
       email: '@wadeart',
@@ -84,17 +84,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '23 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '82',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '2%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-7.png',
@@ -103,7 +103,7 @@ const NetworkNFTContent = () => {
         image: '300-12.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Guy Hawkins',
       email: '@hawkinsnyc',
@@ -111,17 +111,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '2508 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '27k',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '57%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-10.png',
@@ -130,7 +130,7 @@ const NetworkNFTContent = () => {
           'flex items-center justify-center relative text-2.5xl text-primary size-20 ring-1 ring-primary-clarity bg-primary-light rounded-full',
         fallback: 'B',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Bessie Lane',
       email: '@booker777',
@@ -138,17 +138,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '4 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '105',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '93%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-11.png',
@@ -157,7 +157,7 @@ const NetworkNFTContent = () => {
         image: '300-5.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Bessie Cooper',
       email: '@bessie_c',
@@ -165,17 +165,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '123 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '3123',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '7%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-8.png',
@@ -184,7 +184,7 @@ const NetworkNFTContent = () => {
         image: '300-2.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Jerome Bell',
       email: '@jerome',
@@ -192,17 +192,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '67 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '904',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '46%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-8.png',
@@ -211,7 +211,7 @@ const NetworkNFTContent = () => {
         image: '300-14.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Floyd Miles',
       email: '@milesandwales',
@@ -219,17 +219,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '205 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '2979',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '11%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-13.png',
@@ -238,7 +238,7 @@ const NetworkNFTContent = () => {
         image: '300-3.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Albert Flores',
       email: '@alberanstanton',
@@ -246,17 +246,17 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '2723 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '306k',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '8%',
-          description: 'Listed'
-        }
-      ]
+          description: 'Listed',
+        },
+      ],
     },
     {
       bgImage: 'bg-7.png',
@@ -265,7 +265,7 @@ const NetworkNFTContent = () => {
         image: '300-17.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Jacob Jones',
       email: '@jacobeth_99',
@@ -273,18 +273,18 @@ const NetworkNFTContent = () => {
       statistics: [
         {
           total: '2 ETH',
-          description: 'Sales'
+          description: 'Sales',
         },
         {
           total: '68',
-          description: 'Items'
+          description: 'Items',
         },
         {
           total: '74%',
-          description: 'Listed'
-        }
-      ]
-    }
+          description: 'Listed',
+        },
+      ],
+    },
   ];
 
   const renderItem = (item: INFTContentItem, index: number) => (
@@ -314,7 +314,9 @@ const NetworkNFTContent = () => {
   return (
     <div className="flex flex-col items-stretch gap-5 lg:gap-7.5">
       <div className="flex flex-wrap items-center gap-5 justify-between">
-        <h3 className="text-md text-gray-900 font-medium">Showing {items.length} Users</h3>
+        <h3 className="text-md text-gray-900 font-medium">
+          Showing {items.length} Users
+        </h3>
 
         <div className="flex items-center flex-wrap gap-5">
           <div className="flex items-center gap-2.5">
@@ -352,7 +354,7 @@ const NetworkNFTContent = () => {
                 type="text"
                 placeholder="Type name, team"
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={e => setSearchInput(e.target.value)}
               />
             </label>
           </div>

@@ -6,13 +6,13 @@ const useBodyClasses = (classNames: string) => {
     const classes = classNames.split(/\s+/).filter(Boolean); // Filter out empty strings
 
     // Add each class to the body element when the component mounts
-    classes.forEach((className) => {
+    classes.forEach(className => {
       document.body.classList.add(className);
     });
 
     // Cleanup function to remove classes when the component unmounts
     return () => {
-      classes.forEach((className) => {
+      classes.forEach(className => {
         document.body.classList.remove(className);
       });
     };

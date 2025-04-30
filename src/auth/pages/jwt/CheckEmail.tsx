@@ -19,10 +19,15 @@ const CheckEmail = () => {
           />
         </div>
 
-        <h3 className="text-lg font-medium text-gray-900 text-center mb-3">Check your email</h3>
+        <h3 className="text-lg font-medium text-gray-900 text-center mb-3">
+          Check your email
+        </h3>
         <div className="text-2sm text-center text-gray-700 mb-7.5">
           Please click the link sent to your email&nbsp;
-          <a href="#" className="text-2sm text-gray-900 font-medium hover:text-primary-active">
+          <a
+            href="#"
+            className="text-2sm text-gray-900 font-medium hover:text-primary-active"
+          >
             bob@keenthemes.com
           </a>
           <br />
@@ -36,7 +41,9 @@ const CheckEmail = () => {
         </div>
 
         <div className="flex items-center justify-center gap-1">
-          <span className="text-xs text-gray-700">Didn’t receive an email?</span>
+          <span className="text-xs text-gray-700">
+            Didn’t receive an email?
+          </span>
           <Link to="/auth/classic/login" className="text-xs font-medium link">
             Resend
           </Link>

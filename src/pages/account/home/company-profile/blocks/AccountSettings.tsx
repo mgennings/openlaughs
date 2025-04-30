@@ -13,12 +13,18 @@ const AccountSettings = () => {
             <tr>
               <td className="min-w-56 text-gray-600 font-normal">Email</td>
               <td className="min-w-60 w-full">
-                <a href="#" className="text-gray-800 text-sm font-normal hover:text-primary-active">
+                <a
+                  href="#"
+                  className="text-gray-800 text-sm font-normal hover:text-primary-active"
+                >
                   john.doe@hexlad.io
                 </a>
               </td>
               <td className="min-w-28 text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -30,7 +36,10 @@ const AccountSettings = () => {
                 Password last changed 2 months ago
               </td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -90,7 +99,10 @@ const AccountSettings = () => {
               <td className="text-gray-600 font-normal">Team Account</td>
               <td className="text-gray-700 text-2sm font-normal">To be set</td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -116,7 +128,9 @@ const AccountSettings = () => {
                     className="flex items-center justify-center size-8 bg-light rounded-full border border-gray-300"
                   >
                     <img
-                      src={toAbsoluteUrl('/media/brand-logos/twitch-purple.svg')}
+                      src={toAbsoluteUrl(
+                        '/media/brand-logos/twitch-purple.svg',
+                      )}
                       className="size-4"
                       alt=""
                     />
@@ -151,7 +165,10 @@ const AccountSettings = () => {
                 </div>
               </td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -161,7 +178,10 @@ const AccountSettings = () => {
               <td className="text-gray-600 font-normal">Referral Link</td>
               <td className="text-gray-800 text-2sm font-normal">
                 <div className="flex items-center gap-0.5">
-                  <a href="#" className="text-gray-700 text-sm hover:text-primary-active">
+                  <a
+                    href="#"
+                    className="text-gray-700 text-sm hover:text-primary-active"
+                  >
                     https://studio.co/W3gvQOI35dt
                   </a>
                   <button className="btn btn-icon btn-xs btn-clear btn-light">

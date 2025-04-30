@@ -14,7 +14,13 @@ interface ICreateTeamProps {
   };
 }
 
-const MiscCreateTeam = ({ className, image, title, subTitle, engage }: ICreateTeamProps) => {
+const MiscCreateTeam = ({
+  className,
+  image,
+  title,
+  subTitle,
+  engage,
+}: ICreateTeamProps) => {
   return (
     <div className={clsx('card', className && className)}>
       <div className="card-body flex flex-col place-content-center gap-5">

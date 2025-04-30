@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useResponsive } from '@/hooks';
 import { useEffect } from 'react';
 import { usePathname } from '@/providers';
@@ -9,7 +8,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '@/components/ui/sheet';
 
 const MegaMenu = () => {

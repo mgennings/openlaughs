@@ -14,7 +14,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-warning',
     date: '6 Aug, 2024',
     dueDate: 'HR Dept', // Changed to date
-    amount: '24.00'
+    amount: '24.00',
   },
   {
     invoice: 'Invoice-2024-rq857m',
@@ -22,7 +22,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '17 Jun, 2024',
     dueDate: '6 Aug, 2024',
-    amount: '29.99'
+    amount: '29.99',
   },
   {
     invoice: 'Invoice-2024-jk563z',
@@ -30,7 +30,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '30 Apr, 2024',
     dueDate: '6 Aug, 2024',
-    amount: '24.00'
+    amount: '24.00',
   },
   {
     invoice: 'Invoice-2024-hg234x',
@@ -38,7 +38,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-danger',
     date: '21 Apr, 2024',
     dueDate: '6 Aug, 2024',
-    amount: '6.59'
+    amount: '6.59',
   },
   {
     invoice: 'Invoice-2024-lp098y',
@@ -46,7 +46,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '14 Mar, 2024',
     dueDate: '6 Aug, 2024',
-    amount: '79.00'
+    amount: '79.00',
   },
   {
     invoice: 'Invoice-2024-q196l',
@@ -54,7 +54,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '08 Jan, 2024',
     dueDate: '6 Aug, 2024',
-    amount: '257.00'
+    amount: '257.00',
   },
   {
     invoice: 'Invoice-2024-m113s',
@@ -62,7 +62,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-warning',
     date: '07 Nov, 2024',
     dueDate: 'Design Dept', // Changed to date
-    amount: '67.00'
+    amount: '67.00',
   },
   {
     invoice: 'Invoice-2024-u859c',
@@ -70,7 +70,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-danger',
     date: '16 May, 2024',
     dueDate: '07 Nov, 2024',
-    amount: '494.00'
+    amount: '494.00',
   },
   {
     invoice: 'Invoice-2024-m803g',
@@ -78,7 +78,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '16 Mar, 2024',
     dueDate: '16 Mar, 2024',
-    amount: '142.00'
+    amount: '142.00',
   },
   {
     invoice: 'Invoice-2024-r204u',
@@ -86,7 +86,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '25 Mar, 2024',
     dueDate: '25 Mar, 2024',
-    amount: '35.00'
+    amount: '35.00',
   },
   {
     invoice: 'Invoice-2024-b907a',
@@ -94,7 +94,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '12 Feb, 2024',
     dueDate: '12 Feb, 2024',
-    amount: '59.99'
+    amount: '59.99',
   },
   {
     invoice: 'Invoice-2024-n567k',
@@ -102,7 +102,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-warning',
     date: '01 Mar, 2024',
     dueDate: 'Marketing Dept', // Changed to date
-    amount: '150.00'
+    amount: '150.00',
   },
   {
     invoice: 'Invoice-2024-k453j',
@@ -110,7 +110,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-danger',
     date: '03 Apr, 2024',
     dueDate: '03 Apr, 2024',
-    amount: '89.50'
+    amount: '89.50',
   },
   {
     invoice: 'Invoice-2024-d981q',
@@ -118,7 +118,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '20 Feb, 2024',
     dueDate: '20 Feb, 2024',
-    amount: '200.00'
+    amount: '200.00',
   },
   {
     invoice: 'Invoice-2024-p846y',
@@ -126,7 +126,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '15 May, 2024',
     dueDate: '15 May, 2024',
-    amount: '75.00'
+    amount: '75.00',
   },
   {
     invoice: 'Invoice-2024-z190x',
@@ -134,7 +134,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-warning',
     date: '10 Jun, 2024',
     dueDate: 'Finance Dept', // Changed to date
-    amount: '130.00'
+    amount: '130.00',
   },
   {
     invoice: 'Invoice-2024-l892v',
@@ -142,7 +142,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '25 Jan, 2024',
     dueDate: '25 Jan, 2024',
-    amount: '100.00'
+    amount: '100.00',
   },
   {
     invoice: 'Invoice-2024-t675c',
@@ -150,7 +150,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-danger',
     date: '18 Jul, 2024',
     dueDate: '18 Jul, 2024',
-    amount: '45.00'
+    amount: '45.00',
   },
   {
     invoice: 'Invoice-2024-w432r',
@@ -158,7 +158,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '09 Aug, 2024',
     dueDate: '09 Aug, 2024',
-    amount: '60.00'
+    amount: '60.00',
   },
   {
     invoice: 'Invoice-2024-e765n',
@@ -166,7 +166,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-warning',
     date: '12 Oct, 2024',
     dueDate: 'IT Dept', // Changed to date
-    amount: '500.00'
+    amount: '500.00',
   },
   {
     invoice: 'Invoice-2024-h789p',
@@ -174,7 +174,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '27 May, 2024',
     dueDate: '27 May, 2024',
-    amount: '220.00'
+    amount: '220.00',
   },
   {
     invoice: 'Invoice-2024-m987l',
@@ -182,7 +182,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-warning',
     date: '19 Sep, 2024',
     dueDate: 'R&D Dept', // Changed to date
-    amount: '350.00'
+    amount: '350.00',
   },
   {
     invoice: 'Invoice-2024-c654j',
@@ -190,7 +190,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-danger',
     date: '23 Oct, 2024',
     dueDate: '23 Oct, 2024',
-    amount: '75.00'
+    amount: '75.00',
   },
   {
     invoice: 'Invoice-2024-q341w',
@@ -198,7 +198,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '29 Nov, 2024',
     dueDate: '29 Nov, 2024',
-    amount: '180.00'
+    amount: '180.00',
   },
   {
     invoice: 'Invoice-2024-b453g',
@@ -206,7 +206,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '11 Dec, 2024',
     dueDate: '11 Dec, 2024',
-    amount: '90.00'
+    amount: '90.00',
   },
   {
     invoice: 'Invoice-2024-d768k',
@@ -214,7 +214,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-danger',
     date: '05 Jan, 2024',
     dueDate: '05 Jan, 2024',
-    amount: '40.00'
+    amount: '40.00',
   },
   {
     invoice: 'Invoice-2024-z123v',
@@ -222,7 +222,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '14 Feb, 2024',
     dueDate: '14 Feb, 2024',
-    amount: '115.00'
+    amount: '115.00',
   },
   {
     invoice: 'Invoice-2024-t786y',
@@ -230,7 +230,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-success',
     date: '23 Mar, 2024',
     dueDate: '23 Mar, 2024',
-    amount: '55.00'
+    amount: '55.00',
   },
   {
     invoice: 'Invoice-2024-r890p',
@@ -238,7 +238,7 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-warning',
     date: '30 Apr, 2024',
     dueDate: '30 Apr, 2024',
-    amount: '95.00'
+    amount: '95.00',
   },
   {
     invoice: 'Invoice-2024-q654j',
@@ -246,8 +246,8 @@ const InvoicingData: IInvoicingData[] = [
     color: 'badge-danger',
     date: '08 May, 2024',
     dueDate: '08 May, 2024',
-    amount: '32.00'
-  }
+    amount: '32.00',
+  },
 ];
 
 export { InvoicingData, type IInvoicingData };

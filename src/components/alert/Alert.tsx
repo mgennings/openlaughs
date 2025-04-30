@@ -17,14 +17,14 @@ const variantStyles = {
   info: 'border-info-clarity bg-info-light text-info',
   danger: 'border-danger-clarity bg-danger-light text-danger',
   primary: 'border-primary-clarity bg-primary-light text-primary',
-  warning: 'border-warning-clarity bg-warning-light text-warning'
+  warning: 'border-warning-clarity bg-warning-light text-warning',
 };
 
 const Alert: React.FC<IAlertProps> = ({
   variant = 'primary',
   icon = 'information-2',
   children,
-  className = ''
+  className = '',
 }) => {
   return (
     <div

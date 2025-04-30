@@ -1,7 +1,14 @@
-/* eslint-disable prettier/prettier */
 import { useMemo } from 'react';
 import { Column, ColumnDef, RowSelectionState } from '@tanstack/react-table';
-import { DataGrid, DataGridColumnHeader, DataGridColumnVisibility, DataGridRowSelect, DataGridRowSelectAll, KeenIcon, useDataGrid } from '@/components';
+import {
+  DataGrid,
+  DataGridColumnHeader,
+  DataGridColumnVisibility,
+  DataGridRowSelect,
+  DataGridRowSelectAll,
+  KeenIcon,
+  useDataGrid,
+} from '@/components';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { SecurityLogData, ISecurityLogData } from '.';
@@ -11,12 +18,14 @@ interface IColumnFilterProps<TData, TValue> {
 }
 
 const SecurityLog = () => {
-  const ColumnInputFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
+  const ColumnInputFilter = <TData, TValue>({
+    column,
+  }: IColumnFilterProps<TData, TValue>) => {
     return (
       <Input
         placeholder="Filter..."
         value={(column.getFilterValue() as string) ?? ''}
-        onChange={(event) => column.setFilterValue(event.target.value)}
+        onChange={event => column.setFilterValue(event.target.value)}
         className="h-9 w-full max-w-40"
       />
     );
@@ -31,25 +40,33 @@ const SecurityLog = () => {
         enableSorting: false,
         enableHiding: false,
         meta: {
-          headerClassName: 'w-0'
-        }
-      },
-      {
-        accessorFn: (row) => row.timestamp,
-        id: 'timestamp',
-        header: ({ column }) => <DataGridColumnHeader title='Timestamp' filter={<ColumnInputFilter column={column} />} column={column} />,
-        enableSorting: true,
-        cell: (info) => info.getValue(),
-        meta: {
-          headerClassName: 'min-w-[200px]'
+          headerClassName: 'w-0',
         },
       },
       {
-        accessorFn: (row) => row.eventType,
-        id: 'eventType',
-        header: ({ column }) => <DataGridColumnHeader title='Event Type' column={column} />,
+        accessorFn: row => row.timestamp,
+        id: 'timestamp',
+        header: ({ column }) => (
+          <DataGridColumnHeader
+            title="Timestamp"
+            filter={<ColumnInputFilter column={column} />}
+            column={column}
+          />
+        ),
         enableSorting: true,
-        cell: (info) => (
+        cell: info => info.getValue(),
+        meta: {
+          headerClassName: 'min-w-[200px]',
+        },
+      },
+      {
+        accessorFn: row => row.eventType,
+        id: 'eventType',
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Event Type" column={column} />
+        ),
+        enableSorting: true,
+        cell: info => (
           <div className="flex items-center gap-1.5">
             <KeenIcon
               icon={info.row.original.eventType.icon.name}
@@ -66,45 +83,55 @@ const SecurityLog = () => {
         },
       },
       {
-        accessorFn: (row) => row.actionTaken,
+        accessorFn: row => row.actionTaken,
         id: 'actionTaken',
-        header: ({ column }) => <DataGridColumnHeader title='Action Taken' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Action Taken" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
         meta: {
           headerTitle: 'Action Taken',
           headerClassName: 'min-w-[200px]',
         },
       },
       {
-        accessorFn: (row) => row.sourceIp,
+        accessorFn: row => row.sourceIp,
         id: 'sourceIp',
-        header: ({ column }) => <DataGridColumnHeader title='Source IP' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Source IP" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
         meta: {
           headerTitle: 'Source IP',
           headerClassName: 'min-w-[130px]',
         },
       },
       {
-        accessorFn: (row) => row.destinationIp,
+        accessorFn: row => row.destinationIp,
         id: 'destinationIp',
-        header: ({ column }) => <DataGridColumnHeader title='Destination IP' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Destination IP" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
         meta: {
           headerTitle: 'Destination IP',
           headerClassName: 'min-w-[130px]',
         },
       },
       {
-        accessorFn: (row) => row.severity,
+        accessorFn: row => row.severity,
         id: 'severity',
-        header: ({ column }) => <DataGridColumnHeader title='Severity' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Severity" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => (
-          <span className={`badge badge-sm badge-outline ${info.row.original.severity.variant}`}>
+        cell: info => (
+          <span
+            className={`badge badge-sm badge-outline ${info.row.original.severity.variant}`}
+          >
             {info.row.original.severity.label}
           </span>
         ),
@@ -117,9 +144,7 @@ const SecurityLog = () => {
         header: () => '',
         enableSorting: false,
         cell: () => (
-          <button 
-            className="btn btn-icon btn-light btn-clear btn-sm" 
-          >
+          <button className="btn btn-icon btn-light btn-clear btn-sm">
             <KeenIcon icon="notepad" />
           </button>
         ),
@@ -128,7 +153,7 @@ const SecurityLog = () => {
         },
       },
     ],
-    []
+    [],
   );
 
   const data: ISecurityLogData[] = useMemo(() => SecurityLogData, []);
@@ -141,8 +166,8 @@ const SecurityLog = () => {
         description: `Selected row IDs: ${selectedRowIds}`,
         action: {
           label: 'Undo',
-          onClick: () => console.log('Undo')
-        }
+          onClick: () => console.log('Undo'),
+        },
       });
     }
   };
@@ -155,12 +180,17 @@ const SecurityLog = () => {
         <h3 className="card-title">Security Log</h3>
 
         <div className="flex flex-wrap items-center gap-2.5">
-          <DataGridColumnVisibility table={table}/>
+          <DataGridColumnVisibility table={table} />
           <label className="switch switch-sm">
-            <input name="check" type="checkbox" value="1" defaultChecked className="order-2" readOnly />
-            <span className="switch-label order-1">
-              Push Alerts
-            </span>
+            <input
+              name="check"
+              type="checkbox"
+              value="1"
+              defaultChecked
+              className="order-2"
+              readOnly
+            />
+            <span className="switch-label order-1">Push Alerts</span>
           </label>
         </div>
       </div>
@@ -168,13 +198,13 @@ const SecurityLog = () => {
   };
 
   return (
-    <DataGrid 
-      columns={columns} 
-      data={data} 
-      rowSelection={true} 
+    <DataGrid
+      columns={columns}
+      data={data}
+      rowSelection={true}
       onRowSelectionChange={handleRowSelection}
       pagination={{ size: 10 }}
-      sorting={[{ id: 'timestamp', desc: false }]} 
+      sorting={[{ id: 'timestamp', desc: false }]}
       toolbar={<Toolbar />}
       layout={{ card: true }}
     />

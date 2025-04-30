@@ -5,154 +5,159 @@ const NetworkGetStartedContent = () => {
     {
       icon: 'user-square',
       title: 'User Cards',
-      description: 'A Broad Perspective on Our Comprehensive Security Features and Policies.',
+      description:
+        'A Broad Perspective on Our Comprehensive Security Features and Policies.',
       sub: [
         {
           title: 'Mini Cards',
-          path: 'network/user-cards/mini-cards'
+          path: 'network/user-cards/mini-cards',
         },
         {
           title: 'Team Members',
-          path: 'account/members/team-members'
+          path: 'account/members/team-members',
         },
         {
           title: 'Athor',
-          path: 'network/user-cards/author'
+          path: 'network/user-cards/author',
         },
         {
           title: 'NFT',
-          path: 'network/user-cards/nft'
+          path: 'network/user-cards/nft',
         },
         {
           title: 'Social',
-          path: 'network/user-cards/social'
-        }
-      ]
+          path: 'network/user-cards/social',
+        },
+      ],
     },
     {
       icon: 'subtitle',
       title: 'User Base',
-      description: 'A Broad Perspective on Our Comprehensive Security Features and Policies.',
+      description:
+        'A Broad Perspective on Our Comprehensive Security Features and Policies.',
       sub: [
         {
           title: 'Team Crew',
-          path: 'network/user-cards/team-crew'
+          path: 'network/user-cards/team-crew',
         },
         {
           title: 'App Roster',
-          path: 'user-table/app-roster'
+          path: 'user-table/app-roster',
         },
         {
           title: 'Visitor',
-          path: 'network/user-table/visitors'
+          path: 'network/user-table/visitors',
         },
         {
           title: 'Authors',
-          path: 'network/user-cards/author'
+          path: 'network/user-cards/author',
         },
         {
           title: 'SaaS Users',
-          path: 'network/user-table/saas-users'
+          path: 'network/user-table/saas-users',
         },
         {
           title: 'Store Clients',
-          path: 'network/user-table/store-clients'
-        }
-      ]
+          path: 'network/user-table/store-clients',
+        },
+      ],
     },
     {
       icon: 'key-square',
       title: 'Cooperators',
-      description: 'A Broad Perspective on Our Comprehensive Security Features and Policies.',
+      description:
+        'A Broad Perspective on Our Comprehensive Security Features and Policies.',
       sub: [
         {
           title: 'Contacts',
-          path: 'account/members/roles'
+          path: 'account/members/roles',
         },
         {
           title: 'Employee',
-          path: 'account/members/team-members'
+          path: 'account/members/team-members',
         },
         {
           title: 'Vendors',
-          path: 'network/user-table/market-authors'
+          path: 'network/user-table/market-authors',
         },
         {
           title: 'Companies',
-          path: 'public-profile/profiles/company'
+          path: 'public-profile/profiles/company',
         },
         {
           title: 'Service Agents',
-          path: 'account/api-keys'
+          path: 'account/api-keys',
         },
         {
           title: 'Applicants',
-          path: 'network/user-table/store-clients'
-        }
-      ]
+          path: 'network/user-table/store-clients',
+        },
+      ],
     },
     {
       icon: 'chart-pie-3',
       title: 'Community Engagement',
-      description: 'A Broad Perspective on Our Comprehensive Security Features and Policies.',
+      description:
+        'A Broad Perspective on Our Comprehensive Security Features and Policies.',
       sub: [
         {
           title: 'Contacts',
-          path: 'account/members/roles'
+          path: 'account/members/roles',
         },
         {
           title: 'Employee',
-          path: 'account/members/team-members'
+          path: 'account/members/team-members',
         },
         {
           title: 'Vendors',
-          path: 'network/user-table/market-authors'
+          path: 'network/user-table/market-authors',
         },
         {
           title: 'Companies',
-          path: 'public-profile/profiles/company'
+          path: 'public-profile/profiles/company',
         },
         {
           title: 'Service Agents',
-          path: 'account/api-keys'
+          path: 'account/api-keys',
         },
         {
           title: 'Applicants',
-          path: 'network/user-table/store-clients'
-        }
-      ]
+          path: 'network/user-table/store-clients',
+        },
+      ],
     },
     {
       icon: 'calendar-tick',
       title: 'Donatiors',
-      description: 'A Broad Perspective on Our Comprehensive Security Features and Policies.',
+      description:
+        'A Broad Perspective on Our Comprehensive Security Features and Policies.',
       sub: [
         {
           title: 'Contacts',
-          path: 'account/members/roles'
+          path: 'account/members/roles',
         },
         {
           title: 'Employee',
-          path: 'account/members/team-members'
+          path: 'account/members/team-members',
         },
         {
           title: 'Vendors',
-          path: 'network/user-table/market-authors'
+          path: 'network/user-table/market-authors',
         },
         {
           title: 'Companies',
-          path: 'public-profile/profiles/company'
+          path: 'public-profile/profiles/company',
         },
         {
           title: 'Service Agents',
-          path: 'account/api-keys'
+          path: 'account/api-keys',
         },
         {
           title: 'Applicants',
-          path: 'network/user-table/store-clients'
-        }
-      ]
-    }
+          path: 'network/user-table/store-clients',
+        },
+      ],
+    },
   ];
 
   return (

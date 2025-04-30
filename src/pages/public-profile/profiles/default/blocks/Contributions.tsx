@@ -18,7 +18,7 @@ const Contributions = ({ title }: IContributionsProps) => {
     'var(--tw-brand)',
     'var(--tw-success)',
     'var(--tw-info)',
-    'var(--tw-warning)'
+    'var(--tw-warning)',
   ];
 
   const options: ApexOptions = {
@@ -26,22 +26,22 @@ const Contributions = ({ title }: IContributionsProps) => {
     labels: labels,
     colors: colors,
     fill: {
-      colors: colors
+      colors: colors,
     },
     chart: {
-      type: 'donut'
+      type: 'donut',
     },
     stroke: {
       show: true,
-      width: 2
+      width: 2,
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     plotOptions: {
       pie: {
-        expandOnClick: false
-      }
+        expandOnClick: false,
+      },
     },
     legend: {
       offsetY: -10,
@@ -49,26 +49,26 @@ const Contributions = ({ title }: IContributionsProps) => {
       fontSize: '13px',
       fontWeight: '500',
       itemMargin: {
-        vertical: 1
+        vertical: 1,
       },
       labels: {
         colors: 'var(--tw-gray-700)',
-        useSeriesColors: false
-      }
+        useSeriesColors: false,
+      },
     },
     responsive: [
       {
         breakpoint: 480,
         options: {
           chart: {
-            width: 200
+            width: 200,
           },
           legend: {
-            position: 'bottom'
-          }
-        }
-      }
-    ]
+            position: 'bottom',
+          },
+        },
+      },
+    ],
   };
 
   return (
@@ -86,10 +86,10 @@ const Contributions = ({ title }: IContributionsProps) => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

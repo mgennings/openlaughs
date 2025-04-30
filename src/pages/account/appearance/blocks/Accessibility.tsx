@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
 interface IAccessibilityItem {
@@ -25,9 +25,15 @@ const Accessibility = () => {
       description: 'Enable modifier keys for quick keyboard shortcuts.',
       actions: (
         <div className="switch switch-sm">
-          <input type="checkbox" name="param" defaultChecked value="1" readOnly />
+          <input
+            type="checkbox"
+            name="param"
+            defaultChecked
+            value="1"
+            readOnly
+          />
         </div>
-      )
+      ),
     },
     {
       icon: 'disguise',
@@ -37,7 +43,7 @@ const Accessibility = () => {
         <div className="switch switch-sm">
           <input type="checkbox" name="param" value="1" readOnly />
         </div>
-      )
+      ),
     },
     {
       icon: 'double-right-arrow',
@@ -52,11 +58,11 @@ const Accessibility = () => {
             <SelectContent>
               <SelectItem value="1">System preferences</SelectItem>
               <SelectItem value="2">Sound</SelectItem>
-              <SelectItem value="3">Focus</SelectItem>  
+              <SelectItem value="3">Focus</SelectItem>
             </SelectContent>
-          </Select>  
+          </Select>
         </div>
-      )
+      ),
     },
     {
       icon: 'screen',
@@ -64,10 +70,16 @@ const Accessibility = () => {
       description: 'Links open in the desktop app for convenience.',
       actions: (
         <div className="switch switch-sm">
-          <input type="checkbox" name="param" defaultChecked value="1" readOnly />
+          <input
+            type="checkbox"
+            name="param"
+            defaultChecked
+            value="1"
+            readOnly
+          />
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   const renderItem = (item: IAccessibilityItem, index: number) => {

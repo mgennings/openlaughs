@@ -14,7 +14,13 @@ const BasicSettings = ({ title }: IBasicSettingsProps) => {
         <div className="flex items-center gap-2">
           <label className="switch switch-sm">
             <span className="switch-label">Public Profile</span>
-            <input type="checkbox" value="1" name="check" defaultChecked readOnly />
+            <input
+              type="checkbox"
+              value="1"
+              name="check"
+              defaultChecked
+              readOnly
+            />
           </label>
         </div>
       </div>
@@ -24,12 +30,18 @@ const BasicSettings = ({ title }: IBasicSettingsProps) => {
             <tr>
               <td className="py-2 min-w-36 text-gray-600 font-normal">Email</td>
               <td className="py-2 min-w-60">
-                <a href="#" className="text-gray-800 font-normal text-sm hover:text-primary-active">
+                <a
+                  href="#"
+                  className="text-gray-800 font-normal text-sm hover:text-primary-active"
+                >
                   jasontt@studio.co
                 </a>
               </td>
               <td className="py-2 max-w-16 text-end">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -37,9 +49,14 @@ const BasicSettings = ({ title }: IBasicSettingsProps) => {
 
             <tr>
               <td className="py-2 text-gray-600 font-normal">Password</td>
-              <td className="py-2 text-gray-700 font-normal">Password last changed 2 months ago</td>
+              <td className="py-2 text-gray-700 font-normal">
+                Password last changed 2 months ago
+              </td>
               <td className="py-2 text-end">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -99,7 +116,10 @@ const BasicSettings = ({ title }: IBasicSettingsProps) => {
                 </div>
               </td>
               <td className="py-2 text-end">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -116,7 +136,9 @@ const BasicSettings = ({ title }: IBasicSettingsProps) => {
             </tr>
 
             <tr>
-              <td className="py-2 text-gray-600 font-normal">Social Profiles</td>
+              <td className="py-2 text-gray-600 font-normal">
+                Social Profiles
+              </td>
               <td className="py-0.5">
                 <div className="flex items-center gap-2.5">
                   <a
@@ -135,7 +157,9 @@ const BasicSettings = ({ title }: IBasicSettingsProps) => {
                     className="flex items-center justify-center size-8 bg-light rounded-full border border-gray-300"
                   >
                     <img
-                      src={toAbsoluteUrl('/media/brand-logos/twitch-purple.svg')}
+                      src={toAbsoluteUrl(
+                        '/media/brand-logos/twitch-purple.svg',
+                      )}
                       className="size-4"
                       alt=""
                     />
@@ -170,17 +194,25 @@ const BasicSettings = ({ title }: IBasicSettingsProps) => {
                 </div>
               </td>
               <td className="py-2 text-end">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
             </tr>
 
             <tr>
-              <td className="py-3 text-gray-600 text-sm font-normal">Referral Link</td>
+              <td className="py-3 text-gray-600 text-sm font-normal">
+                Referral Link
+              </td>
               <td className="py-3 text-gray-700 text-2sm font-normal">
                 <div className="flex items-center gap-0.5">
-                  <a href="#" className="text-gray-800 text-sm hover:text-primary-active">
+                  <a
+                    href="#"
+                    className="text-gray-800 text-sm hover:text-primary-active"
+                  >
                     https://studio.co/W3gvQOI35dt
                   </a>
                   <button className="btn btn-xs btn-light btn-clear btn-icon">

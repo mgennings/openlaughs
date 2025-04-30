@@ -1,5 +1,12 @@
 import { KeenIcon } from '@/components';
-import { TMenuConfig, MenuItem, MenuLink, MenuTitle, MenuIcon, MenuBadge } from '@/components/menu';
+import {
+  TMenuConfig,
+  MenuItem,
+  MenuLink,
+  MenuTitle,
+  MenuIcon,
+  MenuBadge,
+} from '@/components/menu';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
@@ -34,7 +41,9 @@ const MegaMenuSubHighlighted = (items: TMenuConfig) => {
 
             {item.badge && (
               <MenuBadge>
-                <span className="badge badge-primary badge-outline badge-xs">{item.badge}</span>
+                <span className="badge badge-primary badge-outline badge-xs">
+                  {item.badge}
+                </span>
               </MenuBadge>
             )}
           </MenuLink>

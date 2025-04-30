@@ -8,8 +8,8 @@ export default {
     },
     'postcss-import': {},
     'tailwindcss/nesting': 'postcss-nesting',
-    'tailwindcss': {},
-    'autoprefixer': {},
+    tailwindcss: {},
+    autoprefixer: {},
     'postcss-logical': {
       preserve: true, // Preserve logical properties and don't convert them
     },

@@ -16,12 +16,15 @@ const ModalBackdrop = forwardRef<HTMLDivElement, IModalBackdropProps>(
     return (
       <div
         ref={ref}
-        className={clsx('modal-backdrop transition-all duration-300 -z-1', className && className)}
+        className={clsx(
+          'modal-backdrop transition-all duration-300 -z-1',
+          className && className,
+        )}
         aria-hidden="true"
         {...other}
       />
     );
-  }
+  },
 );
 
 export { ModalBackdrop, type IModalBackdropProps };

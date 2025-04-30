@@ -7,7 +7,7 @@ import {
   ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
+  ToolbarPageTitle,
 } from '@/partials/toolbar';
 import { PageNavbar } from '@/pages/account';
 
@@ -26,10 +26,15 @@ const AccountOverviewPage = () => {
           <Toolbar>
             <ToolbarHeading>
               <ToolbarPageTitle />
-              <ToolbarDescription>Central Hub for Personal Customization</ToolbarDescription>
+              <ToolbarDescription>
+                Central Hub for Personal Customization
+              </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
-              <Link to="/account/security/overview" className="btn btn-sm btn-light">
+              <Link
+                to="/account/security/overview"
+                className="btn btn-sm btn-light"
+              >
                 Security History
               </Link>
             </ToolbarActions>

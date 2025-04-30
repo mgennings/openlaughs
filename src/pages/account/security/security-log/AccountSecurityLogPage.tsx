@@ -2,7 +2,12 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Container } from '@/components/container';
-import { Toolbar, ToolbarActions, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
+import {
+  Toolbar,
+  ToolbarActions,
+  ToolbarHeading,
+  ToolbarPageTitle,
+} from '@/partials/toolbar';
 import { PageNavbar } from '@/pages/account';
 
 import { AccountSecurityLogContent } from '.';
@@ -21,7 +26,9 @@ const AccountSecurityLogPage = () => {
             <ToolbarHeading>
               <ToolbarPageTitle />
               <div className="flex flex-wrap items-center gap-2 font-medium">
-                <span className="text-sm text-gray-600">Authorized Devices for Report Access</span>
+                <span className="text-sm text-gray-600">
+                  Authorized Devices for Report Access
+                </span>
                 <span className="size-0.75 bg-gray-600 rounded-full"></span>
                 <a href="#" className="font-semibold btn btn-link link">
                   Unlink All Devices
@@ -29,7 +36,10 @@ const AccountSecurityLogPage = () => {
               </div>
             </ToolbarHeading>
             <ToolbarActions>
-              <Link to="/account/security/overview" className="btn btn-sm btn-light">
+              <Link
+                to="/account/security/overview"
+                className="btn btn-sm btn-light"
+              >
                 Security Overview
               </Link>
             </ToolbarActions>

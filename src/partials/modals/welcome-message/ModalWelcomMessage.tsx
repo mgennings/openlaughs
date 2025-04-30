@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from '@/components/ui/dialog';
 import { Link } from 'react-router-dom';
 import { toAbsoluteUrl } from '@/utils';
@@ -14,7 +14,10 @@ interface IModalWelcomMessageProps {
   onOpenChange: () => void;
 }
 
-const ModalWelcomMessage = ({ open, onOpenChange }: IModalWelcomMessageProps) => {
+const ModalWelcomMessage = ({
+  open,
+  onOpenChange,
+}: IModalWelcomMessageProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[500px]">
@@ -49,7 +52,10 @@ const ModalWelcomMessage = ({ open, onOpenChange }: IModalWelcomMessageProps) =>
             </Link>
           </div>
 
-          <Link to="/" className="text-2sm font-medium text-gray-700 hover:text-primary py-3">
+          <Link
+            to="/"
+            className="text-2sm font-medium text-gray-700 hover:text-primary py-3"
+          >
             Skip the tour
           </Link>
         </DialogBody>

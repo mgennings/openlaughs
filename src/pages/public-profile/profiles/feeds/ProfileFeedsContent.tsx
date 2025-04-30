@@ -6,7 +6,7 @@ import { Post1, Post2, Post3, Post4 } from './blocks';
 const ProfileFeedsContent = () => {
   const data: IStatisticsItems = [
     { title: 'Connections', value: '5.3k' },
-    { title: 'Uploads', value: '28.9k' }
+    { title: 'Uploads', value: '28.9k' },
   ];
 
   return (

@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { KeenIcon } from '@/components';
 
 const InviteWithLink = () => {
-  const [linkInput, setLinkInput] = useState('https://www.ktstudio.com/RSVP?c=12345XYZt');
+  const [linkInput, setLinkInput] = useState(
+    'https://www.ktstudio.com/RSVP?c=12345XYZt',
+  );
   return (
     <form className="card">
       <div className="card-header">
@@ -18,8 +20,8 @@ const InviteWithLink = () => {
                 className="input pe-10"
                 type="text"
                 value={linkInput}
-                onChange={(e) => setLinkInput(e.target.value)}
-              />  
+                onChange={e => setLinkInput(e.target.value)}
+              />
               <button className="btn btn-clear btn-light btn-icon btn-sm absolute end-0 top-2/4 -translate-y-2/4 me-1.5">
                 <KeenIcon icon="copy" />
               </button>
@@ -33,8 +35,9 @@ const InviteWithLink = () => {
         </div>
 
         <p className="text-gray-800 text-2sm">
-          Click below to RSVP for our exclusive event. Limited spaces available, so don't miss out.
-          Reserve your spot now with this special invitation link!
+          Click below to RSVP for our exclusive event. Limited spaces available,
+          so don't miss out. Reserve your spot now with this special invitation
+          link!
         </p>
       </div>
       <div className="card-footer justify-center">

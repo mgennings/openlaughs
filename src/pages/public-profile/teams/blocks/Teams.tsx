@@ -38,14 +38,18 @@ const Teams = () => {
       labels: ['Ul', 'DevOps'],
       team: {
         size: 'size-7',
-        group: [{ filename: '300-4.png' }, { filename: '300-1.png' }, { filename: '300-2.png' }],
+        group: [
+          { filename: '300-4.png' },
+          { filename: '300-1.png' },
+          { filename: '300-2.png' },
+        ],
         more: {
           number: 10,
-          variant: 'text-success-inverse ring-success-light bg-success'
-        }
+          variant: 'text-success-inverse ring-success-light bg-success',
+        },
       },
       connected: true,
-      rating: { value: 5, round: 0 }
+      rating: { value: 5, round: 0 },
     },
     {
       icon: 'abstract-22',
@@ -54,10 +58,14 @@ const Teams = () => {
       labels: ['Dev', 'Al', 'Cloud'],
       team: {
         size: 'size-7',
-        group: [{ filename: '300-5.png' }, { filename: '300-7.png' }, { filename: '300-11.png' }]
+        group: [
+          { filename: '300-5.png' },
+          { filename: '300-7.png' },
+          { filename: '300-11.png' },
+        ],
       },
       connected: true,
-      rating: { value: 5, round: 0 }
+      rating: { value: 5, round: 0 },
     },
     {
       icon: 'abstract-39',
@@ -72,12 +80,12 @@ const Teams = () => {
           { filename: '300-2.png' },
           {
             fallback: 'S',
-            variant: 'text-primary-inverse ring-primary-light bg-primary'
-          }
-        ]
+            variant: 'text-primary-inverse ring-primary-light bg-primary',
+          },
+        ],
       },
       connected: false,
-      rating: { value: 4, round: 0.5 }
+      rating: { value: 4, round: 0.5 },
     },
     {
       icon: 'shield-slash',
@@ -87,10 +95,10 @@ const Teams = () => {
       team: {
         size: 'size-7',
         group: [{ filename: '300-23.png' }, { filename: '300-31.png' }],
-        className: 'lg:justify-end'
+        className: 'lg:justify-end',
       },
       connected: true,
-      rating: { value: 4, round: 0.5 }
+      rating: { value: 4, round: 0.5 },
     },
     {
       icon: 'chart-line-star',
@@ -105,12 +113,12 @@ const Teams = () => {
           { filename: '300-14.png' },
           {
             fallback: 'A',
-            variant: 'text-primary-inverse ring-primary-light bg-primary'
-          }
-        ]
+            variant: 'text-primary-inverse ring-primary-light bg-primary',
+          },
+        ],
       },
       connected: false,
-      rating: { value: 5, round: 0 }
+      rating: { value: 5, round: 0 },
     },
     {
       icon: 'message-programming',
@@ -123,11 +131,11 @@ const Teams = () => {
           { filename: '300-5.png' },
           { filename: '300-6.png' },
           { filename: '300-7.png' },
-          { filename: '300-11.png' }
-        ]
+          { filename: '300-11.png' },
+        ],
       },
       connected: true,
-      rating: { value: 3, round: 0 }
+      rating: { value: 3, round: 0 },
     },
     {
       icon: 'nexo',
@@ -136,14 +144,18 @@ const Teams = () => {
       labels: ['Creative', 'Strat'],
       team: {
         size: 'size-7',
-        group: [{ filename: '300-2.png' }, { filename: '300-17.png' }, { filename: '300-12.png' }],
+        group: [
+          { filename: '300-2.png' },
+          { filename: '300-17.png' },
+          { filename: '300-12.png' },
+        ],
         more: {
           number: 23,
-          variant: 'text-success-inverse ring-success-light bg-success size-7'
-        }
+          variant: 'text-success-inverse ring-success-light bg-success size-7',
+        },
       },
       connected: false,
-      rating: { value: 5, round: 0 }
+      rating: { value: 5, round: 0 },
     },
     {
       icon: 'abstract-44',
@@ -156,11 +168,11 @@ const Teams = () => {
           { filename: '300-14.png' },
           { filename: '300-3.png' },
           { filename: '300-19.png' },
-          { filename: '300-9.png' }
-        ]
+          { filename: '300-9.png' },
+        ],
       },
       connected: true,
-      rating: { value: 2, round: 0.5 }
+      rating: { value: 2, round: 0.5 },
     },
     {
       icon: 'abstract-25',
@@ -174,13 +186,13 @@ const Teams = () => {
           { filename: '300-16.png' },
           {
             fallback: 'K',
-            variant: 'text-info-inverse ring-info-light bg-info'
-          }
-        ]
+            variant: 'text-info-inverse ring-info-light bg-info',
+          },
+        ],
       },
       connected: false,
-      rating: { value: 4, round: 0 }
-    }
+      rating: { value: 4, round: 0 },
+    },
   ];
 
   const renderItem = (item: ITeamsItem, index: number) => {
@@ -216,7 +228,9 @@ const Teams = () => {
   return (
     <div className="flex flex-col items-stretch gap-5 lg:gap-7.5">
       <div className="flex flex-wrap items-center gap-5 justify-between">
-        <h3 className="text-lg text-gray-800 font-semibold">{items.length} Teams</h3>
+        <h3 className="text-lg text-gray-800 font-semibold">
+          {items.length} Teams
+        </h3>
 
         <div className="btn-tabs" data-tabs="true">
           <a

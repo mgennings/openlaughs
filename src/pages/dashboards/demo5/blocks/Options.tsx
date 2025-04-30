@@ -18,14 +18,14 @@ const Options = () => {
       title: 'Seats',
       icon: 'badge',
       desc: 'Central hub for users: view data, change settings, see activity logs',
-      path: '/account/members/team-info'
+      path: '/account/members/team-info',
     },
     {
       title: 'Login & Security',
       icon: 'security-user',
       desc: 'Set passwords, enable 2FA, view login logs, update security questions',
-      path: '/account/security/security-log'
-    }
+      path: '/account/security/security-log',
+    },
   ];
 
   const renderItem = (item: IOptionsItem, index: number) => {
@@ -44,7 +44,9 @@ const Options = () => {
             >
               {item.title}
             </Link>
-            <span className="text-2sm font-medium text-gray-600 leading-5">{item.desc}</span>
+            <span className="text-2sm font-medium text-gray-600 leading-5">
+              {item.desc}
+            </span>
           </div>
         </div>
 
@@ -55,7 +57,10 @@ const Options = () => {
           >
             View page
           </Link>
-          <KeenIcon icon="right" className="text-primary text-xs rtl:transform rtl:rotate-180" />
+          <KeenIcon
+            icon="right"
+            className="text-primary text-xs rtl:transform rtl:rotate-180"
+          />
         </div>
       </div>
     );

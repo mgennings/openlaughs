@@ -5,7 +5,7 @@ type TUseViewport = [number, number];
 const useViewport = (): TUseViewport => {
   const [dimensions, setDimensions] = useState<TUseViewport>([
     window.innerHeight,
-    window.innerWidth
+    window.innerWidth,
   ]);
 
   useEffect(() => {

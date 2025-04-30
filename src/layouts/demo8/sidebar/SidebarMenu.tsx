@@ -9,7 +9,7 @@ import {
   MenuLink,
   MenuSeparator,
   MenuSub,
-  MenuTitle
+  MenuTitle,
 } from '@/components/menu';
 import { useMenus } from '@/providers';
 import { useResponsive } from '@/hooks';
@@ -25,28 +25,28 @@ const SidebarMenu = () => {
     {
       title: 'Boards',
       icon: 'chart-line-star',
-      path: '/'
+      path: '/',
     },
     {
       title: 'Profiles',
       icon: 'profile-circle',
-      children: primaryMenuConfig?.[2].children
+      children: primaryMenuConfig?.[2].children,
     },
     {
       title: 'Account',
       icon: 'setting-2',
-      children: primaryMenuConfig?.[3].children
+      children: primaryMenuConfig?.[3].children,
     },
     {
       title: 'Network',
       icon: 'users',
-      children: primaryMenuConfig?.[4].children
+      children: primaryMenuConfig?.[4].children,
     },
     {
       title: 'Help',
       icon: 'share',
-      children: megaMenuConfig?.[5].children
-    }
+      children: megaMenuConfig?.[5].children,
+    },
   ];
 
   const buildMenu = (items: TMenuConfig) => {
@@ -55,7 +55,11 @@ const SidebarMenu = () => {
     });
   };
 
-  const buildMenuItemRoot = (item: IMenuItemConfig, index: number, level: number = 0) => {
+  const buildMenuItemRoot = (
+    item: IMenuItemConfig,
+    index: number,
+    level: number = 0,
+  ) => {
     if (item.children) {
       return (
         <MenuItem
@@ -68,10 +72,10 @@ const SidebarMenu = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [10, 14] : [-10, 14] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [10, 14] : [-10, 14], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuLink
@@ -182,7 +186,11 @@ const SidebarMenu = () => {
     });
   };
 
-  const buildMenuItemChild = (item: IMenuItemConfig, index: number, level: number = 0) => {
+  const buildMenuItemChild = (
+    item: IMenuItemConfig,
+    index: number,
+    level: number = 0,
+  ) => {
     if (item.separator) {
       return <MenuSeparator key={index} />;
     } else if (item.children) {
@@ -192,13 +200,16 @@ const SidebarMenu = () => {
           toggle={isDesktop ? 'dropdown' : 'accordion'}
           trigger={isDesktop ? 'hover' : 'click'}
           dropdownProps={{
-            placement: 'right-start'
+            placement: 'right-start',
           }}
         >
           <MenuLink className="grow cursor-pointer">
             <MenuTitle>{item.title}</MenuTitle>
             <MenuArrow>
-              <KeenIcon icon="right" className="text-3xs rtl:translate rtl:rotate-180" />
+              <KeenIcon
+                icon="right"
+                className="text-3xs rtl:translate rtl:rotate-180"
+              />
             </MenuArrow>
           </MenuLink>
           <MenuSub className="menu-default gap-0.5 w-[220px] scrollable-y-auto lg:overflow-visible max-h-[50vh]">
@@ -218,7 +229,11 @@ const SidebarMenu = () => {
   };
 
   return (
-    <Menu highlight={true} multipleExpand={false} className="flex flex-col gap-2.5 grow">
+    <Menu
+      highlight={true}
+      multipleExpand={false}
+      className="flex flex-col gap-2.5 grow"
+    >
       {menuConfig && buildMenu(menuConfig)}
     </Menu>
   );

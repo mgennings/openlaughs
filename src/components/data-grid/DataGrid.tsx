@@ -5,7 +5,7 @@ import {
   RowSelectionState,
   SortingState,
   Table,
-  TableOptions
+  TableOptions,
 } from '@tanstack/react-table';
 
 export type TDataGridLayoutCellSpacing = 'xs' | 'md' | 'sm' | 'lg';
@@ -24,7 +24,10 @@ export interface TDataGridProps<TData extends object> {
   data?: TData[];
   rowSelection?: boolean;
   getRowId?: TableOptions<TData>['getRowId'];
-  onRowSelectionChange?: (state: RowSelectionState, table?: Table<TData>) => void;
+  onRowSelectionChange?: (
+    state: RowSelectionState,
+    table?: Table<TData>,
+  ) => void;
   messages?: {
     loading?: ReactNode | string;
     empty?: ReactNode | string;
@@ -58,7 +61,9 @@ export interface TDataGridProps<TData extends object> {
   children?: ReactNode;
 }
 
-export const DataGrid = <TData extends object>(props: TDataGridProps<TData>) => {
+export const DataGrid = <TData extends object>(
+  props: TDataGridProps<TData>,
+) => {
   return (
     <DataGridProvider {...props}>
       <DataGridInner />

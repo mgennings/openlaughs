@@ -15,7 +15,7 @@ const FavoriteGames = () => {
     { image: '17.jpg' },
     { image: '18.jpg' },
     { image: '19.jpg' },
-    { image: '20.jpg' }
+    { image: '20.jpg' },
   ];
 
   const renderItem = (item: IFavoriteGamesItem, index: number) => {

@@ -16,7 +16,13 @@ const Account = ({ title }: IAccountProps) => {
         <div className="flex items-center gap-2">
           <label className="switch switch-sm">
             <span className="switch-label">Public Profile</span>
-            <input type="checkbox" value="1" name="check" defaultChecked readOnly />
+            <input
+              type="checkbox"
+              value="1"
+              name="check"
+              defaultChecked
+              readOnly
+            />
           </label>
         </div>
       </div>
@@ -39,7 +45,10 @@ const Account = ({ title }: IAccountProps) => {
               <td className="text-gray-600 font-normal">Name</td>
               <td className="text-gray-800 font-normal">Jason Tatum</td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -48,10 +57,15 @@ const Account = ({ title }: IAccountProps) => {
             <tr>
               <td className="text-gray-600 font-normal">Availability</td>
               <td className="text-gray-700">
-                <span className="badge badge-sm badge-outline badge-success">Available now</span>
+                <span className="badge badge-sm badge-outline badge-success">
+                  Available now
+                </span>
               </td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -65,7 +79,10 @@ const Account = ({ title }: IAccountProps) => {
                 </a>
               </td>
               <td className="max-w-16 text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -77,7 +94,10 @@ const Account = ({ title }: IAccountProps) => {
                 Password last changed 2 months ago
               </td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -127,7 +147,10 @@ const Account = ({ title }: IAccountProps) => {
                 </div>
               </td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>
@@ -163,7 +186,9 @@ const Account = ({ title }: IAccountProps) => {
                     className="flex items-center justify-center size-8 bg-light rounded-full border border-gray-300"
                   >
                     <img
-                      src={toAbsoluteUrl('/media/brand-logos/twitch-purple.svg')}
+                      src={toAbsoluteUrl(
+                        '/media/brand-logos/twitch-purple.svg',
+                      )}
                       className="size-4"
                       alt=""
                     />
@@ -198,7 +223,10 @@ const Account = ({ title }: IAccountProps) => {
                 </div>
               </td>
               <td className="text-center">
-                <a href="#" className="btn btn-sm btn-icon btn-clear btn-primary">
+                <a
+                  href="#"
+                  className="btn btn-sm btn-icon btn-clear btn-primary"
+                >
                   <KeenIcon icon="notepad-edit" />
                 </a>
               </td>

@@ -16,7 +16,7 @@ const Tags = ({ title }: ITagsProps) => {
     { label: 'Webflow' },
     { label: 'AI' },
     { label: 'noCode' },
-    { label: 'Management' }
+    { label: 'Management' },
   ];
 
   const renderItem = (item: ITagsItem, index: number) => {

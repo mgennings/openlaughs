@@ -21,7 +21,7 @@ const TrustedDevices = () => {
       location: 'Seville, Spain',
       flag: 'spain.svg',
       device: 'MacOS 12.19.6',
-      datetime: 'Active: Today at 9:03 AM'
+      datetime: 'Active: Today at 9:03 AM',
     },
     {
       logo: 'chrome.svg',
@@ -29,8 +29,8 @@ const TrustedDevices = () => {
       location: 'Lyon, France',
       flag: 'france.svg',
       device: 'Android 14.35',
-      datetime: 'Active: Mar 18 at 9:03 AM'
-    }
+      datetime: 'Active: Mar 18 at 9:03 AM',
+    },
   ];
 
   const renderItem = (item: ITrustedDevicesItem, index: number) => {
@@ -90,10 +90,10 @@ const TrustedDevices = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

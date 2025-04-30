@@ -4,7 +4,7 @@ export default plugin(({ addComponents }) => {
   // Form input
   addComponents({
     '.input-group': {
-      'display': 'flex',
+      display: 'flex',
       'align-items': 'stretch',
       '.btn': {
         'flex-shrink': '0',
@@ -23,10 +23,11 @@ export default plugin(({ addComponents }) => {
         'border-start-start-radius': '0',
         'border-end-start-radius': '0',
       },
-      '.input:has(~ .btn), .input:has(~ .input), .input:has(~ .dropdown > .btn)': {
-        'border-start-end-radius': '0',
-        'border-end-end-radius': '0',
-      },
+      '.input:has(~ .btn), .input:has(~ .input), .input:has(~ .dropdown > .btn)':
+        {
+          'border-start-end-radius': '0',
+          'border-end-end-radius': '0',
+        },
       '.btn:has(~ .input, ~ .btn), .input:has(~ .input)': {
         'border-start-end-radius': '0',
         'border-end-end-radius': '0',

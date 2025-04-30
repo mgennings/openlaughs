@@ -4,11 +4,11 @@ import svgToDataUri from 'mini-svg-data-uri';
 export default plugin(({ addComponents, theme }) => {
   addComponents({
     '.select': {
-      'display': 'block',
-      'width': '100%',
-      'appearance': 'none',
+      display: 'block',
+      width: '100%',
+      appearance: 'none',
       'box-shadow': 'none',
-      'outline': 'none',
+      outline: 'none',
       'background-repeat': 'no-repeat',
       'background-position': `right 0.675rem center`, // Logical property for RTL/LTR
       'background-size': '14px 11px',
@@ -21,7 +21,7 @@ export default plugin(({ addComponents, theme }) => {
         'background-image': 'none',
       },
       '&:-moz-focusring': {
-        'color': 'transparent',
+        color: 'transparent',
         'text-shadow': 'none',
       },
       'font-weight': theme('custom.components.btn.DEFAULT.fontWeight'),
@@ -29,41 +29,41 @@ export default plugin(({ addComponents, theme }) => {
       'line-height': '1',
       'background-color': 'var(--tw-light-active)',
       'border-radius': theme('custom.components.common.borderRadius.btn'),
-      'height': theme('custom.components.btn.DEFAULT.height'),
+      height: theme('custom.components.btn.DEFAULT.height'),
       'padding-inline-start': theme('custom.components.input.DEFAULT.px'), // Logical property for RTL/LTR
       'padding-inline-end': theme('custom.components.input.DEFAULT.px'), // Logical property for RTL/LTR
-      'border': '1px solid var(--tw-gray-300)',
-      'color': 'var(--tw-gray-700)',
+      border: '1px solid var(--tw-gray-300)',
+      color: 'var(--tw-gray-700)',
       '&:hover': {
         'border-color': 'var(--tw-gray-400)',
       },
       '&:focus': {
         'border-color': 'var(--tw-primary)',
         'box-shadow': 'var(--tw-input-focus-box-shadow)',
-        'color': 'var(--tw-gray-700)',
+        color: 'var(--tw-gray-700)',
         '&::placeholder': {
-          'color': 'var(--tw-gray-600)',
+          color: 'var(--tw-gray-600)',
         },
       },
       '&:active': {
-        'color': 'var(--tw-gray-700)',
+        color: 'var(--tw-gray-700)',
         '&::placeholder': {
-          'color': 'var(--tw-gray-600)',
+          color: 'var(--tw-gray-600)',
         },
         'box-shadow': 'none',
       },
       '&:disabled': {
         'background-color': 'var(--tw-gray-100)',
-        'color': 'var(--tw-gray-400)',
+        color: 'var(--tw-gray-400)',
         '&::placeholder': {
-          'color': 'var(--tw-gray-300)',
+          color: 'var(--tw-gray-300)',
         },
       },
     },
     '.select-sm': {
       'font-weight': theme('custom.components.btn.sm.fontWeight'),
       'font-size': theme('custom.components.btn.sm.fontSize'),
-      'height': theme('custom.components.btn.sm.height'),
+      height: theme('custom.components.btn.sm.height'),
       'padding-inline-start': theme('custom.components.input.sm.px'), // Logical property for RTL/LTR
       'padding-inline-end': theme('custom.components.input.sm.px'), // Logical property for RTL/LTR
       'background-size': '14px 10px',
@@ -72,7 +72,7 @@ export default plugin(({ addComponents, theme }) => {
     '.select-lg': {
       'font-weight': theme('custom.components.btn.lg.fontWeight'),
       'font-size': theme('custom.components.btn.lg.fontSize'),
-      'height': theme('custom.components.btn.lg.height'),
+      height: theme('custom.components.btn.lg.height'),
       'padding-inline-start': theme('custom.components.input.lg.px'), // Logical property for RTL/LTR
       'padding-inline-end': theme('custom.components.input.lg.px'), // Logical property for RTL/LTR
       'background-size': '14px 12px',
@@ -80,8 +80,8 @@ export default plugin(({ addComponents, theme }) => {
     },
     '[dir=rtl]': {
       '.select': {
-       'background-position': `left 0.675rem center`, // Logical property for RTL/LTR
-      }
-    }
+        'background-position': `left 0.675rem center`, // Logical property for RTL/LTR
+      },
+    },
   });
 });

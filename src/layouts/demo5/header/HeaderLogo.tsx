@@ -10,7 +10,7 @@ import {
   MenuSub,
   MenuTitle,
   MenuToggle,
-  KeenIcon
+  KeenIcon,
 } from '@/components';
 
 import { useDemo5Layout } from '..';
@@ -50,44 +50,44 @@ const HeaderLogo = () => {
       title: 'MetronicTeam',
       icon: 'profile-circle',
       urlPartial: '/public-profile/',
-      path: '/public-profile/profiles/default'
+      path: '/public-profile/profiles/default',
     },
     {
       title: 'KeenTeam',
       icon: 'setting-2',
       urlPartial: '/account/',
-      path: '/'
-    }
+      path: '/',
+    },
   ];
 
   const items: IHeaderLogoItems = [
     {
       title: 'Fall ‘24 Campaign',
-      icon: 'profile-circle'
+      icon: 'profile-circle',
     },
     {
       title: 'Fall Winter 2024 ',
-      icon: 'setting-2'
+      icon: 'setting-2',
     },
     {
       title: 'Barberry Autmn 24',
-      icon: 'users'
+      icon: 'users',
     },
     {
       title: 'PF24 Advertising',
-      icon: 'security-user'
-    }
+      icon: 'security-user',
+    },
   ];
 
   const stagings: IHeaderLogoStagings = [
     {
       title: 'Staging',
-      icon: 'profile-circle'
+      icon: 'profile-circle',
     },
     {
       title: 'Account',
-      icon: 'setting-2'
-    }
+      icon: 'setting-2',
+    },
   ];
 
   return (
@@ -125,10 +125,10 @@ const HeaderLogo = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="text-gray-900 text-sm font-medium">
@@ -154,7 +154,9 @@ const HeaderLogo = () => {
             </MenuItem>
           </Menu>
 
-          <span className="text-sm text-gray-400 font-medium px-2.5 md:inline">/</span>
+          <span className="text-sm text-gray-400 font-medium px-2.5 md:inline">
+            /
+          </span>
 
           <Menu className="menu-default">
             <MenuItem
@@ -166,10 +168,10 @@ const HeaderLogo = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="text-gray-900 text-sm font-medium">
@@ -207,10 +209,10 @@ const HeaderLogo = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="text-gray-900 text-sm font-medium">

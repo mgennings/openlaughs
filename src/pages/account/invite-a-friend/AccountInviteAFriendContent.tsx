@@ -1,6 +1,10 @@
 import { Fragment } from 'react';
 
-import { IHighlightedPostsItems, MiscEngage, MiscHighlightedPosts } from '@/partials/misc';
+import {
+  IHighlightedPostsItems,
+  MiscEngage,
+  MiscHighlightedPosts,
+} from '@/partials/misc';
 import { toAbsoluteUrl } from '@/utils';
 
 import { InviteWithLink } from '../members/team-members/blocks';
@@ -13,22 +17,22 @@ const AccountInviteAFriendContent = () => {
       title: 'Expand Your Network: Seamless Friend Invitation System',
       summary:
         'Invite colleagues to join and collaborate with ease using our streamlined invitation process. Share the experience and grow your professional network effortlessly.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'message-add',
       title: 'Collaboration Growth: Refer Peers with Custom Invites',
       summary:
         "Enhance your team's capabilities by inviting peers directly through personalized invitations. Strengthen your projects by collaborating with trusted professionals.",
-      path: '#'
+      path: '#',
     },
     {
       icon: 'address-book',
       title: 'Team Building: Easy Referral of Professional Contacts',
       summary:
         "Strengthen your team's dynamics by inviting industry friends to collaborate. Use our intuitive referral system to bring in expertise and foster collaboration.",
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (
@@ -60,7 +64,7 @@ const AccountInviteAFriendContent = () => {
             }
             more={{
               title: 'Contact Support',
-              url: 'https://keenthemes.com/contact'
+              url: 'https://keenthemes.com/contact',
             }}
           />
         </div>

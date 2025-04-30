@@ -2,7 +2,12 @@ import { Fragment } from 'react';
 
 import { toAbsoluteUrl } from '@/utils';
 
-import { MiscEngage, MiscFaq, MiscHighlightedPosts, IHighlightedPostsItems } from '@/partials/misc';
+import {
+  MiscEngage,
+  MiscFaq,
+  MiscHighlightedPosts,
+  IHighlightedPostsItems,
+} from '@/partials/misc';
 
 import { Members } from '../permissions-toggle';
 import { PermissionsCheck } from './blocks';
@@ -14,22 +19,22 @@ const AccountPermissionsCheckContent = () => {
       title: 'Optimizing Team Coordination: Role Assignment Tools',
       summary:
         'Empower your team with dynamic role assignment capabilities. Utilize our intuitive tools to assign and manage user permissions effectively. Explore resources and best practices to maximize team efficiency.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'toggle-on-circle',
       title: 'Refining Access Control: Permissions Customization',
       summary:
         "Tailor user experiences with customizable permission settings. Our detailed guides and resources provide streamlined processes for managing access levels. Ensure secure and precise control over your workspace's functionalities.",
-      path: '#'
+      path: '#',
     },
     {
       icon: 'shield-tick',
       title: 'Enhanced Security Management: Granular Permission Settings',
       summary:
         'Fortify your workspace with enhanced permission controls. Our advanced settings allow for granular access management, ensuring each team member has the appropriate level of access. Benefit from our comprehensive security protocols and guidance.',
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (
@@ -61,7 +66,7 @@ const AccountPermissionsCheckContent = () => {
             }
             more={{
               title: 'Contact Support',
-              url: ''
+              url: '',
             }}
           />
         </div>

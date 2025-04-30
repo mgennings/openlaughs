@@ -16,7 +16,7 @@ const ManageData = () => {
         <a href="#" className="btn btn-sm btn-light btn-outline">
           Start
         </a>
-      )
+      ),
     },
     {
       title: 'People with the link',
@@ -25,7 +25,7 @@ const ManageData = () => {
         <a href="#" className="btn btn-sm btn-light btn-outline">
           Delete
         </a>
-      )
+      ),
     },
     {
       title: 'No one',
@@ -34,15 +34,20 @@ const ManageData = () => {
         <div className="switch switch-sm">
           <input type="checkbox" name="param" value="1" readOnly />
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   const renderItem = (item: IManageDataItem, index: number) => {
     return (
-      <div key={index} className="card-group flex items-center justify-between py-4 gap-2.5">
+      <div
+        key={index}
+        className="card-group flex items-center justify-between py-4 gap-2.5"
+      >
         <div className="flex flex-col justify-center gap-1.5">
-          <span className="leading-none font-medium text-sm text-gray-900">{item.title}</span>
+          <span className="leading-none font-medium text-sm text-gray-900">
+            {item.title}
+          </span>
           <span className="text-2sm text-gray-700">{item.description}</span>
         </div>
 

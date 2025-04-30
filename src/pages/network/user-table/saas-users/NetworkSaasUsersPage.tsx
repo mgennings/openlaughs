@@ -6,7 +6,7 @@ import {
   ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
+  ToolbarPageTitle,
 } from '@/partials/toolbar';
 
 import { NetworkSaasUsersContent } from '.';
@@ -25,9 +25,13 @@ const NetworkSaasUsersPage = () => {
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
                   <span className="text-md text-gray-600">All Members:</span>
-                  <span className="text-md text-gray-800 font-semibold me-2">49,053</span>
+                  <span className="text-md text-gray-800 font-semibold me-2">
+                    49,053
+                  </span>
                   <span className="text-md text-gray-600">Pro Licenses</span>
-                  <span className="text-md text-gray-800 font-semibold">1724</span>
+                  <span className="text-md text-gray-800 font-semibold">
+                    1724
+                  </span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>

@@ -9,7 +9,7 @@ import {
   MenuLink,
   MenuSub,
   MenuTitle,
-  MenuToggle
+  MenuToggle,
 } from '@/components/menu';
 import { MENU_ROOT } from '@/config';
 import { useEffect, useState } from 'react';
@@ -27,7 +27,7 @@ const HeaderLogo = () => {
   };
 
   useEffect(() => {
-    MENU_ROOT.forEach((item) => {
+    MENU_ROOT.forEach(item => {
       if (item.rootPath && pathname.includes(item.rootPath)) {
         setSelectedMenuItem(item);
       }
@@ -59,8 +59,12 @@ const HeaderLogo = () => {
         </Link>
       </div>
       <div className="flex items-center">
-        <h3 className="text-gray-700 text-base hidden md:block">MetronicTeam</h3>
-        <span className="text-sm text-gray-400 font-medium px-2.5 hidden md:inline">/</span>
+        <h3 className="text-gray-700 text-base hidden md:block">
+          MetronicTeam
+        </h3>
+        <span className="text-sm text-gray-400 font-medium px-2.5 hidden md:inline">
+          /
+        </span>
 
         <Menu className="menu-default">
           <MenuItem
@@ -72,10 +76,10 @@ const HeaderLogo = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="text-gray-900 font-medium">
@@ -86,7 +90,10 @@ const HeaderLogo = () => {
             </MenuToggle>
             <MenuSub className="menu-default w-48 py-2">
               {MENU_ROOT.map((item, index) => (
-                <MenuItem key={index} className={item === selectedMenuItem ? 'active' : ''}>
+                <MenuItem
+                  key={index}
+                  className={item === selectedMenuItem ? 'active' : ''}
+                >
                   <MenuLink path={item.path}>
                     {item.icon && (
                       <MenuIcon>

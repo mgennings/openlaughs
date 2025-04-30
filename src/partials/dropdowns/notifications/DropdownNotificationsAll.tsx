@@ -7,7 +7,7 @@ import {
   DropdownNotificationsItem3,
   DropdownNotificationsItem4,
   DropdownNotificationsItem5,
-  DropdownNotificationsItem6
+  DropdownNotificationsItem6,
 } from './items';
 
 const DropdownNotificationsAll = () => {
@@ -84,8 +84,12 @@ const DropdownNotificationsAll = () => {
       <>
         <div className="border-b border-b-gray-200"></div>
         <div className="grid grid-cols-2 p-5 gap-2.5">
-          <button className="btn btn-sm btn-light justify-center">Archive all</button>
-          <button className="btn btn-sm btn-light justify-center">Mark all as read</button>
+          <button className="btn btn-sm btn-light justify-center">
+            Archive all
+          </button>
+          <button className="btn btn-sm btn-light justify-center">
+            Mark all as read
+          </button>
         </div>
       </>
     );
@@ -93,7 +97,10 @@ const DropdownNotificationsAll = () => {
 
   return (
     <div className="grow">
-      <div className="scrollable-y-auto" style={{ maxHeight: `${listHeight}px` }}>
+      <div
+        className="scrollable-y-auto"
+        style={{ maxHeight: `${listHeight}px` }}
+      >
         {buildList()}
       </div>
       <div ref={footerRef}>{buildFooter()}</div>

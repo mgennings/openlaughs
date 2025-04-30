@@ -9,7 +9,7 @@ import {
   MenuItem,
   MenuLink,
   MenuSub,
-  MenuTitle
+  MenuTitle,
 } from '@/components/menu';
 import { useMenus } from '@/providers';
 
@@ -24,7 +24,11 @@ const SidebarMenuPrimary = () => {
     });
   };
 
-  const buildMenuItemRoot = (item: IMenuItemConfig, index: number, level: number) => {
+  const buildMenuItemRoot = (
+    item: IMenuItemConfig,
+    index: number,
+    level: number,
+  ) => {
     if (item.children) {
       return (
         <MenuItem key={index} toggle="accordion" trigger="click">
@@ -37,7 +41,9 @@ const SidebarMenuPrimary = () => {
             </MenuTitle>
             {buildMenuArrow()}
           </MenuLink>
-          <MenuSub className={clsx('menu-accordion gap-px', subIndetion[level])}>
+          <MenuSub
+            className={clsx('menu-accordion gap-px', subIndetion[level])}
+          >
             {buildMenuItemChildren(item.children, index, level + 1)}
           </MenuSub>
         </MenuItem>
@@ -49,7 +55,7 @@ const SidebarMenuPrimary = () => {
             path={item.path}
             className={clsx(
               'gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200',
-              subIndetion[level]
+              subIndetion[level],
             )}
           >
             <MenuIcon className="items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
@@ -64,7 +70,11 @@ const SidebarMenuPrimary = () => {
     }
   };
 
-  const buildMenuItemChildren = (items: TMenuConfig, index: number, level: number = 0) => {
+  const buildMenuItemChildren = (
+    items: TMenuConfig,
+    index: number,
+    level: number = 0,
+  ) => {
     return items.map((item, index) => {
       if (!item.disabled) {
         return buildMenuItemChild(item, index, level);
@@ -72,7 +82,11 @@ const SidebarMenuPrimary = () => {
     });
   };
 
-  const buildMenuItemChild = (item: IMenuItemConfig, index: number, level: number = 0) => {
+  const buildMenuItemChild = (
+    item: IMenuItemConfig,
+    index: number,
+    level: number = 0,
+  ) => {
     if (item.children) {
       return (
         <MenuItem
@@ -84,8 +98,12 @@ const SidebarMenuPrimary = () => {
           <MenuLink className="py-2 px-2.5 rounded-md border border-transparent">
             {item.collapse ? (
               <MenuTitle className="text-2sm text-gray-600 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
-                <span className="hidden menu-item-show:!flex">{item.collapseTitle}</span>
-                <span className="flex menu-item-show:hidden">{item.expandTitle}</span>
+                <span className="hidden menu-item-show:!flex">
+                  {item.collapseTitle}
+                </span>
+                <span className="flex menu-item-show:hidden">
+                  {item.expandTitle}
+                </span>
               </MenuTitle>
             ) : (
               <MenuTitle className="text-2sm text-gray-800 menu-item-active:text-gray-900 menu-item-here:text-gray-900 menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
@@ -95,8 +113,17 @@ const SidebarMenuPrimary = () => {
 
             {buildMenuArrow()}
           </MenuLink>
-          <MenuSub className={clsx('menu-accordion gap-px', !item.collapse && subIndetion[level])}>
-            {buildMenuItemChildren(item.children, index, item.collapse ? level : level + 1)}
+          <MenuSub
+            className={clsx(
+              'menu-accordion gap-px',
+              !item.collapse && subIndetion[level],
+            )}
+          >
+            {buildMenuItemChildren(
+              item.children,
+              index,
+              item.collapse ? level : level + 1,
+            )}
           </MenuSub>
         </MenuItem>
       );
@@ -120,7 +147,10 @@ const SidebarMenuPrimary = () => {
     return (
       <MenuArrow className="text-gray-600 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800">
         <KeenIcon icon="down" className="text-xs menu-item-show:hidden" />
-        <KeenIcon icon="up" className="text-xs hidden menu-item-show:inline-flex" />
+        <KeenIcon
+          icon="up"
+          className="text-xs hidden menu-item-show:inline-flex"
+        />
       </MenuArrow>
     );
   };
@@ -129,7 +159,11 @@ const SidebarMenuPrimary = () => {
   const menuConfig = getMenuConfig('primary');
 
   return (
-    <Menu highlight={true} multipleExpand={false} className="flex flex-col w-full gap-1.5 px-3.5">
+    <Menu
+      highlight={true}
+      multipleExpand={false}
+      className="flex flex-col w-full gap-1.5 px-3.5"
+    >
       {menuConfig && buildMenu(menuConfig)}
     </Menu>
   );

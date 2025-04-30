@@ -29,7 +29,10 @@ const StartNow = () => {
             Discover promotions crafted to match your preferences.
           </span>
 
-          <Link to="/network/user-table/visitors" className="btn btn-dark btn-sm">
+          <Link
+            to="/network/user-table/visitors"
+            className="btn btn-dark btn-sm"
+          >
             Start Now
           </Link>
         </div>

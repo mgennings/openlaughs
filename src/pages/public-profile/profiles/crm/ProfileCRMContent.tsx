@@ -1,5 +1,12 @@
 import { Contributors, Tags } from '../default';
-import { Activity, ApiCredentials, Attributes, Deals, GeneralInfo, RecentInvoices } from './blocks';
+import {
+  Activity,
+  ApiCredentials,
+  Attributes,
+  Deals,
+  GeneralInfo,
+  RecentInvoices,
+} from './blocks';
 
 const ProfileCRMContent = () => {
   return (

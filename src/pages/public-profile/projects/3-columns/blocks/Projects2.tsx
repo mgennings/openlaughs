@@ -42,11 +42,11 @@ const Projects2 = () => {
       endDate: 'Dec 21',
       status: {
         label: 'In Progress',
-        variant: 'badge-primary'
+        variant: 'badge-primary',
       },
       progress: {
         variant: 'progress-primary',
-        value: 55
+        value: 55,
       },
       team: {
         size: 'size-[30px]',
@@ -55,10 +55,10 @@ const Projects2 = () => {
           { filename: '300-2.png' },
           {
             fallback: 'S',
-            variant: 'text-primary-inverse ring-primary-light bg-primary'
-          }
-        ]
-      }
+            variant: 'text-primary-inverse ring-primary-light bg-primary',
+          },
+        ],
+      },
     },
     {
       logo: 'telegram.svg',
@@ -68,16 +68,16 @@ const Projects2 = () => {
       endDate: 'Dec 23',
       status: {
         label: 'Completed',
-        variant: 'badge-success'
+        variant: 'badge-success',
       },
       progress: {
         variant: 'progress-success',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
-        group: [{ filename: '300-24.png' }, { filename: '300-7.png' }]
-      }
+        group: [{ filename: '300-24.png' }, { filename: '300-7.png' }],
+      },
     },
     {
       logo: 'kickstarter.svg',
@@ -87,20 +87,24 @@ const Projects2 = () => {
       endDate: 'Dec 12',
       status: {
         label: 'Upcoming',
-        variant: ''
+        variant: '',
       },
       progress: {
         variant: 'progress-gray-300',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
-        group: [{ filename: '300-21.png' }, { filename: '300-1.png' }, { filename: '300-2.png' }],
+        group: [
+          { filename: '300-21.png' },
+          { filename: '300-1.png' },
+          { filename: '300-2.png' },
+        ],
         more: {
           number: 10,
-          variant: 'text-success-inverse ring-success-light bg-success'
-        }
-      }
+          variant: 'text-success-inverse ring-success-light bg-success',
+        },
+      },
     },
     {
       logo: 'quickbooks.svg',
@@ -110,11 +114,11 @@ const Projects2 = () => {
       endDate: 'Dec 11',
       status: {
         label: 'In Progress',
-        variant: 'badge-primary'
+        variant: 'badge-primary',
       },
       progress: {
         variant: 'progress-primary',
-        value: 19
+        value: 19,
       },
       team: {
         size: 'size-[30px]',
@@ -123,10 +127,10 @@ const Projects2 = () => {
           { filename: '300-2.png' },
           {
             fallback: 'M',
-            variant: 'text-danger-inverse ring-danger-light bg-danger'
-          }
-        ]
-      }
+            variant: 'text-danger-inverse ring-danger-light bg-danger',
+          },
+        ],
+      },
     },
     {
       logo: 'google-analytics.svg',
@@ -136,16 +140,20 @@ const Projects2 = () => {
       endDate: 'Dec 14',
       status: {
         label: 'Upcoming',
-        variant: ''
+        variant: '',
       },
       progress: {
         variant: 'progress-gray-300',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
-        group: [{ filename: '300-5.png' }, { filename: '300-17.png' }, { filename: '300-16.png' }]
-      }
+        group: [
+          { filename: '300-5.png' },
+          { filename: '300-17.png' },
+          { filename: '300-16.png' },
+        ],
+      },
     },
     {
       logo: 'google-webdev.svg',
@@ -155,20 +163,24 @@ const Projects2 = () => {
       endDate: 'Dec 25',
       status: {
         label: 'Completed',
-        variant: 'badge-success'
+        variant: 'badge-success',
       },
       progress: {
         variant: 'progress-success',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
-        group: [{ filename: '300-6.png' }, { filename: '300-23.png' }, { filename: '300-12.png' }],
+        group: [
+          { filename: '300-6.png' },
+          { filename: '300-23.png' },
+          { filename: '300-12.png' },
+        ],
         more: {
           number: 10,
-          variant: 'text-primary-inverse ring-primary-light bg-primary'
-        }
-      }
+          variant: 'text-primary-inverse ring-primary-light bg-primary',
+        },
+      },
     },
     {
       logo: 'figma.svg',
@@ -178,11 +190,11 @@ const Projects2 = () => {
       endDate: 'Dec 08',
       status: {
         label: 'Upcoming',
-        variant: ''
+        variant: '',
       },
       progress: {
         variant: 'progress-gray-300',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
@@ -190,9 +202,9 @@ const Projects2 = () => {
           { filename: '300-14.png' },
           { filename: '300-3.png' },
           { filename: '300-19.png' },
-          { filename: '300-9.png' }
-        ]
-      }
+          { filename: '300-9.png' },
+        ],
+      },
     },
     {
       logo: 'btcchina.svg',
@@ -202,20 +214,24 @@ const Projects2 = () => {
       endDate: 'Dec 23',
       status: {
         label: 'In Progress',
-        variant: 'badge-primary'
+        variant: 'badge-primary',
       },
       progress: {
         variant: 'progress-primary',
-        value: 35
+        value: 35,
       },
       team: {
         size: 'size-[30px]',
-        group: [{ filename: '300-21.png' }, { filename: '300-32.png' }, { filename: '300-2.png' }],
+        group: [
+          { filename: '300-21.png' },
+          { filename: '300-32.png' },
+          { filename: '300-2.png' },
+        ],
         more: {
           number: 1,
-          variant: 'text-success-inverse ring-success-light bg-success'
-        }
-      }
+          variant: 'text-success-inverse ring-success-light bg-success',
+        },
+      },
     },
     {
       logo: 'patientory.svg',
@@ -225,11 +241,11 @@ const Projects2 = () => {
       endDate: 'Dec 21',
       status: {
         label: 'Upcoming',
-        variant: ''
+        variant: '',
       },
       progress: {
         variant: 'progress-gray-300',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
@@ -238,10 +254,10 @@ const Projects2 = () => {
           { filename: '300-2.png' },
           {
             fallback: 'K',
-            variant: 'text-success-inverse ring-success-light bg-success'
-          }
-        ]
-      }
+            variant: 'text-success-inverse ring-success-light bg-success',
+          },
+        ],
+      },
     },
     {
       logo: 'jira.svg',
@@ -251,20 +267,24 @@ const Projects2 = () => {
       endDate: 'Dec 13',
       status: {
         label: 'Completed',
-        variant: 'badge-success'
+        variant: 'badge-success',
       },
       progress: {
         variant: 'progress-success',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
-        group: [{ filename: '300-12.png' }, { filename: '300-20.png' }, { filename: '300-3.png' }],
+        group: [
+          { filename: '300-12.png' },
+          { filename: '300-20.png' },
+          { filename: '300-3.png' },
+        ],
         more: {
           number: 5,
-          variant: 'text-success-inverse ring-success-light bg-success'
-        }
-      }
+          variant: 'text-success-inverse ring-success-light bg-success',
+        },
+      },
     },
     {
       logo: 'plastic-scm.svg',
@@ -274,16 +294,16 @@ const Projects2 = () => {
       endDate: 'Dec 21',
       status: {
         label: 'Upcoming',
-        variant: ''
+        variant: '',
       },
       progress: {
         variant: 'progress-gray-300',
-        value: 100
+        value: 100,
       },
       team: {
         size: 'size-[30px]',
-        group: [{ filename: '300-16.png' }]
-      }
+        group: [{ filename: '300-16.png' }],
+      },
     },
     {
       logo: 'perrier.svg',
@@ -293,11 +313,11 @@ const Projects2 = () => {
       endDate: 'Dec 28',
       status: {
         label: 'In Progress',
-        variant: 'badge-primary'
+        variant: 'badge-primary',
       },
       progress: {
         variant: 'progress-primary',
-        value: 55
+        value: 55,
       },
       team: {
         size: 'size-[30px]',
@@ -306,11 +326,11 @@ const Projects2 = () => {
           { filename: '300-9.png' },
           {
             fallback: 'F',
-            variant: 'text-primary-inverse ring-primary-light bg-primary'
-          }
-        ]
-      }
-    }
+            variant: 'text-primary-inverse ring-primary-light bg-primary',
+          },
+        ],
+      },
+    },
   ];
 
   const renderProject = (project: IProjects2Item, index: number) => {
@@ -346,7 +366,9 @@ const Projects2 = () => {
   return (
     <div className="flex flex-col items-stretch gap-5 lg:gap-7.5">
       <div className="flex flex-wrap items-center gap-5 justify-between">
-        <h3 className="text-lg text-gray-900 font-semibold">{projects.length} Projects</h3>
+        <h3 className="text-lg text-gray-900 font-semibold">
+          {projects.length} Projects
+        </h3>
 
         <div className="btn-tabs" data-tabs="true">
           <a

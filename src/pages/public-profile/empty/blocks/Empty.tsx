@@ -26,7 +26,10 @@ const Empty = () => {
           </div>
           <div className="text-sm text-gray-700 text-center gap-1">
             Begin by crafting your inaugural list in minutes.&nbsp;
-            <Link to="/account/billing/plans" className="text-sm font-medium link">
+            <Link
+              to="/account/billing/plans"
+              className="text-sm font-medium link"
+            >
               Get Started!
             </Link>
           </div>

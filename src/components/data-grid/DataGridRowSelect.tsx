@@ -10,7 +10,7 @@ const DataGridRowSelect = <TData,>({ row }: IDataGridRowSelectProps<TData>) => {
   return (
     <Checkbox
       checked={row.getIsSelected()}
-      onCheckedChange={(value) => row.toggleSelected(!!value)}
+      onCheckedChange={value => row.toggleSelected(!!value)}
       aria-label="Select row"
       className="align-[inherit]"
     />

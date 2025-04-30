@@ -9,7 +9,7 @@ import {
   MenuLabel,
   MenuLink,
   MenuSub,
-  MenuTitle
+  MenuTitle,
 } from '@/components/menu';
 import { MENU_ROOT } from '@/config';
 import { KeenIcon } from '@/components';
@@ -23,7 +23,7 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
   const handleInputChange = () => {};
 
   useEffect(() => {
-    MENU_ROOT.forEach((item) => {
+    MENU_ROOT.forEach(item => {
       if (item.rootPath && pathname.includes(item.rootPath)) {
         setSelectedMenuItem(item);
       }
@@ -55,10 +55,10 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [0, 15] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: [0, 15], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuLabel className="cursor-pointer text-gray-900 font-medium grow justify-between">
@@ -71,7 +71,10 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
             </MenuLabel>
             <MenuSub className="menu-default w-48 py-2">
               {MENU_ROOT.map((item, index) => (
-                <MenuItem key={index} className={item === selectedMenuItem ? 'active' : ''}>
+                <MenuItem
+                  key={index}
+                  className={item === selectedMenuItem ? 'active' : ''}
+                >
                   <MenuLink path={item.path}>
                     {item.icon && (
                       <MenuIcon>

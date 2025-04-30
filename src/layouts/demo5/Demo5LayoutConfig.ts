@@ -6,12 +6,12 @@ const demo5LayoutConfig: ILayoutConfig = {
   name: 'demo5-layout',
   options: {
     header: {
-      stickyOffset: 200 // Offset value (in pixels) that determines when the header becomes sticky on scroll
+      stickyOffset: 200, // Offset value (in pixels) that determines when the header becomes sticky on scroll
     },
     sidebar: {
-      stickyOffset: 200 // Offset value (in pixels) that determines when the sidebar becomes sticky on scroll
-    }
-  }
+      stickyOffset: 200, // Offset value (in pixels) that determines when the sidebar becomes sticky on scroll
+    },
+  },
 };
 
 export { demo5LayoutConfig };

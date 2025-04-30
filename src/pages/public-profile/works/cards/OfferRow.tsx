@@ -8,7 +8,13 @@ import { CommonHexagonBadge } from '@/partials/common';
 
 import { IOfferRowProps } from './Offer';
 
-const OfferRow = ({ path, size, iconSize, title, subTitle }: IOfferRowProps) => {
+const OfferRow = ({
+  path,
+  size,
+  iconSize,
+  title,
+  subTitle,
+}: IOfferRowProps) => {
   return (
     <Fragment>
       <style>
@@ -31,7 +37,12 @@ const OfferRow = ({ path, size, iconSize, title, subTitle }: IOfferRowProps) => 
             <div className="flex justify-center">
               <CommonHexagonBadge
                 size={size}
-                badge={<KeenIcon icon="rocket" className={`${iconSize} text-brand`} />}
+                badge={
+                  <KeenIcon
+                    icon="rocket"
+                    className={`${iconSize} text-brand`}
+                  />
+                }
                 stroke="stroke-brand-clarity"
                 fill="fill-light"
               />
@@ -41,7 +52,9 @@ const OfferRow = ({ path, size, iconSize, title, subTitle }: IOfferRowProps) => 
               <span className="text-xl font-semibold text-gray-900 hover:text-primary-active mb-px">
                 {title}
               </span>
-              <span className="text-sm font-medium text-gray-600">{subTitle}</span>
+              <span className="text-sm font-medium text-gray-600">
+                {subTitle}
+              </span>
             </div>
           </div>
         </div>

@@ -1,5 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { ChangeEvent, DragEvent, FC, useCallback, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  DragEvent,
+  FC,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import { getAcceptTypeString, getListFiles, openFileDialog } from './utils';
 
 import React from 'react';
@@ -48,7 +55,7 @@ const ImageInput: FC<IImageInputProps> = ({
   inputProps,
   multiple,
   children,
-  onChange
+  onChange,
 }) => {
   const inValue = value || [];
   const inputRef = useRef<HTMLInputElement>(null);
@@ -67,7 +74,9 @@ const ImageInput: FC<IImageInputProps> = ({
     handleClickInput();
   }, [handleClickInput]);
 
-  const onInputChange = async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
+  const onInputChange = async (
+    e: ChangeEvent<HTMLInputElement>,
+  ): Promise<void> => {
     await handleChange(e.target.files);
     if (inputRef.current) inputRef.current.value = '';
   };
@@ -98,7 +107,7 @@ const ImageInput: FC<IImageInputProps> = ({
   const onImageRemove = (index: number | number[]): void => {
     const updatedList = [...inValue];
     if (Array.isArray(index)) {
-      index.forEach((i) => {
+      index.forEach(i => {
         updatedList.splice(i, 1);
       });
     } else {
@@ -153,7 +162,7 @@ const ImageInput: FC<IImageInputProps> = ({
         type="file"
         accept={getAcceptTypeString(acceptType)}
         multiple={multiple}
-        onChange={(e) => {
+        onChange={e => {
           onInputChange(e);
         }}
         style={{ display: 'none' }}
@@ -170,12 +179,17 @@ const ImageInput: FC<IImageInputProps> = ({
           onDragEnter: handleDragIn,
           onDragLeave: handleDragOut,
           onDragOver: handleDrag,
-          onDragStart: handleDragStart
+          onDragStart: handleDragStart,
         },
-        isDragging
+        isDragging,
       })}
     </>
   );
 };
 
-export { ImageInput, type IImageInputProps, type TImageInputFiles, type IImageInputFile };
+export {
+  ImageInput,
+  type IImageInputProps,
+  type TImageInputFiles,
+  type IImageInputFile,
+};

@@ -5,7 +5,7 @@ import { matchPath } from 'react-router';
 export const getMenuLinkPath = (children: ReactNode): string => {
   let path = '';
 
-  Children.forEach(children, (child) => {
+  Children.forEach(children, child => {
     if (isValidElement(child) && child.type === MenuLink && child.props.path) {
       path = child.props.path; // Assign the path when found
     }
@@ -14,7 +14,10 @@ export const getMenuLinkPath = (children: ReactNode): string => {
   return path;
 };
 
-export const hasMenuActiveChild = (path: string, children: ReactNode): boolean => {
+export const hasMenuActiveChild = (
+  path: string,
+  children: ReactNode,
+): boolean => {
   const childrenArray: ReactNode[] = Children.toArray(children);
 
   for (const child of childrenArray) {

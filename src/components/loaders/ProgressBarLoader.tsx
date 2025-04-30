@@ -8,8 +8,8 @@ const ProgressBarLoader = () => {
           height: '3px', // Customize the height
           opacity: '0.5',
           '& .MuiLinearProgress-bar': {
-            backgroundColor: 'var(--tw-primary)' // Change the color of the progress bar
-          }
+            backgroundColor: 'var(--tw-primary)', // Change the color of the progress bar
+          },
         }}
       />
     </div>

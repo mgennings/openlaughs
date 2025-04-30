@@ -14,8 +14,8 @@ const About = () => {
     { status: 'Phone:', info: '+31 6 1234 56 78' },
     {
       status: 'Email:',
-      info: '<a href="#" class="text-gray-800 hover:text-primary-active">jenny@ktstudio.com</a>'
-    }
+      info: '<a href="#" class="text-gray-800 hover:text-primary-active">jenny@ktstudio.com</a>',
+    },
   ];
 
   const renderTable = (table: IAboutTable, index: number) => {

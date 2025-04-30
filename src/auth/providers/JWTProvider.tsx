@@ -6,7 +6,7 @@ import {
   type PropsWithChildren,
   type SetStateAction,
   useEffect,
-  useState
+  useState,
 } from 'react';
 
 import * as authHelper from '../_helpers';
@@ -30,13 +30,17 @@ interface AuthContextProps {
   loginWithGoogle?: () => Promise<void>;
   loginWithFacebook?: () => Promise<void>;
   loginWithGithub?: () => Promise<void>;
-  register: (email: string, password: string, password_confirmation: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    password_confirmation: string,
+  ) => Promise<void>;
   requestPasswordResetLink: (email: string) => Promise<void>;
   changePassword: (
     email: string,
     token: string,
     password: string,
-    password_confirmation: string
+    password_confirmation: string,
   ) => Promise<void>;
   getUser: () => Promise<AxiosResponse<any>>;
   logout: () => void;
@@ -75,7 +79,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     try {
       const { data: auth } = await axios.post<AuthModel>(LOGIN_URL, {
         email,
-        password
+        password,
       });
       saveAuth(auth);
       const { data: user } = await getUser();
@@ -86,12 +90,16 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const register = async (email: string, password: string, password_confirmation: string) => {
+  const register = async (
+    email: string,
+    password: string,
+    password_confirmation: string,
+  ) => {
     try {
       const { data: auth } = await axios.post(REGISTER_URL, {
         email,
         password,
-        password_confirmation
+        password_confirmation,
       });
       saveAuth(auth);
       const { data: user } = await getUser();
@@ -104,7 +112,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const requestPasswordResetLink = async (email: string) => {
     await axios.post(FORGOT_PASSWORD_URL, {
-      email
+      email,
     });
   };
 
@@ -112,13 +120,13 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     email: string,
     token: string,
     password: string,
-    password_confirmation: string
+    password_confirmation: string,
   ) => {
     await axios.post(RESET_PASSWORD_URL, {
       email,
       token,
       password,
-      password_confirmation
+      password_confirmation,
     });
   };
 
@@ -146,7 +154,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         changePassword,
         getUser,
         logout,
-        verify
+        verify,
       }}
     >
       {children}

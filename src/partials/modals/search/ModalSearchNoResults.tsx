@@ -18,7 +18,9 @@ const ModalSearchNoResults = () => {
         />
       </div>
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-base font-semibold text-gray-900 text-center">No Results Found</h3>
+        <h3 className="text-base font-semibold text-gray-900 text-center">
+          No Results Found
+        </h3>
         <span className="text-2sm font-medium text-center text-gray-600">
           Refine your query to discover relevant items
         </span>

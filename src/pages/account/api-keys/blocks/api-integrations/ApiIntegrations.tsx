@@ -1,7 +1,14 @@
-/* eslint-disable prettier/prettier */
 import { useMemo } from 'react';
 import { Column, ColumnDef, RowSelectionState } from '@tanstack/react-table';
-import { DataGrid, DataGridColumnHeader, DataGridColumnVisibility, DataGridRowSelect, DataGridRowSelectAll, KeenIcon, useDataGrid } from '@/components';
+import {
+  DataGrid,
+  DataGridColumnHeader,
+  DataGridColumnVisibility,
+  DataGridRowSelect,
+  DataGridRowSelectAll,
+  KeenIcon,
+  useDataGrid,
+} from '@/components';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { ApiIntegrationsData, IApiIntegrationsData } from '.';
@@ -11,12 +18,14 @@ interface IColumnFilterProps<TData, TValue> {
 }
 
 const ApiIntegrations = () => {
-  const ColumnInputFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
+  const ColumnInputFilter = <TData, TValue>({
+    column,
+  }: IColumnFilterProps<TData, TValue>) => {
     return (
       <Input
         placeholder="Filter..."
         value={(column.getFilterValue() as string) ?? ''}
-        onChange={(event) => column.setFilterValue(event.target.value)}
+        onChange={event => column.setFilterValue(event.target.value)}
         className="h-9 w-full max-w-40"
       />
     );
@@ -31,26 +40,34 @@ const ApiIntegrations = () => {
         enableSorting: false,
         enableHiding: false,
         meta: {
-          headerClassName: 'w-0'
-        }
+          headerClassName: 'w-0',
+        },
       },
       {
-        accessorFn: (row) => row.integration,
+        accessorFn: row => row.integration,
         id: 'integration',
-        header: ({ column }) => <DataGridColumnHeader title='Integration' filter={<ColumnInputFilter column={column} />} column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader
+            title="Integration"
+            filter={<ColumnInputFilter column={column} />}
+            column={column}
+          />
+        ),
         enableSorting: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
         meta: {
           headerClassName: 'min-w-[206px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.apiKey,
+        accessorFn: row => row.apiKey,
         id: 'apiKey',
-        header: ({ column }) => <DataGridColumnHeader title='API Key' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="API Key" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => (
+        cell: info => (
           <div className="flex items-center text-gray-800 font-normal">
             {info.row.original.apiKey}
             <a
@@ -64,51 +81,53 @@ const ApiIntegrations = () => {
         meta: {
           headerTitle: 'API Key',
           headerClassName: 'min-w-[224px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
-      },   
+          cellClassName: 'text-gray-700 font-normal',
+        },
+      },
       {
-        accessorFn: (row) => row.dailyCalls,
+        accessorFn: row => row.dailyCalls,
         id: 'dailyCalls',
-        header: ({ column }) => <DataGridColumnHeader title='Daily Calls' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Daily Calls" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
         meta: {
           headerTitle: 'Daily Calls',
           headerClassName: 'min-w-[122px]',
           cellClassName: 'text-gray-700 font-normal',
-        }
+        },
       },
       {
-        accessorFn: (row) => row.status,
+        accessorFn: row => row.status,
         id: 'status',
-        header: ({ column }) => <DataGridColumnHeader title='Status' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Status" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
         meta: {
           headerClassName: 'min-w-[98px]',
           cellClassName: 'text-gray-700 font-normal',
-        }
+        },
       },
       {
         id: 'actions',
         header: () => '',
         enableSorting: false,
-        cell: () => {                    
+        cell: () => {
           return (
-            <button 
-              className="btn btn-sm btn-icon btn-icon-lg btn-clear btn-light" 
-            >
+            <button className="btn btn-sm btn-icon btn-icon-lg btn-clear btn-light">
               <KeenIcon icon="notepad-edit" />
             </button>
           );
         },
         meta: {
-          headerClassName: 'w-[60px]'
-        }
+          headerClassName: 'w-[60px]',
+        },
       },
     ],
-    []
+    [],
   );
 
   const data: IApiIntegrationsData[] = useMemo(() => ApiIntegrationsData, []);
@@ -121,8 +140,8 @@ const ApiIntegrations = () => {
         description: `Selected row IDs: ${selectedRowIds}`,
         action: {
           label: 'Undo',
-          onClick: () => console.log('Undo')
-        }
+          onClick: () => console.log('Undo'),
+        },
       });
     }
   };
@@ -137,27 +156,33 @@ const ApiIntegrations = () => {
         <div className="flex flex-wrap items-center gap-2.5">
           <div className="flex gap-7.5">
             <label className="switch switch-sm">
-              <input name="check" type="checkbox" value="1" className="order-2" readOnly />
+              <input
+                name="check"
+                type="checkbox"
+                value="1"
+                className="order-2"
+                readOnly
+              />
               <span className="switch-label order-1">Pause all</span>
             </label>
             <a href="#" className="btn btn-sm btn-primary">
               Add New
             </a>
           </div>
-          <DataGridColumnVisibility table={table}/>
+          <DataGridColumnVisibility table={table} />
         </div>
       </div>
     );
   };
 
   return (
-    <DataGrid 
-      columns={columns} 
-      data={data} 
-      rowSelection={true} 
+    <DataGrid
+      columns={columns}
+      data={data}
+      rowSelection={true}
       onRowSelectionChange={handleRowSelection}
       pagination={{ size: 10 }}
-      sorting={[{ id: 'integration', desc: false }]} 
+      sorting={[{ id: 'integration', desc: false }]}
       toolbar={<Toolbar />}
       layout={{ card: true }}
     />

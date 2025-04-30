@@ -1,5 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { createContext, type PropsWithChildren, useContext, useState } from 'react';
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useState,
+} from 'react';
 
 import { getData, setData } from '../utils';
 
@@ -35,7 +40,7 @@ const initialProps: ILayoutProps = {
   hasLayout: (name: string): boolean => false,
   updateLayout: (name: string, config: Partial<ILayoutConfig>) => {},
   currentLayout: null,
-  setCurrentLayout: (layoutProvider: any) => {}
+  setCurrentLayout: (layoutProvider: any) => {},
 };
 
 const LayoutContext = createContext<ILayoutProps>(initialProps);
@@ -68,7 +73,13 @@ const LayoutProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <LayoutContext.Provider
-      value={{ getLayout, hasLayout, updateLayout, currentLayout, setCurrentLayout }}
+      value={{
+        getLayout,
+        hasLayout,
+        updateLayout,
+        currentLayout,
+        setCurrentLayout,
+      }}
     >
       {children}
     </LayoutContext.Provider>

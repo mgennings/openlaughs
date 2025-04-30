@@ -6,7 +6,9 @@ const ModalShareProfileViaEmail = () => {
   return (
     <div className="flex flex-col px-5 gap-2.5">
       <div className="flex flex-center gap-1">
-        <label className="text-gray-900 font-semibold text-2sm">Share via email</label>
+        <label className="text-gray-900 font-semibold text-2sm">
+          Share via email
+        </label>
         <KeenIcon icon="information-2" className="text-gray-500 text-2sm" />
       </div>
 
@@ -16,7 +18,7 @@ const ModalShareProfileViaEmail = () => {
             type="text"
             name="query"
             value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
+            onChange={e => setEmailInput(e.target.value)}
             placeholder="miles.turner@gmail.com"
           />
         </label>

@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from '@/components/ui/dialog';
 
 interface IModalAccountDeactivatedProps {
@@ -14,7 +14,10 @@ interface IModalAccountDeactivatedProps {
   onOpenChange: () => void;
 }
 
-const ModalAccountDeactivated = ({ open, onOpenChange }: IModalAccountDeactivatedProps) => {
+const ModalAccountDeactivated = ({
+  open,
+  onOpenChange,
+}: IModalAccountDeactivatedProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-full max-w-[500px] max-h-[95%] scrollable-y-auto">

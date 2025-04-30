@@ -1,6 +1,13 @@
 import { FormattedMessage } from 'react-intl';
 import { KeenIcon } from '@/components';
-import { MenuItem, MenuLink, MenuTitle, MenuIcon, MenuBadge, MenuSub } from '@/components/menu';
+import {
+  MenuItem,
+  MenuLink,
+  MenuTitle,
+  MenuIcon,
+  MenuBadge,
+  MenuSub,
+} from '@/components/menu';
 import clsx from 'clsx';
 import { I18N_LANGUAGES, TLanguage, useLanguage } from '@/i18n';
 
@@ -8,7 +15,9 @@ interface IDropdownUserLanguagesProps {
   menuItemRef: any;
 }
 
-const DropdownUserLanguages = ({ menuItemRef }: IDropdownUserLanguagesProps) => {
+const DropdownUserLanguages = ({
+  menuItemRef,
+}: IDropdownUserLanguagesProps) => {
   const { currentLanguage, changeLanguage } = useLanguage();
   const { isRTL } = useLanguage();
 
@@ -31,12 +40,20 @@ const DropdownUserLanguages = ({ menuItemRef }: IDropdownUserLanguagesProps) => 
       >
         <MenuLink className="h-10">
           <MenuIcon>
-            <img src={item.flag} className="inline-block size-4 rounded-full" alt={item.label} />
+            <img
+              src={item.flag}
+              className="inline-block size-4 rounded-full"
+              alt={item.label}
+            />
           </MenuIcon>
           <MenuTitle>{item.label}</MenuTitle>
           {item.code === currentLanguage.code && (
             <MenuBadge>
-              <KeenIcon icon="check-circle" style="solid" className="text-success text-base" />
+              <KeenIcon
+                icon="check-circle"
+                style="solid"
+                className="text-success text-base"
+              />
             </MenuBadge>
           )}
         </MenuLink>
@@ -54,10 +71,10 @@ const DropdownUserLanguages = ({ menuItemRef }: IDropdownUserLanguagesProps) => 
           {
             name: 'offset',
             options: {
-              offset: isRTL() ? [-10, 0] : [10, 0] // [skid, distance]
-            }
-          }
-        ]
+              offset: isRTL() ? [-10, 0] : [10, 0], // [skid, distance]
+            },
+          },
+        ],
       }}
     >
       <MenuLink>
@@ -76,7 +93,9 @@ const DropdownUserLanguages = ({ menuItemRef }: IDropdownUserLanguagesProps) => 
           />
         </div>
       </MenuLink>
-      <MenuSub className="menu-default light:border-gray-300 w-[190px]">{buildItems()}</MenuSub>
+      <MenuSub className="menu-default light:border-gray-300 w-[190px]">
+        {buildItems()}
+      </MenuSub>
     </MenuItem>
   );
 };

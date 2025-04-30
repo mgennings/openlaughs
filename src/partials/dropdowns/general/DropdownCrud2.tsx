@@ -5,7 +5,7 @@ import {
   MenuItem,
   MenuLink,
   MenuSub,
-  MenuTitle
+  MenuTitle,
 } from '@/components';
 import { useLanguage } from '@/i18n';
 
@@ -31,10 +31,10 @@ const DropdownCrud2 = () => {
             {
               name: 'offset',
               options: {
-                offset: isRTL() ? [15, 0] : [-15, 0] // [skid, distance]
-              }
-            }
-          ]
+                offset: isRTL() ? [15, 0] : [-15, 0], // [skid, distance]
+              },
+            },
+          ],
         }}
       >
         <MenuLink>
@@ -43,7 +43,10 @@ const DropdownCrud2 = () => {
           </MenuIcon>
           <MenuTitle>Export</MenuTitle>
           <MenuArrow>
-            <KeenIcon icon="right" className="text-3xs rtl:transform rtl:rotate-180" />
+            <KeenIcon
+              icon="right"
+              className="text-3xs rtl:transform rtl:rotate-180"
+            />
           </MenuArrow>
         </MenuLink>
         <MenuSub className="menu-default" rootClassName="w-full max-w-[175px]">

@@ -12,7 +12,13 @@ interface IIntegrationProps {
   actions: ReactNode;
 }
 
-const CardIntegration = ({ logo, path, name, description, actions }: IIntegrationProps) => {
+const CardIntegration = ({
+  logo,
+  path,
+  name,
+  description,
+  actions,
+}: IIntegrationProps) => {
   return (
     <div className="card">
       <div className="card-body p-5 lg:p-7.5">

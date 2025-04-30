@@ -6,7 +6,7 @@ const authLayoutBrandedConfig: ILayoutConfig = {
   name: 'auth-branded',
 
   // Currently no additional options defined, but this object can be extended in the future
-  options: {}
+  options: {},
 };
 
 export { authLayoutBrandedConfig };

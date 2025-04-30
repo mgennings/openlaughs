@@ -6,7 +6,7 @@ import {
   ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
+  ToolbarPageTitle,
 } from '@/partials/toolbar';
 import { PageNavbar } from '@/pages/account';
 
@@ -25,7 +25,9 @@ const AccountSettingsEnterprisePage = () => {
           <Toolbar>
             <ToolbarHeading>
               <ToolbarPageTitle />
-              <ToolbarDescription>Tailored Tools for Business Scalability</ToolbarDescription>
+              <ToolbarDescription>
+                Tailored Tools for Business Scalability
+              </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
               <a href="#" className="btn btn-sm btn-light">

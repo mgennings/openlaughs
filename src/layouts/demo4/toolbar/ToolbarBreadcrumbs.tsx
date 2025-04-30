@@ -18,11 +18,17 @@ const ToolbarBreadcrumbs = () => {
               {item.title}
             </Link>
           ) : (
-            <span className={index === items.length - 1 ? 'text-gray-900' : 'text-gray-700'}>
+            <span
+              className={
+                index === items.length - 1 ? 'text-gray-900' : 'text-gray-700'
+              }
+            >
               {item.title}
             </span>
           )}
-          {index !== items.length - 1 && <span className="text-gray-400 text-sm">/</span>}
+          {index !== items.length - 1 && (
+            <span className="text-gray-400 text-sm">/</span>
+          )}
         </Fragment>
       ))}
     </div>

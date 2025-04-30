@@ -19,992 +19,992 @@ const UsersData: IUsersData[] = [
     user: {
       avatar: '300-1.png',
       userName: 'Esther Howard',
-      userGmail: 'esther.howard@gmail.com'
+      userGmail: 'esther.howard@gmail.com',
     },
     role: 'Editor',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Malaysia',
     flag: 'malaysia.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-2.png',
       userName: 'Cody Fisher',
-      userGmail: 'cody.fisher@gmail.com'
+      userGmail: 'cody.fisher@gmail.com',
     },
     role: 'Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Canada',
     flag: 'canada.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-3.png',
       userName: 'Tyler Hero',
-      userGmail: 'tyler.hero@gmail.com'
+      userGmail: 'tyler.hero@gmail.com',
     },
     role: 'Super Admin',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Estonia',
     flag: 'estonia.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-4.png',
       userName: 'Robert Fox',
-      userGmail: 'robert.fox@gmail.com'
+      userGmail: 'robert.fox@gmail.com',
     },
     role: 'Developer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'USA',
     flag: 'united-states.svg',
-    activity: 'Today, 15:02'
+    activity: 'Today, 15:02',
   },
   {
     user: {
       avatar: '300-5.png',
       userName: 'Leslie Alexander',
-      userGmail: 'leslie.alexander@gmail.com'
+      userGmail: 'leslie.alexander@gmail.com',
     },
     role: 'Super Admin',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'India',
     flag: 'india.svg',
-    activity: 'Month ago'
+    activity: 'Month ago',
   },
   {
     user: {
       avatar: '300-6.png',
       userName: 'John Smith',
-      userGmail: 'john.smith@gmail.com'
+      userGmail: 'john.smith@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Australia',
     flag: 'australia.svg',
-    activity: 'Yesterday, 14:23'
+    activity: 'Yesterday, 14:23',
   },
   {
     user: {
       avatar: '300-7.png',
       userName: 'Emily Johnson',
-      userGmail: 'emily.johnson@gmail.com'
+      userGmail: 'emily.johnson@gmail.com',
     },
     role: 'Developer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'France',
     flag: 'france.svg',
-    activity: 'Today, 10:12'
+    activity: 'Today, 10:12',
   },
   {
     user: {
       avatar: '300-8.png',
       userName: 'Michael Brown',
-      userGmail: 'michael.brown@gmail.com'
+      userGmail: 'michael.brown@gmail.com',
     },
     role: 'QA Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Germany',
     flag: 'germany.svg',
-    activity: 'Today, 09:45'
+    activity: 'Today, 09:45',
   },
   {
     user: {
       avatar: '300-10.png',
       userName: 'Olivia Martinez',
-      userGmail: 'olivia.martinez@gmail.com'
+      userGmail: 'olivia.martinez@gmail.com',
     },
     role: 'Product Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Italy',
     flag: 'italy.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-11.png',
       userName: 'Jacob Jones',
-      userGmail: 'jacob.jones@gmail.com'
+      userGmail: 'jacob.jones@gmail.com',
     },
     role: 'Analyst',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Ukraine',
     flag: 'ukraine.svg',
-    activity: ''
+    activity: '',
   },
   {
     user: {
       avatar: '300-12.png',
       userName: 'Daniel Wilson',
-      userGmail: 'daniel.wilson@gmail.com'
+      userGmail: 'daniel.wilson@gmail.com',
     },
     role: 'CTO',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Japan',
     flag: 'japan.svg',
-    activity: 'Yesterday, 17:45'
+    activity: 'Yesterday, 17:45',
   },
   {
     user: {
       avatar: '300-13.png',
       userName: 'Sophia Lee',
-      userGmail: 'sophia.lee@gmail.com'
+      userGmail: 'sophia.lee@gmail.com',
     },
     role: 'HR',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'South Korea',
     flag: 'south-korea.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-14.png',
       userName: 'James Miller',
-      userGmail: 'james.miller@gmail.com'
+      userGmail: 'james.miller@gmail.com',
     },
     role: 'DevOps',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Russia',
     flag: 'russia.svg',
-    activity: 'Today, 11:30'
+    activity: 'Today, 11:30',
   },
   {
     user: {
       avatar: '300-15.png',
       userName: 'Linda Scott',
-      userGmail: 'linda.scott@gmail.com'
+      userGmail: 'linda.scott@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Netherlands',
     flag: 'netherlands.svg',
-    activity: 'Today, 13:22'
+    activity: 'Today, 13:22',
   },
   {
     user: {
       avatar: '300-16.png',
       userName: 'Anthony Thomas',
-      userGmail: 'anthony.thomas@gmail.com'
+      userGmail: 'anthony.thomas@gmail.com',
     },
     role: 'Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Sweden',
     flag: 'sweden.svg',
-    activity: 'Month ago'
+    activity: 'Month ago',
   },
   {
     user: {
       avatar: '300-17.png',
       userName: 'Christopher Martinez',
-      userGmail: 'christopher.martinez@gmail.com'
+      userGmail: 'christopher.martinez@gmail.com',
     },
     role: 'Analyst',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Mexico',
     flag: 'mexico.svg',
-    activity: 'Yesterday, 10:50'
+    activity: 'Yesterday, 10:50',
   },
   {
     user: {
       avatar: '300-18.png',
       userName: 'Ronald Richards',
-      userGmail: 'ronald.richards@gmail.com'
+      userGmail: 'ronald.richards@gmail.com',
     },
     role: 'Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Uruguay',
     flag: 'uruguay.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-19.png',
       userName: 'Jennifer Thomas',
-      userGmail: 'jennifer.thomas@gmail.com'
+      userGmail: 'jennifer.thomas@gmail.com',
     },
     role: 'HR',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Brazil',
     flag: 'brazil.svg',
-    activity: 'Today, 14:20'
+    activity: 'Today, 14:20',
   },
   {
     user: {
       avatar: '300-20.png',
       userName: 'Guy Hawkins',
-      userGmail: 'guy.hawkins@gmail.com'
+      userGmail: 'guy.hawkins@gmail.com',
     },
     role: 'HR',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Turkey',
     flag: 'turkey.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-21.png',
       userName: 'Natalie Watson',
-      userGmail: 'natalie.watson@gmail.com'
+      userGmail: 'natalie.watson@gmail.com',
     },
     role: 'Editor',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Finland',
     flag: 'finland.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-22.png',
       userName: 'Marvin McKinney',
-      userGmail: 'marvin.mckenney@gmail.com'
+      userGmail: 'marvin.mckenney@gmail.com',
     },
     role: 'Viewer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Latvia',
     flag: 'latvia.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-23.png',
       userName: 'Theresa Webb',
-      userGmail: 'theresa.webb@gmail.com'
+      userGmail: 'theresa.webb@gmail.com',
     },
     role: 'Admin',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Brazil',
     flag: 'brazil.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-24.png',
       userName: 'Brian Ross',
-      userGmail: 'brian.ross@gmail.com'
+      userGmail: 'brian.ross@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Norway',
     flag: 'norway.svg',
-    activity: 'Today, 08:30'
+    activity: 'Today, 08:30',
   },
   {
     user: {
       avatar: '300-25.png',
       userName: 'Donald Coleman',
-      userGmail: 'donald.coleman@gmail.com'
+      userGmail: 'donald.coleman@gmail.com',
     },
     role: 'Manager',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Ireland',
     flag: 'ireland.svg',
-    activity: 'Yesterday, 12:00'
+    activity: 'Yesterday, 12:00',
   },
   {
     user: {
       avatar: '300-26.png',
       userName: 'Jason Reed',
-      userGmail: 'jason.reed@gmail.com'
+      userGmail: 'jason.reed@gmail.com',
     },
     role: 'Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Belgium',
     flag: 'belgium.svg',
-    activity: 'Month ago'
+    activity: 'Month ago',
   },
   {
     user: {
       avatar: '300-27.png',
       userName: 'Paul Walker',
-      userGmail: 'paul.walker@gmail.com'
+      userGmail: 'paul.walker@gmail.com',
     },
     role: 'Developer',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Denmark',
     flag: 'denmark.svg',
-    activity: 'Yesterday, 16:00'
+    activity: 'Yesterday, 16:00',
   },
   {
     user: {
       avatar: '300-28.png',
       userName: 'Andrew Mitchell',
-      userGmail: 'andrew.mitchell@gmail.com'
+      userGmail: 'andrew.mitchell@gmail.com',
     },
     role: 'Product Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Portugal',
     flag: 'portugal.svg',
-    activity: 'Today, 12:45'
+    activity: 'Today, 12:45',
   },
   {
     user: {
       avatar: '300-29.png',
       userName: 'Kevin Evans',
-      userGmail: 'kevin.evans@gmail.com'
+      userGmail: 'kevin.evans@gmail.com',
     },
     role: 'Support',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Austria',
     flag: 'austria.svg',
-    activity: 'Today, 14:00'
+    activity: 'Today, 14:00',
   },
   {
     user: {
       avatar: '300-30.png',
       userName: 'Steven Harris',
-      userGmail: 'steven.harris@gmail.com'
+      userGmail: 'steven.harris@gmail.com',
     },
     role: 'Admin',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Greece',
     flag: 'greece.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-31.png',
       userName: 'Thomas Clark',
-      userGmail: 'thomas.clark@gmail.com'
+      userGmail: 'thomas.clark@gmail.com',
     },
     role: 'Analyst',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Switzerland',
     flag: 'switzerland.svg',
-    activity: 'Today, 11:00'
+    activity: 'Today, 11:00',
   },
   {
     user: {
       avatar: '300-32.png',
       userName: 'Justin Adams',
-      userGmail: 'justin.adams@gmail.com'
+      userGmail: 'justin.adams@gmail.com',
     },
     role: 'Viewer',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Czech Republic',
     flag: 'czech-republic.svg',
-    activity: 'Yesterday, 15:30'
+    activity: 'Yesterday, 15:30',
   },
   {
     user: {
       avatar: '300-33.png',
       userName: 'Charles Carter',
-      userGmail: 'charles.carter@gmail.com'
+      userGmail: 'charles.carter@gmail.com',
     },
     role: 'Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Hungary',
     flag: 'hungary.svg',
-    activity: 'Today, 10:30'
+    activity: 'Today, 10:30',
   },
   {
     user: {
       avatar: '300-34.png',
       userName: 'Jessica Evans',
-      userGmail: 'jessica.evans@gmail.com'
+      userGmail: 'jessica.evans@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Poland',
     flag: 'poland.svg',
-    activity: 'Today, 13:45'
+    activity: 'Today, 13:45',
   },
   {
     user: {
       avatar: '300-1.png',
       userName: 'Esther Howard',
-      userGmail: 'esther.howard@gmail.com'
+      userGmail: 'esther.howard@gmail.com',
     },
     role: 'Editor',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Malaysia',
     flag: 'malaysia.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-2.png',
       userName: 'Cody Fisher',
-      userGmail: 'cody.fisher@gmail.com'
+      userGmail: 'cody.fisher@gmail.com',
     },
     role: 'Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Canada',
     flag: 'canada.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-3.png',
       userName: 'Tyler Hero',
-      userGmail: 'tyler.hero@gmail.com'
+      userGmail: 'tyler.hero@gmail.com',
     },
     role: 'Super Admin',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Estonia',
     flag: 'estonia.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-4.png',
       userName: 'Robert Fox',
-      userGmail: 'robert.fox@gmail.com'
+      userGmail: 'robert.fox@gmail.com',
     },
     role: 'Developer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'USA',
     flag: 'united-states.svg',
-    activity: 'Today, 15:02'
+    activity: 'Today, 15:02',
   },
   {
     user: {
       avatar: '300-5.png',
       userName: 'Leslie Alexander',
-      userGmail: 'leslie.alexander@gmail.com'
+      userGmail: 'leslie.alexander@gmail.com',
     },
     role: 'Super Admin',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'India',
     flag: 'india.svg',
-    activity: 'Month ago'
+    activity: 'Month ago',
   },
   {
     user: {
       avatar: '300-6.png',
       userName: 'John Smith',
-      userGmail: 'john.smith@gmail.com'
+      userGmail: 'john.smith@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Australia',
     flag: 'australia.svg',
-    activity: 'Yesterday, 14:23'
+    activity: 'Yesterday, 14:23',
   },
   {
     user: {
       avatar: '300-7.png',
       userName: 'Emily Johnson',
-      userGmail: 'emily.johnson@gmail.com'
+      userGmail: 'emily.johnson@gmail.com',
     },
     role: 'Developer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'France',
     flag: 'france.svg',
-    activity: 'Today, 10:12'
+    activity: 'Today, 10:12',
   },
   {
     user: {
       avatar: '300-8.png',
       userName: 'Michael Brown',
-      userGmail: 'michael.brown@gmail.com'
+      userGmail: 'michael.brown@gmail.com',
     },
     role: 'QA Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Germany',
     flag: 'germany.svg',
-    activity: 'Today, 09:45'
+    activity: 'Today, 09:45',
   },
   {
     user: {
       avatar: '300-10.png',
       userName: 'Olivia Martinez',
-      userGmail: 'olivia.martinez@gmail.com'
+      userGmail: 'olivia.martinez@gmail.com',
     },
     role: 'Product Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Italy',
     flag: 'italy.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-11.png',
       userName: 'Jacob Jones',
-      userGmail: 'jacob.jones@gmail.com'
+      userGmail: 'jacob.jones@gmail.com',
     },
     role: 'Analyst',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Ukraine',
     flag: 'ukraine.svg',
-    activity: ''
+    activity: '',
   },
   {
     user: {
       avatar: '300-12.png',
       userName: 'Daniel Wilson',
-      userGmail: 'daniel.wilson@gmail.com'
+      userGmail: 'daniel.wilson@gmail.com',
     },
     role: 'CTO',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Japan',
     flag: 'apan.svg',
-    activity: 'Yesterday, 17:45'
+    activity: 'Yesterday, 17:45',
   },
   {
     user: {
       avatar: '300-13.png',
       userName: 'Sophia Lee',
-      userGmail: 'sophia.lee@gmail.com'
+      userGmail: 'sophia.lee@gmail.com',
     },
     role: 'HR',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'South Korea',
     flag: 'south-korea.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-14.png',
       userName: 'James Miller',
-      userGmail: 'james.miller@gmail.com'
+      userGmail: 'james.miller@gmail.com',
     },
     role: 'DevOps',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Russia',
     flag: 'russia.svg',
-    activity: 'Today, 11:30'
+    activity: 'Today, 11:30',
   },
   {
     user: {
       avatar: '300-15.png',
       userName: 'Linda Scott',
-      userGmail: 'linda.scott@gmail.com'
+      userGmail: 'linda.scott@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Netherlands',
     flag: 'netherlands.svg',
-    activity: 'Today, 13:22'
+    activity: 'Today, 13:22',
   },
   {
     user: {
       avatar: '300-16.png',
       userName: 'Anthony Thomas',
-      userGmail: 'anthony.thomas@gmail.com'
+      userGmail: 'anthony.thomas@gmail.com',
     },
     role: 'Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Sweden',
     flag: 'sweden.svg',
-    activity: 'Month ago'
+    activity: 'Month ago',
   },
   {
     user: {
       avatar: '300-17.png',
       userName: 'Christopher Martinez',
-      userGmail: 'christopher.martinez@gmail.com'
+      userGmail: 'christopher.martinez@gmail.com',
     },
     role: 'Analyst',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Mexico',
     flag: 'mexico.svg',
-    activity: 'Yesterday, 10:50'
+    activity: 'Yesterday, 10:50',
   },
   {
     user: {
       avatar: '300-18.png',
       userName: 'Ronald Richards',
-      userGmail: 'ronald.richards@gmail.com'
+      userGmail: 'ronald.richards@gmail.com',
     },
     role: 'Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Uruguay',
     flag: 'uruguay.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-19.png',
       userName: 'Jennifer Thomas',
-      userGmail: 'jennifer.thomas@gmail.com'
+      userGmail: 'jennifer.thomas@gmail.com',
     },
     role: 'HR',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Brazil',
     flag: 'brazil.svg',
-    activity: 'Today, 14:20'
+    activity: 'Today, 14:20',
   },
   {
     user: {
       avatar: '300-20.png',
       userName: 'Guy Hawkins',
-      userGmail: 'guy.hawkins@gmail.com'
+      userGmail: 'guy.hawkins@gmail.com',
     },
     role: 'HR',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Turkey',
     flag: 'turkey.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-21.png',
       userName: 'Natalie Watson',
-      userGmail: 'natalie.watson@gmail.com'
+      userGmail: 'natalie.watson@gmail.com',
     },
     role: 'Editor',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Finland',
     flag: 'finland.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-22.png',
       userName: 'Marvin McKinney',
-      userGmail: 'marvin.mckenney@gmail.com'
+      userGmail: 'marvin.mckenney@gmail.com',
     },
     role: 'Viewer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Latvia',
     flag: 'latvia.svg',
-    activity: 'Week ago'
+    activity: 'Week ago',
   },
   {
     user: {
       avatar: '300-23.png',
       userName: 'Theresa Webb',
-      userGmail: 'theresa.webb@gmail.com'
+      userGmail: 'theresa.webb@gmail.com',
     },
     role: 'Admin',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Brazil',
     flag: 'brazil.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-24.png',
       userName: 'Brian Ross',
-      userGmail: 'brian.ross@gmail.com'
+      userGmail: 'brian.ross@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Norway',
     flag: 'norway.svg',
-    activity: 'Today, 08:30'
+    activity: 'Today, 08:30',
   },
   {
     user: {
       avatar: '300-25.png',
       userName: 'Donald Coleman',
-      userGmail: 'donald.coleman@gmail.com'
+      userGmail: 'donald.coleman@gmail.com',
     },
     role: 'Manager',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Ireland',
     flag: 'ireland.svg',
-    activity: 'Yesterday, 12:00'
+    activity: 'Yesterday, 12:00',
   },
   {
     user: {
       avatar: '300-26.png',
       userName: 'Jason Reed',
-      userGmail: 'jason.reed@gmail.com'
+      userGmail: 'jason.reed@gmail.com',
     },
     role: 'Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Belgium',
     flag: 'belgium.svg',
-    activity: 'Month ago'
+    activity: 'Month ago',
   },
   {
     user: {
       avatar: '300-27.png',
       userName: 'Paul Walker',
-      userGmail: 'paul.walker@gmail.com'
+      userGmail: 'paul.walker@gmail.com',
     },
     role: 'Developer',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Denmark',
     flag: 'denmark.svg',
-    activity: 'Yesterday, 16:00'
+    activity: 'Yesterday, 16:00',
   },
   {
     user: {
       avatar: '300-28.png',
       userName: 'Andrew Mitchell',
-      userGmail: 'andrew.mitchell@gmail.com'
+      userGmail: 'andrew.mitchell@gmail.com',
     },
     role: 'Product Manager',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Portugal',
     flag: 'portugal.svg',
-    activity: 'Today, 12:45'
+    activity: 'Today, 12:45',
   },
   {
     user: {
       avatar: '300-29.png',
       userName: 'Kevin Evans',
-      userGmail: 'kevin.evans@gmail.com'
+      userGmail: 'kevin.evans@gmail.com',
     },
     role: 'Support',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Austria',
     flag: 'austria.svg',
-    activity: 'Today, 14:00'
+    activity: 'Today, 14:00',
   },
   {
     user: {
       avatar: '300-30.png',
       userName: 'Steven Harris',
-      userGmail: 'steven.harris@gmail.com'
+      userGmail: 'steven.harris@gmail.com',
     },
     role: 'Admin',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Greece',
     flag: 'greece.svg',
-    activity: 'Current session'
+    activity: 'Current session',
   },
   {
     user: {
       avatar: '300-31.png',
       userName: 'Thomas Clark',
-      userGmail: 'thomas.clark@gmail.com'
+      userGmail: 'thomas.clark@gmail.com',
     },
     role: 'Analyst',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Switzerland',
     flag: 'switzerland.svg',
-    activity: 'Today, 11:00'
+    activity: 'Today, 11:00',
   },
   {
     user: {
       avatar: '300-32.png',
       userName: 'Justin Adams',
-      userGmail: 'justin.adams@gmail.com'
+      userGmail: 'justin.adams@gmail.com',
     },
     role: 'Viewer',
     status: {
       label: 'On Leave',
-      color: 'danger'
+      color: 'danger',
     },
     location: 'Czech Republic',
     flag: 'czech-republic.svg',
-    activity: 'Yesterday, 15:30'
+    activity: 'Yesterday, 15:30',
   },
   {
     user: {
       avatar: '300-33.png',
       userName: 'Charles Carter',
-      userGmail: 'charles.carter@gmail.com'
+      userGmail: 'charles.carter@gmail.com',
     },
     role: 'Engineer',
     status: {
       label: 'In Office',
-      color: 'success'
+      color: 'success',
     },
     location: 'Hungary',
     flag: 'hungary.svg',
-    activity: 'Today, 10:30'
+    activity: 'Today, 10:30',
   },
   {
     user: {
       avatar: '300-34.png',
       userName: 'Jessica Evans',
-      userGmail: 'jessica.evans@gmail.com'
+      userGmail: 'jessica.evans@gmail.com',
     },
     role: 'Designer',
     status: {
       label: 'Remote',
-      color: 'primary'
+      color: 'primary',
     },
     location: 'Poland',
     flag: 'poland.svg',
-    activity: 'Today, 13:45'
-  }
+    activity: 'Today, 13:45',
+  },
 ];
 
 export { UsersData, type IUsersData };

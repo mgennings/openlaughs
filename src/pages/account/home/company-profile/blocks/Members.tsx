@@ -27,7 +27,7 @@ const Members = ({ url }: IMembersProps) => {
       connections: 26,
       label: 'Project Member',
       joined: 'Today',
-      disabled: true
+      disabled: true,
     },
     {
       avatar: '300-1.png',
@@ -35,7 +35,7 @@ const Members = ({ url }: IMembersProps) => {
       connections: 639,
       label: 'Accountant',
       joined: '5 days ago',
-      disabled: false
+      disabled: false,
     },
     {
       avatar: '300-11.png',
@@ -43,7 +43,7 @@ const Members = ({ url }: IMembersProps) => {
       connections: 125,
       label: 'Data Analyst',
       joined: '3 days ago',
-      disabled: false
+      disabled: false,
     },
     {
       avatar: '300-2.png',
@@ -51,7 +51,7 @@ const Members = ({ url }: IMembersProps) => {
       connections: 81,
       label: 'Accountant',
       joined: '2 weeks ago',
-      disabled: true
+      disabled: true,
     },
     {
       avatar: '300-5.png',
@@ -59,8 +59,8 @@ const Members = ({ url }: IMembersProps) => {
       connections: 1203,
       label: 'Director',
       joined: '3 weeks ago',
-      disabled: false
-    }
+      disabled: false,
+    },
   ];
 
   const renderItem = (table: IMembersItem, index: number) => {
@@ -113,10 +113,10 @@ const Members = ({ url }: IMembersProps) => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -153,10 +153,10 @@ const Members = ({ url }: IMembersProps) => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

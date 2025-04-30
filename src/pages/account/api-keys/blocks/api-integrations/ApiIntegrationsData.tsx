@@ -16,7 +16,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'User Auth System',
@@ -26,7 +26,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Data Analytics',
@@ -36,7 +36,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'CRM Connector',
@@ -46,7 +46,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Inventory Manager',
@@ -56,7 +56,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Inventory Manager',
@@ -66,7 +66,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Order Tracking Sys',
@@ -76,7 +76,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Feedback Loop',
@@ -86,7 +86,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Payment Gateway',
@@ -96,7 +96,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Shipping Coordinator',
@@ -106,7 +106,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Accounting Tool',
@@ -116,7 +116,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Customer Support',
@@ -126,7 +126,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Social Media Manager',
@@ -136,7 +136,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'SEO Analyzer',
@@ -146,7 +146,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Newsletter Service',
@@ -156,7 +156,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'SMS Notification Service',
@@ -166,7 +166,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Cloud Storage',
@@ -176,7 +176,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Fraud Detection',
@@ -186,7 +186,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'AI Chatbot',
@@ -196,7 +196,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Project Management',
@@ -206,7 +206,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Event Logging',
@@ -216,7 +216,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Calendar Sync',
@@ -226,7 +226,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'HR Management',
@@ -236,7 +236,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Content Delivery Network',
@@ -246,7 +246,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Marketing Automation',
@@ -256,7 +256,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'File Sharing',
@@ -266,7 +266,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Customer Feedback',
@@ -276,7 +276,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Sales Forecasting',
@@ -286,7 +286,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Data Warehouse',
@@ -296,7 +296,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Email Campaigns',
@@ -306,7 +306,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Business Intelligence',
@@ -316,8 +316,8 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
-  }
+    ),
+  },
 ];
 
 export { ApiIntegrationsData, type IApiIntegrationsData };

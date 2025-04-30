@@ -5,7 +5,8 @@ import { toAbsoluteUrl } from '@/utils';
 import { useDemo1Layout } from '../';
 
 const HeaderLogo = () => {
-  const { setMobileSidebarOpen, setMobileMegaMenuOpen, megaMenuEnabled } = useDemo1Layout();
+  const { setMobileSidebarOpen, setMobileMegaMenuOpen, megaMenuEnabled } =
+    useDemo1Layout();
 
   const handleSidebarOpen = () => {
     setMobileSidebarOpen(true);

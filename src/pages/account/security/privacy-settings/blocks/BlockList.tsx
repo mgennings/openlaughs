@@ -23,23 +23,23 @@ const BlockList = ({ text, limit, className }: IBlockListProps) => {
     {
       avatar: 'gray/1.png',
       name: 'Esther Howard',
-      commits: 6
+      commits: 6,
     },
     {
       avatar: 'gray/2.png',
       name: 'Tyler Hero',
-      commits: 29
+      commits: 29,
     },
     {
       avatar: 'gray/3.png',
       name: 'Arlene McCoy',
-      commits: 34
+      commits: 34,
     },
     {
       avatar: 'gray/4.png',
       name: 'Cody Fisher',
-      commits: 1
-    }
+      commits: 1,
+    },
   ];
 
   const renderItem = (item: IBlockListItem, index: number) => {
@@ -96,4 +96,9 @@ const BlockList = ({ text, limit, className }: IBlockListProps) => {
   );
 };
 
-export { BlockList, type IBlockListItem, type IBlockListItems, type IBlockListProps };
+export {
+  BlockList,
+  type IBlockListItem,
+  type IBlockListItems,
+  type IBlockListProps,
+};

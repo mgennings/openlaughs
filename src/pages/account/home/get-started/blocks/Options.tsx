@@ -38,10 +38,10 @@ const Options = ({ items, dropdown }: IOptionsProps) => {
                       {
                         name: 'offset',
                         options: {
-                          offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                        }
-                      }
-                    ]
+                          offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                        },
+                      },
+                    ],
                   }}
                 >
                   <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -60,7 +60,9 @@ const Options = ({ items, dropdown }: IOptionsProps) => {
             >
               {item.title}
             </Link>
-            <span className="text-2sm text-gray-700 leading-5">{item.desc}</span>
+            <span className="text-2sm text-gray-700 leading-5">
+              {item.desc}
+            </span>
           </div>
         </div>
       </div>

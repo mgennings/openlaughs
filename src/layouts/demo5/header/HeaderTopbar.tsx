@@ -36,10 +36,10 @@ const HeaderTopbar = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, 10] : [115, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, 10] : [115, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon btn-icon-lg size-9 text-gray-600 hover:text-primary dropdown-open:text-primary">
@@ -61,10 +61,10 @@ const HeaderTopbar = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, 10] : [60, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, 10] : [60, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon btn-icon-lg size-9 text-gray-600 hover:text-primary dropdown-open:text-primary">
@@ -87,10 +87,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: [5, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: [5, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-icon rounded-full">

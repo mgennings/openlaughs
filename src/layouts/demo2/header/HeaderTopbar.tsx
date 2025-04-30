@@ -31,10 +31,10 @@ const HeaderTopbar = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [115, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: [115, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-gray-200 dropdown-open:bg-gray-200 text-gray-600">
@@ -56,10 +56,10 @@ const HeaderTopbar = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [75, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: [75, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-gray-200 dropdown-open:bg-gray-200 text-gray-600">
@@ -82,10 +82,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: [20, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: [20, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-icon rounded-full">

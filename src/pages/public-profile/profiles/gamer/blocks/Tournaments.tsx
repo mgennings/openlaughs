@@ -29,8 +29,8 @@ const Tournaments = () => {
         variant: 'progress-primary',
         value: 80,
         slotNumber: 76,
-        leftNumber: 9
-      }
+        leftNumber: 9,
+      },
     },
     {
       image: '33.jpg',
@@ -42,8 +42,8 @@ const Tournaments = () => {
         variant: 'progress-primary',
         value: 20,
         slotNumber: 520,
-        leftNumber: 27
-      }
+        leftNumber: 27,
+      },
     },
     {
       image: '34.jpg',
@@ -55,8 +55,8 @@ const Tournaments = () => {
         variant: 'progress-primary',
         value: 42,
         slotNumber: 18,
-        leftNumber: 21
-      }
+        leftNumber: 21,
+      },
     },
     {
       image: '11.jpg',
@@ -68,8 +68,8 @@ const Tournaments = () => {
         variant: 'progress-primary',
         value: 80,
         slotNumber: 98,
-        leftNumber: 44
-      }
+        leftNumber: 44,
+      },
     },
     {
       image: '12.jpg',
@@ -81,9 +81,9 @@ const Tournaments = () => {
         variant: 'progress-primary',
         value: 60,
         slotNumber: 324,
-        leftNumber: 15
-      }
-    }
+        leftNumber: 15,
+      },
+    },
   ];
 
   const renderItem = (item: ITournamentsItem, index: number) => {

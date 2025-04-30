@@ -22,7 +22,10 @@ const Comments = ({ items }: ICommentsProps) => {
         <div className="grid gap-2.5 grow">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-1.5">
-              <a href="#" className="text-md font-medium text-gray-900 hover:text-primary-active">
+              <a
+                href="#"
+                className="text-md font-medium text-gray-900 hover:text-primary-active"
+              >
                 {item.author}
               </a>
               <span className="text-sm text-gray-700">{item.date}</span>
@@ -58,7 +61,7 @@ const Comments = ({ items }: ICommentsProps) => {
             type="text"
             placeholder="your comment.."
             value={commentInput}
-            onChange={(e) => setCommentInput(e.target.value)}
+            onChange={e => setCommentInput(e.target.value)}
           />
           <button className="btn btn-icon btn-sm">
             <KeenIcon icon="picture" />

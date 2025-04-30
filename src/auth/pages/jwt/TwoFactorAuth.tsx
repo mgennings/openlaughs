@@ -28,7 +28,9 @@ const TwoFactorAuth = () => {
         />
 
         <div className="text-center mb-2">
-          <h3 className="text-lg font-medium text-gray-900 mb-5">Verify your phone</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-5">
+            Verify your phone
+          </h3>
           <div className="flex flex-col">
             <span className="text-2sm text-gray-700 mb-1.5">
               Enter the verification code we sent to
@@ -47,19 +49,23 @@ const TwoFactorAuth = () => {
               maxLength={1}
               className="input focus:border-primary-clarity focus:ring focus:ring-primary-clarity size-10 shrink-0 px-0 text-center"
               value={value}
-              onChange={(e) => handleInputChange(index, e.target.value)}
+              onChange={e => handleInputChange(index, e.target.value)}
             />
           ))}
         </div>
 
         <div className="flex items-center justify-center mb-2">
-          <span className="text-xs text-gray-700 me-1.5">Didn’t receive a code? (37s)</span>
+          <span className="text-xs text-gray-700 me-1.5">
+            Didn’t receive a code? (37s)
+          </span>
           <Link to="/auth/classic/login" className="text-xs link">
             Resend
           </Link>
         </div>
 
-        <button className="btn btn-primary flex justify-center grow">Continue</button>
+        <button className="btn btn-primary flex justify-center grow">
+          Continue
+        </button>
 
         <Link
           to="/auth/login"

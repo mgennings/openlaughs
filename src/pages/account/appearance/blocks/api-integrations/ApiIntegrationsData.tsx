@@ -16,7 +16,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'User Auth System',
@@ -26,7 +26,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Data Analytics',
@@ -36,13 +36,14 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'CRM Connector',
     apiKey: 'p6qM7rS8tK9BnHjCcR',
     dailyCalls: '8,000',
-    actions: '<div class="switch switch-sm"><input type="checkbox" name="param" value="1"></div>'
+    actions:
+      '<div class="switch switch-sm"><input type="checkbox" name="param" value="1"></div>',
   },
   {
     integration: 'Inventory Manager',
@@ -52,7 +53,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Inventory Manager',
@@ -62,7 +63,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Order Tracking Sys',
@@ -72,7 +73,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Feedback Loop',
@@ -82,7 +83,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Payment Gateway',
@@ -92,7 +93,7 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" value="1" readOnly />
       </div>
-    )
+    ),
   },
   {
     integration: 'Shipping Coordinator',
@@ -102,8 +103,8 @@ const ApiIntegrationsData: IApiIntegrationsData[] = [
       <div className="switch switch-sm">
         <input type="checkbox" name="param" defaultChecked value="1" readOnly />
       </div>
-    )
-  }
+    ),
+  },
 ];
 
 export { ApiIntegrationsData, type IApiIntegrationsData };

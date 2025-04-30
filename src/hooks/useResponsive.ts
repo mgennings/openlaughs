@@ -11,9 +11,12 @@ const useResponsive = (
   query: TResponsiveQuery,
   key?: TResponsiveBreakpoint,
   start?: TResponsiveBreakpoint,
-  end?: TResponsiveBreakpoint
+  end?: TResponsiveBreakpoint,
 ) => {
-  const screens = tailwindConfig?.theme?.screens as Record<string, TResponsiveBreakpoint>;
+  const screens = tailwindConfig?.theme?.screens as Record<
+    string,
+    TResponsiveBreakpoint
+  >;
 
   if (query === 'up' && key) {
     key = breakpoints.includes(key) && screens ? screens[key] : key;

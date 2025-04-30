@@ -9,7 +9,7 @@ const SnackbarProvider = ({ children }: PropsWithChildren) => {
       maxSnack={3}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       Components={{
-        solid: SolidSnackbar
+        solid: SolidSnackbar,
       }}
     >
       {children}

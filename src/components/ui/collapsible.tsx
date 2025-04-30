@@ -17,13 +17,14 @@ const CollapsibleContent = React.forwardRef<
     ref={ref}
     className={cn(
       `overflow-hidden transition-all data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down`,
-      className
+      className,
     )}
     {...props}
   >
     <div className="p-2">{children}</div>
   </CollapsiblePrimitive.CollapsibleContent>
 ));
-CollapsibleContent.displayName = CollapsiblePrimitive.CollapsibleContent.displayName;
+CollapsibleContent.displayName =
+  CollapsiblePrimitive.CollapsibleContent.displayName;
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent };

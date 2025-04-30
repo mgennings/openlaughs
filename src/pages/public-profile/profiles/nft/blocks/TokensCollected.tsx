@@ -18,36 +18,36 @@ const TokensCollected = () => {
       title: 'Chrismas Wonders',
       id: 50924,
       info: '5.9 XMR',
-      date: '12 Aug, 2023'
+      date: '12 Aug, 2023',
     },
     {
       image: '5.jpg',
       title: 'Digital Harmony',
       id: 44233,
       info: '1.3 XMR',
-      date: '29 Dec, 2023'
+      date: '29 Dec, 2023',
     },
     {
       image: '6.jpg',
       title: 'Geometric Patterns',
       id: 872458,
       info: '14.7 XMR',
-      date: '10h 13m 32s'
+      date: '10h 13m 32s',
     },
     {
       image: '7.jpg',
       title: 'Futuristic Sculptures',
       id: 71045,
       info: '4.3 XMR',
-      date: '10h 30m 00s'
+      date: '10h 30m 00s',
     },
     {
       image: '8.jpg',
       title: 'Enchanted Realms',
       id: 67670,
       info: '5.3 XMR',
-      date: '15h 43m 23s'
-    }
+      date: '15h 43m 23s',
+    },
   ];
 
   const renderItems = (item: ITokensCollectedItem, index: number) => {
@@ -83,4 +83,8 @@ const TokensCollected = () => {
   );
 };
 
-export { TokensCollected, type ITokensCollectedItem, type ITokensCollectedItems };
+export {
+  TokensCollected,
+  type ITokensCollectedItem,
+  type ITokensCollectedItems,
+};

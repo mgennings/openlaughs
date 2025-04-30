@@ -7,7 +7,7 @@ import {
   ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
+  ToolbarPageTitle,
 } from '@/partials/toolbar';
 import { PageNavbar } from '@/pages/account';
 
@@ -26,7 +26,9 @@ const AccountImportMembersPage = () => {
           <Toolbar>
             <ToolbarHeading>
               <ToolbarPageTitle />
-              <ToolbarDescription>Overview of all team members and roles.</ToolbarDescription>
+              <ToolbarDescription>
+                Overview of all team members and roles.
+              </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
               <Link to="#" className="btn btn-sm btn-light">

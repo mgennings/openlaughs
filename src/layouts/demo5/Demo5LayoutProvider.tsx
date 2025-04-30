@@ -1,5 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { createContext, type PropsWithChildren, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useLocation } from 'react-router';
 import { useMenuChildren } from '@/components/menu';
 import { MENU_SIDEBAR } from '@/config/menu.config';
@@ -24,11 +30,12 @@ const initalLayoutProps: IDemo5LayoutProviderProps = {
   mobileSidebarOpen: false, // Mobile sidebar is closed by default
   setMobileSidebarOpen: (open: boolean) => {
     console.log(`${open}`);
-  }
+  },
 };
 
 // Creating context for the layout provider with initial properties
-const Demo5LayoutContext = createContext<IDemo5LayoutProviderProps>(initalLayoutProps);
+const Demo5LayoutContext =
+  createContext<IDemo5LayoutProviderProps>(initalLayoutProps);
 
 // Custom hook to access the layout context
 const useDemo5Layout = () => useContext(Demo5LayoutContext);
@@ -61,7 +68,8 @@ const Demo5LayoutProvider = ({ children }: PropsWithChildren) => {
 
   const scrollPosition = useScrollPosition(); // Tracks the scroll position
 
-  const headerSticky: boolean = scrollPosition > layout.options.header.stickyOffset; // Makes the header sticky based on scroll
+  const headerSticky: boolean =
+    scrollPosition > layout.options.header.stickyOffset; // Makes the header sticky based on scroll
 
   return (
     // Provides the layout configuration and controls via context to the application
@@ -70,7 +78,7 @@ const Demo5LayoutProvider = ({ children }: PropsWithChildren) => {
         layout,
         headerSticky,
         mobileSidebarOpen,
-        setMobileSidebarOpen
+        setMobileSidebarOpen,
       }}
     >
       {children}

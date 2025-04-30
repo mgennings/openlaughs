@@ -15,7 +15,7 @@ const CommonRating = ({ className, rating, round }: IRatingProps) => {
           className={clsx(
             'rating-label',
             index < rating ? 'checked' : '',
-            index === rating && round ? 'indeterminate' : ''
+            index === rating && round ? 'indeterminate' : '',
           )}
         >
           {index === rating && round ? (

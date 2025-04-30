@@ -25,7 +25,11 @@ const Breadcrumbs = () => {
             {item.title}
           </span>
           {!last && (
-            <KeenIcon icon="right" className="text-gray-500 text-3xs" key={`separator-${index}`} />
+            <KeenIcon
+              icon="right"
+              className="text-gray-500 text-3xs"
+              key={`separator-${index}`}
+            />
           )}
         </Fragment>
       );

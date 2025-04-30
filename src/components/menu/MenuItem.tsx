@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ClickAwayListener, Popper } from '@mui/base';
 import clsx from 'clsx';
 import React, {
@@ -12,7 +11,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState
+  useState,
 } from 'react';
 import useResponsiveProp from '@/hooks/useResponsiveProp';
 import { useMatchPath } from '../../hooks/useMatchPath';
@@ -30,7 +29,7 @@ import {
   TMenuTrigger,
   IMenuToggleProps,
   MenuToggle,
-  useMenu
+  useMenu,
 } from './';
 import { usePathname } from '@/providers';
 import { getMenuLinkPath, hasMenuActiveChild } from './utils';
@@ -53,7 +52,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
       children,
       open = false,
       parentId,
-      id
+      id,
     } = props;
 
     const { ...containerProps } = ContainerPropsProp;
@@ -68,7 +67,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
       multipleExpand,
       setOpenAccordion,
       isOpenAccordion,
-      dropdownTimeout
+      dropdownTimeout,
     } = useMenu();
     const finalParentId = parentId !== undefined ? parentId : '';
     const finalId = id !== undefined ? id : '';
@@ -101,7 +100,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
     const [accordionEnter, setAccordionEnter] = useState(open);
 
     const hasSub = Children.toArray(children).some(
-      (child) => isValidElement(child) && child.type === MenuSub
+      child => isValidElement(child) && child.type === MenuSub,
     );
 
     const handleHide = () => {
@@ -205,7 +204,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
         hasItemSub: hasSub,
         tabIndex,
         handleToggle,
-        handleClick
+        handleClick,
       };
 
       // Return the child with modified props
@@ -217,7 +216,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
       const modifiedProps: IMenuToggleProps = {
         hasItemSub: hasSub,
         tabIndex,
-        handleToggle
+        handleToggle,
       };
 
       // Return the child with modified props
@@ -230,7 +229,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
         hasItemSub: hasSub,
         tabIndex,
         handleToggle,
-        handleClick
+        handleClick,
       };
 
       // Return the child with modified props
@@ -248,7 +247,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
         toggle: propToggle,
         handleParentHide: handleHide,
         tabIndex,
-        menuItemRef: ref
+        menuItemRef: ref,
       };
 
       const modofiedChild = cloneElement(child, modifiedProps);
@@ -257,19 +256,21 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
         <Popper
           style={{
             zIndex: dropdownZIndex,
-            pointerEvents: trigger === 'click' ? 'auto' : 'none'
+            pointerEvents: trigger === 'click' ? 'auto' : 'none',
           }}
           {...propDropdownProps}
           anchorEl={show ? menuItemRef.current : null}
           open={show}
           autoFocus={false}
-          className={clsx(child.props.rootClassName && child.props.rootClassName)}
+          className={clsx(
+            child.props.rootClassName && child.props.rootClassName,
+          )}
         >
           <ClickAwayListener onClickAway={handleHide}>
             <div
               className={clsx(
                 'menu-container',
-                child.props.baseClassName && child.props.baseClassName
+                child.props.baseClassName && child.props.baseClassName,
               )}
               ref={menuContainerRef}
               style={{ pointerEvents: 'auto' }}
@@ -300,14 +301,14 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
         toggle: propToggle,
         handleClick,
         handleEntered,
-        handleExited
+        handleExited,
       };
 
       return cloneElement(child, modifiedProps);
     };
 
     const renderChildren = () => {
-      const modifiedChildren = Children.map(children, (child) => {
+      const modifiedChildren = Children.map(children, child => {
         if (isValidElement(child)) {
           if (child.type === MenuLink) {
             return renderLink(child);
@@ -342,9 +343,9 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
         },
         isOpen: () => {
           return show;
-        }
+        },
       }),
-      [show]
+      [show],
     );
 
     useEffect(() => {
@@ -403,7 +404,7 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
         tabIndex={tabIndex}
         {...(propToggle === 'dropdown' && {
           onMouseEnter: handleMouseEnter,
-          onMouseLeave: handleMouseLeave
+          onMouseLeave: handleMouseLeave,
         })}
         className={clsx(
           'menu-item',
@@ -412,13 +413,13 @@ const MenuItemComponent = forwardRef<IMenuItemRef | null, IMenuItemProps>(
           active && 'active',
           show && 'show',
           here && 'here',
-          transitioning && 'transitioning'
+          transitioning && 'transitioning',
         )}
       >
         {renderChildren()}
       </div>
     );
-  }
+  },
 );
 
 const MenuItem = memo(MenuItemComponent);

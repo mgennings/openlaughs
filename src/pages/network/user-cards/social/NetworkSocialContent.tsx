@@ -7,7 +7,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
 interface ISocialContentItem {
@@ -33,11 +33,11 @@ const NetworkSocialContent = () => {
         image: '300-1.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Jenny Klabber',
       description: 'San Antonio, TX',
-      verify: true
+      verify: true,
     },
     {
       avatar: {
@@ -45,11 +45,11 @@ const NetworkSocialContent = () => {
           'flex items-center justify-center relative text-2.5xl text-danger size-20 ring-1 ring-danger-clarity bg-danger-light rounded-full',
         fallback: 'K',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Kevin Warren',
       description: 'Fort Wayne, IN',
-      verify: true
+      verify: true,
     },
     {
       avatar: {
@@ -57,11 +57,11 @@ const NetworkSocialContent = () => {
         image: '300-9.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Brian Davis',
       description: 'Reno, NV',
-      verify: false
+      verify: false,
     },
     {
       avatar: {
@@ -69,11 +69,11 @@ const NetworkSocialContent = () => {
         image: '300-11.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Guy Hawkins',
       description: 'Irving, TX',
-      verify: true
+      verify: true,
     },
     {
       avatar: {
@@ -81,11 +81,11 @@ const NetworkSocialContent = () => {
         image: '300-30.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Albert Flores',
       description: 'Boise, ID',
-      verify: false
+      verify: false,
     },
     {
       avatar: {
@@ -93,11 +93,11 @@ const NetworkSocialContent = () => {
           'flex items-center justify-center relative text-2.5xl text-info size-20 ring-1 ring-info-clarity bg-info-light rounded-full',
         fallback: 'S',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Savannah Nguyen',
       description: 'Spokane, WA',
-      verify: true
+      verify: true,
     },
     {
       avatar: {
@@ -105,11 +105,11 @@ const NetworkSocialContent = () => {
           'flex items-center justify-center relative text-2.5xl text-success size-20 ring-1 ring-success-clarity bg-success-light rounded-full',
         fallback: 'M',
         badgeClass:
-          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-gray-400 rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Marvin McKinney',
       description: 'Richmond, VA',
-      verify: false
+      verify: false,
     },
     {
       avatar: {
@@ -117,11 +117,11 @@ const NetworkSocialContent = () => {
         image: '300-3.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Darrell Steward',
       description: 'Baton Rouge, LA',
-      verify: true
+      verify: true,
     },
     {
       avatar: {
@@ -129,12 +129,12 @@ const NetworkSocialContent = () => {
         image: '300-5.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full ring-2 ring-light absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       name: 'Eleanor Pena',
       description: 'Des Moines, IA',
-      verify: true
-    }
+      verify: true,
+    },
   ];
 
   const renderItem = (item: ISocialContentItem, index: number) => (
@@ -160,7 +160,9 @@ const NetworkSocialContent = () => {
   return (
     <div className="flex flex-col items-stretch gap-5 lg:gap-7.5">
       <div className="flex flex-wrap items-center gap-5 justify-between">
-        <h3 className="text-md text-gray-900 font-medium">Showing {items.length} Users</h3>
+        <h3 className="text-md text-gray-900 font-medium">
+          Showing {items.length} Users
+        </h3>
 
         <div className="flex items-center flex-wrap gap-5">
           <div className="flex items-center flex-wrap gap-2.5">
@@ -198,7 +200,7 @@ const NetworkSocialContent = () => {
                 type="text"
                 placeholder="Type name, team"
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={e => setSearchInput(e.target.value)}
               />
             </label>
           </div>
@@ -257,4 +259,8 @@ const NetworkSocialContent = () => {
   );
 };
 
-export { NetworkSocialContent, type ISocialContentItem, type ISocialContentItems };
+export {
+  NetworkSocialContent,
+  type ISocialContentItem,
+  type ISocialContentItems,
+};

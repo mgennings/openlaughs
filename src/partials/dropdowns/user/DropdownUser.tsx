@@ -14,7 +14,7 @@ import {
   MenuTitle,
   MenuSeparator,
   MenuArrow,
-  MenuIcon
+  MenuIcon,
 } from '@/components/menu';
 
 interface IDropdownUserProps {
@@ -30,7 +30,7 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
     const newThemeMode = event.target.checked ? 'dark' : 'light';
 
     storeSettings({
-      themeMode: newThemeMode
+      themeMode: newThemeMode,
     });
   };
 
@@ -97,10 +97,10 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [50, 0] : [-50, 0] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [50, 0] : [-50, 0], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuLink>
@@ -111,7 +111,10 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                 <FormattedMessage id="USER.MENU.MY_ACCOUNT" />
               </MenuTitle>
               <MenuArrow>
-                <KeenIcon icon="right" className="text-3xs rtl:transform rtl:rotate-180" />
+                <KeenIcon
+                  icon="right"
+                  className="text-3xs rtl:transform rtl:rotate-180"
+                />
               </MenuArrow>
             </MenuLink>
             <MenuSub className="menu-default light:border-gray-300 w-[200px]] md:w-[220px]">
@@ -144,11 +147,16 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                     <FormattedMessage id="USER.MENU.BILLING" />
                   </MenuTitle>
                   <DefaultTooltip
-                    title={<FormattedMessage id="USER.MENU.PAYMENT_&_SUBSCRIPTION_INFO" />}
+                    title={
+                      <FormattedMessage id="USER.MENU.PAYMENT_&_SUBSCRIPTION_INFO" />
+                    }
                     placement="top"
                     className="max-w-48"
                   >
-                    <KeenIcon icon="information-2" className="text-gray-500 text-md" />
+                    <KeenIcon
+                      icon="information-2"
+                      className="text-gray-500 text-md"
+                    />
                   </DefaultTooltip>
                 </MenuLink>
               </MenuItem>
@@ -192,7 +200,13 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                     <FormattedMessage id="USER.MENU.NOTIFICATIONS" />
                   </MenuTitle>
                   <label className="switch switch-sm">
-                    <input name="check" type="checkbox" checked onChange={() => {}} value="1" />
+                    <input
+                      name="check"
+                      type="checkbox"
+                      checked
+                      onChange={() => {}}
+                      value="1"
+                    />
                   </label>
                 </MenuLink>
               </MenuItem>

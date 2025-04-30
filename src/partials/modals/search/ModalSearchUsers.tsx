@@ -37,8 +37,12 @@ const ModalSearchUsers = ({ items, more = true }: IModalSearchUsersProps) => {
 
               {/* Status badge and action button */}
               <div className="flex items-center gap-2.5">
-                <div className={`badge badge-pill badge-outline ${item.color} gap-1.5`}>
-                  <span className={`badge badge-dot ${item.color} size-1.5`}></span>
+                <div
+                  className={`badge badge-pill badge-outline ${item.color} gap-1.5`}
+                >
+                  <span
+                    className={`badge badge-dot ${item.color} size-1.5`}
+                  ></span>
                   {item.label}
                 </div>
                 <button className="btn btn-icon btn-light btn-clear btn-sm">

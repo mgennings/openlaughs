@@ -22,7 +22,14 @@ interface IRoleProps {
   path: string;
 }
 
-const CardRole = ({ path, title, subTitle, description, team, badge }: IRoleProps) => {
+const CardRole = ({
+  path,
+  title,
+  subTitle,
+  description,
+  team,
+  badge,
+}: IRoleProps) => {
   const { isRTL } = useLanguage();
 
   return (
@@ -52,10 +59,10 @@ const CardRole = ({ path, title, subTitle, description, team, badge }: IRoleProp
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

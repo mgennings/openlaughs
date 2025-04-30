@@ -6,7 +6,7 @@ import {
   MenuLabel,
   MenuSub,
   MenuTitle,
-  MenuToggle
+  MenuToggle,
 } from '@/components/menu';
 import { KeenIcon } from '@/components/keenicons';
 import { useLanguage } from '@/i18n';
@@ -59,16 +59,19 @@ const NavbarDropdown = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-sm btn-icon btn-light">
             <KeenIcon icon="dots-vertical" />
           </MenuToggle>
-          <MenuSub className="menu-default" rootClassName="w-full max-w-[220px]">
+          <MenuSub
+            className="menu-default"
+            rootClassName="w-full max-w-[220px]"
+          >
             <MenuItem onClick={handleSettingsModalOpen}>
               <MenuLabel>
                 <MenuIcon>
@@ -108,9 +111,18 @@ const NavbarDropdown = () => {
         </MenuItem>
       </Menu>
 
-      <ModalShareProfile open={ShareProfileModalOpen} onOpenChange={handleShareProfileModalClose} />
-      <ModalGiveAward open={giveAwardModalOpen} onOpenChange={handleGiveAwardModalClose} />
-      <ModalReportUser open={reportUserModalOpen} onOpenChange={handleReportUserModalClose} />
+      <ModalShareProfile
+        open={ShareProfileModalOpen}
+        onOpenChange={handleShareProfileModalClose}
+      />
+      <ModalGiveAward
+        open={giveAwardModalOpen}
+        onOpenChange={handleGiveAwardModalClose}
+      />
+      <ModalReportUser
+        open={reportUserModalOpen}
+        onOpenChange={handleReportUserModalClose}
+      />
     </Fragment>
   );
 };

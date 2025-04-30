@@ -19,38 +19,38 @@ const Connections = () => {
       avatar: '300-3.png',
       name: 'Tyler Hero',
       connections: 26,
-      jointLinks: 6
+      jointLinks: 6,
     },
     {
       avatar: '300-1.png',
       name: 'Esther Howard',
       connections: 639,
-      jointLinks: 'none'
+      jointLinks: 'none',
     },
     {
       avatar: '300-11.png',
       name: 'Jacob Jones',
       connections: 125,
-      jointLinks: 19
+      jointLinks: 19,
     },
     {
       avatar: '300-2.png',
       name: 'Cody Fisher',
       connections: 81,
-      jointLinks: 'none'
+      jointLinks: 'none',
     },
     {
       avatar: '300-5.png',
       name: 'Leslie Alexander',
       connections: 1203,
-      jointLinks: 2
+      jointLinks: 2,
     },
     {
       avatar: '300-9.png',
       name: 'Guy Hawkins',
       connections: 2,
-      jointLinks: 'none'
-    }
+      jointLinks: 'none',
+    },
   ];
 
   const renderItem = (table: IConnection, index: number) => {
@@ -78,7 +78,9 @@ const Connections = () => {
           </div>
         </td>
 
-        <td className="py-2 text-end text-gray-600 font-nmedium">{table.jointLinks}</td>
+        <td className="py-2 text-end text-gray-600 font-nmedium">
+          {table.jointLinks}
+        </td>
 
         <td className="py-2 text-end">
           <button className="btn btn-xs btn-icon btn-primary rounded-full">
@@ -97,10 +99,10 @@ const Connections = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -129,10 +131,10 @@ const Connections = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -149,7 +151,9 @@ const Connections = () => {
             <tbody>
               <tr className="bg-gray-100">
                 <th className="text-start font-medium min-w-48 py-2.5">Name</th>
-                <th className="text-end font-medium min-w-28 py-2.5">Joint Links</th>
+                <th className="text-end font-medium min-w-28 py-2.5">
+                  Joint Links
+                </th>
                 <th className="text-end font-medium min-w-20 py-2.5">Status</th>
                 <th className="min-w-16"></th>
               </tr>

@@ -15,8 +15,8 @@ const OpenToWork = ({ className, title }: IOpenToWorkProps) => {
       </div>
       <div className="card-body">
         <p className="text-sm text-gray-800 leading-5.5">
-          Seasoned UI/UX designer with a flair for user-centric interfaces. Let&apos;s create
-          something amazing together!
+          Seasoned UI/UX designer with a flair for user-centric interfaces.
+          Let&apos;s create something amazing together!
         </p>
       </div>
 

@@ -35,26 +35,28 @@ const rootStyles = {
   success: 'bg-success text-success-inverse',
   danger: 'bg-danger text-danger-inverse',
   warning: 'bg-warning text-warning-inverse',
-  info: 'bg-info text-info-inverse'
+  info: 'bg-info text-info-inverse',
 };
 
-const SolidSnackbar = forwardRef<HTMLDivElement, ISolidSnackbarProps>((props, ref) => {
-  const { state, icon, message } = props;
+const SolidSnackbar = forwardRef<HTMLDivElement, ISolidSnackbarProps>(
+  (props, ref) => {
+    const { state, icon, message } = props;
 
-  // Get the icon and styles based on the state
-  const iconName = icon || 'information-2';
-  const rootClass = rootStyles[state] || rootStyles['primary'];
+    // Get the icon and styles based on the state
+    const iconName = icon || 'information-2';
+    const rootClass = rootStyles[state] || rootStyles['primary'];
 
-  return (
-    <SnackbarContent ref={ref} role="alert">
-      <div
-        className={`flex grow items-center gap-2.5 rounded-md py-2.5 px-3 shadow-default ${rootClass}`}
-      >
-        {iconName && <KeenIcon icon={iconName} className={`text-lg`} />}
-        <span className="text-sm">{message}</span>
-      </div>
-    </SnackbarContent>
-  );
-});
+    return (
+      <SnackbarContent ref={ref} role="alert">
+        <div
+          className={`flex grow items-center gap-2.5 rounded-md py-2.5 px-3 shadow-default ${rootClass}`}
+        >
+          {iconName && <KeenIcon icon={iconName} className={`text-lg`} />}
+          <span className="text-sm">{message}</span>
+        </div>
+      </SnackbarContent>
+    );
+  },
+);
 
 export { SolidSnackbar };

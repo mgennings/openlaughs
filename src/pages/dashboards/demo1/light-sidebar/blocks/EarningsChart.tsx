@@ -8,7 +8,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
 const fetchEarningsChart = () => {
@@ -29,86 +29,86 @@ const EarningsChart = () => {
     'Sep',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
   ];
 
   useEffect(() => {
-    fetchEarningsChart().then((value) => setCharData(value.data));
+    fetchEarningsChart().then(value => setCharData(value.data));
   }, []);
 
   const options: ApexOptions = {
     series: [
       {
         name: 'series1',
-        data: charData ?? []
-      }
+        data: charData ?? [],
+      },
     ],
     chart: {
       height: 250,
       type: 'area',
       toolbar: {
-        show: false
-      }
+        show: false,
+      },
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     legend: {
-      show: false
+      show: false,
     },
     stroke: {
       curve: 'smooth',
       show: true,
       width: 3,
-      colors: ['var(--tw-primary)']
+      colors: ['var(--tw-primary)'],
     },
     xaxis: {
       categories: categories,
       axisBorder: {
-        show: false
+        show: false,
       },
       axisTicks: {
-        show: false
+        show: false,
       },
       labels: {
         style: {
           colors: 'var(--tw-gray-500)',
-          fontSize: '12px'
-        }
+          fontSize: '12px',
+        },
       },
       crosshairs: {
         position: 'front',
         stroke: {
           color: 'var(--tw-primary)',
           width: 1,
-          dashArray: 3
-        }
+          dashArray: 3,
+        },
       },
       tooltip: {
         enabled: false,
         formatter: undefined,
         offsetY: 0,
         style: {
-          fontSize: '12px'
-        }
-      }
+          fontSize: '12px',
+        },
+      },
     },
     yaxis: {
       min: 0,
       max: 100,
       tickAmount: 5,
       axisTicks: {
-        show: false
+        show: false,
       },
       labels: {
         style: {
           colors: 'var(--tw-gray-500)',
-          fontSize: '12px'
+          fontSize: '12px',
         },
-        formatter: (defaultValue) => {
+        formatter: defaultValue => {
           return `$${defaultValue}K`;
-        }
-      }
+        },
+      },
     },
     tooltip: {
       enabled: true,
@@ -119,7 +119,7 @@ const EarningsChart = () => {
 
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
-          currency: 'USD'
+          currency: 'USD',
         });
 
         const formattedNumber = formatter.format(number);
@@ -133,7 +133,7 @@ const EarningsChart = () => {
             </div>
           </div>
           `;
-      }
+      },
     },
     markers: {
       size: 0,
@@ -152,29 +152,29 @@ const EarningsChart = () => {
       showNullDataPoints: true,
       hover: {
         size: 8,
-        sizeOffset: 0
-      }
+        sizeOffset: 0,
+      },
     },
     fill: {
       gradient: {
         opacityFrom: 0.25,
-        opacityTo: 0
-      }
+        opacityTo: 0,
+      },
     },
     grid: {
       borderColor: 'var(--tw-gray-200)',
       strokeDashArray: 5,
       yaxis: {
         lines: {
-          show: true
-        }
+          show: true,
+        },
       },
       xaxis: {
         lines: {
-          show: false
-        }
-      }
-    }
+          show: false,
+        },
+      },
+    },
   };
 
   return (
@@ -184,7 +184,13 @@ const EarningsChart = () => {
 
         <div className="flex items-center gap-5">
           <label className="switch switch-sm">
-            <input name="check" type="checkbox" value="1" className="order-2" readOnly />
+            <input
+              name="check"
+              type="checkbox"
+              value="1"
+              className="order-2"
+              readOnly
+            />
             <span className="switch-label order-1">Referrals only</span>
           </label>
 

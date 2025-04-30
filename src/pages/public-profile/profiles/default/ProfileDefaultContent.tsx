@@ -8,7 +8,7 @@ import {
   RecentUploads,
   Tags,
   UnlockPartnerships,
-  WorkExperience
+  WorkExperience,
 } from './blocks';
 
 const ProfileDefaultContent = () => {

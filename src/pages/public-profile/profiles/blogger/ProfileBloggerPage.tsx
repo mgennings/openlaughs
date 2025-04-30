@@ -26,7 +26,7 @@ const ProfileBloggerPage = () => {
         info={[
           { label: 'KeenThemes', icon: 'dribbble' },
           { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
+          { email: 'jenny@kteam.com', icon: 'sms' },
         ]}
       />
 

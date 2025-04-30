@@ -13,6 +13,12 @@ export const KeenIcon = forwardRef<HTMLElement, IKeenIconsProps>(
     }
 
     // Spread props and apply the ref to the <i> element
-    return <i ref={ref} {...props} className={clsx(`ki-${style}`, `ki-${icon}`, className)} />;
-  }
+    return (
+      <i
+        ref={ref}
+        {...props}
+        className={clsx(`ki-${style}`, `ki-${icon}`, className)}
+      />
+    );
+  },
 );

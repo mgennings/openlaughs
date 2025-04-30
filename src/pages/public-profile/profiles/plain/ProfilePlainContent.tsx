@@ -1,4 +1,9 @@
-import { INetworkItems, IStatisticsItems, Network, Statistics } from '../company';
+import {
+  INetworkItems,
+  IStatisticsItems,
+  Network,
+  Statistics,
+} from '../company';
 import { Tags } from '../default';
 import { AboutMe, GettingStarted, OpenToWork } from './blocks';
 
@@ -7,7 +12,7 @@ const ProfilePlainContent = () => {
     { number: '249', label: 'Connections' },
     { number: '1.2k', label: 'Uploads' },
     { number: '1M+', label: 'Gross Sales' },
-    { number: '27', label: 'Author Rank' }
+    { number: '27', label: 'Author Rank' },
   ];
 
   const data: INetworkItems = [
@@ -16,7 +21,7 @@ const ProfilePlainContent = () => {
     { icon: 'briefcase', link: 'UI/UX Desiger' },
     { icon: 'sms', link: 'jenny@kteam.com' },
     { icon: 'icon', link: 'https://keenthemes.com' },
-    { icon: 'facebook', link: 'keenthemes' }
+    { icon: 'facebook', link: 'keenthemes' },
   ];
 
   return (

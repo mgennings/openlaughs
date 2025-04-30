@@ -34,8 +34,9 @@ const EntryCallout = ({ className }: IEntryCalloutProps) => {
                 { filename: '300-2.png' },
                 {
                   fallback: 'S',
-                  variant: 'text-success-inverse text-xs ring-success-light bg-success'
-                }
+                  variant:
+                    'text-success-inverse text-xs ring-success-light bg-success',
+                },
               ]}
             />
 

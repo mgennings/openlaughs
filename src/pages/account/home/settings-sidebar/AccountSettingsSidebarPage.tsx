@@ -5,7 +5,7 @@ import {
   ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
+  ToolbarPageTitle,
 } from '@/partials/toolbar';
 import { PageNavbar } from '@/pages/account';
 
@@ -24,7 +24,9 @@ const AccountSettingsSidebarPage = () => {
           <Toolbar>
             <ToolbarHeading>
               <ToolbarPageTitle />
-              <ToolbarDescription>Intuitive Access to In-Depth Customization</ToolbarDescription>
+              <ToolbarDescription>
+                Intuitive Access to In-Depth Customization
+              </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
               <a href="#" className="btn btn-sm btn-light">

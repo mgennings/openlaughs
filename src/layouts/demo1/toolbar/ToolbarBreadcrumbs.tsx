@@ -22,7 +22,11 @@ const ToolbarBreadcrumbs = () => {
                 {item.title}
               </Link>
             ) : (
-              <span className={index === items.length - 1 ? 'text-gray-700' : 'text-gray-700'}>
+              <span
+                className={
+                  index === items.length - 1 ? 'text-gray-700' : 'text-gray-700'
+                }
+              >
                 {item.title}
               </span>
             )}

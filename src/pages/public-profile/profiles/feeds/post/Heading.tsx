@@ -32,7 +32,10 @@ const Heading = ({ author, avatar, date }: IHeadingProps) => {
         />
 
         <div className="flex flex-col">
-          <a href="#" className="text-md font-medium text-gray-900 hover:text-primary-active mb-1">
+          <a
+            href="#"
+            className="text-md font-medium text-gray-900 hover:text-primary-active mb-1"
+          >
             {author}
           </a>
           <time className="text-sm text-gray-600">{date}</time>
@@ -49,10 +52,10 @@ const Heading = ({ author, avatar, date }: IHeadingProps) => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

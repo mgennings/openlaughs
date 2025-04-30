@@ -22,24 +22,27 @@ const ConnectedProfiles = () => {
       user: {
         name: 'Tyler Hero',
         tasks: 26,
-        avatar: '300-3.png'
+        avatar: '300-3.png',
       },
       socialLogo: 'x.svg',
-      socialLogoDark: 'x-dark.svg'
+      socialLogoDark: 'x-dark.svg',
     },
     {
       user: {
         name: 'Leslie Alexander',
         tasks: 26,
-        avatar: '300-5.png'
+        avatar: '300-5.png',
       },
-      socialLogo: 'google.svg'
-    }
+      socialLogo: 'google.svg',
+    },
   ];
 
   const renderItem = (item: IConnectedProfilesItem, index: number) => {
     return (
-      <div key={index} className="card-group flex justify-between items-center py-4">
+      <div
+        key={index}
+        className="card-group flex justify-between items-center py-4"
+      >
         <div className="flex items-center grow gap-2.5">
           <img
             src={toAbsoluteUrl(`/media/avatars/${item.user.avatar}`)}
@@ -48,10 +51,15 @@ const ConnectedProfiles = () => {
           />
 
           <div className="flex flex-col gap-1">
-            <a href="#" className="text-sm font-medium text-gray-900 hover:text-primary-active">
+            <a
+              href="#"
+              className="text-sm font-medium text-gray-900 hover:text-primary-active"
+            >
               {item.user.name}
             </a>
-            <span className="text-xs text-gray-700">{item.user.tasks} tasks</span>
+            <span className="text-xs text-gray-700">
+              {item.user.tasks} tasks
+            </span>
           </div>
         </div>
 
@@ -87,10 +95,10 @@ const ConnectedProfiles = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -121,4 +129,8 @@ const ConnectedProfiles = () => {
   );
 };
 
-export { ConnectedProfiles, type IConnectedProfilesItem, type IConnectedProfilesItems };
+export {
+  ConnectedProfiles,
+  type IConnectedProfilesItem,
+  type IConnectedProfilesItems,
+};

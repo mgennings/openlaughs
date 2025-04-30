@@ -1,9 +1,20 @@
-/* eslint-disable prettier/prettier */
-import React, { useEffect, useMemo, useState } from 'react';import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/i18n';
 import { toAbsoluteUrl } from '@/utils';
 import { Column, ColumnDef, RowSelectionState } from '@tanstack/react-table';
-import { DataGrid, DataGridColumnHeader, DataGridColumnVisibility, DataGridRowSelect, DataGridRowSelectAll, KeenIcon, useDataGrid, Menu, MenuItem, MenuToggle } from '@/components';
+import {
+  DataGrid,
+  DataGridColumnHeader,
+  DataGridColumnVisibility,
+  DataGridRowSelect,
+  DataGridRowSelectAll,
+  KeenIcon,
+  useDataGrid,
+  Menu,
+  MenuItem,
+  MenuToggle,
+} from '@/components';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { DropdownCrudItem1 } from '@/partials/dropdowns/general';
@@ -17,12 +28,14 @@ const Invites = () => {
   const { isRTL } = useLanguage();
   const storageFilterId = 'teams-filter';
 
-  const ColumnInputFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
+  const ColumnInputFilter = <TData, TValue>({
+    column,
+  }: IColumnFilterProps<TData, TValue>) => {
     return (
       <Input
         placeholder="Filter..."
         value={(column.getFilterValue() as string) ?? ''}
-        onChange={(event) => column.setFilterValue(event.target.value)}
+        onChange={event => column.setFilterValue(event.target.value)}
         className="h-9 w-full max-w-40"
       />
     );
@@ -37,20 +50,28 @@ const Invites = () => {
         enableSorting: false,
         enableHiding: false,
         meta: {
-          headerClassName: 'w-0'
-        }
+          headerClassName: 'w-0',
+        },
       },
       {
-        accessorFn: (row) => row.member,
+        accessorFn: row => row.member,
         id: 'member',
-        header: ({ column }) => <DataGridColumnHeader title='Member' filter={<ColumnInputFilter column={column} />} column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader
+            title="Member"
+            filter={<ColumnInputFilter column={column} />}
+            column={column}
+          />
+        ),
         enableSorting: true,
-        cell: (info) => {
+        cell: info => {
           return (
             <div className="flex items-center gap-2.5">
               <div>
                 <img
-                  src={toAbsoluteUrl(`/media/avatars/${info.row.original.member.avatar}`)}
+                  src={toAbsoluteUrl(
+                    `/media/avatars/${info.row.original.member.avatar}`,
+                  )}
                   className="h-9 rounded-full"
                   alt=""
                 />
@@ -71,19 +92,23 @@ const Invites = () => {
         },
         meta: {
           headerClassName: 'min-w-[250px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.location,
+        accessorFn: row => row.location,
         id: 'location',
-        header: ({ column }) => <DataGridColumnHeader title='Location' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Location" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => {
+        cell: info => {
           return (
             <div className="flex items-center gap-1.5">
               <img
-                src={toAbsoluteUrl(`/media/flags/${info.row.original.location.flag}`)}
+                src={toAbsoluteUrl(
+                  `/media/flags/${info.row.original.location.flag}`,
+                )}
                 className="h-4 rounded-full"
                 alt=""
               />
@@ -95,17 +120,21 @@ const Invites = () => {
         },
         meta: {
           headerClassName: 'min-w-[120px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.status,
+        accessorFn: row => row.status,
         id: 'status',
         enableSorting: true,
-        header: ({ column }) => <DataGridColumnHeader title='Status' column={column} />,
-        cell: (info) => {
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Status" column={column} />
+        ),
+        cell: info => {
           return (
-            <span className={`badge badge-xs badge-outline ${info.row.original.status.variant} items-center`}>
+            <span
+              className={`badge badge-xs badge-outline ${info.row.original.status.variant} items-center`}
+            >
               <span className={info.row.original.status.variant}></span>
               {info.row.original.status.label}
             </span>
@@ -113,20 +142,22 @@ const Invites = () => {
         },
         meta: {
           headerClassName: 'min-w-[103px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.recentlyActivity,
+        accessorFn: row => row.recentlyActivity,
         id: 'recentlyActivity',
-        header: ({ column }) => <DataGridColumnHeader title='Recent activity' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Recent activity" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
         meta: {
           headerTitle: 'Recent activity',
           headerClassName: 'min-w-[160px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
         id: 'click',
@@ -143,10 +174,10 @@ const Invites = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -161,7 +192,7 @@ const Invites = () => {
         },
       },
     ],
-    [isRTL]
+    [isRTL],
   );
 
   // Memoize the team data
@@ -182,9 +213,9 @@ const Invites = () => {
     if (!searchTerm) return data; // If no search term, return full data
 
     return data.filter(
-      (team) =>
+      team =>
         team.member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        team.location.name.toLowerCase().includes(searchTerm.toLowerCase())
+        team.location.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
   }, [searchTerm, data]);
 
@@ -196,8 +227,8 @@ const Invites = () => {
         description: `Selected row IDs: ${selectedRowIds}`,
         action: {
           label: 'Undo',
-          onClick: () => console.log('Undo')
-        }
+          onClick: () => console.log('Undo'),
+        },
       });
     }
   };
@@ -220,12 +251,18 @@ const Invites = () => {
               className="input input-sm ps-8"
               placeholder="Search Members"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+              onChange={e => setSearchTerm(e.target.value)} // Update search term
             />
           </div>
-          <DataGridColumnVisibility table={table}/>
+          <DataGridColumnVisibility table={table} />
           <label className="switch switch-sm">
-            <input name="check" type="checkbox" value="1" className="order-2" readOnly />
+            <input
+              name="check"
+              type="checkbox"
+              value="1"
+              className="order-2"
+              readOnly
+            />
             <span className="switch-label order-1">Active Users</span>
           </label>
         </div>
@@ -234,13 +271,13 @@ const Invites = () => {
   };
 
   return (
-    <DataGrid 
-      columns={columns} 
-      data={filteredData} 
-      rowSelection={true} 
+    <DataGrid
+      columns={columns}
+      data={filteredData}
+      rowSelection={true}
       onRowSelectionChange={handleRowSelection}
       pagination={{ size: 10 }}
-      sorting={[{ id: 'member', desc: false }]} 
+      sorting={[{ id: 'member', desc: false }]}
       toolbar={<Toolbar />}
       layout={{ card: true }}
     />

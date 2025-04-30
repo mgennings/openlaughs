@@ -15,28 +15,31 @@ const Locations = () => {
     {
       image: '10.jpg',
       title: 'Duolingo Tech Hub',
-      description: '456 Innovation Street, Floor 6, Techland, New York 54321'
+      description: '456 Innovation Street, Floor 6, Techland, New York 54321',
     },
     {
       image: '11.jpg',
       title: 'Duolingo Language Lab',
-      description: '789 Learning Lane, 3rd Floor, Lingoville, Texas 98765'
+      description: '789 Learning Lane, 3rd Floor, Lingoville, Texas 98765',
     },
     {
       image: '12.jpg',
       title: 'Duolingo Research Institute',
-      description: '246 Innovation Road, Research Wing, Innovacity, Arizona 13579'
+      description:
+        '246 Innovation Road, Research Wing, Innovacity, Arizona 13579',
     },
     {
       image: '7.jpg',
       title: 'Duolingo Research Institute',
-      description: '246 Innovation Road, Research Wing, Innovacity, Arizona 13579'
+      description:
+        '246 Innovation Road, Research Wing, Innovacity, Arizona 13579',
     },
     {
       image: '8.jpg',
       title: 'Duolingo Research Institute',
-      description: '246 Innovation Road, Research Wing, Innovacity, Arizona 13579'
-    }
+      description:
+        '246 Innovation Road, Research Wing, Innovacity, Arizona 13579',
+    },
   ];
 
   const renderItem = (item: ILocationsItem, index: number) => {

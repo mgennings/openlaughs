@@ -48,10 +48,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [-170, 10] : [170, 10]
-                }
-              }
-            ]
+                  offset: isRTL() ? [-170, 10] : [170, 10],
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
@@ -73,10 +73,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [-10, 10] : [10, 10]
-                }
-              }
-            ]
+                  offset: isRTL() ? [-10, 10] : [10, 10],
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
@@ -98,10 +98,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [-70, 10] : [70, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [-70, 10] : [70, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-icon btn-icon-lg relative cursor-pointer size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
@@ -122,10 +122,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [-20, 10] : [20, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [-20, 10] : [20, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-icon rounded-full">

@@ -13,7 +13,10 @@ const SidebarFooter = forwardRef<HTMLDivElement, any>((props, ref) => {
   const { isRTL } = useLanguage();
 
   return (
-    <div ref={ref} className="flex flex-center justify-between shrink-0 ps-4 pe-3.5 mb-3.5">
+    <div
+      ref={ref}
+      className="flex flex-center justify-between shrink-0 ps-4 pe-3.5 mb-3.5"
+    >
       <Menu data-menu="true">
         <MenuItem
           ref={itemUserRef}
@@ -25,10 +28,10 @@ const SidebarFooter = forwardRef<HTMLDivElement, any>((props, ref) => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [10, 15] : [-10, 15] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [10, 15] : [-10, 15], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-icon rounded-full">
@@ -54,10 +57,10 @@ const SidebarFooter = forwardRef<HTMLDivElement, any>((props, ref) => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [10, 15]
-                  }
-                }
-              ]
+                    offset: [10, 15],
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon btn-icon-lg relative size-8 hover:bg-light hover:text-primary dropdown-open:bg-gray-200 text-gray-600">
@@ -75,10 +78,10 @@ const SidebarFooter = forwardRef<HTMLDivElement, any>((props, ref) => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [10, 15]
-                  }
-                }
-              ]
+                    offset: [10, 15],
+                  },
+                },
+              ],
             }}
           ></MenuItem>
         </Menu>

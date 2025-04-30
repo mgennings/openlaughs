@@ -3,13 +3,13 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from '@/components/ui/dialog';
 import {
   ModalShareProfileViaLink,
   ModalShareProfileViaEmail,
   ModalShareProfileUsers,
-  ModalShareProfileSettings
+  ModalShareProfileSettings,
 } from '@/partials/modals/share-profile';
 
 interface ModalGiveAwardProps {
@@ -34,7 +34,10 @@ const ModalGiveAward = ({ open, onOpenChange }: ModalGiveAwardProps) => {
           <ModalShareProfileViaEmail />
           <div className="border-b border-b-gray-200"></div>
 
-          <div className="scrollable-y-auto" style={{ maxHeight: `${scrollableHeight}px` }}>
+          <div
+            className="scrollable-y-auto"
+            style={{ maxHeight: `${scrollableHeight}px` }}
+          >
             <ModalShareProfileUsers />
           </div>
 

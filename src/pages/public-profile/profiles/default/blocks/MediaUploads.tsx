@@ -21,80 +21,80 @@ const MediaUploads = () => {
     'Sep',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
   ];
 
   const options: ApexOptions = {
     series: [
       {
         name: 'series1',
-        data: data
-      }
+        data: data,
+      },
     ],
     chart: {
       height: 250,
       type: 'area',
       toolbar: {
-        show: false
-      }
+        show: false,
+      },
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     legend: {
-      show: false
+      show: false,
     },
     stroke: {
       curve: 'smooth',
       show: true,
       width: 3,
-      colors: ['var(--tw-primary)']
+      colors: ['var(--tw-primary)'],
     },
     xaxis: {
       categories: categories,
       axisBorder: {
-        show: false
+        show: false,
       },
       axisTicks: {
-        show: false
+        show: false,
       },
       labels: {
         style: {
           colors: 'var(--tw-gray-500)',
-          fontSize: '12px'
-        }
+          fontSize: '12px',
+        },
       },
       crosshairs: {
         position: 'front',
         stroke: {
           color: 'var(--tw-primary)',
           width: 1,
-          dashArray: 3
-        }
+          dashArray: 3,
+        },
       },
       tooltip: {
         enabled: false,
         formatter: undefined,
         offsetY: 0,
         style: {
-          fontSize: '12px'
-        }
-      }
+          fontSize: '12px',
+        },
+      },
     },
     yaxis: {
       min: 0,
       max: 100,
       tickAmount: 5,
       axisTicks: {
-        show: false
+        show: false,
       },
       labels: {
         style: {
           colors: 'var(--tw-gray-500)',
-          fontSize: '12px'
+          fontSize: '12px',
         },
-        formatter: (defaultValue: number) => `$${defaultValue}K`
-      }
+        formatter: (defaultValue: number) => `$${defaultValue}K`,
+      },
     },
     tooltip: {
       enabled: true,
@@ -105,7 +105,7 @@ const MediaUploads = () => {
 
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
-          currency: 'USD'
+          currency: 'USD',
         });
 
         const formattedNumber = formatter.format(number);
@@ -119,7 +119,7 @@ const MediaUploads = () => {
             </div>
           </div>
         `;
-      }
+      },
     },
     markers: {
       size: 0,
@@ -133,32 +133,32 @@ const MediaUploads = () => {
       showNullDataPoints: true,
       hover: {
         size: 8,
-        sizeOffset: 0
+        sizeOffset: 0,
       },
       discrete: [],
       offsetX: 0,
-      offsetY: 0
+      offsetY: 0,
     },
     fill: {
       gradient: {
         opacityFrom: 0.25,
-        opacityTo: 0
-      }
+        opacityTo: 0,
+      },
     },
     grid: {
       borderColor: 'var(--tw-gray-200)',
       strokeDashArray: 5,
       yaxis: {
         lines: {
-          show: true
-        }
+          show: true,
+        },
       },
       xaxis: {
         lines: {
-          show: false
-        }
-      }
-    }
+          show: false,
+        },
+      },
+    },
   };
 
   return (
@@ -177,10 +177,10 @@ const MediaUploads = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

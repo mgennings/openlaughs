@@ -7,7 +7,7 @@ import {
   ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
+  ToolbarPageTitle,
 } from '@/partials/toolbar';
 import { PageNavbar } from '@/pages/account';
 
@@ -26,10 +26,15 @@ const AccountCurrentSessionsPage = () => {
           <Toolbar>
             <ToolbarHeading>
               <ToolbarPageTitle />
-              <ToolbarDescription>Authorized Devices for Report Access</ToolbarDescription>
+              <ToolbarDescription>
+                Authorized Devices for Report Access
+              </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
-              <Link to="/account/security/security-log" className="btn btn-sm btn-light">
+              <Link
+                to="/account/security/security-log"
+                className="btn btn-sm btn-light"
+              >
                 Activity Log
               </Link>
             </ToolbarActions>

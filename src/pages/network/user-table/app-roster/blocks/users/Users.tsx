@@ -7,7 +7,7 @@ import {
   DataGridColumnHeader,
   DataGridRowSelect,
   DataGridRowSelectAll,
-  useDataGrid
+  useDataGrid,
 } from '@/components';
 import { ColumnDef, Column, RowSelectionState } from '@tanstack/react-table';
 import {
@@ -15,7 +15,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 import { UsersData, IUsersData } from './';
 import { toast } from 'sonner';
@@ -26,12 +26,14 @@ interface IColumnFilterProps<TData, TValue> {
 }
 
 const Users = () => {
-  const ColumnInputFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
+  const ColumnInputFilter = <TData, TValue>({
+    column,
+  }: IColumnFilterProps<TData, TValue>) => {
     return (
       <Input
         placeholder="Filter..."
         value={(column.getFilterValue() as string) ?? ''}
-        onChange={(event) => column.setFilterValue(event.target.value)}
+        onChange={event => column.setFilterValue(event.target.value)}
         className="h-9 w-full max-w-40"
       />
     );
@@ -40,11 +42,11 @@ const Users = () => {
   const [users, setUsers] = useState<IUsersData[]>(UsersData); // Initialize state with UsersData
 
   const handleToggle = (index: number) => {
-    setUsers((prevUsers) => {
+    setUsers(prevUsers => {
       const updatedUsers = [...prevUsers];
       updatedUsers[index] = {
         ...updatedUsers[index],
-        switch: !updatedUsers[index].switch // Toggle the switch state
+        switch: !updatedUsers[index].switch, // Toggle the switch state
       };
       return updatedUsers;
     });
@@ -59,8 +61,8 @@ const Users = () => {
         enableSorting: false,
         enableHiding: false,
         meta: {
-          headerClassName: 'w-0'
-        }
+          headerClassName: 'w-0',
+        },
       },
       {
         accessorFn: (row: IUsersData) => row.user,
@@ -77,12 +79,17 @@ const Users = () => {
           return (
             <div className="flex items-center gap-2.5">
               <img
-                src={toAbsoluteUrl(`/media/avatars/${row.original.user.avatar}`)}
+                src={toAbsoluteUrl(
+                  `/media/avatars/${row.original.user.avatar}`,
+                )}
                 className="rounded-full size-7 shrink-0"
                 alt={`${row.original.user.userName}`}
               />
 
-              <Link to="#" className="text-sm font-medium text-gray-900 hover:text-primary-active">
+              <Link
+                to="#"
+                className="text-sm font-medium text-gray-900 hover:text-primary-active"
+              >
                 {row.original.user.userName}
               </Link>
             </div>
@@ -90,41 +97,47 @@ const Users = () => {
         },
         meta: {
           className: 'min-w-[200px]',
-          cellClassName: 'font-normal text-gray-800'
-        }
+          cellClassName: 'font-normal text-gray-800',
+        },
       },
       {
-        accessorFn: (row) => row.phone,
+        accessorFn: row => row.phone,
         id: 'phone',
-        header: ({ column }) => <DataGridColumnHeader title="Phone" column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Phone" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => {
+        cell: info => {
           return info.row.original.phone;
         },
         meta: {
           className: 'min-w-[165px]',
-          cellClassName: 'font-normal text-gray-800'
-        }
+          cellClassName: 'font-normal text-gray-800',
+        },
       },
       {
-        accessorFn: (row) => row.branch,
+        accessorFn: row => row.branch,
         id: 'branch',
-        header: ({ column }) => <DataGridColumnHeader title="Branch" column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Branch" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => {
+        cell: info => {
           return info.row.original.branch;
         },
         meta: {
           className: 'min-w-[165px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
+          cellClassName: 'text-gray-800 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.logos,
+        accessorFn: row => row.logos,
         id: 'image',
-        header: ({ column }) => <DataGridColumnHeader title="Connected Apps" column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Connected Apps" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => {
+        cell: info => {
           return (
             <div className="flex items-center text-gray-800 font-normal gap-1.5">
               {Array.isArray(info.row.original.logos) &&
@@ -140,15 +153,17 @@ const Users = () => {
           );
         },
         meta: {
-          className: 'min-w-[165px]'
-        }
+          className: 'min-w-[165px]',
+        },
       },
       {
-        accessorFn: (row) => row.labels,
+        accessorFn: row => row.labels,
         id: 'label',
-        header: ({ column }) => <DataGridColumnHeader title="Tags" column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Tags" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => {
+        cell: info => {
           return (
             <div className="flex items-center text-gray-800 font-normal gap-1.5">
               {Array.isArray(info.row.original.labels) &&
@@ -161,13 +176,15 @@ const Users = () => {
           );
         },
         meta: {
-          className: 'min-w-[225px]'
-        }
+          className: 'min-w-[225px]',
+        },
       },
       {
-        accessorFn: (row) => row.switch,
+        accessorFn: row => row.switch,
         id: 'switch',
-        header: ({ column }) => <DataGridColumnHeader title="Enforce 2FA" column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Enforce 2FA" column={column} />
+        ),
         enableSorting: true,
         cell: ({ row }) => {
           const userSwitch = row.original.switch; // Har bir foydalanuvchining switch holati
@@ -185,8 +202,8 @@ const Users = () => {
           );
         },
         meta: {
-          className: 'min-w-[100px]'
-        }
+          className: 'min-w-[100px]',
+        },
       },
       {
         id: 'edit',
@@ -200,11 +217,11 @@ const Users = () => {
           );
         },
         meta: {
-          headerClassName: 'w-[60px]'
-        }
-      }
+          headerClassName: 'w-[60px]',
+        },
+      },
     ],
-    []
+    [],
   );
 
   const data: IUsersData[] = useMemo(() => users, [users]); // Use users state
@@ -217,8 +234,8 @@ const Users = () => {
         description: `Selected row IDs: ${selectedRowIds}`,
         action: {
           label: 'Undo',
-          onClick: () => console.log('Undo')
-        }
+          onClick: () => console.log('Undo'),
+        },
       });
     }
   };
@@ -229,7 +246,9 @@ const Users = () => {
 
     return (
       <div className="card-header flex-wrap gap-2 border-b-0 px-5">
-        <h3 className="card-title font-medium text-sm">Showing 10 of 49,053 users</h3>
+        <h3 className="card-title font-medium text-sm">
+          Showing 10 of 49,053 users
+        </h3>
 
         <div className="flex flex-wrap gap-2 lg:gap-5">
           <div className="flex">
@@ -239,7 +258,7 @@ const Users = () => {
                 type="text"
                 placeholder="Search users"
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={e => setSearchInput(e.target.value)}
               />
             </label>
           </div>

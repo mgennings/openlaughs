@@ -8,7 +8,7 @@ import {
   PaymentHistory,
   SetGoal,
   Upgrade,
-  YourCurrentPlan
+  YourCurrentPlan,
 } from './blocks';
 
 const AccountSettingsEnterpriseContent = () => {

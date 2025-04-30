@@ -21,7 +21,7 @@ const App = () => {
       basename={BASE_URL}
       future={{
         v7_relativeSplatPath: true,
-        v7_startTransition: true
+        v7_startTransition: true,
       }}
     >
       <PathnameProvider>

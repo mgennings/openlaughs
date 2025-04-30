@@ -8,7 +8,7 @@ import {
   ActivitiesLogin,
   ActivitiesNewProduct,
   ActivitiesProductSpecific,
-  ActivitiesProductWebinar
+  ActivitiesProductWebinar,
 } from '@/partials/activities/items';
 
 const Activity = () => {

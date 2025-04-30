@@ -1,5 +1,10 @@
 import { cn } from '@/lib/utils';
-import { useDataGrid, DataGridLoader, DataGridTable, DataGridPagination } from '.';
+import {
+  useDataGrid,
+  DataGridLoader,
+  DataGridTable,
+  DataGridPagination,
+} from '.';
 
 const DataGridInner = () => {
   const { props, table, loading } = useDataGrid();
@@ -19,14 +24,14 @@ const DataGridInner = () => {
         [&>[data-pagination]]:px-5
         [&>[data-pagination]]:py-3
       `,
-        props.layout?.classes?.root
+        props.layout?.classes?.root,
       )}
     >
       {props.toolbar && props.toolbar}
       <div
         className={cn(
           'relative w-full scrollable-x-auto border rounded-md',
-          props.layout?.classes?.container
+          props.layout?.classes?.container,
         )}
         data-container
       >

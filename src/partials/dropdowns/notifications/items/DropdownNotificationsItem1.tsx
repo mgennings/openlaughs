@@ -22,7 +22,7 @@ const DropdownNotificationsItem1 = ({
   label,
   time,
   specialist,
-  text
+  text,
 }: IDropdownNotificationsItemProps) => {
   const [emailInput, setEmailInput] = useState('');
   return (
@@ -39,7 +39,10 @@ const DropdownNotificationsItem1 = ({
       <div className="flex flex-col gap-3.5">
         <div className="flex flex-col gap-1">
           <div className="text-2sm font-medium">
-            <Link to="#" className="hover:text-primary-active text-gray-900 font-semibold">
+            <Link
+              to="#"
+              className="hover:text-primary-active text-gray-900 font-semibold"
+            >
               {userName}
             </Link>
             <span className="text-gray-700"> {description} </span>
@@ -57,7 +60,10 @@ const DropdownNotificationsItem1 = ({
 
         <div className="card shadow-none flex flex-col gap-2.5 p-3.5 rounded-lg bg-light-active">
           <div className="text-2sm font-semibold text-gray-600 mb-px">
-            <Link to="#" className="hover:text-primary-active text-gray-900 font-semibold">
+            <Link
+              to="#"
+              className="hover:text-primary-active text-gray-900 font-semibold"
+            >
               @Cody
             </Link>
             <span className="text-gray-700 font-medium"> {text} </span>
@@ -66,7 +72,7 @@ const DropdownNotificationsItem1 = ({
           <label className="input input-sm">
             <input
               type="text"
-              onChange={(e) => setEmailInput(e.target.value)}
+              onChange={e => setEmailInput(e.target.value)}
               placeholder="Reply"
               value={emailInput}
             />

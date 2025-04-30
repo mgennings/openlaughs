@@ -77,10 +77,14 @@ export default plugin(({ addComponents, theme }) => {
   addComponents({
     '.table': {
       'th:first-child': {
-        'border-start-start-radius': theme('custom.components.common.borderRadius.card'), // Logical property for top-left in LTR and top-right in RTL
+        'border-start-start-radius': theme(
+          'custom.components.common.borderRadius.card',
+        ), // Logical property for top-left in LTR and top-right in RTL
       },
       'th:last-child': {
-        'border-start-end-radius': theme('custom.components.common.borderRadius.card'), // Logical property for top-right in LTR and top-left in RTL
+        'border-start-end-radius': theme(
+          'custom.components.common.borderRadius.card',
+        ), // Logical property for top-right in LTR and top-left in RTL
       },
     },
     '.card-header + .card-body, .card-header + .card-table': {
@@ -133,24 +137,40 @@ export default plugin(({ addComponents, theme }) => {
       },
     },
     '.card-rounded-b': {
-      'border-end-start-radius': theme('custom.components.common.borderRadius.card'), // Logical property for bottom-left in LTR and bottom-right in RTL
-      'border-end-end-radius': theme('custom.components.common.borderRadius.card'), // Logical property for bottom-right in LTR and bottom-left in RTL
+      'border-end-start-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ), // Logical property for bottom-left in LTR and bottom-right in RTL
+      'border-end-end-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ), // Logical property for bottom-right in LTR and bottom-left in RTL
     },
     '.card-rounded-bs': {
-      'border-end-start-radius': theme('custom.components.common.borderRadius.card'),
+      'border-end-start-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ),
     },
     '.card-rounded-be': {
-      'border-end-end-radius': theme('custom.components.common.borderRadius.card'),
+      'border-end-end-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ),
     },
     '.card-rounded-t': {
-      'border-start-start-radius': theme('custom.components.common.borderRadius.card'),
-      'border-start-end-radius': theme('custom.components.common.borderRadius.card'),
+      'border-start-start-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ),
+      'border-start-end-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ),
     },
     '.card-rounded-ts': {
-      'border-start-start-radius': theme('custom.components.common.borderRadius.card'),
+      'border-start-start-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ),
     },
     '.card-rounded-te': {
-      'border-start-end-radius': theme('custom.components.common.borderRadius.card'),
+      'border-start-end-radius': theme(
+        'custom.components.common.borderRadius.card',
+      ),
     },
   });
 });

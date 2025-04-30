@@ -9,7 +9,7 @@ const I18N_MESSAGES = {
   en: enMessages,
   ar: arMessages,
   fr: frMessages,
-  zh: zhMessages
+  zh: zhMessages,
 };
 
 const I18N_CONFIG_KEY = 'i18nConfig';
@@ -20,31 +20,36 @@ const I18N_LANGUAGES: readonly TLanguage[] = [
     code: 'en',
     direction: 'ltr',
     flag: toAbsoluteUrl('/media/flags/united-states.svg'),
-    messages: I18N_MESSAGES.en
+    messages: I18N_MESSAGES.en,
   },
   {
     label: 'Arabic (Saudi)',
     code: 'ar',
     direction: 'rtl',
     flag: toAbsoluteUrl('/media/flags/saudi-arabia.svg'),
-    messages: I18N_MESSAGES.ar
+    messages: I18N_MESSAGES.ar,
   },
   {
     label: 'French',
     code: 'fr',
     direction: 'ltr',
     flag: toAbsoluteUrl('/media/flags/france.svg'),
-    messages: I18N_MESSAGES.fr
+    messages: I18N_MESSAGES.fr,
   },
   {
     label: 'Chinese',
     code: 'zh',
     direction: 'ltr',
     flag: toAbsoluteUrl('/media/flags/china.svg'),
-    messages: I18N_MESSAGES.zh
-  }
+    messages: I18N_MESSAGES.zh,
+  },
 ];
 
 const I18N_DEFAULT_LANGUAGE: TLanguage = I18N_LANGUAGES[0];
 
-export { I18N_CONFIG_KEY, I18N_DEFAULT_LANGUAGE, I18N_LANGUAGES, I18N_MESSAGES };
+export {
+  I18N_CONFIG_KEY,
+  I18N_DEFAULT_LANGUAGE,
+  I18N_LANGUAGES,
+  I18N_MESSAGES,
+};

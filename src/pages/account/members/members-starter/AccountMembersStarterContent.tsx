@@ -24,7 +24,8 @@ const AccountMembersStarterContent = () => {
         title="New Member Onboarding and Registration"
         subTitle={
           <Fragment>
-            A streamlined process to welcome and integrate new members into the team,
+            A streamlined process to welcome and integrate new members into the
+            team,
             <br />
             ensuring a smooth and efficient start.
           </Fragment>
@@ -32,7 +33,7 @@ const AccountMembersStarterContent = () => {
         engage={{
           path: '/account/home/user-profile',
           label: 'Add New Member',
-          btnColor: 'btn-primary'
+          btnColor: 'btn-primary',
         }}
       />
 

@@ -1,5 +1,9 @@
 import { CrudAvatarUpload } from '@/partials/crud';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 
@@ -8,7 +12,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 import { KeenIcon } from '@/components';
 import { useState } from 'react';
@@ -25,7 +29,7 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
   const [addressInput, setAddressInput] = useState('Avinguda Imaginària, 789');
   const [cityInput, setCityInput] = useState('Barcelona');
   const [postcodeInput, setPostcodeInput] = useState('08012');
-  
+
   return (
     <div className="card pb-2.5">
       <div className="card-header" id="general_settings">
@@ -33,7 +37,13 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
         <div className="flex items-center gap-2">
           <label className="switch switch-sm">
             <span className="switch-label">Public Profile</span>
-            <input type="checkbox" value="1" name="check" defaultChecked readOnly />
+            <input
+              type="checkbox"
+              value="1"
+              name="check"
+              defaultChecked
+              readOnly
+            />
           </label>
         </div>
       </div>
@@ -41,7 +51,9 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
         <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
           <label className="form-label max-w-56">Photo</label>
           <div className="flex items-center justify-between flex-wrap grow gap-2.5">
-            <span className="text-2sm font-medium text-gray-600">150x150px JPEG, PNG Image</span>
+            <span className="text-2sm font-medium text-gray-600">
+              150x150px JPEG, PNG Image
+            </span>
             <CrudAvatarUpload />
           </div>
         </div>
@@ -52,20 +64,22 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
             className="input"
             type="text"
             value={nameInput}
-            onChange={(e) => setNameInput(e.target.value)}
-          /> 
+            onChange={e => setNameInput(e.target.value)}
+          />
         </div>
 
         <div className="w-full">
           <div className="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
-            <label className="form-label flex items-center gap-1 max-w-56">Birth Date</label>
+            <label className="form-label flex items-center gap-1 max-w-56">
+              Birth Date
+            </label>
             <Popover>
               <PopoverTrigger asChild>
                 <button
                   id="date"
                   className={cn(
                     'input data-[state=open]:border-primary',
-                    !date && 'text-muted-foreground'
+                    !date && 'text-muted-foreground',
                   )}
                 >
                   <KeenIcon icon="calendar" className="-ms-0.5" />
@@ -97,8 +111,8 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
             className="input"
             type="text"
             value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
-          />  
+            onChange={e => setEmailInput(e.target.value)}
+          />
         </div>
 
         <div className="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
@@ -107,13 +121,13 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
             className="input"
             type="text"
             value={addressInput}
-            onChange={(e) => setAddressInput(e.target.value)}
-          />  
+            onChange={e => setAddressInput(e.target.value)}
+          />
         </div>
 
         <div className="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
           <label className="form-label max-w-56">Country</label>
-        
+
           <Select defaultValue="1">
             <SelectTrigger>
               <SelectValue placeholder="Select" />
@@ -121,9 +135,9 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
             <SelectContent>
               <SelectItem value="1">Spain</SelectItem>
               <SelectItem value="2">Option 2</SelectItem>
-              <SelectItem value="3">Option 3</SelectItem> 
+              <SelectItem value="3">Option 3</SelectItem>
             </SelectContent>
-          </Select>   
+          </Select>
         </div>
 
         <div className="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
@@ -137,8 +151,8 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
             className="input"
             type="text"
             value={cityInput}
-            onChange={(e) => setCityInput(e.target.value)}
-          />   
+            onChange={e => setCityInput(e.target.value)}
+          />
         </div>
 
         <div className="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5 mb-2.5">
@@ -147,8 +161,8 @@ const BasicSettings = ({ title }: IGeneralSettingsProps) => {
             className="input"
             type="text"
             value={postcodeInput}
-            onChange={(e) => setPostcodeInput(e.target.value)}
-          />    
+            onChange={e => setPostcodeInput(e.target.value)}
+          />
         </div>
 
         <div className="flex justify-end">

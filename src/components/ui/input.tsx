@@ -10,13 +10,13 @@ const inputVariants = cva(
       size: {
         default: 'h-10 px-3 py-2',
         sm: 'h-8 px-2 py-1',
-        lg: 'h-11 px-4 py-3'
-      }
+        lg: 'h-11 px-4 py-3',
+      },
     },
     defaultVariants: {
-      size: 'default'
-    }
-  }
+      size: 'default',
+    },
+  },
 );
 
 export interface InputProps
@@ -26,9 +26,14 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, size, ...props }, ref) => {
     return (
-      <input type={type} className={cn(inputVariants({ size }), className)} ref={ref} {...props} />
+      <input
+        type={type}
+        className={cn(inputVariants({ size }), className)}
+        ref={ref}
+        {...props}
+      />
     );
-  }
+  },
 );
 
 Input.displayName = 'Input';

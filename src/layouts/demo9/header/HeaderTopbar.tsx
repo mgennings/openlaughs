@@ -29,10 +29,10 @@ const HeaderTopbar = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [7, 10] : [-7, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [7, 10] : [-7, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon btn-icon-base btn-sm text-gray-600 hover:text-primary dropdown-open:text-primary">
@@ -53,10 +53,10 @@ const HeaderTopbar = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [7, 10] : [-7, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [7, 10] : [-7, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon btn-icon-base btn-sm text-gray-600 hover:text-primary dropdown-open:text-primary">
@@ -71,7 +71,13 @@ const HeaderTopbar = () => {
 
       <div className="flex items-center gap-2">
         <label className="switch switch-sm">
-          <input className="order-1" name="check" type="checkbox" defaultChecked value="1" />
+          <input
+            className="order-1"
+            name="check"
+            type="checkbox"
+            defaultChecked
+            value="1"
+          />
           <div className="switch-label order-2">
             <span className="text-gray-800 text-2sm font-medium">Pro</span>
           </div>
@@ -92,10 +98,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: [0, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: [0, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="btn btn-sm btn-dark">

@@ -17,7 +17,7 @@ const useMatchPath = (path: string, mode = 'default'): IUseMatchPath => {
 
   return {
     match,
-    isExternal: path.startsWith('http') || path.startsWith('//')
+    isExternal: path.startsWith('http') || path.startsWith('//'),
   };
 };
 

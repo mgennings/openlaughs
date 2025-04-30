@@ -9,7 +9,7 @@ import {
   ActivitiesFollowersMilestone,
   ActivitiesInterview,
   ActivitiesNewArticle,
-  ActivitiesUpcomingContent
+  ActivitiesUpcomingContent,
 } from '@/partials/activities/items';
 
 const Activities = () => {
@@ -25,7 +25,13 @@ const Activities = () => {
               <span className="switch-on:hidden">Off</span>
               <span className="hidden switch-on:inline">On</span>
             </span>
-            <input type="checkbox" value="1" name="check" defaultChecked readOnly />
+            <input
+              type="checkbox"
+              value="1"
+              name="check"
+              defaultChecked
+              readOnly
+            />
           </label>
         </div>
       </div>

@@ -9,7 +9,7 @@ const getViewPort = (): { width: number; height: number } => {
 
   return {
     width: e[a + 'Width'] as number,
-    height: e[a + 'Height'] as number
+    height: e[a + 'Height'] as number,
   };
 };
 

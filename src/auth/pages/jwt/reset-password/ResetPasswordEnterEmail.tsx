@@ -12,7 +12,9 @@ const ResetPasswordEnterEmail = () => {
       <form className="card-body flex flex-col gap-5 p-10">
         <div className="text-center">
           <h3 className="text-lg font-medium text-gray-900">Your Email</h3>
-          <span className="text-2sm text-gray-700">Enter your email to reset password</span>
+          <span className="text-2sm text-gray-700">
+            Enter your email to reset password
+          </span>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -22,7 +24,7 @@ const ResetPasswordEnterEmail = () => {
             type="text"
             placeholder="email@email.com"
             value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
+            onChange={e => setSearchInput(e.target.value)}
           />
         </div>
 

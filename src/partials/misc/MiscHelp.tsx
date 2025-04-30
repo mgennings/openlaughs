@@ -44,7 +44,10 @@ const MiscHelp = () => {
             />
           </Fragment>
         }
-        more={{ title: 'Contact Support', url: 'https://devs.keenthemes.com/unresolved' }}
+        more={{
+          title: 'Contact Support',
+          url: 'https://devs.keenthemes.com/unresolved',
+        }}
       />
     </div>
   );

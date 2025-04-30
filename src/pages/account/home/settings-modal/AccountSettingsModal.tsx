@@ -14,7 +14,7 @@ import {
   BasicSettings,
   DeleteAccount,
   ExternalServicesIntegrations,
-  ExternalServicesManageApi
+  ExternalServicesManageApi,
 } from '@/pages/account/home/settings-sidebar/blocks';
 import { useResponsive, useViewport } from '@/hooks';
 import {
@@ -23,7 +23,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from '@/components/ui/dialog';
 
 interface IModalProfileProps {
@@ -51,7 +51,9 @@ const AccountSettingsModal = ({ open, onOpenChange }: IModalProfileProps) => {
           <DialogDescription></DialogDescription>
           <div className="flex items-center justify-between flex-wrap grow gap-5 pb-7.5">
             <div className="flex flex-col justify-center gap-2">
-              <h1 className="text-xl font-semibold leading-none text-gray-900">Settings - Modal</h1>
+              <h1 className="text-xl font-semibold leading-none text-gray-900">
+                Settings - Modal
+              </h1>
               <div className="flex items-center gap-2 text-sm font-normal text-gray-700">
                 Dynamic, Focused Adjustment Interface
               </div>
@@ -61,7 +63,10 @@ const AccountSettingsModal = ({ open, onOpenChange }: IModalProfileProps) => {
             </button>
           </div>
         </DialogHeader>
-        <DialogBody className="scrollable-y py-0 mb-5 ps-0 pe-3 -me-7" ref={parentRef}>
+        <DialogBody
+          className="scrollable-y py-0 mb-5 ps-0 pe-3 -me-7"
+          ref={parentRef}
+        >
           <div className="flex grow gap-5 lg:gap-7.5">
             {desktopMode && (
               <div className="block w-[230px] shrink-0">

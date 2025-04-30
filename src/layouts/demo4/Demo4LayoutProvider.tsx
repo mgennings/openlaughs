@@ -1,4 +1,10 @@
-import { createContext, type PropsWithChildren, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { MENU_SIDEBAR } from '@/config';
 import { useMenus } from '@/providers';
 import { ILayoutConfig, useLayout } from '@/providers';
@@ -20,11 +26,12 @@ const initalLayoutProps: IDemo4LayoutProviderProps = {
   mobileSidebarOpen: false, // Mobile sidebar is closed by default
   setMobileSidebarOpen: (open: boolean) => {
     console.log(`${open}`);
-  }
+  },
 };
 
 // Create a context to manage the layout-related state and logic for Demo4 layout
-const Demo4LayoutContext = createContext<IDemo4LayoutProviderProps>(initalLayoutProps);
+const Demo4LayoutContext =
+  createContext<IDemo4LayoutProviderProps>(initalLayoutProps);
 
 // Custom hook to access the layout context in other components
 const useDemo4Layout = () => useContext(Demo4LayoutContext);
@@ -36,7 +43,10 @@ const Demo4LayoutProvider = ({ children }: PropsWithChildren) => {
   const { getLayout, setCurrentLayout } = useLayout(); // Hook to get and set layout configuration
 
   // Merge the Demo4 layout configuration with the current layout configuration fetched via getLayout
-  const layoutConfig = deepMerge(Demo4LayoutConfig, getLayout(Demo4LayoutConfig.name));
+  const layoutConfig = deepMerge(
+    Demo4LayoutConfig,
+    getLayout(Demo4LayoutConfig.name),
+  );
 
   // Set the initial state for layout and mobile sidebar
   const [layout] = useState(layoutConfig); // Layout configuration is stored in state
@@ -58,7 +68,7 @@ const Demo4LayoutProvider = ({ children }: PropsWithChildren) => {
       value={{
         layout, // The current layout configuration
         mobileSidebarOpen, // Whether the mobile sidebar is currently open
-        setMobileSidebarOpen // Function to toggle the mobile sidebar state
+        setMobileSidebarOpen, // Function to toggle the mobile sidebar state
       }}
     >
       {children} {/* Render child components that consume this context */}

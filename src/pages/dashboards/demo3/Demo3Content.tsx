@@ -29,7 +29,8 @@ const Demo3Content = () => {
             title="Swift Setup for New Teams"
             subTitle={
               <>
-                Enhance team formation and management with easy-to-use tools for communication,
+                Enhance team formation and management with easy-to-use tools for
+                communication,
                 <br />
                 task organization, and progress tracking, all in one place.
               </>
@@ -37,7 +38,7 @@ const Demo3Content = () => {
             engage={{
               path: '/public-profile/teams',
               label: 'Create Team',
-              btnColor: 'btn-dark'
+              btnColor: 'btn-dark',
             }}
           />
         </div>

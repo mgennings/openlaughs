@@ -10,7 +10,7 @@ const MenuLink = ({
   className,
   handleToggle,
   handleClick,
-  children
+  children,
 }: IMenuLinkProps) => {
   if (!hasItemSub && path) {
     if (externalLink) {
@@ -29,7 +29,11 @@ const MenuLink = ({
       );
     } else {
       return (
-        <Link to={path} onClick={handleClick} className={clsx('menu-link', className && className)}>
+        <Link
+          to={path}
+          onClick={handleClick}
+          className={clsx('menu-link', className && className)}
+        >
           {children}
         </Link>
       );
@@ -37,13 +41,19 @@ const MenuLink = ({
   } else {
     if (hasItemSub) {
       return (
-        <div className={clsx('menu-link', className && className)} onClick={handleToggle}>
+        <div
+          className={clsx('menu-link', className && className)}
+          onClick={handleToggle}
+        >
           {children}
         </div>
       );
     } else {
       return (
-        <div className={clsx('menu-link', className && className)} onClick={handleClick}>
+        <div
+          className={clsx('menu-link', className && className)}
+          onClick={handleClick}
+        >
           {children}
         </div>
       );

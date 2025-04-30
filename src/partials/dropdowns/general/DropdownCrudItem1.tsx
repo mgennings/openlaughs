@@ -5,7 +5,7 @@ import {
   MenuLink,
   MenuSeparator,
   MenuSub,
-  MenuTitle
+  MenuTitle,
 } from '@/components';
 
 const DropdownCrudItem1 = () => {

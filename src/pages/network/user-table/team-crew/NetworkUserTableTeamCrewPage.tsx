@@ -6,7 +6,7 @@ import {
   ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
+  ToolbarPageTitle,
 } from '@/partials/toolbar';
 
 import { NetworkUserTableTeamCrewContent } from '.';
@@ -25,7 +25,9 @@ const NetworkUserTableTeamCrewPage = () => {
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
                   <span className="text-md text-gray-700">All Members:</span>
-                  <span className="text-md text-gray-800 font-medium me-2">49,053</span>
+                  <span className="text-md text-gray-800 font-medium me-2">
+                    49,053
+                  </span>
                   <span className="text-md text-gray-700">Pro Licenses</span>
                   <span className="text-md text-gray-800 font-medium">724</span>
                 </div>

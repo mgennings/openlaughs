@@ -26,7 +26,10 @@ const GettingStarted = () => {
           <span className="text-sm text-gray-700">
             Begin by crafting your inaugural list in minutes.
           </span>
-          <Link to="/account/billing/plans" className="text-sm font-medium link">
+          <Link
+            to="/account/billing/plans"
+            className="text-sm font-medium link"
+          >
             Get Started!
           </Link>
         </div>

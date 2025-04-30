@@ -20,7 +20,7 @@ const CommonAvatar = ({
   iconClass,
   badgeClass,
   className,
-  imageClass
+  imageClass,
 }: IAvatarProps) => {
   return (
     <div className={clsx(className && className)}>

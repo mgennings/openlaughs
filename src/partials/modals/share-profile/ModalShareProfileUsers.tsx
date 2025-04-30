@@ -7,7 +7,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
 const ModalShareProfileUsers = () => {
@@ -16,20 +16,20 @@ const ModalShareProfileUsers = () => {
       avatar: '300-3.png',
       userName: 'Tyler Hero',
       email: 'tyler.hero@gmail.com',
-      role: 'owner'
+      role: 'owner',
     },
     {
       avatar: '300-1.png',
       userName: 'Esther Howard',
       email: 'esther.howard@gmail.com',
-      role: 'editor'
+      role: 'editor',
     },
     {
       avatar: '300-11.png',
       userName: 'Jacob Jones',
       email: 'jacob.jones@gmail.com',
-      role: 'viewer'
-    }
+      role: 'viewer',
+    },
   ];
 
   return (
@@ -49,7 +49,10 @@ const ModalShareProfileUsers = () => {
               >
                 {item.userName}
               </Link>
-              <Link to="#" className="hover:text-primary-active text-2sm font-medium text-gray-600">
+              <Link
+                to="#"
+                className="hover:text-primary-active text-2sm font-medium text-gray-600"
+              >
                 {item.email}
               </Link>
             </div>

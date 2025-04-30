@@ -6,7 +6,11 @@ interface IDropdownChatMessageInProps {
   avatar: string;
 }
 
-const DropdownChatMessageIn = ({ text, time, avatar }: IDropdownChatMessageInProps) => {
+const DropdownChatMessageIn = ({
+  text,
+  time,
+  avatar,
+}: IDropdownChatMessageInProps) => {
   return (
     <div className="flex items-end gap-3.5 px-5">
       <img src={toAbsoluteUrl(avatar)} className="rounded-full size-9" alt="" />

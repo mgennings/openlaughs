@@ -14,9 +14,9 @@ const UnlockPartnerships = () => {
             </h2>
 
             <p className="text-sm text-gray-700 leading-5.5">
-              Explore exciting collaboration opportunities with our blog. We&apos;re open to
-              partnerships, guest posts, and more. Join us to share your insights and grow your
-              audience.
+              Explore exciting collaboration opportunities with our blog.
+              We&apos;re open to partnerships, guest posts, and more. Join us to
+              share your insights and grow your audience.
             </p>
           </div>
 

@@ -6,7 +6,9 @@ export interface IModalSearchSettingsItemsProps {
   items: IModalSearchSettingsItem[];
 }
 
-const ModalSearchSettingsItems = ({ items }: IModalSearchSettingsItemsProps) => {
+const ModalSearchSettingsItems = ({
+  items,
+}: IModalSearchSettingsItemsProps) => {
   return (
     <>
       {items.map((item, index) => (

@@ -16,12 +16,19 @@ const Integrations = () => {
       logo: 'jira.svg',
       path: '/account/billing/basic',
       name: 'Jira',
-      description: 'Project management for agile teams, tracking issues and tasks.',
+      description:
+        'Project management for agile teams, tracking issues and tasks.',
       actions: (
         <div className="switch switch-sm">
-          <input type="checkbox" name="param" defaultChecked value="1" readOnly />
+          <input
+            type="checkbox"
+            name="param"
+            defaultChecked
+            value="1"
+            readOnly
+          />
         </div>
-      )
+      ),
     },
     {
       logo: 'inferno.svg',
@@ -32,62 +39,85 @@ const Integrations = () => {
         <div className="switch switch-sm">
           <input type="checkbox" name="param" value="1" readOnly />
         </div>
-      )
+      ),
     },
     {
       logo: 'evernote.svg',
       path: '/account/billing/plans',
       name: 'Evernote',
-      description: 'Organizes personal and professional documents, ideas, tasks.',
+      description:
+        'Organizes personal and professional documents, ideas, tasks.',
       actions: (
         <div className="switch switch-sm">
-          <input type="checkbox" name="param" defaultChecked value="1" readOnly />
+          <input
+            type="checkbox"
+            name="param"
+            defaultChecked
+            value="1"
+            readOnly
+          />
         </div>
-      )
+      ),
     },
     {
       logo: 'gitlab.svg',
       path: '/account/billing/history',
       name: 'Gitlab',
-      description: 'DevOps platform for code control, project management, CI/CD.',
+      description:
+        'DevOps platform for code control, project management, CI/CD.',
       actions: (
         <div className="switch switch-sm">
-          <input type="checkbox" name="param" defaultChecked value="1" readOnly />
+          <input
+            type="checkbox"
+            name="param"
+            defaultChecked
+            value="1"
+            readOnly
+          />
         </div>
-      )
+      ),
     },
     {
       logo: 'google-webdev.svg',
       path: '/account/security/get-started',
       name: 'Google webdev',
-      description: 'Tools for building quality web experiences, focusing on performance.',
+      description:
+        'Tools for building quality web experiences, focusing on performance.',
       actions: (
         <div className="switch switch-sm">
-          <input type="checkbox" name="param" defaultChecked value="1" readOnly />
+          <input
+            type="checkbox"
+            name="param"
+            defaultChecked
+            value="1"
+            readOnly
+          />
         </div>
-      )
+      ),
     },
     {
       logo: 'invision.svg',
       path: '/account/security/overview',
       name: 'Invision',
-      description: 'Digital design platform for prototyping and design workflow.',
+      description:
+        'Digital design platform for prototyping and design workflow.',
       actions: (
         <div className="switch switch-sm">
           <input type="checkbox" name="param" value="1" readOnly />
         </div>
-      )
+      ),
     },
     {
       logo: 'duolingo.svg',
       path: '/account/security/allowed-ip-addresses',
       name: 'Duolingo',
-      description: 'Interactive exercises for fun, effective language learning.',
+      description:
+        'Interactive exercises for fun, effective language learning.',
       actions: (
         <div className="switch switch-sm">
           <input type="checkbox" name="param" value="1" readOnly />
         </div>
-      )
+      ),
     },
     {
       logo: 'google-analytics-2.svg',
@@ -98,8 +128,8 @@ const Integrations = () => {
         <div className="switch switch-sm">
           <input type="checkbox" name="param" value="1" readOnly />
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   const renderItem = (item: IIntegrationsItem, index: number) => {

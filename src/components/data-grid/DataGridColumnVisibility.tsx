@@ -6,7 +6,7 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
-  DropdownMenuSeparator
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { KeenIcon } from '@/components/keenicons';
 
@@ -17,7 +17,7 @@ interface IDataGridColumnVisibilityProps<TData> {
 
 export function DataGridColumnVisibility<TData>({
   table,
-  hideTitle = false
+  hideTitle = false,
 }: IDataGridColumnVisibilityProps<TData>) {
   return (
     <DropdownMenu>
@@ -28,18 +28,23 @@ export function DataGridColumnVisibility<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel className="font-medium">Toggle Columns</DropdownMenuLabel>
+        <DropdownMenuLabel className="font-medium">
+          Toggle Columns
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
-          .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide())
-          .map((column) => {
+          .filter(
+            column =>
+              typeof column.accessorFn !== 'undefined' && column.getCanHide(),
+          )
+          .map(column => {
             return (
               <DropdownMenuCheckboxItem
                 key={column.id}
                 className="capitalize"
                 checked={column.getIsVisible()}
-                onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                onCheckedChange={value => column.toggleVisibility(!!value)}
               >
                 {column.columnDef.meta?.headerTitle || column.id}
               </DropdownMenuCheckboxItem>

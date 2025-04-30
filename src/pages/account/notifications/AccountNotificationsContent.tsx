@@ -1,6 +1,11 @@
 import { Fragment } from 'react';
 
-import { MiscEngage, MiscFaq, MiscHighlightedPosts, IHighlightedPostsItems } from '@/partials/misc';
+import {
+  MiscEngage,
+  MiscFaq,
+  MiscHighlightedPosts,
+  IHighlightedPostsItems,
+} from '@/partials/misc';
 import { toAbsoluteUrl } from '@/utils';
 
 import { Channels, DoNotDistrub, OtherNotifications } from './blocks';
@@ -12,22 +17,22 @@ const AccountNotificationsContent = () => {
       title: 'Streamlined Alerts Setup: Custom Notification Preferences',
       summary:
         'Tailor your alert preferences with our streamlined setup. Stay informed with notifications that matter to you most.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'message-notify',
       title: 'Effective Communication: Instant Notification Tools',
       summary:
         'Ensure timely communication with our instant notification tools. Customize alerts to stay ahead in real-time collaboration.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'notification-status',
       title: 'Personalized Updates: Smart Alert System',
       summary:
         'Control how you receive updates with our smart alert system. Personalize notifications for a more efficient workflow.',
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (
@@ -59,7 +64,7 @@ const AccountNotificationsContent = () => {
             }
             more={{
               title: 'Contact Support',
-              url: ''
+              url: '',
             }}
           />
         </div>

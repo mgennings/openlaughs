@@ -10,7 +10,12 @@ interface IUserSocialProps {
   verify: boolean;
 }
 
-const CardUserSocial = ({ avatar, name, description, verify }: IUserSocialProps) => {
+const CardUserSocial = ({
+  avatar,
+  name,
+  description,
+  verify,
+}: IUserSocialProps) => {
   return (
     <div className="card">
       <div className="card-body flex flex-col items-center lg:pt-10">

@@ -27,43 +27,43 @@ const Connections = ({ url }: IConnectionsProps) => {
       name: 'Tyler Hero',
       connections: 26,
       jointLinks: 6,
-      connected: true
+      connected: true,
     },
     {
       avatar: '300-1.png',
       name: 'Esther Howard',
       connections: 639,
       jointLinks: 'none',
-      connected: false
+      connected: false,
     },
     {
       avatar: '300-11.png',
       name: 'Jacob Jones',
       connections: 125,
       jointLinks: 19,
-      connected: false
+      connected: false,
     },
     {
       avatar: '300-2.png',
       name: 'Cody Fisher',
       connections: 81,
       jointLinks: 'none',
-      connected: true
+      connected: true,
     },
     {
       avatar: '300-5.png',
       name: 'Leslie Alexander',
       connections: 1203,
       jointLinks: 2,
-      connected: false
+      connected: false,
     },
     {
       avatar: '300-9.png',
       name: 'Guy Hawkins',
       connections: 2,
       jointLinks: 'none',
-      connected: true
-    }
+      connected: true,
+    },
   ];
 
   const renderItem = (table: IConnectionsItem, index: number) => {
@@ -98,7 +98,11 @@ const Connections = ({ url }: IConnectionsProps) => {
           <button
             className={`btn btn-xs btn-icon btn-primary btn-outline rounded-full ${table.connected ? 'active' : ''}`}
           >
-            {table.connected ? <KeenIcon icon="check" /> : <KeenIcon icon="plus" />}
+            {table.connected ? (
+              <KeenIcon icon="check" />
+            ) : (
+              <KeenIcon icon="plus" />
+            )}
           </button>
         </td>
 
@@ -113,10 +117,10 @@ const Connections = ({ url }: IConnectionsProps) => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -145,10 +149,10 @@ const Connections = ({ url }: IConnectionsProps) => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -165,7 +169,9 @@ const Connections = ({ url }: IConnectionsProps) => {
             <tbody>
               <tr className="bg-gray-100">
                 <th className="text-start font-normal min-w-48 py-2.5">Name</th>
-                <th className="text-end font-medium min-w-20 py-2.5">Joint Links</th>
+                <th className="text-end font-medium min-w-20 py-2.5">
+                  Joint Links
+                </th>
                 <th className="text-end font-medium min-w-20 py-2.5">Status</th>
                 <th className="min-w-16"></th>
               </tr>
@@ -187,4 +193,9 @@ const Connections = ({ url }: IConnectionsProps) => {
   );
 };
 
-export { Connections, type IConnectionsItem, type IConnectionsItems, type IConnectionsProps };
+export {
+  Connections,
+  type IConnectionsItem,
+  type IConnectionsItems,
+  type IConnectionsProps,
+};

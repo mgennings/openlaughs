@@ -9,7 +9,7 @@ import {
   DataGridRowSelect,
   DataGridRowSelectAll,
   DataGridColumnHeader,
-  useDataGrid
+  useDataGrid,
 } from '@/components';
 import { CommonRating } from '@/partials/common';
 import { Team, QueryApiResponse } from './teams-types';
@@ -25,8 +25,12 @@ interface IColumnFilterProps<TData, TValue> {
 }
 
 const Teams = () => {
-  const ColumnFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
-    const [inputValue, setInputValue] = useState((column.getFilterValue() as string) ?? '');
+  const ColumnFilter = <TData, TValue>({
+    column,
+  }: IColumnFilterProps<TData, TValue>) => {
+    const [inputValue, setInputValue] = useState(
+      (column.getFilterValue() as string) ?? '',
+    );
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') {
@@ -53,17 +57,17 @@ const Teams = () => {
     () => [
       {
         accessorKey: 'id',
-        accessorFn: (row) => row.id,
+        accessorFn: row => row.id,
         header: () => <DataGridRowSelectAll />,
         cell: ({ row }) => <DataGridRowSelect row={row} />,
         enableSorting: false,
         enableHiding: false,
         meta: {
-          headerClassName: 'w-0'
-        }
+          headerClassName: 'w-0',
+        },
       },
       {
-        accessorFn: (row) => row.name,
+        accessorFn: row => row.name,
         id: 'name',
         header: ({ column }) => (
           <DataGridColumnHeader
@@ -73,7 +77,7 @@ const Teams = () => {
           />
         ),
         enableSorting: true,
-        cell: (info) => (
+        cell: info => (
           <div className="flex flex-col gap-2">
             <Link
               className="leading-none font-medium text-sm text-gray-900 hover:text-primary"
@@ -87,48 +91,52 @@ const Teams = () => {
           </div>
         ),
         meta: {
-          headerClassName: 'min-w-[280px]'
-        }
+          headerClassName: 'min-w-[280px]',
+        },
       },
       {
-        accessorFn: (row) => row.rating,
+        accessorFn: row => row.rating,
         id: 'rating',
-        header: ({ column }) => <DataGridColumnHeader title="Rating" column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Rating" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => (
+        cell: info => (
           <CommonRating
             rating={Math.floor(info.row.original.rating)}
             round={info.row.original.rating % 1}
           />
         ),
         meta: {
-          className: 'min-w-[135px]'
-        }
+          className: 'min-w-[135px]',
+        },
       },
       {
-        accessorFn: (row) => row.updated_at,
+        accessorFn: row => row.updated_at,
         id: 'updated_at',
         enableSorting: true,
         enableHiding: false,
-        header: ({ column }) => <DataGridColumnHeader title="Last Modified" column={column} />,
-        cell: (info) => formatIsoDate(info.row.original.updated_at),
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Last Modified" column={column} />
+        ),
+        cell: info => formatIsoDate(info.row.original.updated_at),
         meta: {
-          className: 'min-w-[135px]'
-        }
+          className: 'min-w-[135px]',
+        },
       },
       {
-        accessorFn: (row) => row.users,
+        accessorFn: row => row.users,
         id: 'users',
         header: () => 'Members',
         enableSorting: false,
         enableHiding: true,
-        cell: (info) => <TeamUsers users={info.row.original.users} />,
+        cell: info => <TeamUsers users={info.row.original.users} />,
         meta: {
-          className: 'min-w-[135px]'
-        }
-      }
+          className: 'min-w-[135px]',
+        },
+      },
     ],
-    []
+    [],
   );
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -159,25 +167,25 @@ const Teams = () => {
       }
 
       const response = await axios.get<TeamsQueryApiResponse>(
-        `${import.meta.env.VITE_APP_API_URL}/teams/query?${queryParams.toString()}`
+        `${import.meta.env.VITE_APP_API_URL}/teams/query?${queryParams.toString()}`,
       );
 
       return {
         data: response.data.data, // Server response data
-        totalCount: response.data.pagination.total // Total count for pagination
+        totalCount: response.data.pagination.total, // Total count for pagination
       };
     } catch (error) {
       toast(`Connection Error`, {
         description: `An error occurred while fetching data. Please try again later`,
         action: {
           label: 'Ok',
-          onClick: () => console.log('Ok')
-        }
+          onClick: () => console.log('Ok'),
+        },
       });
 
       return {
         data: [],
-        totalCount: 0
+        totalCount: 0,
       };
     }
   };
@@ -190,13 +198,17 @@ const Teams = () => {
         description: `Selected row IDs: ${selectedRowIds}`,
         action: {
           label: 'Undo',
-          onClick: () => console.log('Undo')
-        }
+          onClick: () => console.log('Undo'),
+        },
       });
     }
   };
 
-  const Toolbar = ({ setSearchQuery }: { setSearchQuery: (query: string) => void }) => {
+  const Toolbar = ({
+    setSearchQuery,
+  }: {
+    setSearchQuery: (query: string) => void;
+  }) => {
     const [inputValue, setInputValue] = useState(searchQuery);
     const { table } = useDataGrid();
 
@@ -206,12 +218,16 @@ const Teams = () => {
         if (inputValue.trim() === '') {
           // Remove the 'query' filter if input is empty
           table.setColumnFilters(
-            table.getState().columnFilters.filter((filter) => filter.id !== 'query') // Exclude the filter with id 'query'
+            table
+              .getState()
+              .columnFilters.filter(filter => filter.id !== 'query'), // Exclude the filter with id 'query'
           );
         } else {
           // Add or update the 'query' filter
           table.setColumnFilters([
-            ...table.getState().columnFilters.filter((filter) => filter.id !== 'query'), // Remove existing 'query' filter
+            ...table
+              .getState()
+              .columnFilters.filter(filter => filter.id !== 'query'), // Remove existing 'query' filter
             { id: 'query', value: inputValue }, // Add the new filter
           ]);
         }

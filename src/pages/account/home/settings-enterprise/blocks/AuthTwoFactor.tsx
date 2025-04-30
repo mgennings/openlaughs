@@ -19,14 +19,15 @@ const AuthTwoFactor = () => {
       icon: 'message-text-2',
       title: 'Text Message (SMS)',
       description: 'Instant codes for secure account verification.',
-      checkbox: true
+      checkbox: true,
     },
     {
       icon: 'shield-tick',
       title: 'Authenticator App (TOTP)',
-      description: 'Elevate protection with an authenticator app for two-factor authentication.',
-      checkbox: false
-    }
+      description:
+        'Elevate protection with an authenticator app for two-factor authentication.',
+      checkbox: false,
+    },
   ];
 
   const renderItem = (item: IAuthTwoFactorItem, index: number) => {
@@ -40,7 +41,9 @@ const AuthTwoFactor = () => {
             stroke="stroke-gray-300"
             fill="fill-gray-100"
             size="size-[50px]"
-            badge={<KeenIcon icon={item.icon} className="text-xl text-gray-500" />}
+            badge={
+              <KeenIcon icon={item.icon} className="text-xl text-gray-500" />
+            }
           />
 
           <div className="flex flex-col">
@@ -76,10 +79,10 @@ const AuthTwoFactor = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

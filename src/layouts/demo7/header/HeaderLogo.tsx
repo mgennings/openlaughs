@@ -32,7 +32,9 @@ const HeaderLogo = () => {
         >
           <KeenIcon icon="burger-menu-2" />
         </button>
-        <h3 className="text-gray-900 text-lg font-medium hidden md:block">Metronic</h3>
+        <h3 className="text-gray-900 text-lg font-medium hidden md:block">
+          Metronic
+        </h3>
       </div>
 
       <MegaMenu />

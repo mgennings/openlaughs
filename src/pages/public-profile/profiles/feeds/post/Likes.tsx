@@ -17,32 +17,32 @@ const Likes = () => {
       avatar: '300-14.png',
       name: 'Adam Wilson ',
       subscribers: 2,
-      connected: false
+      connected: false,
     },
     {
       avatar: '300-7.png',
       name: 'Renee Branson',
       subscribers: 6,
-      connected: true
+      connected: true,
     },
     {
       avatar: '300-32.png',
       name: 'Jonathan Taylor',
       subscribers: 13,
-      connected: false
+      connected: false,
     },
     {
       avatar: '300-15.png',
       name: 'Lilia Mattox',
       subscribers: 4,
-      connected: true
+      connected: true,
     },
     {
       avatar: '300-25.png',
       name: 'Neil Roberts',
       subscribers: 23,
-      connected: true
-    }
+      connected: true,
+    },
   ];
 
   const renderItem = (item: ILikesItem, index: number) => {
@@ -62,7 +62,9 @@ const Likes = () => {
             >
               {item.name}
             </a>
-            <span className="text-2sm text-gray-700">{item.subscribers} mutual subscribers</span>
+            <span className="text-2sm text-gray-700">
+              {item.subscribers} mutual subscribers
+            </span>
           </div>
         </div>
 

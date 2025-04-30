@@ -3,5 +3,5 @@ export const camelToSnakeCase = (str: string) => {
 };
 
 export const snakeToCamelCase = (str: string) => {
-  return str.replace(/(_\w)/g, (match) => match[1].toUpperCase());
+  return str.replace(/(_\w)/g, match => match[1].toUpperCase());
 };

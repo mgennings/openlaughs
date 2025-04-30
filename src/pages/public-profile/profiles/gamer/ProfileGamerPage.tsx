@@ -26,7 +26,7 @@ const ProfileGamerPage = () => {
         info={[
           { label: 'SF, Bay Area', icon: 'geolocation' },
           { label: 'floydgg', icon: 'twitch' },
-          { email: 'Level 22', icon: 'ocus' }
+          { email: 'Level 22', icon: 'ocus' },
         ]}
       />
 

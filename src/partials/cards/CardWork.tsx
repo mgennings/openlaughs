@@ -13,7 +13,14 @@ interface IWorkProps {
   comments: number;
 }
 
-const CardWork = ({ image, title, authorAvatar, authorName, likes, comments }: IWorkProps) => {
+const CardWork = ({
+  image,
+  title,
+  authorAvatar,
+  authorName,
+  likes,
+  comments,
+}: IWorkProps) => {
   return (
     <div className="card border-0">
       <img

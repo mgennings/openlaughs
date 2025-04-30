@@ -10,7 +10,7 @@ const SidebarMenu = ({ height = 0 }: ISidebarMenuProps) => {
       <div
         className="scrollable-y-auto light:[--tw-scrollbar-thumb-color:var(--tw-content-scrollbar-color)] grow"
         style={{
-          ...(height > 0 && { height: `${height}px` })
+          ...(height > 0 && { height: `${height}px` }),
         }}
       >
         <SidebarMenuPrimary />

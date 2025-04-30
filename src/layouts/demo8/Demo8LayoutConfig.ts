@@ -4,7 +4,7 @@ import { type ILayoutConfig } from '@/providers';
 const Demo8LayoutConfig: ILayoutConfig = {
   name: 'demo8-layout', // Unique name identifier for this layout
   // Defining configuration options for the layout
-  options: {}
+  options: {},
 };
 
 export { Demo8LayoutConfig };

@@ -1,5 +1,8 @@
 import { forwardRef } from 'react';
-import { Modal as MuiModal, ModalProps as BaseModalProps } from '@mui/base/Modal';
+import {
+  Modal as MuiModal,
+  ModalProps as BaseModalProps,
+} from '@mui/base/Modal';
 import { ModalBackdrop } from '@/components';
 import clsx from 'clsx';
 
@@ -19,7 +22,7 @@ const Modal = forwardRef<HTMLDivElement, IModalProps>(
         style={{
           zIndex: `${zIndex}`,
           opacity: open ? 1 : 0,
-          display: open ? 'block' : 'none'
+          display: open ? 'block' : 'none',
         }}
         className={clsx('modal', className)}
         {...props} // Spread any additional props
@@ -28,7 +31,7 @@ const Modal = forwardRef<HTMLDivElement, IModalProps>(
         {children}
       </MuiModal>
     );
-  }
+  },
 );
 
 export { Modal };

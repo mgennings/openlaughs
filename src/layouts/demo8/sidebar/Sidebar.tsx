@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from 'react-router-dom';
 import { KeenIcon, Menu, MenuItem, MenuToggle } from '@/components';
 import { useEffect, useRef, useState } from 'react';
@@ -16,7 +15,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '@/components/ui/sheet';
 
 const Sidebar = () => {
@@ -46,7 +45,8 @@ const Sidebar = () => {
     if (footerRef.current) {
       const headerHeight = headerRef.current ? getHeight(headerRef.current) : 0;
       const footerHeight = getHeight(footerRef.current);
-      const availableHeight = viewportHeight - headerHeight - footerHeight - scrollableOffset;
+      const availableHeight =
+        viewportHeight - headerHeight - footerHeight - scrollableOffset;
       setScrollableHeight(availableHeight);
     } else {
       setScrollableHeight(viewportHeight);
@@ -77,13 +77,17 @@ const Sidebar = () => {
         <div
           className="scrollable-y-hover grow gap-2.5 shrink-0 flex items-center pt-5 lg:pt-0 ps-3 pe-3 lg:pe-0 flex-col"
           style={{
-            ...(desktopMode && scrollableHeight > 0 && { height: `${scrollableHeight}px` })
+            ...(desktopMode &&
+              scrollableHeight > 0 && { height: `${scrollableHeight}px` }),
           }}
         >
           <SidebarMenu />
         </div>
 
-        <div ref={footerRef} className="flex flex-col gap-5 items-center shrink-0 pb-4">
+        <div
+          ref={footerRef}
+          className="flex flex-col gap-5 items-center shrink-0 pb-4"
+        >
           <div className="flex flex-col gap-1.5">
             <Menu>
               <MenuItem
@@ -97,10 +101,10 @@ const Sidebar = () => {
                     {
                       name: 'offset',
                       options: {
-                        offset: [110, 30] // [skid, distance]
-                      }
-                    }
-                  ]
+                        offset: [110, 30], // [skid, distance]
+                      },
+                    },
+                  ],
                 }}
               >
                 <MenuToggle className="btn btn-icon btn-icon-xl relative rounded-md size-9 border border-transparent hover:bg-light hover:text-primary hover:border-gray-200 dropdown-open:bg-gray-200 text-gray-600">
@@ -123,10 +127,10 @@ const Sidebar = () => {
                     {
                       name: 'offset',
                       options: {
-                        offset: isRTL() ? [-20, 30] : [20, 30] // [skid, distance]
-                      }
-                    }
-                  ]
+                        offset: isRTL() ? [-20, 30] : [20, 30], // [skid, distance]
+                      },
+                    },
+                  ],
                 }}
               >
                 <MenuToggle className="btn btn-icon btn-icon-xl relative rounded-md size-9 border border-transparent hover:bg-light hover:text-primary hover:border-gray-200 dropdown-open:bg-gray-200 text-gray-600">
@@ -149,10 +153,10 @@ const Sidebar = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [-20, 28] : [20, 28] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [-20, 28] : [20, 28], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-icon">

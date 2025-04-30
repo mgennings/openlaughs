@@ -5,7 +5,7 @@ const authLayoutConfig: ILayoutConfig = {
   name: 'auth',
 
   // Options object is currently empty but can be extended with layout-specific configurations
-  options: {}
+  options: {},
 };
 
 export { authLayoutConfig };

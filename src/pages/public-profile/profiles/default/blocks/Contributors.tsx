@@ -21,26 +21,26 @@ const Contributors = () => {
       avatar: '300-3.png',
       name: 'Tyler Hero',
       connections: 6,
-      connected: false
+      connected: false,
     },
     {
       avatar: '300-1.png',
       name: 'Esther Howard',
       connections: 29,
-      connected: true
+      connected: true,
     },
     {
       avatar: '300-14.png',
       name: 'Cody Fisher',
       connections: 34,
-      connected: false
+      connected: false,
     },
     {
       avatar: '300-7.png',
       name: 'Arlene McCoy',
       connections: 1,
-      connected: true
-    }
+      connected: true,
+    },
   ];
 
   const renderItem = (item: IContributorsItem, index: number) => {
@@ -76,10 +76,10 @@ const Contributors = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -107,10 +107,10 @@ const Contributors = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

@@ -19,7 +19,7 @@ const SidebarSecondary = () => {
       <div
         className="scrollable-y-auto grow"
         style={{
-          ...(scrollableHeight > 0 && { height: `${scrollableHeight}px` })
+          ...(scrollableHeight > 0 && { height: `${scrollableHeight}px` }),
         }}
       >
         {pathname === '/' ? <SidebarMenuDashboard /> : <SidebarMenuDefault />}

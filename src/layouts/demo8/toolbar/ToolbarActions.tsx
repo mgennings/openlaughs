@@ -5,7 +5,11 @@ export interface IToolbarActionsProps {
 }
 
 const ToolbarActions = ({ children }: IToolbarActionsProps) => {
-  return <div className="flex items-center flex-wrap gap-1.5 lg:gap-2.5">{children}</div>;
+  return (
+    <div className="flex items-center flex-wrap gap-1.5 lg:gap-2.5">
+      {children}
+    </div>
+  );
 };
 
 export { ToolbarActions };

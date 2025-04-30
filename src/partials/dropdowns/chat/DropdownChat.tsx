@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react';
 import { getHeight, toAbsoluteUrl } from '@/utils';
 import { Link } from 'react-router-dom';
@@ -11,7 +10,7 @@ import {
   MenuTitle,
   MenuToggle,
   MenuArrow,
-  MenuIcon
+  MenuIcon,
 } from '@/components/menu';
 import { useLanguage } from '@/i18n';
 import { useViewport } from '@/hooks';
@@ -71,7 +70,11 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
         <div className="flex items-center justify-between flex-wrap gap-2 px-5">
           <div className="flex items-center flex-wrap gap-2">
             <div className="flex items-center justify-center shrink-0 rounded-full bg-gray-100 border border-gray-200 size-11">
-              <img src={toAbsoluteUrl('/media/brand-logos/gitlab.svg')} className="size-7" alt="" />
+              <img
+                src={toAbsoluteUrl('/media/brand-logos/gitlab.svg')}
+                className="size-7"
+                alt=""
+              />
             </div>
 
             <div className="flex flex-col">
@@ -81,7 +84,9 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
               >
                 HR Team
               </Link>
-              <span className="text-2xs font-medium italic text-gray-500">Jessy is typing..</span>
+              <span className="text-2xs font-medium italic text-gray-500">
+                Jessy is typing..
+              </span>
             </div>
           </div>
 
@@ -94,8 +99,9 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
                 { path: '/media/avatars/300-2.png' },
                 {
                   fallback: '+10',
-                  variant: 'text-success-inverse size-6 ring-success-light bg-success'
-                }
+                  variant:
+                    'text-success-inverse size-6 ring-success-light bg-success',
+                },
               ]}
             />
 
@@ -109,16 +115,19 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
                     {
                       name: 'offset',
                       options: {
-                        offset: isRTL() ? [0, -10] : [0, 10] // [skid, distance]
-                      }
-                    }
-                  ]
+                        offset: isRTL() ? [0, -10] : [0, 10], // [skid, distance]
+                      },
+                    },
+                  ],
                 }}
               >
                 <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
                   <KeenIcon icon="dots-vertical" />
                 </MenuToggle>
-                <MenuSub className="menu-default" rootClassName="w-full max-w-[175px] pt-2">
+                <MenuSub
+                  className="menu-default"
+                  rootClassName="w-full max-w-[175px] pt-2"
+                >
                   <MenuItem path="/account/members/teams">
                     <MenuLink>
                       <MenuIcon>
@@ -136,10 +145,10 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
                         {
                           name: 'offset',
                           options: {
-                            offset: isRTL() ? [15, 0] : [-15, 0] // [skid, distance]
-                          }
-                        }
-                      ]
+                            offset: isRTL() ? [15, 0] : [-15, 0], // [skid, distance]
+                          },
+                        },
+                      ],
                     }}
                   >
                     <MenuLink>
@@ -148,10 +157,16 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
                       </MenuIcon>
                       <MenuTitle>Team</MenuTitle>
                       <MenuArrow>
-                        <KeenIcon icon="right" className="text-3xs rtl:transform rtl:rotate-180" />
+                        <KeenIcon
+                          icon="right"
+                          className="text-3xs rtl:transform rtl:rotate-180"
+                        />
                       </MenuArrow>
                     </MenuLink>
-                    <MenuSub className="menu-default" rootClassName="w-full max-w-[175px]">
+                    <MenuSub
+                      className="menu-default"
+                      rootClassName="w-full max-w-[175px]"
+                    >
                       <MenuItem path="/account/members/import-members">
                         <MenuLink>
                           <MenuIcon>
@@ -203,50 +218,50 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
         text: `
             Hello! <br>
             Next week we are closing the project. Do You have questions?`,
-        in: true
+        in: true,
       },
       {
         avatar: '/media/avatars/300-2.png',
         text: 'This is excellent news!',
         time: '14:08',
         read: true,
-        out: true
+        out: true,
       },
       {
         avatar: '/media/avatars/300-4.png',
         time: '14:26',
         text: `
             I have checked the features, can not wait to demo them!`,
-        in: true
+        in: true,
       },
       {
         avatar: '/media/avatars/300-1.png',
         time: '15:09',
         text: `
             I have looked over the rollout plan, and everything seems spot on. I am ready on my end and can not wait for the user feedback.`,
-        in: true
+        in: true,
       },
       {
         avatar: '/media/avatars/300-2.png',
         text: "Haven't seen the build yet, I'll look now.",
         time: '15:52',
         read: false,
-        out: true
+        out: true,
       },
       {
         avatar: '/media/avatars/300-2.png',
         text: 'Checking the build now',
         time: '15:52',
         read: false,
-        out: true
+        out: true,
       },
       {
         avatar: '/media/avatars/300-4.png',
         time: '17:40',
         text: `
             Tomorrow, I will send the link for the meeting`,
-        in: true
-      }
+        in: true,
+      },
     ];
 
     return (
@@ -292,7 +307,10 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
         <div className="flex items-center justify-between gap-3 grow">
           <div className="flex flex-col">
             <div className="flex gap-1 text-2sm mb-px">
-              <Link to="#" className="hover:text-primary-active font-semibold text-gray-900">
+              <Link
+                to="#"
+                className="hover:text-primary-active font-semibold text-gray-900"
+              >
                 Jane Perez
               </Link>
               <span className="text-gray-600">wants to join chat</span>
@@ -305,7 +323,10 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
           </div>
 
           <div className="flex gap-2.5">
-            <button className="btn btn-light btn-xs" data-dismiss="#join_request">
+            <button
+              className="btn btn-light btn-xs"
+              data-dismiss="#join_request"
+            >
               Decline
             </button>
             <button className="btn btn-dark btn-xs">Accept</button>
@@ -316,6 +337,7 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
   };
 
   const buildForm = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [emailInput, setEmailInput] = useState('');
     return (
       <div className="relative grow mx-5 mb-2.5">
@@ -328,7 +350,7 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
         <input
           type="text"
           className="input h-auto py-4 ps-12 bg-transparent"
-          onChange={(e) => setEmailInput(e.target.value)}
+          onChange={e => setEmailInput(e.target.value)}
           placeholder="Write a message..."
           value={emailInput}
         />
@@ -344,7 +366,10 @@ const DropdownChat = ({ menuTtemRef }: IDropdownChatProps) => {
   };
 
   return (
-    <MenuSub rootClassName="w-full max-w-[450px]" className="light:border-gray-300">
+    <MenuSub
+      rootClassName="w-full max-w-[450px]"
+      className="light:border-gray-300"
+    >
       <div ref={headerRef}>
         {buildHeader()}
         {buildTopbar()}

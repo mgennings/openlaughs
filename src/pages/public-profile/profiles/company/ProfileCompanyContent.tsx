@@ -7,7 +7,7 @@ import {
   CompanyProfile,
   Locations,
   IStatisticsItems,
-  INetworkItems
+  INetworkItems,
 } from './blocks';
 
 const ProfileCompanyContent = () => {
@@ -15,7 +15,7 @@ const ProfileCompanyContent = () => {
     { number: '624', label: 'Employees' },
     { number: '60.7M', label: 'Users' },
     { number: '369M', label: 'Revenue' },
-    { number: '27', label: 'Company Rank' }
+    { number: '27', label: 'Company Rank' },
   ];
 
   const data: INetworkItems = [
@@ -23,7 +23,7 @@ const ProfileCompanyContent = () => {
     { icon: 'sms', link: 'info@duolingo.com' },
     { icon: 'facebook', link: 'duolingo' },
     { icon: 'twitter', link: 'duolingo-news' },
-    { icon: 'youtube', link: 'duolingo-tuts' }
+    { icon: 'youtube', link: 'duolingo-tuts' },
   ];
 
   return (

@@ -20,7 +20,7 @@ const DropdownNotificationsItem5 = ({
   day,
   link,
   date,
-  info
+  info,
 }: IDropdownNotificationsItemProps) => {
   return (
     <div className="flex grow gap-2.5 px-5">
@@ -37,7 +37,10 @@ const DropdownNotificationsItem5 = ({
 
       <div className="flex flex-col gap-1">
         <div className="text-2sm font-medium mb-px">
-          <Link to="#" className="hover:text-primary-active text-gray-900 font-semibold">
+          <Link
+            to="#"
+            className="hover:text-primary-active text-gray-900 font-semibold"
+          >
             {userName}
           </Link>
           <span className="text-gray-700"> {description} </span>

@@ -32,7 +32,9 @@ const ModalSearchIntegrations = ({ items }: IModalSearchIntegrationsProps) => {
                 >
                   {item.name}
                 </a>
-                <span className="text-2xs font-medium text-gray-600">{item.description}</span>
+                <span className="text-2xs font-medium text-gray-600">
+                  {item.description}
+                </span>
               </div>
             </div>
 

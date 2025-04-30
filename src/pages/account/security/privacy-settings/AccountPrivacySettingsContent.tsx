@@ -1,6 +1,15 @@
-import { MiscFaq, MiscHighlightedPosts, IHighlightedPostsItems } from '@/partials/misc';
+import {
+  MiscFaq,
+  MiscHighlightedPosts,
+  IHighlightedPostsItems,
+} from '@/partials/misc';
 
-import { BlockList, ManageData, PrivacySettings, ReportSettings } from './blocks';
+import {
+  BlockList,
+  ManageData,
+  PrivacySettings,
+  ReportSettings,
+} from './blocks';
 
 const AccountPrivacySettingsContent = () => {
   const posts: IHighlightedPostsItems = [
@@ -9,15 +18,15 @@ const AccountPrivacySettingsContent = () => {
       title: 'Fortifying Privacy Controls: Customization and Guidelines',
       summary:
         'Enhance your privacy framework with customizable settings. Understand and apply robust controls with our comprehensive guidelines to protect member data.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'setting',
       title: 'Navigating Privacy Preferences: Secure Configuration Tools',
       summary:
         'Take command of your privacy settings with our secure configuration tools. Detailed resources and expert insights ensure your preferences are set for maximum protection.',
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (

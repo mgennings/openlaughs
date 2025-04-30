@@ -11,7 +11,11 @@ export interface IScrollspyMenuProps {
 }
 
 const ScrollspyMenu = ({ items }: IScrollspyMenuProps) => {
-  const buildAnchor = (item: IScrollspyMenuItem, index: number, indent: boolean = false) => {
+  const buildAnchor = (
+    item: IScrollspyMenuItem,
+    index: number,
+    indent: boolean = false,
+  ) => {
     return (
       <div
         key={index}
@@ -40,7 +44,9 @@ const ScrollspyMenu = ({ items }: IScrollspyMenuProps) => {
             <div className="ps-6 pe-2.5 py-2.5 text-2sm font-semibold text-gray-900">
               {item.title}
             </div>
-            <div className="flex flex-col">{buildSubAnchors(item.children)}</div>
+            <div className="flex flex-col">
+              {buildSubAnchors(item.children)}
+            </div>
           </div>
         );
       } else {

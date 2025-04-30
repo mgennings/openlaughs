@@ -11,7 +11,7 @@ import {
   LoginSessions,
   ProductInsight,
   QuickSettings,
-  TrustedDevices
+  TrustedDevices,
 } from './blocks';
 
 const AccountOverviewContent = () => {
@@ -21,22 +21,22 @@ const AccountOverviewContent = () => {
       title: 'Enhancing Security Knowledge: Guides, Tips, and Documentation',
       summary:
         'Explore comprehensive resources to strengthen security understanding through detailed guides, expert tips, and documentation.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'ensure',
       title: 'Mastering Security Protocols: Learning Through Expert Guidance',
       summary:
         'Delve into the realm of security with specialized learning materials, expert guidance, and practical tips for implementation.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'shield-search',
       title: 'Navigating Digital Security: A Comprehensive Learning Journey',
       summary:
         'Embark on a journey of digital security enlightenment with our extensive collection of educational guides and practical advice..',
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (
@@ -63,7 +63,7 @@ const AccountOverviewContent = () => {
             more={{ title: 'Review Security Tips', url: '#' }}
             features={[
               ['Strong Passwords', 'Two-Factor Authentication'],
-              ['Budget-Friendly', 'Fresh Look']
+              ['Budget-Friendly', 'Fresh Look'],
             ]}
           />
 
@@ -102,7 +102,11 @@ const AccountOverviewContent = () => {
 
           <ProductInsight
             image={
-              <img src={toAbsoluteUrl('/media/brand-logos/android.svg')} className="h-5" alt="" />
+              <img
+                src={toAbsoluteUrl('/media/brand-logos/android.svg')}
+                className="h-5"
+                alt=""
+              />
             }
             title="Android"
             description="Active Sessions"

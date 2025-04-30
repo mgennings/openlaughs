@@ -21,28 +21,28 @@ const CompanyProfile = () => {
     {
       icon: 'dribbble',
       text: 'https://duolingo.com',
-      info: true
+      info: true,
     },
     {
       icon: 'facebook',
       text: 'duolingo',
-      info: true
+      info: true,
     },
     {
       icon: 'youtube',
       text: 'duolingo-tuts',
-      info: true
+      info: true,
     },
     {
       icon: 'whatsapp',
       text: '(31) 6-1235-4567',
-      info: false
+      info: false,
     },
     {
       icon: 'map',
       text: 'Herengracht 501, 1017 BV Amsterdam, NL',
-      info: false
-    }
+      info: false,
+    },
   ];
 
   const products: IProfileProducts = [
@@ -58,7 +58,7 @@ const CompanyProfile = () => {
     { label: 'Translator' },
     { label: 'Webflow' },
     { label: 'Language Lab' },
-    { label: 'Lingo Plus' }
+    { label: 'Lingo Plus' },
   ];
 
   const renderRows = (row: IProfileRow, index: number) => {
@@ -91,7 +91,7 @@ const CompanyProfile = () => {
     className: 'leaflet-marker',
     bgPos: [10, 10],
     iconAnchor: [20, 37],
-    popupAnchor: [0, -37]
+    popupAnchor: [0, -37],
   });
 
   return (
@@ -100,7 +100,9 @@ const CompanyProfile = () => {
         <h3 className="card-title">Company Profile</h3>
       </div>
       <div className="card-body">
-        <h3 className="text-base font-semibold text-gray-900 leading-none mb-5">Headquarter</h3>
+        <h3 className="text-base font-semibold text-gray-900 leading-none mb-5">
+          Headquarter
+        </h3>
 
         <div className="flex flex-wrap items-center gap-5 mb-10">
           <MapContainer
@@ -127,10 +129,11 @@ const CompanyProfile = () => {
         <div className="grid gap-2.5 mb-7">
           <div className="text-md font-semibold text-gray-900">About</div>
           <p className="text-sm text-gray-800 leading-5.5">
-            Now that I’m done thoroughly mangling that vague metaphor, let’s get down to business.
-            You know you need to start blogging to grow your business, but you don’t know how. In
-            this post, I’ll show you how to write a great blog post in five simple steps that people
-            will actually want to read.
+            Now that I’m done thoroughly mangling that vague metaphor, let’s get
+            down to business. You know you need to start blogging to grow your
+            business, but you don’t know how. In this post, I’ll show you how to
+            write a great blog post in five simple steps that people will
+            actually want to read.
           </p>
         </div>
 
@@ -152,5 +155,5 @@ export {
   type IProfileRow,
   type IProfileRows,
   type IProfileProduct,
-  type IProfileProducts
+  type IProfileProducts,
 };

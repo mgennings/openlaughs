@@ -13,7 +13,7 @@ const initialValues = {
   email: '',
   password: '',
   changepassword: '',
-  acceptTerms: false
+  acceptTerms: false,
 };
 
 const signupSchema = Yup.object().shape({
@@ -31,7 +31,7 @@ const signupSchema = Yup.object().shape({
     .max(50, 'Maximum 50 symbols')
     .required('Password confirmation is required')
     .oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
-  acceptTerms: Yup.bool().required('You must accept the terms and conditions')
+  acceptTerms: Yup.bool().required('You must accept the terms and conditions'),
 });
 
 const Signup = () => {
@@ -61,7 +61,7 @@ const Signup = () => {
         setSubmitting(false);
         setLoading(false);
       }
-    }
+    },
   });
 
   const togglePassword = (event: { preventDefault: () => void }) => {
@@ -82,11 +82,19 @@ const Signup = () => {
         onSubmit={formik.handleSubmit}
       >
         <div className="text-center mb-2.5">
-          <h3 className="text-lg font-semibold text-gray-900 leading-none mb-2.5">Sign up</h3>
+          <h3 className="text-lg font-semibold text-gray-900 leading-none mb-2.5">
+            Sign up
+          </h3>
           <div className="flex items-center justify-center font-medium">
-            <span className="text-2sm text-gray-600 me-1.5">Already have an Account ?</span>
+            <span className="text-2sm text-gray-600 me-1.5">
+              Already have an Account ?
+            </span>
             <Link
-              to={currentLayout?.name === 'auth-branded' ? '/auth/login' : '/auth/classic/login'}
+              to={
+                currentLayout?.name === 'auth-branded'
+                  ? '/auth/login'
+                  : '/auth/classic/login'
+              }
               className="text-2sm link"
             >
               Sign In
@@ -118,7 +126,9 @@ const Signup = () => {
 
         <div className="flex items-center gap-2">
           <span className="border-t border-gray-200 w-full"></span>
-          <span className="text-2xs text-gray-500 font-medium uppercase">Or</span>
+          <span className="text-2xs text-gray-500 font-medium uppercase">
+            Or
+          </span>
           <span className="border-t border-gray-200 w-full"></span>
         </div>
 
@@ -136,8 +146,8 @@ const Signup = () => {
                 'form-control bg-transparent',
                 { 'is-invalid': formik.touched.email && formik.errors.email },
                 {
-                  'is-valid': formik.touched.email && !formik.errors.email
-                }
+                  'is-valid': formik.touched.email && !formik.errors.email,
+                },
               )}
             />
           </label>
@@ -159,15 +169,20 @@ const Signup = () => {
               className={clsx(
                 'form-control bg-transparent',
                 {
-                  'is-invalid': formik.touched.password && formik.errors.password
+                  'is-invalid':
+                    formik.touched.password && formik.errors.password,
                 },
                 {
-                  'is-valid': formik.touched.password && !formik.errors.password
-                }
+                  'is-valid':
+                    formik.touched.password && !formik.errors.password,
+                },
               )}
             />
             <button className="btn btn-icon" onClick={togglePassword}>
-              <KeenIcon icon="eye" className={clsx('text-gray-500', { hidden: showPassword })} />
+              <KeenIcon
+                icon="eye"
+                className={clsx('text-gray-500', { hidden: showPassword })}
+              />
               <KeenIcon
                 icon="eye-slash"
                 className={clsx('text-gray-500', { hidden: !showPassword })}
@@ -192,21 +207,29 @@ const Signup = () => {
               className={clsx(
                 'form-control bg-transparent',
                 {
-                  'is-invalid': formik.touched.changepassword && formik.errors.changepassword
+                  'is-invalid':
+                    formik.touched.changepassword &&
+                    formik.errors.changepassword,
                 },
                 {
-                  'is-valid': formik.touched.changepassword && !formik.errors.changepassword
-                }
+                  'is-valid':
+                    formik.touched.changepassword &&
+                    !formik.errors.changepassword,
+                },
               )}
             />
             <button className="btn btn-icon" onClick={toggleConfirmPassword}>
               <KeenIcon
                 icon="eye"
-                className={clsx('text-gray-500', { hidden: showConfirmPassword })}
+                className={clsx('text-gray-500', {
+                  hidden: showConfirmPassword,
+                })}
               />
               <KeenIcon
                 icon="eye-slash"
-                className={clsx('text-gray-500', { hidden: !showConfirmPassword })}
+                className={clsx('text-gray-500', {
+                  hidden: !showConfirmPassword,
+                })}
               />
             </button>
           </label>

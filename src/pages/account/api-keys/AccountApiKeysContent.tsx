@@ -3,7 +3,12 @@ import { Fragment } from 'react';
 import { toAbsoluteUrl } from '@/utils';
 import { KeenIcon } from '@/components';
 
-import { MiscEngage, MiscFaq, MiscHighlightedPosts, IHighlightedPostsItems } from '@/partials/misc';
+import {
+  MiscEngage,
+  MiscFaq,
+  MiscHighlightedPosts,
+  IHighlightedPostsItems,
+} from '@/partials/misc';
 
 import { ExternalServicesManageApi } from '../home/settings-sidebar';
 import { DoNotDistrub } from '../notifications';
@@ -16,22 +21,22 @@ const AccountApiKeysContent = () => {
       title: 'Streamlined Alerts Setup: Custom Notification Preferences',
       summary:
         'Easily integrate and manage your APIs with our suite of configuration tools. Gain access to extensive instructions, expert support, and in-depth documentation to keep your API interactions efficient and up-to-date..',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'icon',
       title: 'Enhancing Connectivity: Tools for API Expansion',
       summary:
         'Leverage the full potential of your APIs with our advanced expansion tools. We provide all the necessary resources for easy setup, information exchange, and maintaining high-performance API connectivity.',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'subtitle',
       title: 'Organizing Team Data: Efficient Roster Solutions',
       summary:
         'Organize your API data more with our detailed interface solutions. From quick setup guides to management, our tools are designed to streamline every step of your API data organization.',
-      path: '#'
-    }
+      path: '#',
+    },
   ];
 
   return (
@@ -65,7 +70,7 @@ const AccountApiKeysContent = () => {
             }
             more={{
               title: 'Contact Support',
-              url: ''
+              url: '',
             }}
           />
         </div>

@@ -1,13 +1,20 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useResponsive } from '@/hooks';
 import { KeenIcon } from '@/components';
-import { TMenuConfig, MenuItem, MenuLink, MenuTitle, MenuArrow, Menu } from '@/components/menu';
+import {
+  TMenuConfig,
+  MenuItem,
+  MenuLink,
+  MenuTitle,
+  MenuArrow,
+  Menu,
+} from '@/components/menu';
 import {
   MegaMenuSubProfiles,
   MegaMenuSubAccount,
   MegaMenuSubNetwork,
   MegaMenuSubAuth,
-  MegaMenuSubHelp
+  MegaMenuSubHelp,
 } from '@/partials/menu/mega-menu';
 import { useDemo1Layout } from '../Demo1LayoutProvider';
 import { MENU_MEGA } from '@/config';
@@ -60,11 +67,13 @@ const MegaMenuInner = () => {
           toggle={desktopMode ? 'dropdown' : 'accordion'}
           trigger={desktopMode ? 'hover' : 'click'}
           dropdownProps={{
-            placement: isRTL() ? 'bottom-end' : 'bottom-start'
+            placement: isRTL() ? 'bottom-end' : 'bottom-start',
           }}
         >
           <MenuLink className={linkClass}>
-            <MenuTitle className={titleClass}>{publicProfilesItem.title}</MenuTitle>
+            <MenuTitle className={titleClass}>
+              {publicProfilesItem.title}
+            </MenuTitle>
             {buildArrow()}
           </MenuLink>
           {MegaMenuSubProfiles(items)}
@@ -80,10 +89,10 @@ const MegaMenuInner = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [300, 0] : [-300, 0] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [300, 0] : [-300, 0], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuLink className={linkClass}>
@@ -103,10 +112,10 @@ const MegaMenuInner = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [300, 0] : [-300, 0] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [300, 0] : [-300, 0], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuLink className={linkClass}>
@@ -126,10 +135,10 @@ const MegaMenuInner = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [300, 0] : [-300, 0] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [300, 0] : [-300, 0], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuLink className={linkClass}>
@@ -149,10 +158,10 @@ const MegaMenuInner = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [20, 0] : [-20, 0] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [20, 0] : [-20, 0], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuLink className={linkClass}>
@@ -169,7 +178,10 @@ const MegaMenuInner = () => {
     return (
       <MenuArrow className="flex lg:hidden text-gray-400">
         <KeenIcon icon="plus" className="text-2xs menu-item-show:hidden" />
-        <KeenIcon icon="minus" className="text-2xs hidden menu-item-show:inline-flex" />
+        <KeenIcon
+          icon="minus"
+          className="text-2xs hidden menu-item-show:inline-flex"
+        />
       </MenuArrow>
     );
   };

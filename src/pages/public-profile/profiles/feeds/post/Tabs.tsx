@@ -18,7 +18,7 @@ const Tabs = ({
   comments,
   likes,
   saves,
-  className
+  className,
 }: ITabsProps) => {
   return (
     <div

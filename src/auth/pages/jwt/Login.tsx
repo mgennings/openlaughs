@@ -19,13 +19,13 @@ const loginSchema = Yup.object().shape({
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Password is required'),
-  remember: Yup.boolean()
+  remember: Yup.boolean(),
 });
 
 const initialValues = {
   email: 'demo@keenthemes.com',
   password: 'demo1234',
-  remember: false
+  remember: false,
 };
 
 const Login = () => {
@@ -62,7 +62,7 @@ const Login = () => {
         setSubmitting(false);
       }
       setLoading(false);
-    }
+    },
   });
 
   const togglePassword = (event: MouseEvent<HTMLButtonElement>) => {
@@ -78,11 +78,19 @@ const Login = () => {
         noValidate
       >
         <div className="text-center mb-2.5">
-          <h3 className="text-lg font-semibold text-gray-900 leading-none mb-2.5">Sign in</h3>
+          <h3 className="text-lg font-semibold text-gray-900 leading-none mb-2.5">
+            Sign in
+          </h3>
           <div className="flex items-center justify-center font-medium">
-            <span className="text-2sm text-gray-600 me-1.5">Need an account?</span>
+            <span className="text-2sm text-gray-600 me-1.5">
+              Need an account?
+            </span>
             <Link
-              to={currentLayout?.name === 'auth-branded' ? '/auth/signup' : '/auth/classic/signup'}
+              to={
+                currentLayout?.name === 'auth-branded'
+                  ? '/auth/signup'
+                  : '/auth/classic/signup'
+              }
               className="text-2sm link"
             >
               Sign up
@@ -114,13 +122,20 @@ const Login = () => {
 
         <div className="flex items-center gap-2">
           <span className="border-t border-gray-200 w-full"></span>
-          <span className="text-2xs text-gray-500 font-medium uppercase">Or</span>
+          <span className="text-2xs text-gray-500 font-medium uppercase">
+            Or
+          </span>
           <span className="border-t border-gray-200 w-full"></span>
         </div>
 
         <Alert variant="primary">
-          Use <span className="font-semibold text-gray-900">demo@keenthemes.com</span> username and{' '}
-          <span className="font-semibold text-gray-900">demo1234</span> password.
+          Use{' '}
+          <span className="font-semibold text-gray-900">
+            demo@keenthemes.com
+          </span>{' '}
+          username and{' '}
+          <span className="font-semibold text-gray-900">demo1234</span>{' '}
+          password.
         </Alert>
 
         {formik.status && <Alert variant="danger">{formik.status}</Alert>}
@@ -133,7 +148,7 @@ const Login = () => {
               autoComplete="off"
               {...formik.getFieldProps('email')}
               className={clsx('form-control', {
-                'is-invalid': formik.touched.email && formik.errors.email
+                'is-invalid': formik.touched.email && formik.errors.email,
               })}
             />
           </label>
@@ -165,11 +180,14 @@ const Login = () => {
               autoComplete="off"
               {...formik.getFieldProps('password')}
               className={clsx('form-control', {
-                'is-invalid': formik.touched.password && formik.errors.password
+                'is-invalid': formik.touched.password && formik.errors.password,
               })}
             />
             <button className="btn btn-icon" onClick={togglePassword}>
-              <KeenIcon icon="eye" className={clsx('text-gray-500', { hidden: showPassword })} />
+              <KeenIcon
+                icon="eye"
+                className={clsx('text-gray-500', { hidden: showPassword })}
+              />
               <KeenIcon
                 icon="eye-slash"
                 className={clsx('text-gray-500', { hidden: !showPassword })}

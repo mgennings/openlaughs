@@ -12,28 +12,28 @@ const NavbarMenu = () => {
     {
       title: 'Dashboards',
       path: '/',
-      partial: false
+      partial: false,
     },
     {
       title: 'Public Profiles',
       path: '/public-profile/profiles/default',
-      partial: '/public-profile'
+      partial: '/public-profile',
     },
     {
       title: 'Account Settings',
       path: '/account/home/get-started',
-      partial: '/account'
+      partial: '/account',
     },
     {
       title: 'Network',
       path: '/network/get-started',
-      partial: '/network'
+      partial: '/network',
     },
     {
       title: 'Authentication',
       path: '/authentication/get-started',
-      partial: '/authentication'
-    }
+      partial: '/authentication',
+    },
   ];
 
   return (

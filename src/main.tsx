@@ -16,11 +16,13 @@ import React from 'react';
  */
 setupAxios(axios);
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement,
+);
 root.render(
   <React.StrictMode>
     <ProvidersWrapper>
       <App />
     </ProvidersWrapper>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -1,4 +1,10 @@
-import { createContext, type PropsWithChildren, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { deepMerge } from '@/utils';
 import { ILayoutConfig, useLayout } from '@/providers';
 import { authLayoutBrandedConfig } from './AuthBrandedLayoutConfig';
@@ -10,7 +16,7 @@ interface AuthLayoutProviderProps {
 
 // Initial layout properties for the AuthBrandedLayoutProvider, using authLayoutBrandedConfig as the default layout
 const initalLayoutProps: AuthLayoutProviderProps = {
-  layout: authLayoutBrandedConfig
+  layout: authLayoutBrandedConfig,
 };
 
 // Creating a context for the AuthBrandedLayout with the initial layout properties
@@ -25,7 +31,10 @@ const AuthBrandedLayoutProvider = ({ children }: PropsWithChildren) => {
 
   // Function to merge the current layout with the branded auth layout configuration
   const getLayoutConfig = () => {
-    return deepMerge(authLayoutBrandedConfig, getLayout(authLayoutBrandedConfig.name));
+    return deepMerge(
+      authLayoutBrandedConfig,
+      getLayout(authLayoutBrandedConfig.name),
+    );
   };
 
   // Setting the layout state with the merged layout configuration
@@ -40,7 +49,7 @@ const AuthBrandedLayoutProvider = ({ children }: PropsWithChildren) => {
   return (
     <LayoutContext.Provider
       value={{
-        layout
+        layout,
       }}
     >
       {children}

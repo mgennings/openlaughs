@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from 'react-router-dom';
 import { KeenIcon } from '@/components/keenicons';
 import { useResponsive, useViewport } from '@/hooks';
@@ -10,7 +9,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '@/components/ui/sheet';
 
 const Sidebar = () => {
@@ -25,54 +24,54 @@ const Sidebar = () => {
     {
       icon: 'chart-line-star',
       path: '/',
-      tooltip: 'Dashboard'
+      tooltip: 'Dashboard',
     },
     {
       icon: 'profile-circle',
       path: '/public-profile/profiles/default',
-      tooltip: 'Profile'
+      tooltip: 'Profile',
     },
     {
       icon: 'setting-2',
       active: true,
       path: '/account/home/get-started',
-      tooltip: 'Account'
+      tooltip: 'Account',
     },
     {
       icon: 'users',
       path: '/network/get-started',
-      tooltip: 'Network'
+      tooltip: 'Network',
     },
     {
       icon: 'security-user',
       path: '/account/billing/plans',
-      tooltip: 'Plans'
+      tooltip: 'Plans',
     },
     {
       icon: 'messages',
       path: '/account/security/security-log',
-      tooltip: 'Security Logs'
+      tooltip: 'Security Logs',
     },
     {
       icon: 'shop',
       path: '/account/notifications',
-      tooltip: 'Notifications'
+      tooltip: 'Notifications',
     },
     {
       icon: 'cheque',
       path: '/account/members/roles',
-      tooltip: 'ACL'
+      tooltip: 'ACL',
     },
     {
       icon: 'code',
       path: '/account/api-keys',
-      tooltip: 'API Keys'
+      tooltip: 'API Keys',
     },
     {
       icon: 'question',
       path: 'https://keenthemes.com/metronic/tailwind/docs/',
-      tooltip: 'Docs'
-    }
+      tooltip: 'Docs',
+    },
   ];
 
   const handleMobileSidebarClose = () => {
@@ -86,7 +85,8 @@ const Sidebar = () => {
           <div
             className="scrollable-y-auto grow gap-2.5 shrink-0 flex items-center flex-col"
             style={{
-              ...(desktopMode && scrollableHeight > 0 && { height: `${scrollableHeight}px` })
+              ...(desktopMode &&
+                scrollableHeight > 0 && { height: `${scrollableHeight}px` }),
             }}
           >
             {items.map((item, index) =>
@@ -123,7 +123,7 @@ const Sidebar = () => {
                   </span>
                   <span className="tooltip">{item.tooltip}</span>
                 </Link>
-              )
+              ),
             )}
           </div>
         </div>

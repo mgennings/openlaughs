@@ -1,5 +1,11 @@
 import { HTMLAttributes, ReactNode } from 'react';
-import { ChevronsUpDown, ArrowUp, ArrowDown, EyeOff, Check } from 'lucide-react';
+import {
+  ChevronsUpDown,
+  ArrowUp,
+  ArrowDown,
+  EyeOff,
+  Check,
+} from 'lucide-react';
 import { Column } from '@tanstack/react-table';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -10,10 +16,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuCheckboxItem
+  DropdownMenuCheckboxItem,
 } from '@/components/ui/dropdown-menu';
 
-interface IDataGridColumnHeader<TData, TValue> extends HTMLAttributes<HTMLDivElement> {
+interface IDataGridColumnHeader<TData, TValue>
+  extends HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
   title?: string;
   filter?: ReactNode;
@@ -23,7 +30,7 @@ export function DataGridColumnHeader<TData, TValue>({
   column,
   title = '',
   className,
-  filter
+  filter,
 }: IDataGridColumnHeader<TData, TValue>) {
   if (!filter && !column.getCanSort() && !column.getCanHide()) {
     return <div className={cn(className)}>{title}</div>;
@@ -34,7 +41,10 @@ export function DataGridColumnHeader<TData, TValue>({
       <Button
         variant="ghost"
         size="sm"
-        className={cn('-ms-3 h-8 data-[state=open]:bg-accent !ring-0 !ring-offset-0', className)}
+        className={cn(
+          '-ms-3 h-8 data-[state=open]:bg-accent !ring-0 !ring-offset-0',
+          className,
+        )}
         onClick={() => {
           // Determine the current sorting state
           const isSorted = column.getIsSorted();
@@ -68,7 +78,7 @@ export function DataGridColumnHeader<TData, TValue>({
             size="sm"
             className={cn(
               '-ms-3 h-8 data-[state=open]:bg-accent !ring-0 !ring-offset-0',
-              className
+              className,
             )}
           >
             <span className="text-sm">{title}</span>

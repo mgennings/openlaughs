@@ -32,7 +32,11 @@ const ResetPasswordChanged = () => {
 
         <div className="flex justify-center">
           <Link
-            to={currentLayout?.name === 'auth-branded' ? '/auth/login' : '/auth/classic/login'}
+            to={
+              currentLayout?.name === 'auth-branded'
+                ? '/auth/login'
+                : '/auth/classic/login'
+            }
             className="btn btn-primary"
           >
             Sign in

@@ -8,15 +8,20 @@ interface IDetailsItems extends Array<IDetailsItem> {}
 const Details = () => {
   const tables: IDetailsItems = [
     { status: 'Company Name', info: 'KeenThemes' },
-    { status: 'Address', info: 'Keizersgracht 136, 1015 CW Amsterdam, Netherlands' },
+    {
+      status: 'Address',
+      info: 'Keizersgracht 136, 1015 CW Amsterdam, Netherlands',
+    },
     { status: 'Contact', info: 'Jason Tatum' },
-    { status: 'VAT ID', info: 'NL123456789B01' }
+    { status: 'VAT ID', info: 'NL123456789B01' },
   ];
 
   const renderItem = (table: IDetailsItem, index: number) => {
     return (
       <tr key={index}>
-        <td className="text-sm text-gray-600 min-w-36 pb-5 pe-6">{table.status}</td>
+        <td className="text-sm text-gray-600 min-w-36 pb-5 pe-6">
+          {table.status}
+        </td>
         <td className="text-sm text-gray-800 pb-5">{table.info}</td>
       </tr>
     );

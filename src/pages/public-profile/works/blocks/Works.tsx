@@ -28,7 +28,7 @@ const Works = () => {
       authorName: 'Cody Fisher',
       authorAvatar: '300-6.png',
       likes: 24,
-      comments: 5
+      comments: 5,
     },
     {
       title: 'Whispered Emotions',
@@ -37,7 +37,7 @@ const Works = () => {
       authorName: 'Wade Warren',
       authorAvatar: '300-14.png',
       likes: 187,
-      comments: 49
+      comments: 49,
     },
     {
       title: 'Golden Serenity',
@@ -46,7 +46,7 @@ const Works = () => {
       authorName: 'Albert Flores',
       authorAvatar: '300-11.png',
       likes: 60,
-      comments: 13
+      comments: 13,
     },
     {
       title: 'Mystic Shadows',
@@ -55,7 +55,7 @@ const Works = () => {
       authorName: 'Kathryn Murphy',
       authorAvatar: '300-1.png',
       likes: 37,
-      comments: 16
+      comments: 16,
     },
     {
       title: 'Wild Beauty',
@@ -64,7 +64,7 @@ const Works = () => {
       authorName: 'Devon Lane',
       authorAvatar: '300-16.png',
       likes: 625,
-      comments: 109
+      comments: 109,
     },
     {
       title: 'Timeless Elegance',
@@ -73,7 +73,7 @@ const Works = () => {
       authorName: 'Jenny Wilson',
       authorAvatar: '300-5.png',
       likes: 6,
-      comments: 1
+      comments: 1,
     },
     {
       title: 'Intrepid Travel',
@@ -82,7 +82,7 @@ const Works = () => {
       authorName: 'Jhon Smith',
       authorAvatar: '300-25.png',
       likes: 30,
-      comments: 22
+      comments: 22,
     },
     {
       title: 'We rise together',
@@ -91,8 +91,8 @@ const Works = () => {
       authorName: 'Adam Cruse',
       authorAvatar: '300-29.png',
       likes: 19,
-      comments: 23
-    }
+      comments: 23,
+    },
   ];
 
   const renderItem = (item: IWorksItem, index: number) => {
@@ -127,7 +127,9 @@ const Works = () => {
   return (
     <div className="flex flex-col items-stretch gap-5 lg:gap-7.5">
       <div className="flex flex-wrap items-center gap-5 justify-between">
-        <h3 className="text-lg text-gray-900 font-semibold">{items.length} Works</h3>
+        <h3 className="text-lg text-gray-900 font-semibold">
+          {items.length} Works
+        </h3>
 
         <div className="btn-tabs" data-tabs="true">
           <a

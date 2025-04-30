@@ -22,7 +22,10 @@ const HeaderTopbar = () => {
           </span>
         </div>
 
-        <Link to="/account/security/privacy-settings" className="btn btn-sm btn-primary">
+        <Link
+          to="/account/security/privacy-settings"
+          className="btn btn-sm btn-primary"
+        >
           Upgrade
           <KeenIcon icon="arrow-up" />
         </Link>
@@ -41,10 +44,10 @@ const HeaderTopbar = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: [0, 10] // [skid, distance]
-                }
-              }
-            ]
+                  offset: [0, 10], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="size-[34px] rounded-full inline-flex items-center justify-center relative text-lg font-medium border border-gray-300 bg-gray-100 text-gray-800">

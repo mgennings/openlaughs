@@ -6,7 +6,7 @@ import {
   MenuLink,
   MenuSub,
   MenuTitle,
-  MenuToggle
+  MenuToggle,
 } from '@/components/menu';
 import { useLanguage } from '@/i18n';
 
@@ -30,28 +30,28 @@ const SidebarMenuDashboard = () => {
       title: 'Client API',
       path: '/account/home/user-profile',
       icon: 'calendar',
-      active: true
+      active: true,
     },
     {
       title: 'Profile',
       path: '/public-profile/profiles/company',
-      icon: 'profile-circle'
+      icon: 'profile-circle',
     },
     {
       title: 'My Account',
       path: '/account/integrations',
-      icon: 'setting-2'
+      icon: 'setting-2',
     },
     {
       title: 'Projects',
       path: '/public-profile/projects/3-columns',
-      icon: 'questionnaire-tablet'
+      icon: 'questionnaire-tablet',
     },
     {
       title: 'Personal info',
       path: '/public-profile/profiles/creator',
-      icon: 'badge'
-    }
+      icon: 'badge',
+    },
   ];
   const { isRTL } = useLanguage();
 
@@ -61,73 +61,73 @@ const SidebarMenuDashboard = () => {
       children: [
         {
           title: 'API Setup',
-          path: '/account/api-keys'
+          path: '/account/api-keys',
         },
         {
           title: 'Team Settings',
           path: '',
-          active: true
+          active: true,
         },
         {
           title: 'Authentication',
-          path: '/authentication/classic/sign-in'
+          path: '/authentication/classic/sign-in',
         },
         {
           title: 'Endpoints Configs',
-          path: '/account/appearance'
+          path: '/account/appearance',
         },
         {
           title: 'Rate Limiting',
-          path: '/public-profile/network'
-        }
-      ]
+          path: '/public-profile/network',
+        },
+      ],
     },
     {
       title: 'SECURITY',
       children: [
         {
           title: 'Data Encryption',
-          path: '/account/billing/enterprise'
+          path: '/account/billing/enterprise',
         },
         {
           title: 'Text',
-          path: '/account/security/overview'
+          path: '/account/security/overview',
         },
         {
           title: 'Access Control',
-          path: '/account/security/privacy-settings'
+          path: '/account/security/privacy-settings',
         },
         {
           title: 'Incident Response',
-          path: '/account/security/current-sessions'
-        }
-      ]
+          path: '/account/security/current-sessions',
+        },
+      ],
     },
     {
       title: 'ANALYTICS',
       children: [
         {
           title: 'Fetching Data',
-          path: '/account/members/team-info'
+          path: '/account/members/team-info',
         },
         {
           title: 'Custom Reports',
-          path: '/account/home/user-profile'
+          path: '/account/home/user-profile',
         },
         {
           title: 'Real Time Analytics',
-          path: '/account/home/settings-enterprise'
+          path: '/account/home/settings-enterprise',
         },
         {
           title: 'Exportin Data',
-          path: '/account/members/import-members'
+          path: '/account/members/import-members',
         },
         {
           title: 'Dashboard Integration',
-          path: '/account/members/team-info'
-        }
-      ]
-    }
+          path: '/account/members/team-info',
+        },
+      ],
+    },
   ];
 
   const buildDropdown = () => {
@@ -143,10 +143,10 @@ const SidebarMenuDashboard = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: isRTL() ? [4, 0] : [-4, 0] // [skid, distance]
-                }
-              }
-            ]
+                  offset: isRTL() ? [4, 0] : [-4, 0], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="w-full btn btn-light btn-sm justify-between flex-nowrap">

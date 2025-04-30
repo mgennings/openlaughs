@@ -9,7 +9,7 @@ import {
   MenuLabel,
   MenuLink,
   MenuSub,
-  MenuTitle
+  MenuTitle,
 } from '@/components/menu';
 import { MENU_ROOT } from '@/config';
 import { KeenIcon } from '@/components';
@@ -28,7 +28,7 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
   const { isRTL } = useLanguage();
 
   useEffect(() => {
-    MENU_ROOT.forEach((item) => {
+    MENU_ROOT.forEach(item => {
       if (item.rootPath && pathname.includes(item.rootPath)) {
         setSelectedMenuItem(item);
       }
@@ -56,14 +56,16 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [0, 15] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: [0, 15], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuLabel className="cursor-pointer text-gray-900 font-medium grow justify-between">
-              <span className="text-lg font-medium text-inverse grow">Metronic</span>
+              <span className="text-lg font-medium text-inverse grow">
+                Metronic
+              </span>
               <div className="flex flex-col text-gray-900 font-medium">
                 <MenuArrow>
                   <KeenIcon icon="up" />
@@ -76,7 +78,10 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
 
             <MenuSub className="menu-default w-48 py-2" baseClassName="dark">
               {MENU_ROOT.map((item, index) => (
-                <MenuItem key={index} className={item === selectedMenuItem ? 'active' : ''}>
+                <MenuItem
+                  key={index}
+                  className={item === selectedMenuItem ? 'active' : ''}
+                >
                   <MenuLink path={item.path}>
                     {item.icon && (
                       <MenuIcon>
@@ -108,7 +113,10 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
           >
             <KeenIcon icon="magnifier" />
           </button>
-          <ModalSearch open={searchModalOpen} onOpenChange={handleSearchModalClose} />
+          <ModalSearch
+            open={searchModalOpen}
+            onOpenChange={handleSearchModalClose}
+          />
         </div>
       </div>
     </div>

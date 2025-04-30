@@ -11,7 +11,7 @@ import { useLayout } from '@/providers';
 import { AxiosError } from 'axios';
 
 const initialValues = {
-  email: ''
+  email: '',
 };
 
 const forgotPasswordSchema = Yup.object().shape({
@@ -19,7 +19,7 @@ const forgotPasswordSchema = Yup.object().shape({
     .email('Wrong email format')
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
-    .required('Email is required')
+    .required('Email is required'),
 });
 
 const ResetPassword = () => {
@@ -49,7 +49,7 @@ const ResetPassword = () => {
             currentLayout?.name === 'auth-branded'
               ? '/auth/reset-password/check-email'
               : '/auth/classic/reset-password/check-email',
-          search: params.toString()
+          search: params.toString(),
         });
       } catch (error) {
         if (error instanceof AxiosError && error.response) {
@@ -61,7 +61,7 @@ const ResetPassword = () => {
         setLoading(false);
         setSubmitting(false);
       }
-    }
+    },
   });
   return (
     <div className="card max-w-[370px] w-full">
@@ -97,8 +97,8 @@ const ResetPassword = () => {
                 'form-control bg-transparent',
                 { 'is-invalid': formik.touched.email && formik.errors.email },
                 {
-                  'is-valid': formik.touched.email && !formik.errors.email
-                }
+                  'is-valid': formik.touched.email && !formik.errors.email,
+                },
               )}
             />
           </label>
@@ -119,7 +119,11 @@ const ResetPassword = () => {
           </button>
 
           <Link
-            to={currentLayout?.name === 'auth-branded' ? '/auth/login' : '/auth/classic/login'}
+            to={
+              currentLayout?.name === 'auth-branded'
+                ? '/auth/login'
+                : '/auth/classic/login'
+            }
             className="flex items-center justify-center text-sm gap-2 text-gray-700 hover:text-primary"
           >
             <KeenIcon icon="black-left" />

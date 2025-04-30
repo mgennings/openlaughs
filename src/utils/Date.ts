@@ -12,7 +12,7 @@ export const formatIsoDate = (isoDate: string) => {
     'Sep',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
   ];
   const day = date.getDate();
   const month = monthNames[date.getMonth()];

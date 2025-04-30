@@ -9,7 +9,7 @@ import {
   MenuSub,
   MenuTitle,
   MenuToggle,
-  KeenIcon
+  KeenIcon,
 } from '@/components';
 import { useResponsive } from '@/hooks';
 
@@ -43,20 +43,20 @@ const HeaderLogo = () => {
       title: 'MetronicTeam',
       icon: 'profile-circle',
       urlPartial: '/public-profile/',
-      path: '/public-profile/profiles/default'
+      path: '/public-profile/profiles/default',
     },
     {
       title: 'KeenTeam',
       icon: 'setting-2',
       urlPartial: '/account/',
-      path: '/'
-    }
+      path: '/',
+    },
   ];
 
   const months: IHeaderLogoMonths = [
     { title: 'UrbanNest' },
     { title: 'Celestial Finds' },
-    { title: 'BohoChic Bazaar ' }
+    { title: 'BohoChic Bazaar ' },
   ];
 
   return (
@@ -82,7 +82,9 @@ const HeaderLogo = () => {
             alt="logo"
           />
         </Link>
-        <h3 className="text-gray-900 text-lg font-medium hidden md:block">Metronic</h3>
+        <h3 className="text-gray-900 text-lg font-medium hidden md:block">
+          Metronic
+        </h3>
       </div>
 
       {desktopMode && (
@@ -99,10 +101,10 @@ const HeaderLogo = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="text-gray-900 text-sm font-medium">
@@ -140,10 +142,10 @@ const HeaderLogo = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: [0, 0] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: [0, 0], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-light btn-sm flex-nowrap">

@@ -4,8 +4,8 @@ export default plugin(({ addComponents, theme }) => {
   // Menu dropdown
   addComponents({
     '.menu-dropdown': {
-      'gap': '0.125rem',
-      'border': 'var(--tw-dropdown-border)',
+      gap: '0.125rem',
+      border: 'var(--tw-dropdown-border)',
       'box-shadow': 'var(--tw-dropdown-box-shadow)',
       'background-color': 'var(--tw-dropdown-background-color)',
       'border-radius': theme('custom.components.common.borderRadius.dropdown'),
@@ -20,7 +20,7 @@ export default plugin(({ addComponents, theme }) => {
       '.menu-link, .menu-label': {
         'margin-inline-start': theme('spacing')['2.5'],
         'margin-inline-end': theme('spacing')['2.5'],
-        'padding': theme('spacing')['2.5'],
+        padding: theme('spacing')['2.5'],
         'border-radius': theme('borderRadius.md'),
       },
       '.menu-title': {
@@ -30,7 +30,7 @@ export default plugin(({ addComponents, theme }) => {
       },
       '.menu-icon': {
         'margin-inline-end': theme('spacing')['2.5'],
-        'i': {
+        i: {
           'font-size': theme('fontSize.lg'),
         },
       },
@@ -39,7 +39,7 @@ export default plugin(({ addComponents, theme }) => {
       },
       '.menu-arrow': {
         'margin-inline-start': theme('spacing')['2'],
-        'i': {
+        i: {
           'font-size': theme('fontSize.2xs'),
         },
       },
@@ -55,15 +55,18 @@ export default plugin(({ addComponents, theme }) => {
         '.menu-item > .menu-link, .menu-item > .menu-label': {
           'margin-inline-start': theme('spacing')['5'],
         },
-        '.menu-item > .menu-accordion .menu-item > .menu-link, .menu-item > .menu-accordion .menu-item > .menu-label': {
-          'margin-inline-start': theme('spacing')['8'],
-        },
-        '.menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-link, .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-label': {
-          'margin-inline-start': theme('spacing')['11'],
-        },
-        '.menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-link, .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-label': {
-          'margin-inline-start': theme('spacing')['14'],
-        }
+        '.menu-item > .menu-accordion .menu-item > .menu-link, .menu-item > .menu-accordion .menu-item > .menu-label':
+          {
+            'margin-inline-start': theme('spacing')['8'],
+          },
+        '.menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-link, .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-label':
+          {
+            'margin-inline-start': theme('spacing')['11'],
+          },
+        '.menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-link, .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-accordion .menu-item > .menu-label':
+          {
+            'margin-inline-start': theme('spacing')['14'],
+          },
       },
     },
     '.menu-fit': {
@@ -89,29 +92,29 @@ export default plugin(({ addComponents, theme }) => {
     '.menu-default': {
       '.menu-item': {
         '.menu-title': {
-          'color': 'var(--tw-gray-800)',
+          color: 'var(--tw-gray-800)',
         },
         '.menu-icon i': {
-          'color': 'var(--tw-gray-500)',
+          color: 'var(--tw-gray-500)',
         },
         '.menu-arrow i': {
-          'color': 'var(--tw-gray-500)',
+          color: 'var(--tw-gray-500)',
         },
         '.menu-link:hover, .menu-label:hover': {
           '.menu-title': {
-            'color': 'var(--tw-gray-900)',
+            color: 'var(--tw-gray-900)',
           },
           '.menu-icon i': {
-            'color': 'var(--tw-primary)',
+            color: 'var(--tw-primary)',
           },
         },
         '&.active, &.show, &.here, &.focus': {
           '> .menu-link, > .menu-label': {
             '.menu-title': {
-              'color': 'var(--tw-gray-900)',
+              color: 'var(--tw-gray-900)',
             },
             '.menu-icon i': {
-              'color': 'var(--tw-primary)',
+              color: 'var(--tw-primary)',
             },
           },
         },
@@ -131,7 +134,7 @@ export default plugin(({ addComponents, theme }) => {
         },
         '&.disabled': {
           '> .menu-link, > .menu-label': {
-            'opacity': '0.5',
+            opacity: '0.5',
           },
         },
       },

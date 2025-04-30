@@ -6,7 +6,7 @@ import {
   MenuToggle,
   KeenIcon,
   MenuSub,
-  MenuIcon
+  MenuIcon,
 } from '@/components';
 import { useLanguage } from '@/i18n';
 
@@ -38,13 +38,13 @@ const SidebarMenuDashboard = () => {
       title: 'Admin API',
       path: '',
       icon: 'calendar',
-      active: true
+      active: true,
     },
     {
       title: 'Client API',
       path: '',
-      icon: 'setting'
-    }
+      icon: 'setting',
+    },
   ];
 
   const menuItems: IDashboardMenuItems = [
@@ -54,30 +54,30 @@ const SidebarMenuDashboard = () => {
         {
           title: 'API Setup',
           icon: 'setting',
-          path: ''
+          path: '',
         },
         {
           title: 'Team Settings',
           icon: 'users',
           path: '',
-          active: true
+          active: true,
         },
         {
           title: 'Authentication',
           icon: 'password-check',
-          path: ''
+          path: '',
         },
         {
           title: 'Endpoints Configs',
           icon: 'technology-4',
-          path: ''
+          path: '',
         },
         {
           title: 'Rate Limiting',
           icon: 'chart-line-star',
-          path: ''
-        }
-      ]
+          path: '',
+        },
+      ],
     },
     {
       title: 'Security',
@@ -85,24 +85,24 @@ const SidebarMenuDashboard = () => {
         {
           title: 'Data Encryption',
           icon: 'chart-line-star',
-          path: ''
+          path: '',
         },
         {
           title: 'Rate Limiting',
           icon: 'percentage',
-          path: ''
+          path: '',
         },
         {
           title: 'Access Control',
           icon: 'safe-home',
-          path: ''
+          path: '',
         },
         {
           title: 'Incident Response',
           icon: 'status',
-          path: ''
-        }
-      ]
+          path: '',
+        },
+      ],
     },
     {
       title: 'Analytics',
@@ -110,20 +110,20 @@ const SidebarMenuDashboard = () => {
         {
           title: 'Fetching Data',
           icon: 'calendar-8',
-          path: ''
+          path: '',
         },
         {
           title: 'Custom Reports',
           icon: 'office-bag',
-          path: ''
+          path: '',
         },
         {
           title: 'Real Time Analytics',
           icon: 'safe-home',
-          path: ''
-        }
-      ]
-    }
+          path: '',
+        },
+      ],
+    },
   ];
 
   return (
@@ -139,10 +139,10 @@ const SidebarMenuDashboard = () => {
               {
                 name: 'offset',
                 options: {
-                  offset: [0, 0] // [skid, distance]
-                }
-              }
-            ]
+                  offset: [0, 0], // [skid, distance]
+                },
+              },
+            ],
           }}
         >
           <MenuToggle className="w-full btn btn-light btn-sm justify-between flex-nowrap">
@@ -174,7 +174,9 @@ const SidebarMenuDashboard = () => {
         {menuItems.map((heading, index) => (
           <div key={index} className="flex flex-col gap-px">
             <MenuItem>
-              <div className="px-2 text-xs font-medium text-gray-600">{heading.title}</div>
+              <div className="px-2 text-xs font-medium text-gray-600">
+                {heading.title}
+              </div>
             </MenuItem>
 
             {heading.children.map((item, index) => (

@@ -8,7 +8,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from '@/components/ui/dialog';
 import {
   About,
@@ -16,7 +16,7 @@ import {
   Connections,
   Contributions,
   Projects,
-  WorkExperience
+  WorkExperience,
 } from '@/pages/public-profile/profiles/default';
 
 interface IModalProfileProps {
@@ -81,7 +81,10 @@ const ModalProfile = ({ open, onOpenChange }: IModalProfileProps) => {
 
                   <div className="flex flex-wrap justify-center gap-1 lg:gap-3 text-sm">
                     <div className="flex gap-1 items-center">
-                      <KeenIcon icon="abstract" className="text-gray-500 text-base" />
+                      <KeenIcon
+                        icon="abstract"
+                        className="text-gray-500 text-base"
+                      />
                       <a
                         href="https://keenthemes.com"
                         className="text-gray-600 hover:text-primary"
@@ -91,8 +94,14 @@ const ModalProfile = ({ open, onOpenChange }: IModalProfileProps) => {
                       </a>
                     </div>
                     <div className="flex gap-1 items-center">
-                      <KeenIcon icon="sms" className="text-gray-500 text-base" />
-                      <a href="mailto:jenny@kteam.com" className="text-gray-600 hover:text-primary">
+                      <KeenIcon
+                        icon="sms"
+                        className="text-gray-500 text-base"
+                      />
+                      <a
+                        href="mailto:jenny@kteam.com"
+                        className="text-gray-600 hover:text-primary"
+                      >
                         jenny@kteam.com
                       </a>
                     </div>

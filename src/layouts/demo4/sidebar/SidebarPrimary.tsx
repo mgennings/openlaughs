@@ -1,5 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
-import { KeenIcon, Menu, MenuItem, MenuToggle, DefaultTooltip, MenuIcon } from '@/components';
+import {
+  KeenIcon,
+  Menu,
+  MenuItem,
+  MenuToggle,
+  DefaultTooltip,
+  MenuIcon,
+} from '@/components';
 import { useEffect, useRef, useState } from 'react';
 import { getHeight, toAbsoluteUrl } from '@/utils';
 import { useViewport } from '@/hooks';
@@ -21,31 +28,56 @@ const menuItems: IMenuItem[] = [
     icon: 'profile-circle',
     tooltip: 'Profile',
     path: '/public-profile/profiles/default',
-    rootPath: '/public-profile/'
+    rootPath: '/public-profile/',
   },
   {
     icon: 'setting-2',
     tooltip: 'Account',
     path: '/account/home/get-started',
-    rootPath: '/account/'
+    rootPath: '/account/',
   },
-  { icon: 'users', tooltip: 'Network', path: '/network/get-started', rootPath: 'network/' },
+  {
+    icon: 'users',
+    tooltip: 'Network',
+    path: '/network/get-started',
+    rootPath: 'network/',
+  },
   {
     icon: 'security-user',
     tooltip: 'Authentication',
     path: '/authentication/get-started',
-    rootPath: '/authentication/'
+    rootPath: '/authentication/',
   },
-  { icon: 'code', tooltip: 'Plans', path: '/account/billing/plans', rootPath: '' },
+  {
+    icon: 'code',
+    tooltip: 'Plans',
+    path: '/account/billing/plans',
+    rootPath: '',
+  },
   {
     icon: 'shop',
     tooltip: 'Security Logs',
     path: '/account/security/security-log',
-    rootPath: '/account/'
+    rootPath: '/account/',
   },
-  { icon: 'cheque', tooltip: 'Notifications', path: '/account/notifications', rootPath: '' },
-  { icon: 'code', tooltip: 'ACL', path: '/account/members/roles', rootPath: '' },
-  { icon: 'question', tooltip: 'API Keys', path: '/account/api-keys', rootPath: '' }
+  {
+    icon: 'cheque',
+    tooltip: 'Notifications',
+    path: '/account/notifications',
+    rootPath: '',
+  },
+  {
+    icon: 'code',
+    tooltip: 'ACL',
+    path: '/account/members/roles',
+    rootPath: '',
+  },
+  {
+    icon: 'question',
+    tooltip: 'API Keys',
+    path: '/account/api-keys',
+    rootPath: '',
+  },
 ];
 
 const SidebarPrimary = () => {
@@ -61,7 +93,8 @@ const SidebarPrimary = () => {
     if (headerRef.current && footerRef.current) {
       const headerHeight = getHeight(headerRef.current);
       const footerHeight = getHeight(footerRef.current);
-      const availableHeight = viewportHeight - headerHeight - footerHeight - scrollableOffset;
+      const availableHeight =
+        viewportHeight - headerHeight - footerHeight - scrollableOffset;
       setScrollableHeight(availableHeight);
     } else {
       setScrollableHeight(viewportHeight);
@@ -72,8 +105,11 @@ const SidebarPrimary = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState(menuItems[0]);
 
   useEffect(() => {
-    menuItems.forEach((item) => {
-      if (item.rootPath === pathname || (item.rootPath && pathname.includes(item.rootPath))) {
+    menuItems.forEach(item => {
+      if (
+        item.rootPath === pathname ||
+        (item.rootPath && pathname.includes(item.rootPath))
+      ) {
         setSelectedMenuItem(item);
       }
     });
@@ -85,7 +121,10 @@ const SidebarPrimary = () => {
 
   return (
     <div className="flex flex-col items-stretch shrink-0 gap-5 py-5 w-[70px] border-e border-gray-300 dark:border-gray-200">
-      <div ref={headerRef} className="hidden lg:flex items-center justify-center shrink-0">
+      <div
+        ref={headerRef}
+        className="hidden lg:flex items-center justify-center shrink-0"
+      >
         <Link to="/">
           <img
             src={toAbsoluteUrl('/media/app/mini-logo-gray.svg')}
@@ -101,7 +140,7 @@ const SidebarPrimary = () => {
         <div
           className="scrollable-y-hover grow gap-2.5 shrink-0 flex ps-4 flex-col"
           style={{
-            height: `${scrollableHeight}px`
+            height: `${scrollableHeight}px`,
           }}
         >
           {menuItems.map((item, index) => (
@@ -120,7 +159,10 @@ const SidebarPrimary = () => {
           ))}
         </div>
       </div>
-      <div ref={footerRef} className="flex flex-col gap-5 items-center shrink-0">
+      <div
+        ref={footerRef}
+        className="flex flex-col gap-5 items-center shrink-0"
+      >
         <div className="flex flex-col gap-1.5">
           <Menu>
             <MenuItem
@@ -134,10 +176,10 @@ const SidebarPrimary = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: [10, 15] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: [10, 15], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-icon btn-icon-xl relative rounded-md size-9 border border-transparent hover:bg-light hover:text-primary hover:border-gray-200 dropdown-open:bg-gray-200 text-gray-600">
@@ -160,10 +202,10 @@ const SidebarPrimary = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: isRTL() ? [10, 15] : [-10, 15] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: isRTL() ? [10, 15] : [-10, 15], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-icon btn-icon-xl relative rounded-md size-9 border border-transparent hover:bg-light hover:text-primary hover:border-gray-200 dropdown-open:bg-gray-200 text-gray-600">
@@ -186,10 +228,10 @@ const SidebarPrimary = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: isRTL() ? [10, 15] : [-10, 15] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: isRTL() ? [10, 15] : [-10, 15], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-icon rounded-full">

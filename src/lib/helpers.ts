@@ -15,7 +15,7 @@ export const throttle = (func: (...args: any[]) => void, limit: number) => {
             lastRan = Date.now();
           }
         },
-        limit - (Date.now() - lastRan)
+        limit - (Date.now() - lastRan),
       );
     }
   };
@@ -23,9 +23,9 @@ export const throttle = (func: (...args: any[]) => void, limit: number) => {
 
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout | null = null;
+  let timeout: ReturnType<typeof setTimeout> | null = null;
 
   return function (...args: Parameters<T>): void {
     if (timeout) {
@@ -52,7 +52,7 @@ export function deepMerge(obj1: any, obj2: any): any {
   }
 
   return output;
-};
+}
 
 export function uniqueID(): string {
   return (Date.now() + Math.floor(Math.random() * 1000)).toString();

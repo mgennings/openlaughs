@@ -49,7 +49,7 @@ export function setupAxios(axios: any) {
 
       return config;
     },
-    async (err: any) => await Promise.reject(err)
+    async (err: any) => await Promise.reject(err),
   );
 }
 

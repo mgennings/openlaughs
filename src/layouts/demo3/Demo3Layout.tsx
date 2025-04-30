@@ -23,7 +23,7 @@ const Demo3Layout = () => {
 
   useEffect(() => {
     updateSettings({
-      container: 'fluid'
+      container: 'fluid',
     });
   }, []);
 

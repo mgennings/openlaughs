@@ -12,13 +12,13 @@ import {
   Summary,
   UpcomingEvents,
   Users,
-  Works
+  Works,
 } from './blocks';
 
 const ProfileCreatorContent = () => {
   const data: IStatisticsItems = [
     { title: 'Releases', value: '397' },
-    { title: 'Earnigns', value: '89k' }
+    { title: 'Earnigns', value: '89k' },
   ];
 
   const items: IUsersItems = [
@@ -29,7 +29,7 @@ const ProfileCreatorContent = () => {
     { image: '300-6.png' },
     { image: '300-11.png' },
     { image: '300-7.png' },
-    { image: '300-12.png' }
+    { image: '300-12.png' },
   ];
 
   return (
@@ -70,7 +70,7 @@ const ProfileCreatorContent = () => {
             more={{ title: 'Get Started', url: '/network/get-started' }}
             features={[
               ['Time-Saving', 'Easy Revamp'],
-              ['Budget-Friendly', 'Fresh Look']
+              ['Budget-Friendly', 'Fresh Look'],
             ]}
           />
 

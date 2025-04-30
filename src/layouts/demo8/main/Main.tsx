@@ -1,9 +1,21 @@
 import { Fragment, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Outlet, useLocation } from 'react-router';
-import { Menu, MenuItem, MenuToggle, useMenuCurrentItem } from '@/components/menu';
+import {
+  Menu,
+  MenuItem,
+  MenuToggle,
+  useMenuCurrentItem,
+} from '@/components/menu';
 import { useMenus } from '@/providers';
-import { Header, Sidebar, Footer, Toolbar, ToolbarHeading, ToolbarActions } from '..';
+import {
+  Header,
+  Sidebar,
+  Footer,
+  Toolbar,
+  ToolbarHeading,
+  ToolbarActions,
+} from '..';
 import { Link } from 'react-router-dom';
 import { KeenIcon } from '@/components';
 import { useResponsive } from '@/hooks';
@@ -49,7 +61,10 @@ const Main = () => {
                     >
                       <KeenIcon icon="magnifier" className="!text-base" />
                     </button>
-                    <ModalSearch open={searchModalOpen} onOpenChange={handleClose} />
+                    <ModalSearch
+                      open={searchModalOpen}
+                      onOpenChange={handleClose}
+                    />
 
                     <Menu className="me-1.5">
                       <MenuItem
@@ -62,16 +77,21 @@ const Main = () => {
                             {
                               name: 'offset',
                               options: {
-                                offset: [10, 10] // [skid, distance]
-                              }
-                            }
-                          ]
+                                offset: [10, 10], // [skid, distance]
+                              },
+                            },
+                          ],
                         }}
                       >
                         <MenuToggle className="dropdown-toggle btn btn-icon btn-icon-lg size-8 rounded-md hover:bg-gray-200 dropdown-open:bg-gray-200 hover:text-primary text-gray-600">
-                          <KeenIcon icon="notification-status" className="!text-base" />
+                          <KeenIcon
+                            icon="notification-status"
+                            className="!text-base"
+                          />
                         </MenuToggle>
-                        {DropdownNotifications({ menuTtemRef: itemNotificationsRef })}
+                        {DropdownNotifications({
+                          menuTtemRef: itemNotificationsRef,
+                        })}
                       </MenuItem>
                     </Menu>
 

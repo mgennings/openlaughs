@@ -13,7 +13,7 @@ const ModalHeader = forwardRef<HTMLDivElement, IModalHeaderProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 
 export { ModalHeader };

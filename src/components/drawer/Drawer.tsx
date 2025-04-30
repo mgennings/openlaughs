@@ -9,11 +9,11 @@ type TDrawerProps = MuiDrawerProps & {
 const StyledDrawer = styled(MuiDrawer)(() => ({
   '& .MuiDrawer-paper': {
     backgroundColor: 'var(--tw-drawer-background-color)',
-    boxShadow: 'var(--tw-drawer-box-shadow)'
+    boxShadow: 'var(--tw-drawer-box-shadow)',
   },
   '& .MuiModal-backdrop': {
-    backgroundColor: 'var(--tw-backdrop-background-color)'
-  }
+    backgroundColor: 'var(--tw-backdrop-background-color)',
+  },
 }));
 
 const Drawer = (props: TDrawerProps) => {

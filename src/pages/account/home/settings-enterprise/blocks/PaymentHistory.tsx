@@ -16,31 +16,35 @@ const PaymentHistory = () => {
     {
       date: '24 Aug, 2024',
       type: 'Subscription Fee',
-      amount: '$24.00'
+      amount: '$24.00',
     },
     {
       date: '15 Sep, 2024',
       type: 'Product Purchase',
-      amount: '$50.99'
+      amount: '$50.99',
     },
     {
       date: '05 Dec, 2024',
       type: 'Transaction Fee',
-      amount: '$2.50'
+      amount: '$2.50',
     },
     {
       date: '30 May, 2025',
       type: 'Annual Maintenance',
-      amount: '$40.20'
-    }
+      amount: '$40.20',
+    },
   ];
 
   const renderItem = (table: IPaymentHistoryItem, index: number) => {
     return (
       <tr key={index}>
         <td className="text-sm font-normal text-gray-800">{table.date}</td>
-        <td className="text-sm font-normal text-gray-800 lg:text-end">{table.type}</td>
-        <td className="text-sm font-normal text-gray-800 lg:text-end">{table.amount}</td>
+        <td className="text-sm font-normal text-gray-800 lg:text-end">
+          {table.type}
+        </td>
+        <td className="text-sm font-normal text-gray-800 lg:text-end">
+          {table.amount}
+        </td>
         <td>
           <Menu className="items-stretch">
             <MenuItem
@@ -52,10 +56,10 @@ const PaymentHistory = () => {
                   {
                     name: 'offset',
                     options: {
-                      offset: [0, 10] // [skid, distance]
-                    }
-                  }
-                ]
+                      offset: [0, 10], // [skid, distance]
+                    },
+                  },
+                ],
               }}
             >
               <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">
@@ -84,10 +88,10 @@ const PaymentHistory = () => {
                 {
                   name: 'offset',
                   options: {
-                    offset: [0, 10] // [skid, distance]
-                  }
-                }
-              ]
+                    offset: [0, 10], // [skid, distance]
+                  },
+                },
+              ],
             }}
           >
             <MenuToggle className="btn btn-sm btn-icon btn-light btn-clear">

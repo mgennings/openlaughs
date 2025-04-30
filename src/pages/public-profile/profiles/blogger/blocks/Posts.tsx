@@ -16,32 +16,32 @@ const Posts = () => {
       image: '14.jpg',
       label: 'Software',
       description: 'Maximizing Efficiency with Modern Software',
-      time: '4 hours ago'
+      time: '4 hours ago',
     },
     {
       image: '15.jpg',
       label: 'Work-Life',
       description: 'Balancing Work and Life: Strategies for Success',
-      time: '2 days ago'
+      time: '2 days ago',
     },
     {
       image: '16.jpg',
       label: 'Technology',
       description: 'Exploring the Latest Technological',
-      time: 'A week ago'
+      time: 'A week ago',
     },
     {
       image: '11.jpg',
       label: '',
       description: '',
-      time: ''
+      time: '',
     },
     {
       image: '12.jpg',
       label: '',
       description: '',
-      time: ''
-    }
+      time: '',
+    },
   ];
 
   const renderItems = (item: IPostsItem, index: number) => {

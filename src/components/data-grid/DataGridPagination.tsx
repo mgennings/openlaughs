@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -33,8 +33,12 @@ const DataGridPagination = () => {
   const paginationMoreLimit = props.pagination?.moreLimit || 5;
 
   // Determine the start and end of the pagination group
-  const currentGroupStart = Math.floor(pageIndex / paginationMoreLimit) * paginationMoreLimit;
-  const currentGroupEnd = Math.min(currentGroupStart + paginationMoreLimit, pageCount);
+  const currentGroupStart =
+    Math.floor(pageIndex / paginationMoreLimit) * paginationMoreLimit;
+  const currentGroupEnd = Math.min(
+    currentGroupStart + paginationMoreLimit,
+    pageCount,
+  );
 
   // Render page buttons based on the current group
   const renderPageButtons = () => {
@@ -45,12 +49,12 @@ const DataGridPagination = () => {
           key={i}
           variant="ghost"
           className={cn(btnBaseClasses, 'text-muted-foreground', {
-            'bg-accent text-accent-foreground': pageIndex === i
+            'bg-accent text-accent-foreground': pageIndex === i,
           })}
           onClick={() => table.setPageIndex(i)}
         >
           {i + 1}
-        </Button>
+        </Button>,
       );
     }
     return buttons;
@@ -97,7 +101,7 @@ const DataGridPagination = () => {
         <div className="text-sm text-muted-foreground">Rows per page</div>
         <Select
           value={`${table.getState().pagination.pageSize}`}
-          onValueChange={(value) => {
+          onValueChange={value => {
             table.setPageSize(Number(value));
           }}
         >
@@ -105,7 +109,7 @@ const DataGridPagination = () => {
             <SelectValue placeholder={table.getState().pagination.pageSize} />
           </SelectTrigger>
           <SelectContent side="top">
-            {props.pagination?.sizes?.map((pageSize) => (
+            {props.pagination?.sizes?.map(pageSize => (
               <SelectItem key={pageSize} value={`${pageSize}`}>
                 {pageSize}
               </SelectItem>

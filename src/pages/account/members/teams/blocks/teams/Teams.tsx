@@ -1,8 +1,15 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Column, ColumnDef, RowSelectionState } from '@tanstack/react-table';
-import { DataGrid, DataGridColumnHeader, DataGridColumnVisibility, DataGridRowSelect, DataGridRowSelectAll, KeenIcon, useDataGrid } from '@/components';
+import {
+  DataGrid,
+  DataGridColumnHeader,
+  DataGridColumnVisibility,
+  DataGridRowSelect,
+  DataGridRowSelectAll,
+  KeenIcon,
+  useDataGrid,
+} from '@/components';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { CommonAvatars, CommonRating } from '@/partials/common';
@@ -14,12 +21,14 @@ interface IColumnFilterProps<TData, TValue> {
 
 const Teams = () => {
   const storageFilterId = 'teams-filter';
-  const ColumnInputFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
+  const ColumnInputFilter = <TData, TValue>({
+    column,
+  }: IColumnFilterProps<TData, TValue>) => {
     return (
       <Input
         placeholder="Filter..."
         value={(column.getFilterValue() as string) ?? ''}
-        onChange={(event) => column.setFilterValue(event.target.value)}
+        onChange={event => column.setFilterValue(event.target.value)}
         className="h-9 w-full max-w-40"
       />
     );
@@ -34,22 +43,32 @@ const Teams = () => {
         enableSorting: false,
         enableHiding: false,
         meta: {
-          headerClassName: 'w-0'
-        }
+          headerClassName: 'w-0',
+        },
       },
       {
-        accessorFn: (row) => row.team.name,
+        accessorFn: row => row.team.name,
         id: 'team',
-        header: ({ column }) => <DataGridColumnHeader title='Team' filter={<ColumnInputFilter column={column} />} column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader
+            title="Team"
+            filter={<ColumnInputFilter column={column} />}
+            column={column}
+          />
+        ),
         enableSorting: true,
         filterFn: (row, columnId, filterValue) => {
           const team = row.original.team; // Access the original row data
-          const nameMatch = team.name?.toLowerCase().includes(filterValue.toLowerCase());
-          const descriptionMatch = team.description?.toLowerCase().includes(filterValue.toLowerCase());
-          
+          const nameMatch = team.name
+            ?.toLowerCase()
+            .includes(filterValue.toLowerCase());
+          const descriptionMatch = team.description
+            ?.toLowerCase()
+            .includes(filterValue.toLowerCase());
+
           return nameMatch || descriptionMatch;
         },
-        cell: (info) => {
+        cell: info => {
           return (
             <div className="flex flex-col gap-2">
               <Link
@@ -66,15 +85,17 @@ const Teams = () => {
         },
         meta: {
           headerClassName: 'min-w-[350px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.rating.value,
+        accessorFn: row => row.rating.value,
         id: 'rating',
-        header: ({ column }) => <DataGridColumnHeader title='Rating' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Rating" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => (
+        cell: info => (
           <CommonRating
             rating={info.row.original.rating.value}
             round={info.row.original.rating.round}
@@ -82,27 +103,31 @@ const Teams = () => {
         ),
         meta: {
           headerClassName: 'w-[200px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.lastModified,
+        accessorFn: row => row.lastModified,
         id: 'lastModified',
         enableSorting: true,
-        header: ({ column }) => <DataGridColumnHeader title='Last Modified' column={column} />,
-        cell: (info) => info.getValue(),
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Last Modified" column={column} />
+        ),
+        cell: info => info.getValue(),
         meta: {
           headerTitle: 'Last Modified',
           headerClassName: 'w-[200px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
-        accessorFn: (row) => row.members,
+        accessorFn: row => row.members,
         id: 'members',
-        header: ({ column }) => <DataGridColumnHeader title='Members' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader title="Members" column={column} />
+        ),
         enableSorting: true,
-        cell: (info) => (
+        cell: info => (
           <CommonAvatars
             size="size-[30px]"
             group={info.row.original.members.group}
@@ -111,16 +136,16 @@ const Teams = () => {
         ),
         meta: {
           headerClassName: 'w-[200px]',
-          cellClassName: 'text-gray-700 font-normal'
-        }
+          cellClassName: 'text-gray-700 font-normal',
+        },
       },
       {
         id: 'edit',
         header: () => '',
         enableSorting: false,
         cell: ({ row }) => (
-          <button 
-            className="btn btn-sm btn-icon btn-clear btn-light" 
+          <button
+            className="btn btn-sm btn-icon btn-clear btn-light"
             onClick={() => alert(`Clicked on edit for ${row.original.team}`)}
           >
             <KeenIcon icon="notepad-edit" />
@@ -135,8 +160,8 @@ const Teams = () => {
         header: () => '',
         enableSorting: false,
         cell: ({ row }) => (
-          <button 
-            className="btn btn-sm btn-icon btn-clear btn-light" 
+          <button
+            className="btn btn-sm btn-icon btn-clear btn-light"
             onClick={() => alert(`Clicked on delete for ${row.original.team}`)}
           >
             <KeenIcon icon="trash" />
@@ -147,7 +172,7 @@ const Teams = () => {
         },
       },
     ],
-    []
+    [],
   );
 
   // Memoize the team data
@@ -168,9 +193,9 @@ const Teams = () => {
     if (!searchTerm) return data; // If no search term, return full data
 
     return data.filter(
-      (team) =>
+      team =>
         team.team.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        team.team.description.toLowerCase().includes(searchTerm.toLowerCase())
+        team.team.description.toLowerCase().includes(searchTerm.toLowerCase()),
     );
   }, [searchTerm, data]);
 
@@ -182,8 +207,8 @@ const Teams = () => {
         description: `Selected row IDs: ${selectedRowIds}`,
         action: {
           label: 'Undo',
-          onClick: () => console.log('Undo')
-        }
+          onClick: () => console.log('Undo'),
+        },
       });
     }
   };
@@ -206,14 +231,24 @@ const Teams = () => {
                 type="text"
                 placeholder="Search Teams"
                 className="input input-sm ps-8"
-                value={(table.getColumn('team')?.getFilterValue() as string) ?? ''}
-                onChange={(event) => table.getColumn('team')?.setFilterValue(event.target.value)}
+                value={
+                  (table.getColumn('team')?.getFilterValue() as string) ?? ''
+                }
+                onChange={event =>
+                  table.getColumn('team')?.setFilterValue(event.target.value)
+                }
               />
             </div>
           </div>
-          <DataGridColumnVisibility table={table}/>
+          <DataGridColumnVisibility table={table} />
           <label className="switch switch-sm">
-            <input name="check" type="checkbox" value="1" className="order-2" readOnly />
+            <input
+              name="check"
+              type="checkbox"
+              value="1"
+              className="order-2"
+              readOnly
+            />
             <span className="switch-label order-1">Only Active Groups</span>
           </label>
         </div>
@@ -222,13 +257,13 @@ const Teams = () => {
   };
 
   return (
-    <DataGrid 
-      columns={columns} 
-      data={filteredData} 
-      rowSelection={true} 
+    <DataGrid
+      columns={columns}
+      data={filteredData}
+      rowSelection={true}
       onRowSelectionChange={handleRowSelection}
       pagination={{ size: 10 }}
-      sorting={[{ id: 'team', desc: false }]} 
+      sorting={[{ id: 'team', desc: false }]}
       toolbar={<Toolbar />}
       layout={{ card: true }}
     />

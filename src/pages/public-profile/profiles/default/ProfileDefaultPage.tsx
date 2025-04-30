@@ -26,7 +26,7 @@ const ProfileDefaultPage = () => {
         info={[
           { label: 'KeenThemes', icon: 'abstract-41' },
           { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
+          { email: 'jenny@kteam.com', icon: 'sms' },
         ]}
       />
 

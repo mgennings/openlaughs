@@ -8,7 +8,13 @@ import { CommonHexagonBadge } from '../common';
 import { IAddNewProps } from './CardAddNewRow';
 import { useSettings } from '@/providers';
 
-const CardAddNew = ({ path, size, iconSize, title, subTitle }: IAddNewProps) => {
+const CardAddNew = ({
+  path,
+  size,
+  iconSize,
+  title,
+  subTitle,
+}: IAddNewProps) => {
   const { getThemeMode } = useSettings();
 
   return (
@@ -20,7 +26,7 @@ const CardAddNew = ({ path, size, iconSize, title, subTitle }: IAddNewProps) => 
           backgroundImage:
             getThemeMode() === 'dark'
               ? `url('${toAbsoluteUrl('/media/images/2600x1200/bg-4-dark.png')}')`
-              : `url('${toAbsoluteUrl('/media/images/2600x1200/bg-4.png')}')`
+              : `url('${toAbsoluteUrl('/media/images/2600x1200/bg-4.png')}')`,
         }}
       >
         <div className="card-body grid items-center">
@@ -28,7 +34,12 @@ const CardAddNew = ({ path, size, iconSize, title, subTitle }: IAddNewProps) => 
             <div className="flex justify-center pt-5">
               <CommonHexagonBadge
                 size={size}
-                badge={<KeenIcon icon="rocket" className={`${iconSize} text-brand`} />}
+                badge={
+                  <KeenIcon
+                    icon="rocket"
+                    className={`${iconSize} text-brand`}
+                  />
+                }
                 stroke="stroke-brand-clarity"
                 fill="fill-light"
               />

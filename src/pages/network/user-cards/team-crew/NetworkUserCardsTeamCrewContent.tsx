@@ -7,7 +7,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
 interface ITeamCrewAvatar {
@@ -64,32 +64,36 @@ const NetworkUserCardsTeamCrewContent = () => {
         image: '300-1.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       email: 'kevin@pinnacle.com',
       team: {
         size: 'size-7',
-        group: [{ filename: '300-4.png' }, { filename: '300-1.png' }, { filename: '300-2.png' }],
+        group: [
+          { filename: '300-4.png' },
+          { filename: '300-1.png' },
+          { filename: '300-2.png' },
+        ],
         more: {
           number: 10,
-          variant: 'text-success-inverse ring-success-light bg-success'
-        }
+          variant: 'text-success-inverse ring-success-light bg-success',
+        },
       },
       statistics: [
         {
           total: '92',
-          description: 'Purchases'
+          description: 'Purchases',
         },
         {
           total: '$69',
-          description: 'Avg. Price'
+          description: 'Avg. Price',
         },
         {
           total: '$6,240',
-          description: 'Total spent'
-        }
+          description: 'Total spent',
+        },
       ],
-      connected: true
+      connected: true,
     },
     {
       name: 'Sarah Johnson',
@@ -99,7 +103,7 @@ const NetworkUserCardsTeamCrewContent = () => {
           'flex items-center justify-center relative text-2.5xl text-info size-20 ring-1 ring-info-clarity bg-info-light rounded-full',
         fallback: 'S',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       email: 'sarahj@innx.com',
       team: {
@@ -108,24 +112,24 @@ const NetworkUserCardsTeamCrewContent = () => {
           { filename: '300-5.png' },
           { filename: '300-6.png' },
           { filename: '300-7.png' },
-          { filename: '300-11.png' }
-        ]
+          { filename: '300-11.png' },
+        ],
       },
       statistics: [
         {
           total: '123',
-          description: 'Purchases'
+          description: 'Purchases',
         },
         {
           total: '$30',
-          description: 'Avg. Price'
+          description: 'Avg. Price',
         },
         {
           total: '$3,713',
-          description: 'Total spent'
-        }
+          description: 'Total spent',
+        },
       ],
-      connected: false
+      connected: false,
     },
     {
       name: 'Kevin Wang',
@@ -135,7 +139,7 @@ const NetworkUserCardsTeamCrewContent = () => {
           'flex items-center justify-center relative text-2.5xl text-danger size-20 ring-1 ring-danger-clarity bg-danger-light rounded-full',
         fallback: 'K',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       email: 'kevin@pinnacle.com',
       team: {
@@ -144,24 +148,24 @@ const NetworkUserCardsTeamCrewContent = () => {
           { filename: '300-29.png' },
           { filename: '300-33.png' },
           { filename: '300-23.png' },
-          { filename: '300-31.png' }
-        ]
+          { filename: '300-31.png' },
+        ],
       },
       statistics: [
         {
           total: '30',
-          description: 'Purchases'
+          description: 'Purchases',
         },
         {
           total: '$150',
-          description: 'Avg. Price'
+          description: 'Avg. Price',
         },
         {
           total: '$4,500',
-          description: 'Total spent'
-        }
+          description: 'Total spent',
+        },
       ],
-      connected: true
+      connected: true,
     },
     {
       name: 'Brian Davis',
@@ -171,7 +175,7 @@ const NetworkUserCardsTeamCrewContent = () => {
         image: '300-9.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       email: 'brian@vortextech.com',
       team: {
@@ -180,24 +184,24 @@ const NetworkUserCardsTeamCrewContent = () => {
           { filename: '300-14.png' },
           { filename: '300-3.png' },
           { filename: '300-19.png' },
-          { filename: '300-15.png' }
-        ]
+          { filename: '300-15.png' },
+        ],
       },
       statistics: [
         {
           total: '87',
-          description: 'Purchases'
+          description: 'Purchases',
         },
         {
           total: '$22',
-          description: 'Avg. Price'
+          description: 'Avg. Price',
         },
         {
           total: '$1958',
-          description: 'Total spent'
-        }
+          description: 'Total spent',
+        },
       ],
-      connected: true
+      connected: true,
     },
     {
       name: 'Megan Taylor',
@@ -207,7 +211,7 @@ const NetworkUserCardsTeamCrewContent = () => {
           'flex items-center justify-center relative text-2.5xl text-success size-20 ring-1 ring-success-clarity bg-success-light rounded-full',
         fallback: 'M',
         badgeClass:
-          'flex size-2.5 bg-gray-400 rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-gray-400 rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       email: 'megan@catalyst.com',
       team: {
@@ -216,24 +220,24 @@ const NetworkUserCardsTeamCrewContent = () => {
           { filename: '300-5.png' },
           { filename: '300-26.png' },
           { filename: '300-6.png' },
-          { filename: '300-1.png' }
-        ]
+          { filename: '300-1.png' },
+        ],
       },
       statistics: [
         {
           total: '45',
-          description: 'Purchases'
+          description: 'Purchases',
         },
         {
           total: '$300',
-          description: 'Avg. Price'
+          description: 'Avg. Price',
         },
         {
           total: '$13,500',
-          description: 'Total spent'
-        }
+          description: 'Total spent',
+        },
       ],
-      connected: false
+      connected: false,
     },
     {
       name: 'Alex Martinez',
@@ -243,33 +247,37 @@ const NetworkUserCardsTeamCrewContent = () => {
         image: '300-8.png',
         imageClass: 'rounded-full',
         badgeClass:
-          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2'
+          'flex size-2.5 bg-success rounded-full absolute bottom-0.5 start-16 transform -translate-y-1/2',
       },
       email: 'alex@kteam.com',
       team: {
         size: 'size-7',
-        group: [{ filename: '300-4.png' }, { filename: '300-5.png' }, { filename: '300-11.png' }],
+        group: [
+          { filename: '300-4.png' },
+          { filename: '300-5.png' },
+          { filename: '300-11.png' },
+        ],
         more: {
           number: 10,
-          variant: 'text-success-inverse ring-success-light bg-success'
-        }
+          variant: 'text-success-inverse ring-success-light bg-success',
+        },
       },
       statistics: [
         {
           total: '63',
-          description: 'Purchases'
+          description: 'Purchases',
         },
         {
           total: '$65',
-          description: 'Avg. Price'
+          description: 'Avg. Price',
         },
         {
           total: '$4,095',
-          description: 'Total spent'
-        }
+          description: 'Total spent',
+        },
       ],
-      connected: true
-    }
+      connected: true,
+    },
   ];
 
   const renderItem = (item: ITeamCrewContentItem, index: number) => (
@@ -301,7 +309,9 @@ const NetworkUserCardsTeamCrewContent = () => {
   return (
     <div className="flex flex-col items-stretch gap-5 lg:gap-7.5">
       <div className="flex flex-wrap items-center gap-5 justify-between">
-        <h3 className="text-md text-gray-900 font-medium">Showing {items.length} Users</h3>
+        <h3 className="text-md text-gray-900 font-medium">
+          Showing {items.length} Users
+        </h3>
 
         <div className="flex items-center flex-wrap gap-5">
           <div className="flex items-center gap-2.5">
@@ -339,7 +349,7 @@ const NetworkUserCardsTeamCrewContent = () => {
                 type="text"
                 placeholder="Type name, team"
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={e => setSearchInput(e.target.value)}
               />
             </label>
           </div>
@@ -374,7 +384,10 @@ const NetworkUserCardsTeamCrewContent = () => {
           </div>
 
           <div className="flex justify-center">
-            <Link to="/public-profile/projects/3-columns" className="btn btn-link">
+            <Link
+              to="/public-profile/projects/3-columns"
+              className="btn btn-link"
+            >
               Show more projects
             </Link>
           </div>
@@ -398,4 +411,8 @@ const NetworkUserCardsTeamCrewContent = () => {
   );
 };
 
-export { NetworkUserCardsTeamCrewContent, type ITeamCrewContentItem, type ITeamCrewContentItems };
+export {
+  NetworkUserCardsTeamCrewContent,
+  type ITeamCrewContentItem,
+  type ITeamCrewContentItems,
+};

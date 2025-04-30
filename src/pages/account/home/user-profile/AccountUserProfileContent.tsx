@@ -6,7 +6,7 @@ import {
   Connections,
   PersonalInfo,
   StartNow,
-  Work
+  Work,
 } from './blocks';
 
 const AccountUserProfileContent = () => {

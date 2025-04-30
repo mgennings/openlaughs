@@ -11,7 +11,10 @@ export interface IToolbarHeadingProps {
 const ToolbarHeading = ({ title = '', description }: IToolbarHeadingProps) => {
   const { getMenuConfig } = useMenus();
   const { pathname } = useLocation();
-  const currentMenuItem = useMenuCurrentItem(pathname, getMenuConfig('primary'));
+  const currentMenuItem = useMenuCurrentItem(
+    pathname,
+    getMenuConfig('primary'),
+  );
 
   return (
     <div className="flex flex-col justify-center gap-2">

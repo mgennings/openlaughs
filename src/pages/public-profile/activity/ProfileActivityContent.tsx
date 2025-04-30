@@ -14,7 +14,7 @@ import {
   ActivitiesProductWebinar,
   ActivitiesProjectStatus,
   ActivitiesUpcomingContent,
-  ActivitiesVirtualTeam
+  ActivitiesVirtualTeam,
 } from '@/partials/activities/items';
 
 const ProfileActivityContent = () => {
@@ -33,7 +33,13 @@ const ProfileActivityContent = () => {
             <h3 className="card-title">Activity</h3>
             <div className="flex items-center gap-2">
               <label className="switch">
-                <input className="order-2" type="checkbox" value="1" name="check" defaultChecked />
+                <input
+                  className="order-2"
+                  type="checkbox"
+                  value="1"
+                  name="check"
+                  defaultChecked
+                />
                 <span className="switch-label">
                   Auto refresh:&nbsp;
                   <span className="switch-on:hidden">Off</span>
@@ -43,9 +49,13 @@ const ProfileActivityContent = () => {
             </div>
           </div>
           <div className="card-body">
-            {(year === 2024 || year === 2023 || year === 2022) && <ActivitiesNewArticle />}
+            {(year === 2024 || year === 2023 || year === 2022) && (
+              <ActivitiesNewArticle />
+            )}
             {(year === 2024 || year === 2022) && <ActivitiesInterview />}
-            {(year === 2024 || year === 2021) && <ActivitiesPhotographyWorkshop />}
+            {(year === 2024 || year === 2021) && (
+              <ActivitiesPhotographyWorkshop />
+            )}
             <ActivitiesUpcomingContent />
             {(year === 2024 || year === 2019) && <ActivitiesProductWebinar />}
             <ActivitiesFollowersMilestone />

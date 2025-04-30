@@ -12,7 +12,9 @@ const Authentification = () => {
           <tbody>
             <tr>
               <td className="text-gray-600 font-normal">Password</td>
-              <td className="text-gray-700 font-normal">Password last changed 2 months ago</td>
+              <td className="text-gray-700 font-normal">
+                Password last changed 2 months ago
+              </td>
               <td className="text-end">
                 <a href="#" className="btn btn-sm btn-icon btn-icon-lg link">
                   <KeenIcon icon="notepad-edit" />

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react';
 import { useResponsive, useViewport } from '@/hooks';
 import { useDemo10Layout } from '..';
@@ -10,7 +9,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '@/components/ui/sheet';
 
 const Sidebar = () => {
@@ -41,7 +40,8 @@ const Sidebar = () => {
     if (headerRef.current && footerRef.current) {
       const headerHeight = getHeight(headerRef.current);
       const footerHeight = getHeight(footerRef.current);
-      const availableHeight = viewportHeight - headerHeight - footerHeight - scrollableOffset;
+      const availableHeight =
+        viewportHeight - headerHeight - footerHeight - scrollableOffset;
       setScrollableHeight(availableHeight);
     } else {
       setScrollableHeight(viewportHeight);

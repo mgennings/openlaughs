@@ -8,68 +8,68 @@ const AccountGetStartedContent = () => {
       icon: 'badge',
       title: 'Personal info',
       desc: "We're open to partnerships, guest posts, promo bannersand more.",
-      path: '/account/members/team-info'
+      path: '/account/members/team-info',
     },
     {
       icon: 'security-user',
       title: 'Login & Security',
       desc: 'Safeguarding your information with strong authentication measures.',
-      path: '/account/security/security-log'
+      path: '/account/security/security-log',
     },
     {
       icon: 'cheque',
       title: 'Billing & Payments',
       desc: 'Simplify payments today with secure, user-friendly transaction processes.',
-      path: 'account/billing/basic'
+      path: 'account/billing/basic',
     },
     {
       icon: 'notification-on',
       title: 'Notifications',
       desc: 'Keep updated with important notices and event reminders.',
-      path: '/account/notifications'
+      path: '/account/notifications',
     },
     {
       icon: 'dropbox',
       title: 'Integrations',
       desc: 'Enhance Workflows with Advanced Integrations.',
-      path: '/account/integrations'
+      path: '/account/integrations',
     },
     {
       icon: 'user',
       title: 'Members, Teams & Roles',
       desc: 'Efficient management of members, teams, and roles.',
-      path: '/account/members/roles'
+      path: '/account/members/roles',
     },
     {
       icon: 'key-square',
       title: 'API Keys',
       desc: 'Secure and manage Your API Keys effectively and efficiently.',
-      path: '/account/api-keys'
+      path: '/account/api-keys',
     },
     {
       icon: 'mouse-square',
       title: 'Appearance',
       desc: 'Transforming your online presence with flawless appearance.',
-      path: '/account/appearance'
+      path: '/account/appearance',
     },
     {
       icon: 'desktop-mobile',
       title: 'Devices',
       desc: 'Stay ahead with the latest devices and innovations news',
-      path: '#'
+      path: '#',
     },
     {
       icon: 'color-swatch',
       title: 'Brand',
       desc: 'Trending brand designs, identities, and logos.',
-      path: '/account/invite-a-friend'
+      path: '/account/invite-a-friend',
     },
     {
       icon: 'chart-line-star',
       title: 'Activity',
       desc: 'Central Hub for Personal Customization.',
-      path: '/account/activity'
-    }
+      path: '/account/activity',
+    },
   ];
 
   return (

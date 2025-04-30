@@ -16,7 +16,7 @@ const AccordionItemComponent = ({
   indicator,
   children,
   isOpen,
-  onClick
+  onClick,
 }: IAccordionItemProps) => {
   const buildIndicator = () => {
     return (
@@ -36,10 +36,14 @@ const AccordionItemComponent = ({
     <div
       className={clsx(
         'accordion-item [&:not(:last-child)]:border-b border-b-gray-200',
-        isOpen && 'active'
+        isOpen && 'active',
       )}
     >
-      <button type="button" className="accordion-toggle py-4 cursor-pointer" onClick={onClick}>
+      <button
+        type="button"
+        className="accordion-toggle py-4 cursor-pointer"
+        onClick={onClick}
+      >
         <span className="text-base text-gray-900">{title}</span>
         {buildIndicator()}
       </button>

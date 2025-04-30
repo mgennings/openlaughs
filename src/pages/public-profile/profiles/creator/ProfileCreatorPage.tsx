@@ -13,7 +13,10 @@ import { ProfileCreatorContent } from '.';
 const ProfileCreatorPage = () => {
   const image = (
     <div className="flex items-center justify-center rounded-full border-2 border-danger-clarity bg-light size-[100px] shrink-0">
-      <img src={toAbsoluteUrl('/media/brand-logos/inferno.svg')} className="size-11" />
+      <img
+        src={toAbsoluteUrl('/media/brand-logos/inferno.svg')}
+        className="size-11"
+      />
     </div>
   );
 
@@ -25,7 +28,7 @@ const ProfileCreatorPage = () => {
         info={[
           { label: 'inferno.com', icon: 'abstract-39' },
           { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
+          { email: 'jenny@kteam.com', icon: 'sms' },
         ]}
       />
 

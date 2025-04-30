@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useResponsive, useScrollPosition, useViewport } from '@/hooks';
@@ -10,7 +9,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '@/components/ui/sheet';
 
 const Sidebar = () => {
@@ -47,16 +46,21 @@ const Sidebar = () => {
         <div
           className={clsx(
             'w-[--tw-sidebar-width] z-5 lg:top-[80px] top-0 bottom-0 lg:end-auto lg:start-auto shrink-0 py-3 lg:py-0 bg-light dark:bg-coal-100 lg:dark:bg-transparent',
-            sidebarSticky && 'fixed'
+            sidebarSticky && 'fixed',
           )}
         >
           <div
             className="scrollable-y-auto"
             style={{
-              ...(desktopMode && scrollableHeight > 0 && { height: `${scrollableHeight}px` })
+              ...(desktopMode &&
+                scrollableHeight > 0 && { height: `${scrollableHeight}px` }),
             }}
           >
-            {pathname === '/' ? <SidebarMenuDashboard /> : <SidebarMenuDefault />}
+            {pathname === '/' ? (
+              <SidebarMenuDashboard />
+            ) : (
+              <SidebarMenuDefault />
+            )}
           </div>
         </div>
       </div>

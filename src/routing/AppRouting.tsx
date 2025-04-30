@@ -36,7 +36,6 @@ const AppRouting = (): ReactElement => {
           }
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {

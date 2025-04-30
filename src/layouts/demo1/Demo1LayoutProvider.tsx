@@ -1,5 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { createContext, type PropsWithChildren, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useLocation } from 'react-router';
 import { useMenuChildren } from '@/components/menu';
 import { MENU_SIDEBAR } from '@/config/menu.config';
@@ -50,11 +56,12 @@ const initalLayoutProps: IDemo1LayoutProviderProps = {
   },
   setSidebarTheme: (mode: string) => {
     console.log(`${mode}`);
-  }
+  },
 };
 
 // Creating context for the layout provider with initial properties
-const Demo1LayoutContext = createContext<IDemo1LayoutProviderProps>(initalLayoutProps);
+const Demo1LayoutContext =
+  createContext<IDemo1LayoutProviderProps>(initalLayoutProps);
 
 // Custom hook to access the layout context
 const useDemo1Layout = () => useContext(Demo1LayoutContext);
@@ -100,9 +107,9 @@ const Demo1LayoutProvider = ({ children }: PropsWithChildren) => {
     const updatedLayout = {
       options: {
         sidebar: {
-          collapse
-        }
-      }
+          collapse,
+        },
+      },
     };
 
     updateLayout(demo1LayoutConfig.name, updatedLayout); // Updates the layout with the collapsed state
@@ -114,9 +121,9 @@ const Demo1LayoutProvider = ({ children }: PropsWithChildren) => {
     const updatedLayout = {
       options: {
         sidebar: {
-          theme: mode
-        }
-      }
+          theme: mode,
+        },
+      },
     };
 
     setLayout(deepMerge(layout, updatedLayout)); // Merges and sets the updated layout
@@ -137,7 +144,7 @@ const Demo1LayoutProvider = ({ children }: PropsWithChildren) => {
         setSidebarMouseLeave,
         setMobileMegaMenuOpen,
         setSidebarCollapse,
-        setSidebarTheme
+        setSidebarTheme,
       }}
     >
       {children}

@@ -17,7 +17,7 @@ const ToolbarMenu = () => {
     { title: 'September, 2024' },
     { title: 'October, 2024' },
     { title: 'November, 2024' },
-    { title: 'December, 2024' }
+    { title: 'December, 2024' },
   ];
 
   return (
@@ -31,10 +31,10 @@ const ToolbarMenu = () => {
             {
               name: 'offset',
               options: {
-                offset: [0, 0] // [skid, distance]
-              }
-            }
-          ]
+                offset: [0, 0], // [skid, distance]
+              },
+            },
+          ],
         }}
       >
         <MenuToggle className="btn btn-light btn-sm flex-nowrap">
@@ -50,7 +50,10 @@ const ToolbarMenu = () => {
 
         <MenuSub className="menu-default w-48 py-2 scrollable-y max-h-[250px]">
           {months.map((item, index) => (
-            <div className={`menu-item ${item.active ? 'active' : ''}`} key={index}>
+            <div
+              className={`menu-item ${item.active ? 'active' : ''}`}
+              key={index}
+            >
               <Link to="/" className="menu-link">
                 <span className="menu-title">{item.title}</span>
               </Link>

@@ -21,7 +21,7 @@ const QuickSettings = () => {
         <div className="switch switch-sm">
           <input type="checkbox" checked name="param" value="1" readOnly />
         </div>
-      )
+      ),
     },
     {
       icon: 'exit-right',
@@ -31,19 +31,24 @@ const QuickSettings = () => {
         <a href="#" className="btn btn-sm btn-light btn-outline">
           Logout everyone
         </a>
-      )
-    }
+      ),
+    },
   ];
 
   const renderItem = (item: IQuickSettingsItem, index: number) => {
     return (
-      <div key={index} className="card-group flex items-center justify-between py-4 gap-2.5">
+      <div
+        key={index}
+        className="card-group flex items-center justify-between py-4 gap-2.5"
+      >
         <div className="flex items-center gap-3.5">
           <CommonHexagonBadge
             stroke="stroke-gray-300"
             fill="fill-gray-100"
             size="size-[50px]"
-            badge={<KeenIcon icon={item.icon} className="text-1.5xl text-gray-500" />}
+            badge={
+              <KeenIcon icon={item.icon} className="text-1.5xl text-gray-500" />
+            }
           />
 
           <div className="flex flex-col gap-0.5">

@@ -8,7 +8,7 @@ import {
   MenuArrow,
   MenuIcon,
   MenuBadge,
-  MenuSeparator
+  MenuSeparator,
 } from '@/components/menu';
 import { useResponsive } from '@/hooks';
 import { useLanguage } from '@/i18n';
@@ -30,7 +30,7 @@ const MegaMenuSubDropdown = (items: TMenuConfig) => {
             toggle={desktopMode ? 'dropdown' : 'accordion'}
             trigger={desktopMode ? 'hover' : 'click'}
             dropdownProps={{
-              placement: isRTL() ? 'left-start' : 'right-start'
+              placement: isRTL() ? 'left-start' : 'right-start',
             }}
           >
             <MenuLink className="grow-0">
@@ -41,10 +41,16 @@ const MegaMenuSubDropdown = (items: TMenuConfig) => {
               )}
               <MenuTitle className={clsx('')}>{item.title}</MenuTitle>
               <MenuArrow>
-                <KeenIcon icon="right" className="text-3xs rtl:transform rtl:rotate-180" />
+                <KeenIcon
+                  icon="right"
+                  className="text-3xs rtl:transform rtl:rotate-180"
+                />
               </MenuArrow>
             </MenuLink>
-            <MenuSub className="menu-default" rootClassName="max-w-[175px] lg:max-w-[220px]">
+            <MenuSub
+              className="menu-default"
+              rootClassName="max-w-[175px] lg:max-w-[220px]"
+            >
               {buildItems(item.children)}
             </MenuSub>
           </MenuItem>
@@ -68,13 +74,21 @@ const MegaMenuSubDropdown = (items: TMenuConfig) => {
 
               {item.badge && (
                 <MenuBadge>
-                  <span className="badge badge-primary badge-outline badge-xs">{item.badge}</span>
+                  <span className="badge badge-primary badge-outline badge-xs">
+                    {item.badge}
+                  </span>
                 </MenuBadge>
               )}
 
               {item.tooltip && (
-                <DefaultTooltip title={item.tooltip.title} placement={item.tooltip.placement}>
-                  <KeenIcon icon="information-2" className="text-gray-500 text-md" />
+                <DefaultTooltip
+                  title={item.tooltip.title}
+                  placement={item.tooltip.placement}
+                >
+                  <KeenIcon
+                    icon="information-2"
+                    className="text-gray-500 text-md"
+                  />
                 </DefaultTooltip>
               )}
             </MenuLink>

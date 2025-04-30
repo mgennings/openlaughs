@@ -31,7 +31,7 @@ const AccountActivityContent = () => {
           }
           more={{
             title: 'Contact Support',
-            url: ''
+            url: '',
           }}
         />
 
@@ -54,7 +54,7 @@ const AccountActivityContent = () => {
           }
           more={{
             title: 'Go to Help Center',
-            url: ''
+            url: '',
           }}
         />
       </div>

@@ -5,7 +5,7 @@ import { Activity, Collaborate, Posts, Replies } from './blocks';
 const ProfileBloggerContent = () => {
   const data: IStatisticsItems = [
     { title: 'Topics', value: '397' },
-    { title: 'Upvotes', value: '8.2k' }
+    { title: 'Upvotes', value: '8.2k' },
   ];
 
   return (

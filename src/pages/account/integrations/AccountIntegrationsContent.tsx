@@ -31,13 +31,14 @@ const AccountIntegrationsContent = () => {
           <Fragment>
             Explore New Integration: Expand Your Toolkit with Cutting-Edge,
             <br />
-            User-Friendly Solutions Tailored for Efficient and Innovative Project Management.
+            User-Friendly Solutions Tailored for Efficient and Innovative
+            Project Management.
           </Fragment>
         }
         engage={{
           path: '/network/user-cards/mini-cards',
           label: 'Start Now',
-          btnColor: 'btn-primary'
+          btnColor: 'btn-primary',
         }}
       />
 

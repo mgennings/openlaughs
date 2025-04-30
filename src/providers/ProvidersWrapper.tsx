@@ -8,7 +8,7 @@ import {
   MenusProvider,
   SettingsProvider,
   SnackbarProvider,
-  TranslationProvider
+  TranslationProvider,
 } from '@/providers';
 import { HelmetProvider } from 'react-helmet-async';
 

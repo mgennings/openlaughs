@@ -4,11 +4,13 @@ import { IMenuItemConfig, type TMenuConfig } from '../types';
 
 const useMenuCurrentItem = (
   pathname: string,
-  items: TMenuConfig | null
+  items: TMenuConfig | null,
 ): IMenuItemConfig | null => {
   pathname = pathname.trim();
 
-  const findCurrentItem = (items: TMenuConfig | null): IMenuItemConfig | null => {
+  const findCurrentItem = (
+    items: TMenuConfig | null,
+  ): IMenuItemConfig | null => {
     if (!items) return null;
 
     for (let i = 0; i < items.length; i++) {
