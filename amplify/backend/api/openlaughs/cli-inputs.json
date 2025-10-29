@@ -10,9 +10,8 @@
     "additionalAuthTypes": [
       {
         "mode": "API_KEY",
-        "expirationTime": 7,
-        "apiKeyExpirationDate": "2025-05-07T21:37:34.541Z",
-        "keyDescription": ""
+        "expirationTime": 365,
+        "keyDescription": "Public API key for OpenLaughs"
       }
     ]
   }
