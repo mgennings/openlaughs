@@ -17,7 +17,9 @@ const LandingFooter = () => {
               </p>
             </div>
             <div className="text-gray-400 text-sm">
-              <p>© 2024 OpenLaughs. All rights reserved.</p>
+              <p>
+                © {new Date().getFullYear()} OpenLaughs. All rights reserved.
+              </p>
               <p className="mt-1">
                 Built with ❤️ for Austin's comedy community
               </p>
