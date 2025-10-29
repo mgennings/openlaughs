@@ -1,4 +1,5 @@
 import { KeenIcon, Menu, MenuItem, MenuToggle } from '@/components';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '@/i18n';
 import { DropdownCard1 } from '@/partials/dropdowns/general';
 
@@ -23,6 +24,97 @@ interface IHighlightsProps {
 
 const Highlights = ({ limit }: IHighlightsProps) => {
   const { isRTL } = useLanguage();
+  const [btcUsd, setBtcUsd] = useState<number | null>(null);
+  const [btcError, setBtcError] = useState<string | null>(null);
+  const CACHE_KEY = 'openlaughs-btc-usd-v1';
+  const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+  useEffect(() => {
+    const abort = new AbortController();
+
+    const fetchBtc = async () => {
+      try {
+        setBtcError(null);
+
+        // Cache-first
+        try {
+          const cachedRaw = localStorage.getItem(CACHE_KEY);
+          if (cachedRaw) {
+            const cached = JSON.parse(cachedRaw) as {
+              price: number;
+              ts: number;
+            };
+            if (
+              cached &&
+              typeof cached.price === 'number' &&
+              Date.now() - cached.ts < CACHE_TTL_MS
+            ) {
+              setBtcUsd(cached.price);
+              return;
+            }
+          }
+        } catch {
+          console.error('Error parsing BTC price from cache');
+        }
+        const res = await fetch(
+          'https://api.coinpaprika.com/v1/tickers?quotes=USD',
+          {
+            signal: abort.signal,
+            headers: { accept: 'application/json' },
+          },
+        );
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const btc = Array.isArray(data)
+          ? data.find(
+              (c: any) => c?.id === 'btc-bitcoin' || c?.symbol === 'BTC',
+            )
+          : undefined;
+        const price = btc?.quotes?.USD?.price;
+        if (typeof price === 'number') {
+          setBtcUsd(price);
+          // Save to cache
+          try {
+            localStorage.setItem(
+              CACHE_KEY,
+              JSON.stringify({ price, ts: Date.now() }),
+            );
+          } catch {
+            console.error('Error saving BTC price to cache');
+          }
+        } else {
+          throw new Error('BTC price not found');
+        }
+      } catch (err: any) {
+        if (abort.signal.aborted) return;
+        setBtcError(err?.message || 'Failed to load BTC price');
+        // Try stale cache as a fallback
+        try {
+          const cachedRaw = localStorage.getItem(CACHE_KEY);
+          if (cachedRaw) {
+            const cached = JSON.parse(cachedRaw) as { price: number };
+            if (cached && typeof cached.price === 'number') {
+              setBtcUsd(cached.price);
+              return;
+            }
+          }
+        } catch {
+          console.error('Error parsing BTC price from cache');
+        }
+        setBtcUsd(null);
+      }
+    };
+
+    fetchBtc();
+    return () => abort.abort();
+  }, []);
+
+  const formatUsd = (value: number) =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 2,
+    }).format(value);
 
   const rows: IHighlightsRows = [
     {
@@ -123,15 +215,15 @@ const Highlights = ({ limit }: IHighlightsProps) => {
       <div className="card-body flex flex-col gap-4 p-5 lg:p-7.5 lg:pt-4">
         <div className="flex flex-col gap-0.5">
           <span className="text-sm font-normal text-gray-700">
-            All time sales
+            Bitcoin (BTC) Price
           </span>
 
           <div className="flex items-center gap-2.5">
             <span className="text-3xl font-semibold text-gray-900">
-              $295.7k
+              {btcUsd !== null ? formatUsd(btcUsd) : '$295.7k'}
             </span>
             <span className="badge badge-outline badge-success badge-sm">
-              +2.7%
+              {btcError ? 'API' : 'Live'}
             </span>
           </div>
         </div>
