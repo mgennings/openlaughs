@@ -3,770 +3,771 @@
 //  This file was automatically generated and should not be edited.
 
 export type CreateShowInput = {
-  id?: string | null;
-  title: string;
-  description?: string | null;
-  dateTime: string;
-  venueID: string;
-  createdBy?: string | null;
+  id?: string | null,
+  title: string,
+  description?: string | null,
+  dateTime: string,
+  venueID: string,
+  createdBy?: string | null,
 };
 
 export type ModelShowConditionInput = {
-  title?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  dateTime?: ModelStringInput | null;
-  venueID?: ModelIDInput | null;
-  createdBy?: ModelStringInput | null;
-  and?: Array<ModelShowConditionInput | null> | null;
-  or?: Array<ModelShowConditionInput | null> | null;
-  not?: ModelShowConditionInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
+  title?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  dateTime?: ModelStringInput | null,
+  venueID?: ModelIDInput | null,
+  createdBy?: ModelStringInput | null,
+  and?: Array< ModelShowConditionInput | null > | null,
+  or?: Array< ModelShowConditionInput | null > | null,
+  not?: ModelShowConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export enum ModelAttributeTypes {
-  binary = 'binary',
-  binarySet = 'binarySet',
-  bool = 'bool',
-  list = 'list',
-  map = 'map',
-  number = 'number',
-  numberSet = 'numberSet',
-  string = 'string',
-  stringSet = 'stringSet',
-  _null = '_null',
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
 }
 
+
 export type ModelSizeInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
 };
 
 export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type Show = {
-  __typename: 'Show';
-  id: string;
-  title: string;
-  description?: string | null;
-  dateTime: string;
-  venueID: string;
-  createdBy?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  __typename: "Show",
+  id: string,
+  title: string,
+  description?: string | null,
+  dateTime: string,
+  venueID: string,
+  createdBy?: string | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateShowInput = {
-  id: string;
-  title?: string | null;
-  description?: string | null;
-  dateTime?: string | null;
-  venueID?: string | null;
-  createdBy?: string | null;
+  id: string,
+  title?: string | null,
+  description?: string | null,
+  dateTime?: string | null,
+  venueID?: string | null,
+  createdBy?: string | null,
 };
 
 export type DeleteShowInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateVenueInput = {
-  id?: string | null;
-  name: string;
-  address?: string | null;
-  city?: string | null;
-  openMic?: boolean | null;
+  id?: string | null,
+  name: string,
+  address?: string | null,
+  city?: string | null,
+  openMic?: boolean | null,
 };
 
 export type ModelVenueConditionInput = {
-  name?: ModelStringInput | null;
-  address?: ModelStringInput | null;
-  city?: ModelStringInput | null;
-  openMic?: ModelBooleanInput | null;
-  and?: Array<ModelVenueConditionInput | null> | null;
-  or?: Array<ModelVenueConditionInput | null> | null;
-  not?: ModelVenueConditionInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
+  name?: ModelStringInput | null,
+  address?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  openMic?: ModelBooleanInput | null,
+  and?: Array< ModelVenueConditionInput | null > | null,
+  or?: Array< ModelVenueConditionInput | null > | null,
+  not?: ModelVenueConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type Venue = {
-  __typename: 'Venue';
-  id: string;
-  name: string;
-  address?: string | null;
-  city?: string | null;
-  openMic?: boolean | null;
-  createdAt: string;
-  updatedAt: string;
+  __typename: "Venue",
+  id: string,
+  name: string,
+  address?: string | null,
+  city?: string | null,
+  openMic?: boolean | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateVenueInput = {
-  id: string;
-  name?: string | null;
-  address?: string | null;
-  city?: string | null;
-  openMic?: boolean | null;
+  id: string,
+  name?: string | null,
+  address?: string | null,
+  city?: string | null,
+  openMic?: boolean | null,
 };
 
 export type DeleteVenueInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateUserProfileInput = {
-  id?: string | null;
-  email: string;
-  displayName?: string | null;
-  role: string;
+  id?: string | null,
+  email: string,
+  displayName?: string | null,
+  role: string,
 };
 
 export type ModelUserProfileConditionInput = {
-  email?: ModelStringInput | null;
-  displayName?: ModelStringInput | null;
-  role?: ModelStringInput | null;
-  and?: Array<ModelUserProfileConditionInput | null> | null;
-  or?: Array<ModelUserProfileConditionInput | null> | null;
-  not?: ModelUserProfileConditionInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelStringInput | null;
+  email?: ModelStringInput | null,
+  displayName?: ModelStringInput | null,
+  role?: ModelStringInput | null,
+  and?: Array< ModelUserProfileConditionInput | null > | null,
+  or?: Array< ModelUserProfileConditionInput | null > | null,
+  not?: ModelUserProfileConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type UserProfile = {
-  __typename: 'UserProfile';
-  id: string;
-  email: string;
-  displayName?: string | null;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
-  owner?: string | null;
+  __typename: "UserProfile",
+  id: string,
+  email: string,
+  displayName?: string | null,
+  role: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
 };
 
 export type UpdateUserProfileInput = {
-  id: string;
-  email?: string | null;
-  displayName?: string | null;
-  role?: string | null;
+  id: string,
+  email?: string | null,
+  displayName?: string | null,
+  role?: string | null,
 };
 
 export type DeleteUserProfileInput = {
-  id: string;
+  id: string,
 };
 
 export type ModelUserProfileFilterInput = {
-  id?: ModelIDInput | null;
-  email?: ModelStringInput | null;
-  displayName?: ModelStringInput | null;
-  role?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  and?: Array<ModelUserProfileFilterInput | null> | null;
-  or?: Array<ModelUserProfileFilterInput | null> | null;
-  not?: ModelUserProfileFilterInput | null;
-  owner?: ModelStringInput | null;
+  id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
+  displayName?: ModelStringInput | null,
+  role?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelUserProfileFilterInput | null > | null,
+  or?: Array< ModelUserProfileFilterInput | null > | null,
+  not?: ModelUserProfileFilterInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelUserProfileConnection = {
-  __typename: 'ModelUserProfileConnection';
-  items: Array<UserProfile | null>;
-  nextToken?: string | null;
+  __typename: "ModelUserProfileConnection",
+  items:  Array<UserProfile | null >,
+  nextToken?: string | null,
 };
 
 export type ModelShowFilterInput = {
-  id?: ModelIDInput | null;
-  title?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  dateTime?: ModelStringInput | null;
-  venueID?: ModelIDInput | null;
-  createdBy?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  and?: Array<ModelShowFilterInput | null> | null;
-  or?: Array<ModelShowFilterInput | null> | null;
-  not?: ModelShowFilterInput | null;
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  dateTime?: ModelStringInput | null,
+  venueID?: ModelIDInput | null,
+  createdBy?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelShowFilterInput | null > | null,
+  or?: Array< ModelShowFilterInput | null > | null,
+  not?: ModelShowFilterInput | null,
 };
 
 export type ModelShowConnection = {
-  __typename: 'ModelShowConnection';
-  items: Array<Show | null>;
-  nextToken?: string | null;
+  __typename: "ModelShowConnection",
+  items:  Array<Show | null >,
+  nextToken?: string | null,
 };
 
 export type ModelVenueFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  address?: ModelStringInput | null;
-  city?: ModelStringInput | null;
-  openMic?: ModelBooleanInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  and?: Array<ModelVenueFilterInput | null> | null;
-  or?: Array<ModelVenueFilterInput | null> | null;
-  not?: ModelVenueFilterInput | null;
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  address?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  openMic?: ModelBooleanInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelVenueFilterInput | null > | null,
+  or?: Array< ModelVenueFilterInput | null > | null,
+  not?: ModelVenueFilterInput | null,
 };
 
 export type ModelVenueConnection = {
-  __typename: 'ModelVenueConnection';
-  items: Array<Venue | null>;
-  nextToken?: string | null;
+  __typename: "ModelVenueConnection",
+  items:  Array<Venue | null >,
+  nextToken?: string | null,
 };
 
 export type ModelSubscriptionUserProfileFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  email?: ModelSubscriptionStringInput | null;
-  displayName?: ModelSubscriptionStringInput | null;
-  role?: ModelSubscriptionStringInput | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionUserProfileFilterInput | null> | null;
-  or?: Array<ModelSubscriptionUserProfileFilterInput | null> | null;
-  owner?: ModelStringInput | null;
+  id?: ModelSubscriptionIDInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  displayName?: ModelSubscriptionStringInput | null,
+  role?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionUserProfileFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserProfileFilterInput | null > | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  in?: Array<string | null> | null;
-  notIn?: Array<string | null> | null;
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
 };
 
 export type ModelSubscriptionStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  in?: Array<string | null> | null;
-  notIn?: Array<string | null> | null;
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
 };
 
 export type ModelSubscriptionShowFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  title?: ModelSubscriptionStringInput | null;
-  description?: ModelSubscriptionStringInput | null;
-  dateTime?: ModelSubscriptionStringInput | null;
-  venueID?: ModelSubscriptionIDInput | null;
-  createdBy?: ModelSubscriptionStringInput | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionShowFilterInput | null> | null;
-  or?: Array<ModelSubscriptionShowFilterInput | null> | null;
+  id?: ModelSubscriptionIDInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  description?: ModelSubscriptionStringInput | null,
+  dateTime?: ModelSubscriptionStringInput | null,
+  venueID?: ModelSubscriptionIDInput | null,
+  createdBy?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionShowFilterInput | null > | null,
+  or?: Array< ModelSubscriptionShowFilterInput | null > | null,
 };
 
 export type ModelSubscriptionVenueFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  address?: ModelSubscriptionStringInput | null;
-  city?: ModelSubscriptionStringInput | null;
-  openMic?: ModelSubscriptionBooleanInput | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionVenueFilterInput | null> | null;
-  or?: Array<ModelSubscriptionVenueFilterInput | null> | null;
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  address?: ModelSubscriptionStringInput | null,
+  city?: ModelSubscriptionStringInput | null,
+  openMic?: ModelSubscriptionBooleanInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionVenueFilterInput | null > | null,
+  or?: Array< ModelSubscriptionVenueFilterInput | null > | null,
 };
 
 export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
+  ne?: boolean | null,
+  eq?: boolean | null,
 };
 
 export type CreateShowMutationVariables = {
-  input: CreateShowInput;
-  condition?: ModelShowConditionInput | null;
+  input: CreateShowInput,
+  condition?: ModelShowConditionInput | null,
 };
 
 export type CreateShowMutation = {
-  createShow?: {
-    __typename: 'Show';
-    id: string;
-    title: string;
-    description?: string | null;
-    dateTime: string;
-    venueID: string;
-    createdBy?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  createShow?:  {
+    __typename: "Show",
+    id: string,
+    title: string,
+    description?: string | null,
+    dateTime: string,
+    venueID: string,
+    createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type UpdateShowMutationVariables = {
-  input: UpdateShowInput;
-  condition?: ModelShowConditionInput | null;
+  input: UpdateShowInput,
+  condition?: ModelShowConditionInput | null,
 };
 
 export type UpdateShowMutation = {
-  updateShow?: {
-    __typename: 'Show';
-    id: string;
-    title: string;
-    description?: string | null;
-    dateTime: string;
-    venueID: string;
-    createdBy?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  updateShow?:  {
+    __typename: "Show",
+    id: string,
+    title: string,
+    description?: string | null,
+    dateTime: string,
+    venueID: string,
+    createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type DeleteShowMutationVariables = {
-  input: DeleteShowInput;
-  condition?: ModelShowConditionInput | null;
+  input: DeleteShowInput,
+  condition?: ModelShowConditionInput | null,
 };
 
 export type DeleteShowMutation = {
-  deleteShow?: {
-    __typename: 'Show';
-    id: string;
-    title: string;
-    description?: string | null;
-    dateTime: string;
-    venueID: string;
-    createdBy?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  deleteShow?:  {
+    __typename: "Show",
+    id: string,
+    title: string,
+    description?: string | null,
+    dateTime: string,
+    venueID: string,
+    createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateVenueMutationVariables = {
-  input: CreateVenueInput;
-  condition?: ModelVenueConditionInput | null;
+  input: CreateVenueInput,
+  condition?: ModelVenueConditionInput | null,
 };
 
 export type CreateVenueMutation = {
-  createVenue?: {
-    __typename: 'Venue';
-    id: string;
-    name: string;
-    address?: string | null;
-    city?: string | null;
-    openMic?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  createVenue?:  {
+    __typename: "Venue",
+    id: string,
+    name: string,
+    address?: string | null,
+    city?: string | null,
+    openMic?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type UpdateVenueMutationVariables = {
-  input: UpdateVenueInput;
-  condition?: ModelVenueConditionInput | null;
+  input: UpdateVenueInput,
+  condition?: ModelVenueConditionInput | null,
 };
 
 export type UpdateVenueMutation = {
-  updateVenue?: {
-    __typename: 'Venue';
-    id: string;
-    name: string;
-    address?: string | null;
-    city?: string | null;
-    openMic?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  updateVenue?:  {
+    __typename: "Venue",
+    id: string,
+    name: string,
+    address?: string | null,
+    city?: string | null,
+    openMic?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type DeleteVenueMutationVariables = {
-  input: DeleteVenueInput;
-  condition?: ModelVenueConditionInput | null;
+  input: DeleteVenueInput,
+  condition?: ModelVenueConditionInput | null,
 };
 
 export type DeleteVenueMutation = {
-  deleteVenue?: {
-    __typename: 'Venue';
-    id: string;
-    name: string;
-    address?: string | null;
-    city?: string | null;
-    openMic?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  deleteVenue?:  {
+    __typename: "Venue",
+    id: string,
+    name: string,
+    address?: string | null,
+    city?: string | null,
+    openMic?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateUserProfileMutationVariables = {
-  input: CreateUserProfileInput;
-  condition?: ModelUserProfileConditionInput | null;
+  input: CreateUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
 export type CreateUserProfileMutation = {
-  createUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    email: string;
-    displayName?: string | null;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-  } | null;
+  createUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    displayName?: string | null,
+    role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
 };
 
 export type UpdateUserProfileMutationVariables = {
-  input: UpdateUserProfileInput;
-  condition?: ModelUserProfileConditionInput | null;
+  input: UpdateUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
 export type UpdateUserProfileMutation = {
-  updateUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    email: string;
-    displayName?: string | null;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-  } | null;
+  updateUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    displayName?: string | null,
+    role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
 };
 
 export type DeleteUserProfileMutationVariables = {
-  input: DeleteUserProfileInput;
-  condition?: ModelUserProfileConditionInput | null;
+  input: DeleteUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
 export type DeleteUserProfileMutation = {
-  deleteUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    email: string;
-    displayName?: string | null;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-  } | null;
+  deleteUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    displayName?: string | null,
+    role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
 };
 
 export type GetUserProfileQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetUserProfileQuery = {
-  getUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    email: string;
-    displayName?: string | null;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-  } | null;
+  getUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    displayName?: string | null,
+    role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
 };
 
 export type ListUserProfilesQueryVariables = {
-  filter?: ModelUserProfileFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelUserProfileFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListUserProfilesQuery = {
-  listUserProfiles?: {
-    __typename: 'ModelUserProfileConnection';
-    items: Array<{
-      __typename: 'UserProfile';
-      id: string;
-      email: string;
-      displayName?: string | null;
-      role: string;
-      createdAt: string;
-      updatedAt: string;
-      owner?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listUserProfiles?:  {
+    __typename: "ModelUserProfileConnection",
+    items:  Array< {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      displayName?: string | null,
+      role: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetShowQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetShowQuery = {
-  getShow?: {
-    __typename: 'Show';
-    id: string;
-    title: string;
-    description?: string | null;
-    dateTime: string;
-    venueID: string;
-    createdBy?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  getShow?:  {
+    __typename: "Show",
+    id: string,
+    title: string,
+    description?: string | null,
+    dateTime: string,
+    venueID: string,
+    createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type ListShowsQueryVariables = {
-  filter?: ModelShowFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelShowFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListShowsQuery = {
-  listShows?: {
-    __typename: 'ModelShowConnection';
-    items: Array<{
-      __typename: 'Show';
-      id: string;
-      title: string;
-      description?: string | null;
-      dateTime: string;
-      venueID: string;
-      createdBy?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listShows?:  {
+    __typename: "ModelShowConnection",
+    items:  Array< {
+      __typename: "Show",
+      id: string,
+      title: string,
+      description?: string | null,
+      dateTime: string,
+      venueID: string,
+      createdBy?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetVenueQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetVenueQuery = {
-  getVenue?: {
-    __typename: 'Venue';
-    id: string;
-    name: string;
-    address?: string | null;
-    city?: string | null;
-    openMic?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  getVenue?:  {
+    __typename: "Venue",
+    id: string,
+    name: string,
+    address?: string | null,
+    city?: string | null,
+    openMic?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type ListVenuesQueryVariables = {
-  filter?: ModelVenueFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelVenueFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListVenuesQuery = {
-  listVenues?: {
-    __typename: 'ModelVenueConnection';
-    items: Array<{
-      __typename: 'Venue';
-      id: string;
-      name: string;
-      address?: string | null;
-      city?: string | null;
-      openMic?: boolean | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listVenues?:  {
+    __typename: "ModelVenueConnection",
+    items:  Array< {
+      __typename: "Venue",
+      id: string,
+      name: string,
+      address?: string | null,
+      city?: string | null,
+      openMic?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type OnCreateUserProfileSubscriptionVariables = {
-  filter?: ModelSubscriptionUserProfileFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionUserProfileFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateUserProfileSubscription = {
-  onCreateUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    email: string;
-    displayName?: string | null;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-  } | null;
+  onCreateUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    displayName?: string | null,
+    role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
 };
 
 export type OnUpdateUserProfileSubscriptionVariables = {
-  filter?: ModelSubscriptionUserProfileFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionUserProfileFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateUserProfileSubscription = {
-  onUpdateUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    email: string;
-    displayName?: string | null;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-  } | null;
+  onUpdateUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    displayName?: string | null,
+    role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
 };
 
 export type OnDeleteUserProfileSubscriptionVariables = {
-  filter?: ModelSubscriptionUserProfileFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionUserProfileFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteUserProfileSubscription = {
-  onDeleteUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    email: string;
-    displayName?: string | null;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-  } | null;
+  onDeleteUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    displayName?: string | null,
+    role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
 };
 
 export type OnCreateShowSubscriptionVariables = {
-  filter?: ModelSubscriptionShowFilterInput | null;
+  filter?: ModelSubscriptionShowFilterInput | null,
 };
 
 export type OnCreateShowSubscription = {
-  onCreateShow?: {
-    __typename: 'Show';
-    id: string;
-    title: string;
-    description?: string | null;
-    dateTime: string;
-    venueID: string;
-    createdBy?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onCreateShow?:  {
+    __typename: "Show",
+    id: string,
+    title: string,
+    description?: string | null,
+    dateTime: string,
+    venueID: string,
+    createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnUpdateShowSubscriptionVariables = {
-  filter?: ModelSubscriptionShowFilterInput | null;
+  filter?: ModelSubscriptionShowFilterInput | null,
 };
 
 export type OnUpdateShowSubscription = {
-  onUpdateShow?: {
-    __typename: 'Show';
-    id: string;
-    title: string;
-    description?: string | null;
-    dateTime: string;
-    venueID: string;
-    createdBy?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onUpdateShow?:  {
+    __typename: "Show",
+    id: string,
+    title: string,
+    description?: string | null,
+    dateTime: string,
+    venueID: string,
+    createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnDeleteShowSubscriptionVariables = {
-  filter?: ModelSubscriptionShowFilterInput | null;
+  filter?: ModelSubscriptionShowFilterInput | null,
 };
 
 export type OnDeleteShowSubscription = {
-  onDeleteShow?: {
-    __typename: 'Show';
-    id: string;
-    title: string;
-    description?: string | null;
-    dateTime: string;
-    venueID: string;
-    createdBy?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onDeleteShow?:  {
+    __typename: "Show",
+    id: string,
+    title: string,
+    description?: string | null,
+    dateTime: string,
+    venueID: string,
+    createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnCreateVenueSubscriptionVariables = {
-  filter?: ModelSubscriptionVenueFilterInput | null;
+  filter?: ModelSubscriptionVenueFilterInput | null,
 };
 
 export type OnCreateVenueSubscription = {
-  onCreateVenue?: {
-    __typename: 'Venue';
-    id: string;
-    name: string;
-    address?: string | null;
-    city?: string | null;
-    openMic?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onCreateVenue?:  {
+    __typename: "Venue",
+    id: string,
+    name: string,
+    address?: string | null,
+    city?: string | null,
+    openMic?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnUpdateVenueSubscriptionVariables = {
-  filter?: ModelSubscriptionVenueFilterInput | null;
+  filter?: ModelSubscriptionVenueFilterInput | null,
 };
 
 export type OnUpdateVenueSubscription = {
-  onUpdateVenue?: {
-    __typename: 'Venue';
-    id: string;
-    name: string;
-    address?: string | null;
-    city?: string | null;
-    openMic?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onUpdateVenue?:  {
+    __typename: "Venue",
+    id: string,
+    name: string,
+    address?: string | null,
+    city?: string | null,
+    openMic?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnDeleteVenueSubscriptionVariables = {
-  filter?: ModelSubscriptionVenueFilterInput | null;
+  filter?: ModelSubscriptionVenueFilterInput | null,
 };
 
 export type OnDeleteVenueSubscription = {
-  onDeleteVenue?: {
-    __typename: 'Venue';
-    id: string;
-    name: string;
-    address?: string | null;
-    city?: string | null;
-    openMic?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onDeleteVenue?:  {
+    __typename: "Venue",
+    id: string,
+    name: string,
+    address?: string | null,
+    city?: string | null,
+    openMic?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };

@@ -15,6 +15,7 @@
           "additionalAuthenticationProviders": [
             {
               "apiKeyConfig": {
+                "apiKeyExpirationDate": "2026-10-29T15:40:28.583Z",
                 "apiKeyExpirationDays": 365,
                 "description": "Public API key for OpenLaughs"
               },
