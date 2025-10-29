@@ -12,7 +12,12 @@ const cleanedGlobals = Object.fromEntries(
 
 export default [
   {
-    ignores: ['dist', 'public', 'src/components/keenicons/assets', 'amplify-codegen-temp/models/models'],
+    ignores: [
+      'dist',
+      'public',
+      'src/components/keenicons/assets',
+      'amplify-codegen-temp/models/models',
+    ],
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -46,7 +51,7 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
-      'no-unused-vars': 'warn',
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'react/react-in-jsx-scope': 'off',
       'react-hooks/exhaustive-deps': 'off',

@@ -44,8 +44,11 @@ const CheckEmail = () => {
 
         await confirmRegistration(email, values.confirmationCode);
 
-        // Success! Redirect to login or dashboard
-        navigate('/', { replace: true });
+        // Success! Redirect to login page (user needs to sign in after verification)
+        navigate('/auth/login', {
+          replace: true,
+          state: { message: 'Account verified! Please sign in.' },
+        });
       } catch (error: any) {
         console.error('Confirmation error:', error);
         let errorMessage = 'Invalid confirmation code. Please try again.';

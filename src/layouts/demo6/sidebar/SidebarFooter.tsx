@@ -1,4 +1,5 @@
 import React, { forwardRef, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toAbsoluteUrl } from '@/utils';
 import { useAuthContext } from '@/auth';
 import { KeenIcon, Menu, MenuIcon, MenuItem, MenuToggle } from '@/components';
@@ -8,6 +9,7 @@ import { useLanguage } from '@/i18n';
 
 const SidebarFooter = forwardRef<HTMLDivElement, any>((props, ref) => {
   const { logout } = useAuthContext();
+  const navigate = useNavigate();
   const itemNotificationsRef = useRef<any>(null);
   const itemUserRef = useRef<any>(null);
   const { isRTL } = useLanguage();
@@ -87,8 +89,11 @@ const SidebarFooter = forwardRef<HTMLDivElement, any>((props, ref) => {
         </Menu>
 
         <div
-          onClick={logout}
-          className="btn btn-icon btn-icon-lg size-8 hover:bg-light hover:text-primary text-gray-600"
+          onClick={async () => {
+            await logout();
+            navigate('/');
+          }}
+          className="btn btn-icon btn-icon-lg size-8 hover:bg-light hover:text-primary text-gray-600 cursor-pointer"
         >
           <KeenIcon icon="exit-right" />
         </div>

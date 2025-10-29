@@ -1,5 +1,5 @@
 import { ChangeEvent, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useAuthContext } from '@/auth';
 import { useLanguage } from '@/i18n';
@@ -23,8 +23,9 @@ interface IDropdownUserProps {
 
 const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
   const { settings, storeSettings } = useSettings();
-  const { logout } = useAuthContext();
+  const { logout, currentUser } = useAuthContext();
   const { isRTL } = useLanguage();
+  const navigate = useNavigate();
 
   const handleThemeMode = (event: ChangeEvent<HTMLInputElement>) => {
     const newThemeMode = event.target.checked ? 'dark' : 'light';
@@ -35,30 +36,51 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
   };
 
   const buildHeader = () => {
+    const userName =
+      currentUser?.fullname ||
+      currentUser?.username ||
+      currentUser?.email ||
+      'User';
+    const userEmail = currentUser?.email || '';
+    const userInitials =
+      userName
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2) || 'U';
+
     return (
       <div className="flex items-center justify-between px-5 py-1.5 gap-1.5">
         <div className="flex items-center gap-2">
-          <img
-            className="size-9 rounded-full border-2 border-success"
-            src={toAbsoluteUrl('/media/avatars/300-2.png')}
-            alt=""
-          />
+          {currentUser?.pic ? (
+            <img
+              className="size-9 rounded-full border-2 border-success"
+              src={currentUser.pic}
+              alt={userName}
+            />
+          ) : (
+            <div className="size-9 rounded-full border-2 border-success bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
+              {userInitials}
+            </div>
+          )}
           <div className="flex flex-col gap-1.5">
             <Link
-              to="/account/hoteme/get-stard"
+              to="/account/home/user-profile"
               className="text-sm text-gray-800 hover:text-primary font-semibold leading-none"
             >
-              Cody Fisher
+              {userName}
             </Link>
-            <a
-              href="mailto:c.fisher@gmail.com"
-              className="text-xs text-gray-600 hover:text-primary font-medium leading-none"
-            >
-              c.fisher@gmail.com
-            </a>
+            {userEmail && (
+              <a
+                href={`mailto:${userEmail}`}
+                className="text-xs text-gray-600 hover:text-primary font-medium leading-none"
+              >
+                {userEmail}
+              </a>
+            )}
           </div>
         </div>
-        <span className="badge badge-xs badge-primary badge-outline">Pro</span>
       </div>
     );
   };
@@ -253,7 +275,13 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
         </div>
 
         <div className="menu-item px-4 py-1.5">
-          <a onClick={logout} className="btn btn-sm btn-light justify-center">
+          <a
+            onClick={async () => {
+              await logout();
+              navigate('/');
+            }}
+            className="btn btn-sm btn-light justify-center cursor-pointer"
+          >
             <FormattedMessage id="USER.MENU.LOGOUT" />
           </a>
         </div>

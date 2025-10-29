@@ -4,50 +4,65 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
-import { UserProfile } from "../API.ts";
+import * as React from 'react';
+import { GridProps, TextFieldProps } from '@aws-amplify/ui-react';
+import { UserProfile } from '../API.ts';
 export declare type EscapeHatchProps = {
-    [elementHierarchy: string]: Record<string, unknown>;
+  [elementHierarchy: string]: Record<string, unknown>;
 } | null;
 export declare type VariantValues = {
-    [key: string]: string;
+  [key: string]: string;
 };
 export declare type Variant = {
-    variantValues: VariantValues;
-    overrides: EscapeHatchProps;
+  variantValues: VariantValues;
+  overrides: EscapeHatchProps;
 };
 export declare type ValidationResponse = {
-    hasError: boolean;
-    errorMessage?: string;
+  hasError: boolean;
+  errorMessage?: string;
 };
-export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
+export declare type ValidationFunction<T> = (
+  value: T,
+  validationResponse: ValidationResponse,
+) => ValidationResponse | Promise<ValidationResponse>;
 export declare type UserProfileUpdateFormInputValues = {
-    email?: string;
-    displayName?: string;
-    role?: string;
+  email?: string;
+  displayName?: string;
+  role?: string;
 };
 export declare type UserProfileUpdateFormValidationValues = {
-    email?: ValidationFunction<string>;
-    displayName?: ValidationFunction<string>;
-    role?: ValidationFunction<string>;
+  email?: ValidationFunction<string>;
+  displayName?: ValidationFunction<string>;
+  role?: ValidationFunction<string>;
 };
-export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type PrimitiveOverrideProps<T> = Partial<T> &
+  React.DOMAttributes<HTMLDivElement>;
 export declare type UserProfileUpdateFormOverridesProps = {
-    UserProfileUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    email?: PrimitiveOverrideProps<TextFieldProps>;
-    displayName?: PrimitiveOverrideProps<TextFieldProps>;
-    role?: PrimitiveOverrideProps<TextFieldProps>;
+  UserProfileUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+  email?: PrimitiveOverrideProps<TextFieldProps>;
+  displayName?: PrimitiveOverrideProps<TextFieldProps>;
+  role?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type UserProfileUpdateFormProps = React.PropsWithChildren<{
+export declare type UserProfileUpdateFormProps = React.PropsWithChildren<
+  {
     overrides?: UserProfileUpdateFormOverridesProps | undefined | null;
-} & {
+  } & {
     id?: string;
     userProfile?: UserProfile;
-    onSubmit?: (fields: UserProfileUpdateFormInputValues) => UserProfileUpdateFormInputValues;
+    onSubmit?: (
+      fields: UserProfileUpdateFormInputValues,
+    ) => UserProfileUpdateFormInputValues;
     onSuccess?: (fields: UserProfileUpdateFormInputValues) => void;
-    onError?: (fields: UserProfileUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: UserProfileUpdateFormInputValues) => UserProfileUpdateFormInputValues;
+    onError?: (
+      fields: UserProfileUpdateFormInputValues,
+      errorMessage: string,
+    ) => void;
+    onChange?: (
+      fields: UserProfileUpdateFormInputValues,
+    ) => UserProfileUpdateFormInputValues;
     onValidate?: UserProfileUpdateFormValidationValues;
-} & React.CSSProperties>;
-export default function UserProfileUpdateForm(props: UserProfileUpdateFormProps): React.ReactElement;
+  } & React.CSSProperties
+>;
+export default function UserProfileUpdateForm(
+  props: UserProfileUpdateFormProps,
+): React.ReactElement;

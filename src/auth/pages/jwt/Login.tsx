@@ -34,6 +34,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
+  const successMessage = location.state?.message;
   const [showPassword, setShowPassword] = useState(false);
   const { currentLayout } = useLayout();
 
@@ -56,14 +57,16 @@ const Login = () => {
           localStorage.removeItem('email');
         }
 
-        navigate(from, { replace: true });
+        // Redirect to dashboard after successful login
+        navigate('/dashboard', { replace: true });
       } catch (error: any) {
         console.error('Login error:', error);
         // Handle specific Cognito errors
         let errorMessage = 'The login details are incorrect';
         if (error.message) {
           if (error.message.includes('UserNotConfirmedException')) {
-            errorMessage = 'Please verify your email address. Check your inbox for a confirmation code.';
+            errorMessage =
+              'Please verify your email address. Check your inbox for a confirmation code.';
           } else if (error.message.includes('NotAuthorizedException')) {
             errorMessage = 'Incorrect email or password. Please try again.';
           } else if (error.message.includes('UserNotFoundException')) {
@@ -145,6 +148,7 @@ const Login = () => {
           <span className="border-t border-gray-200 w-full"></span>
         </div>
 
+        {successMessage && <Alert variant="primary">{successMessage}</Alert>}
         {formik.status && <Alert variant="danger">{formik.status}</Alert>}
 
         <div className="flex flex-col gap-1">

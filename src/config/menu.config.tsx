@@ -7,7 +7,7 @@ export const MENU_SIDEBAR: TMenuConfig = [
     children: [
       {
         title: 'Light Sidebar',
-        path: '/',
+        path: '/dashboard',
       },
       {
         title: 'Dark Sidebar',
