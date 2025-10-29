@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { DefaultPage, Demo1DarkSidebarPage } from '@/pages/dashboards';
+import { LandingPage } from '@/pages/landing/LandingPage';
 import {
   ProfileActivityPage,
   ProfileBloggerPage,
@@ -75,6 +76,7 @@ import {
 
 import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
+import { LandingLayout } from '@/layouts/landing/LandingLayout';
 import { Demo1Layout } from '@/layouts/demo1';
 import { ErrorsRouting } from '@/errors';
 import {
@@ -90,9 +92,20 @@ import { Demo5Layout } from '@/layouts/demo5';
 const AppRoutingSetup = (): ReactElement => {
   return (
     <Routes>
+      {/* Landing Page - Public */}
+      <Route
+        path="/"
+        element={
+          <LandingLayout>
+            <LandingPage />
+          </LandingLayout>
+        }
+      />
+
+      {/* Authenticated Routes */}
       <Route element={<RequireAuth />}>
         <Route element={<Demo1Layout />}>
-          <Route path="/" element={<DefaultPage />} />
+          <Route path="/dashboard" element={<DefaultPage />} />
           <Route path="/dark-sidebar" element={<Demo1DarkSidebarPage />} />
           <Route path="/demo1-layout" element={<Demo1Layout />} />
           <Route path="/demo2-layout" element={<Demo2Layout />} />
