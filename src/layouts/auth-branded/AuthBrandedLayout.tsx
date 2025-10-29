@@ -38,16 +38,16 @@ const Layout = () => {
 
             <div className="flex flex-col gap-3">
               <h3 className="text-2xl font-semibold text-gray-900">
-                Secure Access Portal
+                Welcome to OpenLaughs 🎭
               </h3>
               <div className="text-base font-medium text-gray-600">
-                A robust authentication gateway ensuring
-                <br /> secure&nbsp;
+                Join Austin's comedy community and discover,
+                <br /> connect, and laugh together. Your gateway to
+                <br />
                 <span className="text-gray-900 font-semibold">
-                  efficient user access
+                  Austin's Comedy Scene
                 </span>
-                &nbsp;to the Metronic
-                <br /> Dashboard interface.
+                , amplified.
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
+/* eslint-disable no-useless-catch */
 /* eslint-disable no-unused-vars */
-import axios, { AxiosResponse } from 'axios';
 import {
   createContext,
   type Dispatch,
@@ -9,15 +9,22 @@ import {
   useState,
 } from 'react';
 
+import {
+  signIn,
+  signUp,
+  signOut as amplifySignOut,
+  resetPassword as amplifyResetPassword,
+  confirmResetPassword,
+  confirmSignUp,
+  resendSignUpCode,
+  getCurrentUser,
+  fetchUserAttributes,
+  type SignInOutput,
+  type SignUpOutput,
+} from 'aws-amplify/auth';
+
 import * as authHelper from '../_helpers';
 import { type AuthModel, type UserModel } from '@/auth';
-
-const API_URL = import.meta.env.VITE_APP_API_URL;
-export const LOGIN_URL = `${API_URL}/login`;
-export const REGISTER_URL = `${API_URL}/register`;
-export const FORGOT_PASSWORD_URL = `${API_URL}/forgot-password`;
-export const RESET_PASSWORD_URL = `${API_URL}/reset-password`;
-export const GET_USER_URL = `${API_URL}/user`;
 
 interface AuthContextProps {
   loading: boolean;
@@ -34,16 +41,26 @@ interface AuthContextProps {
     email: string,
     password: string,
     password_confirmation: string,
+  ) => Promise<SignUpOutput>;
+  confirmRegistration: (
+    email: string,
+    confirmationCode: string,
   ) => Promise<void>;
+  resendConfirmationCode: (email: string) => Promise<void>;
   requestPasswordResetLink: (email: string) => Promise<void>;
+  resetPassword: (
+    email: string,
+    confirmationCode: string,
+    newPassword: string,
+  ) => Promise<void>;
   changePassword: (
     email: string,
     token: string,
     password: string,
     password_confirmation: string,
   ) => Promise<void>;
-  getUser: () => Promise<AxiosResponse<any>>;
-  logout: () => void;
+  getUser: () => Promise<UserModel>;
+  logout: () => Promise<void>;
   verify: () => Promise<void>;
 }
 
@@ -54,15 +71,74 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth());
   const [currentUser, setCurrentUser] = useState<UserModel | undefined>();
 
-  const verify = async () => {
-    if (auth) {
+  // Check for existing session on mount
+  useEffect(() => {
+    const checkAuth = async () => {
       try {
-        const { data: user } = await getUser();
-        setCurrentUser(user);
-      } catch {
+        const user = await getCurrentUser();
+        const attributes = await fetchUserAttributes();
+
+        // Create auth model from Cognito session
+        const authModel: AuthModel = {
+          access_token: 'cognito-session', // Amplify handles tokens internally
+          api_token: 'cognito-session',
+        };
+
+        // Create user model from Cognito attributes
+        const userModel: UserModel = {
+          id: 0, // Will be set from user attributes if available
+          username: attributes.email || user.username || '',
+          password: undefined,
+          email: attributes.email || '',
+          first_name: attributes.given_name || attributes.name || '',
+          last_name: attributes.family_name || '',
+          fullname:
+            attributes.name ||
+            `${attributes.given_name || ''} ${attributes.family_name || ''}`.trim(),
+        };
+
+        setAuth(authModel);
+        setCurrentUser(userModel);
+        authHelper.setAuth(authModel);
+      } catch (error) {
+        // No existing session
         saveAuth(undefined);
-        setCurrentUser(undefined);
+      } finally {
+        setLoading(false);
       }
+    };
+
+    checkAuth();
+  }, []);
+
+  const verify = async () => {
+    try {
+      const user = await getCurrentUser();
+      const attributes = await fetchUserAttributes();
+
+      const authModel: AuthModel = {
+        access_token: 'cognito-session',
+        api_token: 'cognito-session',
+      };
+
+      const userModel: UserModel = {
+        id: 0,
+        username: attributes.email || user.username || '',
+        password: undefined,
+        email: attributes.email || '',
+        first_name: attributes.given_name || attributes.name || '',
+        last_name: attributes.family_name || '',
+        fullname:
+          attributes.name ||
+          `${attributes.given_name || ''} ${attributes.family_name || ''}`.trim(),
+      };
+
+      setAuth(authModel);
+      setCurrentUser(userModel);
+      authHelper.setAuth(authModel);
+    } catch {
+      saveAuth(undefined);
+      setCurrentUser(undefined);
     }
   };
 
@@ -77,16 +153,38 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { data: auth } = await axios.post<AuthModel>(LOGIN_URL, {
-        email,
-        password,
-      });
-      saveAuth(auth);
-      const { data: user } = await getUser();
-      setCurrentUser(user);
-    } catch (error) {
+      const output = await signIn({ username: email, password });
+
+      if (output.isSignedIn) {
+        // Fetch user attributes
+        const user = await getCurrentUser();
+        const attributes = await fetchUserAttributes();
+
+        const authModel: AuthModel = {
+          access_token: 'cognito-session',
+          api_token: 'cognito-session',
+        };
+
+        const userModel: UserModel = {
+          id: 0,
+          username: attributes.email || user.username || '',
+          password: undefined,
+          email: attributes.email || '',
+          first_name: attributes.given_name || attributes.name || '',
+          last_name: attributes.family_name || '',
+          fullname:
+            attributes.name ||
+            `${attributes.given_name || ''} ${attributes.family_name || ''}`.trim(),
+        };
+
+        saveAuth(authModel);
+        setCurrentUser(userModel);
+      } else {
+        throw new Error('Sign in not completed');
+      }
+    } catch (error: any) {
       saveAuth(undefined);
-      throw new Error(`Error ${error}`);
+      throw error;
     }
   };
 
@@ -95,25 +193,72 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     password: string,
     password_confirmation: string,
   ) => {
+    if (password !== password_confirmation) {
+      throw new Error("Passwords don't match");
+    }
+
     try {
-      const { data: auth } = await axios.post(REGISTER_URL, {
-        email,
+      const output = await signUp({
+        username: email,
         password,
-        password_confirmation,
+        options: {
+          userAttributes: {
+            email,
+          },
+          autoSignIn: false, // We'll handle confirmation separately
+        },
       });
-      saveAuth(auth);
-      const { data: user } = await getUser();
-      setCurrentUser(user);
-    } catch (error) {
-      saveAuth(undefined);
-      throw new Error(`Error ${error}`);
+
+      return output;
+    } catch (error: any) {
+      throw error;
+    }
+  };
+
+  const confirmRegistration = async (
+    email: string,
+    confirmationCode: string,
+  ) => {
+    try {
+      await confirmSignUp({
+        username: email,
+        confirmationCode,
+      });
+    } catch (error: any) {
+      throw error;
+    }
+  };
+
+  const resendConfirmationCode = async (email: string) => {
+    try {
+      await resendSignUpCode({ username: email });
+    } catch (error: any) {
+      throw error;
     }
   };
 
   const requestPasswordResetLink = async (email: string) => {
-    await axios.post(FORGOT_PASSWORD_URL, {
-      email,
-    });
+    try {
+      await amplifyResetPassword({ username: email });
+    } catch (error: any) {
+      throw error;
+    }
+  };
+
+  const resetPassword = async (
+    email: string,
+    confirmationCode: string,
+    newPassword: string,
+  ) => {
+    try {
+      await confirmResetPassword({
+        username: email,
+        confirmationCode,
+        newPassword,
+      });
+    } catch (error: any) {
+      throw error;
+    }
   };
 
   const changePassword = async (
@@ -122,21 +267,49 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     password: string,
     password_confirmation: string,
   ) => {
-    await axios.post(RESET_PASSWORD_URL, {
-      email,
-      token,
-      password,
-      password_confirmation,
-    });
+    // For Cognito, use resetPassword flow
+    // This is kept for backward compatibility but may need to be updated
+    try {
+      await confirmResetPassword({
+        username: email,
+        confirmationCode: token,
+        newPassword: password,
+      });
+    } catch (error: any) {
+      throw error;
+    }
   };
 
-  const getUser = async () => {
-    return await axios.get<UserModel>(GET_USER_URL);
+  const getUser = async (): Promise<UserModel> => {
+    try {
+      const user = await getCurrentUser();
+      const attributes = await fetchUserAttributes();
+
+      return {
+        id: 0,
+        username: attributes.email || user.username || '',
+        password: undefined,
+        email: attributes.email || '',
+        first_name: attributes.given_name || attributes.name || '',
+        last_name: attributes.family_name || '',
+        fullname:
+          attributes.name ||
+          `${attributes.given_name || ''} ${attributes.family_name || ''}`.trim(),
+      };
+    } catch (error) {
+      throw error;
+    }
   };
 
-  const logout = () => {
-    saveAuth(undefined);
-    setCurrentUser(undefined);
+  const logout = async () => {
+    try {
+      await amplifySignOut();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    } finally {
+      saveAuth(undefined);
+      setCurrentUser(undefined);
+    }
   };
 
   return (
@@ -150,7 +323,10 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         setCurrentUser,
         login,
         register,
+        confirmRegistration,
+        resendConfirmationCode,
         requestPasswordResetLink,
+        resetPassword,
         changePassword,
         getUser,
         logout,

@@ -53,11 +53,37 @@ const Signup = () => {
         if (!register) {
           throw new Error('AWSAmplifyProvider is required for this form.');
         }
-        await register(values.email, values.password, values.changepassword);
-        navigate(from, { replace: true });
-      } catch (error) {
+        const result = await register(
+          values.email,
+          values.password,
+          values.changepassword,
+        );
+
+        // Check if user needs to confirm their email
+        if (result.nextStep?.signUpStep === 'CONFIRM_SIGN_UP') {
+          // Navigate to email confirmation page or show confirmation UI
+          navigate('/auth/check-email', {
+            replace: true,
+            state: { email: values.email },
+          });
+        } else {
+          // User is automatically signed in (if autoSignIn was enabled)
+          navigate(from, { replace: true });
+        }
+      } catch (error: any) {
         console.error(error);
-        setStatus('The sign up details are incorrect');
+        // Handle specific Cognito errors
+        let errorMessage = 'The sign up details are incorrect';
+        if (error.message) {
+          if (error.message.includes('User already exists')) {
+            errorMessage = 'An account with this email already exists';
+          } else if (error.message.includes('Invalid password')) {
+            errorMessage = 'Password must be at least 8 characters';
+          } else {
+            errorMessage = error.message;
+          }
+        }
+        setStatus(errorMessage);
         setSubmitting(false);
         setLoading(false);
       }
@@ -83,11 +109,14 @@ const Signup = () => {
       >
         <div className="text-center mb-2.5">
           <h3 className="text-lg font-semibold text-gray-900 leading-none mb-2.5">
-            Sign up
+            Join OpenLaughs 🎭
           </h3>
+          <p className="text-xs text-gray-500 mb-3">
+            Start connecting with Austin's comedy community
+          </p>
           <div className="flex items-center justify-center font-medium">
             <span className="text-2sm text-gray-600 me-1.5">
-              Already have an Account ?
+              Already have an Account?
             </span>
             <Link
               to={
@@ -138,9 +167,9 @@ const Signup = () => {
           <label className="form-label text-gray-900">Email</label>
           <label className="input">
             <input
-              placeholder="email@email.com"
+              placeholder="your@email.com"
               type="email"
-              autoComplete="off"
+              autoComplete="email"
               {...formik.getFieldProps('email')}
               className={clsx(
                 'form-control bg-transparent',
@@ -163,8 +192,8 @@ const Signup = () => {
           <label className="input">
             <input
               type={showPassword ? 'text' : 'password'}
-              placeholder="Enter Password"
-              autoComplete="off"
+              placeholder="Enter your password"
+              autoComplete="new-password"
               {...formik.getFieldProps('password')}
               className={clsx(
                 'form-control bg-transparent',
@@ -201,8 +230,8 @@ const Signup = () => {
           <label className="input">
             <input
               type={showConfirmPassword ? 'text' : 'password'}
-              placeholder="Re-enter Password"
-              autoComplete="off"
+              placeholder="Confirm your password"
+              autoComplete="new-password"
               {...formik.getFieldProps('changepassword')}
               className={clsx(
                 'form-control bg-transparent',
@@ -265,7 +294,7 @@ const Signup = () => {
           className="btn btn-primary flex justify-center grow"
           disabled={loading || formik.isSubmitting}
         >
-          {loading ? 'Please wait...' : 'Sign UP'}
+          {loading ? 'Creating your account...' : 'Join OpenLaughs'}
         </button>
       </form>
     </div>

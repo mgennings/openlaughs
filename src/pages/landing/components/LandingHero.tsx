@@ -38,7 +38,7 @@ const LandingHero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Link to="/auth/sign-up">
+              <Link to="/auth/signup">
                 <Button
                   size="lg"
                   className="bg-white text-purple-600 hover:bg-purple-600 hover:text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
@@ -46,7 +46,7 @@ const LandingHero = () => {
                   Get Started Free
                 </Button>
               </Link>
-              <Link to="/auth/sign-in">
+              <Link to="/auth/login">
                 <Button
                   size="lg"
                   className="bg-purple-600 text-white hover:bg-white hover:text-purple-600 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"

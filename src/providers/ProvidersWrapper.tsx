@@ -7,12 +7,18 @@ import {
   LoadersProvider,
   MenusProvider,
   SettingsProvider,
+  // eslint-disable-next-line no-unused-vars
   SnackbarProvider,
   TranslationProvider,
 } from '@/providers';
 import { HelmetProvider } from 'react-helmet-async';
+import { Amplify } from 'aws-amplify';
+import amplifyconfig from '@/amplifyconfiguration.json';
 
 const queryClient = new QueryClient();
+
+// Initialize Amplify
+Amplify.configure(amplifyconfig);
 
 const ProvidersWrapper = ({ children }: PropsWithChildren) => {
   return (

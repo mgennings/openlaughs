@@ -32,7 +32,7 @@ const LandingFooter = () => {
             <ul className="space-y-2 text-gray-400">
               <li>
                 <Link
-                  to="/auth/sign-up"
+                  to="/auth/signup"
                   className="hover:text-white transition-colors"
                 >
                   Sign Up
@@ -40,7 +40,7 @@ const LandingFooter = () => {
               </li>
               <li>
                 <Link
-                  to="/auth/sign-in"
+                  to="/auth/login"
                   className="hover:text-white transition-colors"
                 >
                   Sign In

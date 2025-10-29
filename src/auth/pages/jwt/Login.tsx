@@ -23,8 +23,8 @@ const loginSchema = Yup.object().shape({
 });
 
 const initialValues = {
-  email: 'demo@keenthemes.com',
-  password: 'demo1234',
+  email: '',
+  password: '',
   remember: false,
 };
 
@@ -57,8 +57,22 @@ const Login = () => {
         }
 
         navigate(from, { replace: true });
-      } catch {
-        setStatus('The login details are incorrect');
+      } catch (error: any) {
+        console.error('Login error:', error);
+        // Handle specific Cognito errors
+        let errorMessage = 'The login details are incorrect';
+        if (error.message) {
+          if (error.message.includes('UserNotConfirmedException')) {
+            errorMessage = 'Please verify your email address. Check your inbox for a confirmation code.';
+          } else if (error.message.includes('NotAuthorizedException')) {
+            errorMessage = 'Incorrect email or password. Please try again.';
+          } else if (error.message.includes('UserNotFoundException')) {
+            errorMessage = 'No account found with this email address.';
+          } else {
+            errorMessage = error.message;
+          }
+        }
+        setStatus(errorMessage);
         setSubmitting(false);
       }
       setLoading(false);
@@ -79,8 +93,11 @@ const Login = () => {
       >
         <div className="text-center mb-2.5">
           <h3 className="text-lg font-semibold text-gray-900 leading-none mb-2.5">
-            Sign in
+            Welcome Back to OpenLaughs 🎭
           </h3>
+          <p className="text-xs text-gray-500 mb-3">
+            Austin's Comedy Scene, Amplified
+          </p>
           <div className="flex items-center justify-center font-medium">
             <span className="text-2sm text-gray-600 me-1.5">
               Need an account?
@@ -128,24 +145,15 @@ const Login = () => {
           <span className="border-t border-gray-200 w-full"></span>
         </div>
 
-        <Alert variant="primary">
-          Use{' '}
-          <span className="font-semibold text-gray-900">
-            demo@keenthemes.com
-          </span>{' '}
-          username and{' '}
-          <span className="font-semibold text-gray-900">demo1234</span>{' '}
-          password.
-        </Alert>
-
         {formik.status && <Alert variant="danger">{formik.status}</Alert>}
 
         <div className="flex flex-col gap-1">
           <label className="form-label text-gray-900">Email</label>
           <label className="input">
             <input
-              placeholder="Enter username"
-              autoComplete="off"
+              type="email"
+              placeholder="Enter your email"
+              autoComplete="email"
               {...formik.getFieldProps('email')}
               className={clsx('form-control', {
                 'is-invalid': formik.touched.email && formik.errors.email,
@@ -176,8 +184,8 @@ const Login = () => {
           <label className="input">
             <input
               type={showPassword ? 'text' : 'password'}
-              placeholder="Enter Password"
-              autoComplete="off"
+              placeholder="Enter your password"
+              autoComplete="current-password"
               {...formik.getFieldProps('password')}
               className={clsx('form-control', {
                 'is-invalid': formik.touched.password && formik.errors.password,
