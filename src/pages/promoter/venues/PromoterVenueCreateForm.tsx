@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { createVenue } from '@/graphql/mutations';
 
@@ -9,7 +9,10 @@ interface PromoterVenueCreateFormProps {
 
 const client = generateClient({ authMode: 'userPool' });
 
-const PromoterVenueCreateForm = ({ onCreated, onError }: PromoterVenueCreateFormProps) => {
+const PromoterVenueCreateForm = ({
+  onCreated,
+  onError,
+}: PromoterVenueCreateFormProps) => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -94,7 +97,12 @@ const PromoterVenueCreateForm = ({ onCreated, onError }: PromoterVenueCreateForm
           checked={openMic}
           onChange={e => setOpenMic(e.target.checked)}
         />
-        <label htmlFor="venue-openmic" className="form-label font-normal text-gray-900 m-0">Open mic venue</label>
+        <label
+          htmlFor="venue-openmic"
+          className="form-label font-normal text-gray-900 m-0"
+        >
+          Open mic venue
+        </label>
       </div>
 
       <div className="flex gap-3">
@@ -120,5 +128,3 @@ const PromoterVenueCreateForm = ({ onCreated, onError }: PromoterVenueCreateForm
 };
 
 export { PromoterVenueCreateForm };
-
-

@@ -151,5 +151,4 @@ const Demo1LayoutProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { Demo1LayoutProvider, useDemo1Layout };

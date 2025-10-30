@@ -16,7 +16,10 @@ const PromoterShowsPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createdBy = useMemo(() => currentUser?.email || currentUser?.username || '', [currentUser?.email, currentUser?.username]);
+  const createdBy = useMemo(
+    () => currentUser?.email || currentUser?.username || '',
+    [currentUser?.email, currentUser?.username],
+  );
 
   const fetchShows = async () => {
     if (!createdBy) return;
@@ -46,7 +49,6 @@ const PromoterShowsPage = () => {
 
   useEffect(() => {
     fetchShows();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createdBy]);
 
   return (
@@ -60,11 +62,13 @@ const PromoterShowsPage = () => {
       </div>
 
       <div className="card p-5 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Create a Show</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">
+          Create a Show
+        </h3>
         <PromoterShowCreateForm
           createdBy={createdBy}
           onCreated={() => fetchShows()}
-          onError={(message) => setError(message)}
+          onError={message => setError(message)}
         />
       </div>
 
@@ -76,20 +80,25 @@ const PromoterShowsPage = () => {
 
       {loading ? (
         <div className="flex items-center gap-2 text-gray-600">
-          <div className="spinner-border spinner-border-sm text-primary" role="status" />
+          <div
+            className="spinner-border spinner-border-sm text-primary"
+            role="status"
+          />
           <span>Loading shows…</span>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7.5">
-          {shows.map((item) => {
+          {shows.map(item => {
             // Temporary mapping to existing card props
             return (
               <CardWork
                 key={item.id}
                 title={item.title || 'Untitled Show'}
-                image={"1.jpg"}
-                authorName={currentUser?.fullname || currentUser?.username || 'Me'}
-                authorAvatar={"300-1.png"}
+                image={'1.jpg'}
+                authorName={
+                  currentUser?.fullname || currentUser?.username || 'Me'
+                }
+                authorAvatar={'300-1.png'}
                 likes={0}
                 comments={0}
               />
@@ -102,5 +111,3 @@ const PromoterShowsPage = () => {
 };
 
 export { PromoterShowsPage };
-
-

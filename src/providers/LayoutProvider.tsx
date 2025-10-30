@@ -85,5 +85,4 @@ const LayoutProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { LayoutContext, LayoutProvider, useLayout };

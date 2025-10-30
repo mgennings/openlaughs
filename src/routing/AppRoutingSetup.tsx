@@ -122,14 +122,8 @@ const AppRoutingSetup = (): ReactElement => {
             <Route path="/demo3-layout" element={<Demo3Layout />} />
             <Route path="/demo4-layout" element={<Demo4Layout />} />
             <Route path="/demo5-layout" element={<Demo5Layout />} />
-            <Route
-              path="/promoter/shows"
-              element={<PromoterShowsPage />}
-            />
-            <Route
-              path="/promoter/venues"
-              element={<PromoterVenuesPage />}
-            />
+            <Route path="/promoter/shows" element={<PromoterShowsPage />} />
+            <Route path="/promoter/venues" element={<PromoterVenuesPage />} />
             <Route
               path="/public-profile/profiles/default"
               element={<ProfileDefaultPage />}

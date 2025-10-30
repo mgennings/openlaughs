@@ -33,7 +33,11 @@ const PromoterVenuesPage = () => {
       }
       if ('data' in result) {
         const items = (result.data as ListVenuesQuery).listVenues?.items ?? [];
-        setVenues((items.filter(Boolean) as Venue[]).sort((a, b) => (a.name || '').localeCompare(b.name || '')));
+        setVenues(
+          (items.filter(Boolean) as Venue[]).sort((a, b) =>
+            (a.name || '').localeCompare(b.name || ''),
+          ),
+        );
       }
     } catch (err: any) {
       setError(err?.message || 'Failed to load venues');
@@ -57,8 +61,13 @@ const PromoterVenuesPage = () => {
       </div>
 
       <div className="card p-5 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Create a Venue</h3>
-        <PromoterVenueCreateForm onCreated={fetchVenues} onError={(m) => setError(m)} />
+        <h3 className="text-lg font-medium text-gray-900 mb-4">
+          Create a Venue
+        </h3>
+        <PromoterVenueCreateForm
+          onCreated={fetchVenues}
+          onError={m => setError(m)}
+        />
       </div>
 
       {error && (
@@ -69,7 +78,10 @@ const PromoterVenuesPage = () => {
 
       {loading ? (
         <div className="flex items-center gap-2 text-gray-600">
-          <div className="spinner-border spinner-border-sm text-primary" role="status" />
+          <div
+            className="spinner-border spinner-border-sm text-primary"
+            role="status"
+          />
           <span>Loading venues…</span>
         </div>
       ) : (
@@ -78,7 +90,9 @@ const PromoterVenuesPage = () => {
             <div className="card p-5" key={v.id}>
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900">{v.name}</h4>
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    {v.name}
+                  </h4>
                   <div className="text-sm text-gray-700">{v.city || '—'}</div>
                   <div className="text-sm text-gray-600">{v.address || ''}</div>
                 </div>
@@ -97,5 +111,3 @@ const PromoterVenuesPage = () => {
 };
 
 export { PromoterVenuesPage };
-
-

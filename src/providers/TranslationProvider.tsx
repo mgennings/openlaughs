@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import '@formatjs/intl-relativetimeformat/polyfill';
 import '@formatjs/intl-relativetimeformat/locale-data/en';
 import '@formatjs/intl-relativetimeformat/locale-data/de';

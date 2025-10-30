@@ -85,5 +85,4 @@ const Demo5LayoutProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { Demo5LayoutProvider, useDemo5Layout };

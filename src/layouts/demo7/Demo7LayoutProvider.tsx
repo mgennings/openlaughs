@@ -85,5 +85,4 @@ const Demo7LayoutProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { Demo7LayoutProvider, useDemo7Layout };

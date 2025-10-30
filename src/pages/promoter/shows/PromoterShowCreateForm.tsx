@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { createShow } from '@/graphql/mutations';
 import { listVenues } from '@/graphql/queries';
@@ -12,7 +12,11 @@ interface PromoterShowCreateFormProps {
 
 const client = generateClient({ authMode: 'userPool' });
 
-const PromoterShowCreateForm = ({ createdBy, onCreated, onError }: PromoterShowCreateFormProps) => {
+const PromoterShowCreateForm = ({
+  createdBy,
+  onCreated,
+  onError,
+}: PromoterShowCreateFormProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dateTime, setDateTime] = useState('');
@@ -32,8 +36,13 @@ const PromoterShowCreateForm = ({ createdBy, onCreated, onError }: PromoterShowC
           variables: { limit: 100 },
         });
         if ('data' in result) {
-          const items = (result.data as ListVenuesQuery).listVenues?.items ?? [];
-          setVenues((items.filter(Boolean) as Venue[]).sort((a, b) => (a.name || '').localeCompare(b.name || '')));
+          const items =
+            (result.data as ListVenuesQuery).listVenues?.items ?? [];
+          setVenues(
+            (items.filter(Boolean) as Venue[]).sort((a, b) =>
+              (a.name || '').localeCompare(b.name || ''),
+            ),
+          );
         }
       } catch (err: any) {
         setVenuesError(err?.message || 'Failed to load venues');
@@ -95,7 +104,9 @@ const PromoterShowCreateForm = ({ createdBy, onCreated, onError }: PromoterShowC
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="form-label font-normal text-gray-900">Description</label>
+        <label className="form-label font-normal text-gray-900">
+          Description
+        </label>
         <input
           className="input"
           type="text"
@@ -106,7 +117,9 @@ const PromoterShowCreateForm = ({ createdBy, onCreated, onError }: PromoterShowC
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="form-label font-normal text-gray-900">Date time</label>
+        <label className="form-label font-normal text-gray-900">
+          Date time
+        </label>
         <input
           className="input"
           type="datetime-local"
@@ -125,10 +138,13 @@ const PromoterShowCreateForm = ({ createdBy, onCreated, onError }: PromoterShowC
           onChange={e => setVenueID(e.target.value)}
           required
         >
-          <option value="">{venuesLoading ? 'Loading venues…' : 'Select a venue'}</option>
+          <option value="">
+            {venuesLoading ? 'Loading venues…' : 'Select a venue'}
+          </option>
           {venues.map(v => (
             <option key={v.id} value={v.id || ''}>
-              {v.name}{v.city ? ` — ${v.city}` : ''}
+              {v.name}
+              {v.city ? ` — ${v.city}` : ''}
             </option>
           ))}
         </select>
@@ -160,5 +176,3 @@ const PromoterShowCreateForm = ({ createdBy, onCreated, onError }: PromoterShowC
 };
 
 export { PromoterShowCreateForm };
-
-
