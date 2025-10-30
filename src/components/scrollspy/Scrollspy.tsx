@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { throttle } from '@/utils';
 import * as React from 'react';
 import {

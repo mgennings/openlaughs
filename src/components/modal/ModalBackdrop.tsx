@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 

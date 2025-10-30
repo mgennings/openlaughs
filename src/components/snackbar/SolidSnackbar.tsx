@@ -12,7 +12,6 @@ export type TSolidSnackbar =
   | 'info';
 
 declare module 'notistack' {
-  // eslint-disable-next-line no-unused-vars
   interface VariantOverrides {
     solid: {
       state: TSolidSnackbar;

@@ -7,7 +7,6 @@ import {
   LoadersProvider,
   MenusProvider,
   SettingsProvider,
-  // eslint-disable-next-line no-unused-vars
   SnackbarProvider,
   TranslationProvider,
 } from '@/providers';

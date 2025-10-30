@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-/* eslint-disable no-unused-vars */
+
 import {
   createContext,
   type Dispatch,
