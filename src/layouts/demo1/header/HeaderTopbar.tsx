@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { KeenIcon } from '@/components/keenicons';
 import { toAbsoluteUrl } from '@/utils';
 import { Menu, MenuItem, MenuToggle } from '@/components';
@@ -8,6 +8,12 @@ import { DropdownApps } from '@/partials/dropdowns/apps';
 import { DropdownChat } from '@/partials/dropdowns/chat';
 import { ModalSearch } from '@/partials/modals/search/ModalSearch';
 import { useLanguage } from '@/i18n';
+import { useAuthContext } from '@/auth';
+import { useGraphQL } from '@/lib/useGraphQL';
+import { listUserProfiles } from '@/graphql/queries';
+import type { UserProfile } from '@/API';
+import { getPublicUrl } from '@/lib/storage';
+import { getInitials } from '@/lib/userDisplay';
 
 const HeaderTopbar = () => {
   const { isRTL } = useLanguage();
@@ -15,12 +21,43 @@ const HeaderTopbar = () => {
   const itemAppsRef = useRef<any>(null);
   const itemUserRef = useRef<any>(null);
   const itemNotificationsRef = useRef<any>(null);
+  const { currentUser } = useAuthContext();
+  const { execute } = useGraphQL();
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>();
+  const [initials, setInitials] = useState<string>('U');
 
   const handleShow = () => {
     window.dispatchEvent(new Event('resize'));
   };
 
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  useEffect(() => {
+    const init = async () => {
+      const email = currentUser?.email;
+      const first = currentUser?.first_name;
+      const last = currentUser?.last_name;
+      setInitials(getInitials({ firstName: first, lastName: last, email }));
+      if (!email) return;
+      const data = await execute<{
+        listUserProfiles: { items: (UserProfile | null)[] };
+      }>(listUserProfiles, {
+        variables: { filter: { email: { eq: email } }, limit: 1 },
+      });
+      const prof = data.listUserProfiles.items.filter(Boolean)[0] as
+        | UserProfile
+        | undefined;
+      if (prof?.profileImageKey) {
+        const url = await getPublicUrl(prof.profileImageKey, 300);
+        setAvatarUrl(url.toString());
+      }
+    };
+    void init();
+  }, [
+    currentUser?.email,
+    currentUser?.first_name,
+    currentUser?.last_name,
+    execute,
+  ]);
   const handleOpen = () => setSearchModalOpen(true);
   const handleClose = () => {
     setSearchModalOpen(false);
@@ -129,11 +166,17 @@ const HeaderTopbar = () => {
           }}
         >
           <MenuToggle className="btn btn-icon rounded-full">
-            <img
-              className="size-9 rounded-full border-2 border-success shrink-0"
-              src={toAbsoluteUrl('/media/avatars/300-2.png')}
-              alt=""
-            />
+            {avatarUrl ? (
+              <img
+                className="size-9 rounded-full border-2 border-success shrink-0"
+                src={avatarUrl}
+                alt="avatar"
+              />
+            ) : (
+              <div className="size-9 rounded-full border-2 border-success bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
+                {initials}
+              </div>
+            )}
           </MenuToggle>
           {DropdownUser({ menuItemRef: itemUserRef })}
         </MenuItem>

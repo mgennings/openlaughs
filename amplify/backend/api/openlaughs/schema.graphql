@@ -51,5 +51,16 @@ type UserProfile
   id: ID!
   email: AWSEmail!
   displayName: String
+  firstName: String
+  lastName: String
+  gender: String
+  birthdate: AWSDate
+  profileImageKey: String
+  addressLine1: String
+  addressLine2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
   role: String!
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment } from 'react';
+import { ChangeEvent, Fragment, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useAuthContext } from '@/auth';
@@ -7,6 +7,11 @@ import { toAbsoluteUrl } from '@/utils';
 import { DropdownUserLanguages } from './DropdownUserLanguages';
 import { useSettings } from '@/providers/SettingsProvider';
 import { DefaultTooltip, KeenIcon } from '@/components';
+import { useGraphQL } from '@/lib/useGraphQL';
+import { listUserProfiles } from '@/graphql/queries';
+import type { UserProfile } from '@/API';
+import { getPublicUrl } from '@/lib/storage';
+import { getInitials, getUserDisplayName } from '@/lib/userDisplay';
 import {
   MenuItem,
   MenuLink,
@@ -26,6 +31,30 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
   const { logout, currentUser } = useAuthContext();
   const { isRTL } = useLanguage();
   const navigate = useNavigate();
+  const { execute } = useGraphQL();
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>();
+  const [profile, setProfile] = useState<UserProfile | undefined>();
+
+  useEffect(() => {
+    const init = async () => {
+      const email = currentUser?.email;
+      if (!email) return;
+      const data = await execute<{
+        listUserProfiles: { items: (UserProfile | null)[] };
+      }>(listUserProfiles, {
+        variables: { filter: { email: { eq: email } }, limit: 1 },
+      });
+      const prof = data.listUserProfiles.items.filter(Boolean)[0] as
+        | UserProfile
+        | undefined;
+      if (prof?.profileImageKey) {
+        const url = await getPublicUrl(prof.profileImageKey, 300);
+        setAvatarUrl(url.toString());
+      }
+      setProfile(prof);
+    };
+    void init();
+  }, [currentUser?.email, execute]);
 
   const handleThemeMode = (event: ChangeEvent<HTMLInputElement>) => {
     const newThemeMode = event.target.checked ? 'dark' : 'light';
@@ -36,32 +65,31 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
   };
 
   const buildHeader = () => {
-    const userName =
-      currentUser?.fullname ||
-      currentUser?.username ||
-      currentUser?.email ||
-      'User';
+    const userName = getUserDisplayName({
+      firstName: profile?.firstName || currentUser?.first_name,
+      lastName: profile?.lastName || currentUser?.last_name,
+      email: currentUser?.email,
+      shortLastName: true,
+    });
     const userEmail = currentUser?.email || '';
-    const userInitials =
-      userName
-        .split(' ')
-        .map(n => n[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2) || 'U';
+    const userInitials = getInitials({
+      firstName: profile?.firstName || currentUser?.first_name,
+      lastName: profile?.lastName || currentUser?.last_name,
+      email: currentUser?.email,
+    });
 
     return (
       <div className="flex items-center justify-between px-5 py-1.5 gap-1.5">
         <div className="flex items-center gap-2">
-          {currentUser?.pic ? (
+          {avatarUrl ? (
             <img
               className="size-9 rounded-full border-2 border-success"
-              src={currentUser.pic}
+              src={avatarUrl}
               alt={userName}
             />
           ) : (
             <div className="size-9 rounded-full border-2 border-success bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
-              {userInitials}
+              {userInitials.toUpperCase()}
             </div>
           )}
           <div className="flex flex-col gap-1.5">

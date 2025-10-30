@@ -27,12 +27,40 @@ export default function UserProfileUpdateForm(props) {
   const initialValues = {
     email: "",
     displayName: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    birthdate: "",
+    profileImageKey: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
     role: "",
   };
   const [email, setEmail] = React.useState(initialValues.email);
   const [displayName, setDisplayName] = React.useState(
     initialValues.displayName
   );
+  const [firstName, setFirstName] = React.useState(initialValues.firstName);
+  const [lastName, setLastName] = React.useState(initialValues.lastName);
+  const [gender, setGender] = React.useState(initialValues.gender);
+  const [birthdate, setBirthdate] = React.useState(initialValues.birthdate);
+  const [profileImageKey, setProfileImageKey] = React.useState(
+    initialValues.profileImageKey
+  );
+  const [addressLine1, setAddressLine1] = React.useState(
+    initialValues.addressLine1
+  );
+  const [addressLine2, setAddressLine2] = React.useState(
+    initialValues.addressLine2
+  );
+  const [city, setCity] = React.useState(initialValues.city);
+  const [state, setState] = React.useState(initialValues.state);
+  const [postalCode, setPostalCode] = React.useState(initialValues.postalCode);
+  const [country, setCountry] = React.useState(initialValues.country);
   const [role, setRole] = React.useState(initialValues.role);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -41,6 +69,17 @@ export default function UserProfileUpdateForm(props) {
       : initialValues;
     setEmail(cleanValues.email);
     setDisplayName(cleanValues.displayName);
+    setFirstName(cleanValues.firstName);
+    setLastName(cleanValues.lastName);
+    setGender(cleanValues.gender);
+    setBirthdate(cleanValues.birthdate);
+    setProfileImageKey(cleanValues.profileImageKey);
+    setAddressLine1(cleanValues.addressLine1);
+    setAddressLine2(cleanValues.addressLine2);
+    setCity(cleanValues.city);
+    setState(cleanValues.state);
+    setPostalCode(cleanValues.postalCode);
+    setCountry(cleanValues.country);
     setRole(cleanValues.role);
     setErrors({});
   };
@@ -64,6 +103,17 @@ export default function UserProfileUpdateForm(props) {
   const validations = {
     email: [{ type: "Required" }, { type: "Email" }],
     displayName: [],
+    firstName: [],
+    lastName: [],
+    gender: [],
+    birthdate: [],
+    profileImageKey: [],
+    addressLine1: [],
+    addressLine2: [],
+    city: [],
+    state: [],
+    postalCode: [],
+    country: [],
     role: [{ type: "Required" }],
   };
   const runValidationTasks = async (
@@ -94,6 +144,17 @@ export default function UserProfileUpdateForm(props) {
         let modelFields = {
           email,
           displayName: displayName ?? null,
+          firstName: firstName ?? null,
+          lastName: lastName ?? null,
+          gender: gender ?? null,
+          birthdate: birthdate ?? null,
+          profileImageKey: profileImageKey ?? null,
+          addressLine1: addressLine1 ?? null,
+          addressLine2: addressLine2 ?? null,
+          city: city ?? null,
+          state: state ?? null,
+          postalCode: postalCode ?? null,
+          country: country ?? null,
           role,
         };
         const validationResponses = await Promise.all(
@@ -157,6 +218,17 @@ export default function UserProfileUpdateForm(props) {
             const modelFields = {
               email: value,
               displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
               role,
             };
             const result = onChange(modelFields);
@@ -183,6 +255,17 @@ export default function UserProfileUpdateForm(props) {
             const modelFields = {
               email,
               displayName: value,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
               role,
             };
             const result = onChange(modelFields);
@@ -199,6 +282,414 @@ export default function UserProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "displayName")}
       ></TextField>
       <TextField
+        label="First name"
+        isRequired={false}
+        isReadOnly={false}
+        value={firstName}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName: value,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.firstName ?? value;
+          }
+          if (errors.firstName?.hasError) {
+            runValidationTasks("firstName", value);
+          }
+          setFirstName(value);
+        }}
+        onBlur={() => runValidationTasks("firstName", firstName)}
+        errorMessage={errors.firstName?.errorMessage}
+        hasError={errors.firstName?.hasError}
+        {...getOverrideProps(overrides, "firstName")}
+      ></TextField>
+      <TextField
+        label="Last name"
+        isRequired={false}
+        isReadOnly={false}
+        value={lastName}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName: value,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.lastName ?? value;
+          }
+          if (errors.lastName?.hasError) {
+            runValidationTasks("lastName", value);
+          }
+          setLastName(value);
+        }}
+        onBlur={() => runValidationTasks("lastName", lastName)}
+        errorMessage={errors.lastName?.errorMessage}
+        hasError={errors.lastName?.hasError}
+        {...getOverrideProps(overrides, "lastName")}
+      ></TextField>
+      <TextField
+        label="Gender"
+        isRequired={false}
+        isReadOnly={false}
+        value={gender}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender: value,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.gender ?? value;
+          }
+          if (errors.gender?.hasError) {
+            runValidationTasks("gender", value);
+          }
+          setGender(value);
+        }}
+        onBlur={() => runValidationTasks("gender", gender)}
+        errorMessage={errors.gender?.errorMessage}
+        hasError={errors.gender?.hasError}
+        {...getOverrideProps(overrides, "gender")}
+      ></TextField>
+      <TextField
+        label="Birthdate"
+        isRequired={false}
+        isReadOnly={false}
+        type="date"
+        value={birthdate}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate: value,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.birthdate ?? value;
+          }
+          if (errors.birthdate?.hasError) {
+            runValidationTasks("birthdate", value);
+          }
+          setBirthdate(value);
+        }}
+        onBlur={() => runValidationTasks("birthdate", birthdate)}
+        errorMessage={errors.birthdate?.errorMessage}
+        hasError={errors.birthdate?.hasError}
+        {...getOverrideProps(overrides, "birthdate")}
+      ></TextField>
+      <TextField
+        label="Profile image key"
+        isRequired={false}
+        isReadOnly={false}
+        value={profileImageKey}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey: value,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.profileImageKey ?? value;
+          }
+          if (errors.profileImageKey?.hasError) {
+            runValidationTasks("profileImageKey", value);
+          }
+          setProfileImageKey(value);
+        }}
+        onBlur={() => runValidationTasks("profileImageKey", profileImageKey)}
+        errorMessage={errors.profileImageKey?.errorMessage}
+        hasError={errors.profileImageKey?.hasError}
+        {...getOverrideProps(overrides, "profileImageKey")}
+      ></TextField>
+      <TextField
+        label="Address line1"
+        isRequired={false}
+        isReadOnly={false}
+        value={addressLine1}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1: value,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.addressLine1 ?? value;
+          }
+          if (errors.addressLine1?.hasError) {
+            runValidationTasks("addressLine1", value);
+          }
+          setAddressLine1(value);
+        }}
+        onBlur={() => runValidationTasks("addressLine1", addressLine1)}
+        errorMessage={errors.addressLine1?.errorMessage}
+        hasError={errors.addressLine1?.hasError}
+        {...getOverrideProps(overrides, "addressLine1")}
+      ></TextField>
+      <TextField
+        label="Address line2"
+        isRequired={false}
+        isReadOnly={false}
+        value={addressLine2}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2: value,
+              city,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.addressLine2 ?? value;
+          }
+          if (errors.addressLine2?.hasError) {
+            runValidationTasks("addressLine2", value);
+          }
+          setAddressLine2(value);
+        }}
+        onBlur={() => runValidationTasks("addressLine2", addressLine2)}
+        errorMessage={errors.addressLine2?.errorMessage}
+        hasError={errors.addressLine2?.hasError}
+        {...getOverrideProps(overrides, "addressLine2")}
+      ></TextField>
+      <TextField
+        label="City"
+        isRequired={false}
+        isReadOnly={false}
+        value={city}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city: value,
+              state,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.city ?? value;
+          }
+          if (errors.city?.hasError) {
+            runValidationTasks("city", value);
+          }
+          setCity(value);
+        }}
+        onBlur={() => runValidationTasks("city", city)}
+        errorMessage={errors.city?.errorMessage}
+        hasError={errors.city?.hasError}
+        {...getOverrideProps(overrides, "city")}
+      ></TextField>
+      <TextField
+        label="State"
+        isRequired={false}
+        isReadOnly={false}
+        value={state}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state: value,
+              postalCode,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.state ?? value;
+          }
+          if (errors.state?.hasError) {
+            runValidationTasks("state", value);
+          }
+          setState(value);
+        }}
+        onBlur={() => runValidationTasks("state", state)}
+        errorMessage={errors.state?.errorMessage}
+        hasError={errors.state?.hasError}
+        {...getOverrideProps(overrides, "state")}
+      ></TextField>
+      <TextField
+        label="Postal code"
+        isRequired={false}
+        isReadOnly={false}
+        value={postalCode}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode: value,
+              country,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.postalCode ?? value;
+          }
+          if (errors.postalCode?.hasError) {
+            runValidationTasks("postalCode", value);
+          }
+          setPostalCode(value);
+        }}
+        onBlur={() => runValidationTasks("postalCode", postalCode)}
+        errorMessage={errors.postalCode?.errorMessage}
+        hasError={errors.postalCode?.hasError}
+        {...getOverrideProps(overrides, "postalCode")}
+      ></TextField>
+      <TextField
+        label="Country"
+        isRequired={false}
+        isReadOnly={false}
+        value={country}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country: value,
+              role,
+            };
+            const result = onChange(modelFields);
+            value = result?.country ?? value;
+          }
+          if (errors.country?.hasError) {
+            runValidationTasks("country", value);
+          }
+          setCountry(value);
+        }}
+        onBlur={() => runValidationTasks("country", country)}
+        errorMessage={errors.country?.errorMessage}
+        hasError={errors.country?.hasError}
+        {...getOverrideProps(overrides, "country")}
+      ></TextField>
+      <TextField
         label="Role"
         isRequired={true}
         isReadOnly={false}
@@ -209,6 +700,17 @@ export default function UserProfileUpdateForm(props) {
             const modelFields = {
               email,
               displayName,
+              firstName,
+              lastName,
+              gender,
+              birthdate,
+              profileImageKey,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              postalCode,
+              country,
               role: value,
             };
             const result = onChange(modelFields);

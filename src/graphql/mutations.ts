@@ -133,6 +133,17 @@ export const createUserProfile = /* GraphQL */ `mutation CreateUserProfile(
     id
     email
     displayName
+    firstName
+    lastName
+    gender
+    birthdate
+    profileImageKey
+    addressLine1
+    addressLine2
+    city
+    state
+    postalCode
+    country
     role
     createdAt
     updatedAt
@@ -152,6 +163,17 @@ export const updateUserProfile = /* GraphQL */ `mutation UpdateUserProfile(
     id
     email
     displayName
+    firstName
+    lastName
+    gender
+    birthdate
+    profileImageKey
+    addressLine1
+    addressLine2
+    city
+    state
+    postalCode
+    country
     role
     createdAt
     updatedAt
@@ -171,6 +193,17 @@ export const deleteUserProfile = /* GraphQL */ `mutation DeleteUserProfile(
     id
     email
     displayName
+    firstName
+    lastName
+    gender
+    birthdate
+    profileImageKey
+    addressLine1
+    addressLine2
+    city
+    state
+    postalCode
+    country
     role
     createdAt
     updatedAt

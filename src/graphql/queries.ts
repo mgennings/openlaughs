@@ -13,6 +13,17 @@ export const getUserProfile = /* GraphQL */ `query GetUserProfile($id: ID!) {
     id
     email
     displayName
+    firstName
+    lastName
+    gender
+    birthdate
+    profileImageKey
+    addressLine1
+    addressLine2
+    city
+    state
+    postalCode
+    country
     role
     createdAt
     updatedAt
@@ -34,6 +45,17 @@ export const listUserProfiles = /* GraphQL */ `query ListUserProfiles(
       id
       email
       displayName
+      firstName
+      lastName
+      gender
+      birthdate
+      profileImageKey
+      addressLine1
+      addressLine2
+      city
+      state
+      postalCode
+      country
       role
       createdAt
       updatedAt

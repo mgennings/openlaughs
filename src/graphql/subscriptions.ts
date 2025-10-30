@@ -16,6 +16,17 @@ export const onCreateUserProfile = /* GraphQL */ `subscription OnCreateUserProfi
     id
     email
     displayName
+    firstName
+    lastName
+    gender
+    birthdate
+    profileImageKey
+    addressLine1
+    addressLine2
+    city
+    state
+    postalCode
+    country
     role
     createdAt
     updatedAt
@@ -35,6 +46,17 @@ export const onUpdateUserProfile = /* GraphQL */ `subscription OnUpdateUserProfi
     id
     email
     displayName
+    firstName
+    lastName
+    gender
+    birthdate
+    profileImageKey
+    addressLine1
+    addressLine2
+    city
+    state
+    postalCode
+    country
     role
     createdAt
     updatedAt
@@ -54,6 +76,17 @@ export const onDeleteUserProfile = /* GraphQL */ `subscription OnDeleteUserProfi
     id
     email
     displayName
+    firstName
+    lastName
+    gender
+    birthdate
+    profileImageKey
+    addressLine1
+    addressLine2
+    city
+    state
+    postalCode
+    country
     role
     createdAt
     updatedAt
