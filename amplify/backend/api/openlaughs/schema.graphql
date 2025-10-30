@@ -7,6 +7,7 @@ type Show
         groups: ["promoter", "admin"]
         operations: [create, update, delete]
       }
+      { allow: private, operations: [read] }
       { allow: public, operations: [read] }
     ]
   ) {
@@ -22,7 +23,12 @@ type Venue
   @model
   @auth(
     rules: [
-      { allow: groups, groups: ["admin"], operations: [create, update, delete] }
+      {
+        allow: groups
+        groups: ["promoter", "admin"]
+        operations: [create, update, delete]
+      }
+      { allow: private, operations: [read] }
       { allow: public, operations: [read] }
     ]
   ) {
@@ -39,6 +45,7 @@ type UserProfile
     rules: [
       { allow: owner }
       { allow: groups, groups: ["admin"], operations: [read, update, delete] }
+      { allow: private, operations: [read] }
     ]
   ) {
   id: ID!
