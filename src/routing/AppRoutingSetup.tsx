@@ -92,6 +92,7 @@ import { Demo4Layout } from '@/layouts/demo4';
 import { Demo5Layout } from '@/layouts/demo5';
 import { PromoterShowsPage } from '@/pages/promoter/shows/PromoterShowsPage';
 import { PromoterVenuesPage } from '@/pages/promoter/venues/PromoterVenuesPage';
+import { PromoterVenueDetailPage } from '@/pages/promoter/venues/PromoterVenueDetailPage';
 
 const AppRoutingSetup = (): ReactElement => {
   return (
@@ -124,6 +125,10 @@ const AppRoutingSetup = (): ReactElement => {
             <Route path="/demo5-layout" element={<Demo5Layout />} />
             <Route path="/promoter/shows" element={<PromoterShowsPage />} />
             <Route path="/promoter/venues" element={<PromoterVenuesPage />} />
+            <Route
+              path="/promoter/venues/:id"
+              element={<PromoterVenueDetailPage />}
+            />
             <Route
               path="/public-profile/profiles/default"
               element={<ProfileDefaultPage />}

@@ -36,7 +36,17 @@ type Venue
   name: String!
   address: String
   city: String
+  state: String
+  postalCode: String
+  country: String
   openMic: Boolean
+  bio: String
+  description: String
+  venueImageKeys: [String!]
+  googleReviewsLink: String
+  website: String
+  phone: String
+  email: String
 }
 
 type UserProfile

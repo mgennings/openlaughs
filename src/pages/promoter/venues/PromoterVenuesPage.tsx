@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Container } from '@/components/container';
 import { KeenIcon } from '@/components';
 import { generateClient } from 'aws-amplify/api';
@@ -87,14 +88,30 @@ const PromoterVenuesPage = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7.5">
           {venues.map(v => (
-            <div className="card p-5" key={v.id}>
+            <Link
+              to={`/promoter/venues/${v.id}`}
+              className="card p-5 hover:shadow-lg transition-shadow cursor-pointer"
+              key={v.id}
+            >
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">
+                <div className="flex-1">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-1">
                     {v.name}
                   </h4>
-                  <div className="text-sm text-gray-700">{v.city || '—'}</div>
-                  <div className="text-sm text-gray-600">{v.address || ''}</div>
+                  {v.bio && (
+                    <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                      {v.bio}
+                    </p>
+                  )}
+                  <div className="text-sm text-gray-700">
+                    {v.city || '—'}
+                    {v.state && `, ${v.state}`}
+                  </div>
+                  {v.address && (
+                    <div className="text-sm text-gray-600 mt-1">
+                      {v.address}
+                    </div>
+                  )}
                 </div>
                 {v.openMic ? (
                   <span className="badge badge-success">Open Mic</span>
@@ -102,7 +119,11 @@ const PromoterVenuesPage = () => {
                   <span className="badge badge-light">Venue</span>
                 )}
               </div>
-            </div>
+              <div className="mt-4 flex items-center gap-2 text-sm text-primary">
+                <span>View Details</span>
+                <KeenIcon icon="arrow-right" className="text-xs" />
+              </div>
+            </Link>
           ))}
         </div>
       )}

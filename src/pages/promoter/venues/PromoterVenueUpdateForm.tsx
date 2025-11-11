@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { generateClient } from 'aws-amplify/api';
-import { createVenue } from '@/graphql/mutations';
+import { updateVenue } from '@/graphql/mutations';
+import { getVenue } from '@/graphql/queries';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
-import { uploadPublicImage } from '@/lib/storage';
+import { uploadPublicImage, getPublicUrl } from '@/lib/storage';
+import type { Venue } from '@/API';
 
-interface PromoterVenueCreateFormProps {
-  onCreated?: () => void;
+interface PromoterVenueUpdateFormProps {
+  venueId: string;
+  onUpdated?: () => void;
   onError?: (message: string) => void;
 }
 
 const client = generateClient({ authMode: 'userPool' });
 
-const PromoterVenueCreateForm = ({
-  onCreated,
+const PromoterVenueUpdateForm = ({
+  venueId,
+  onUpdated,
   onError,
-}: PromoterVenueCreateFormProps) => {
+}: PromoterVenueUpdateFormProps) => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -29,25 +33,78 @@ const PromoterVenueCreateForm = ({
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [venueImages, setVenueImages] = useState<TImageInputFiles>([]);
+  const [existingImageKeys, setExistingImageKeys] = useState<string[]>([]);
+  const [existingImageUrls, setExistingImageUrls] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const loadVenue = async () => {
+      try {
+        const result = await client.graphql({
+          query: (getVenue as string).replace(/__typename/g, ''),
+          variables: { id: venueId },
+        });
+
+        if ('data' in result && result.data?.getVenue) {
+          const venue = result.data.getVenue as Venue;
+          setName(venue.name || '');
+          setAddress(venue.address || '');
+          setCity(venue.city || '');
+          setState(venue.state || '');
+          setPostalCode(venue.postalCode || '');
+          setCountry(venue.country || '');
+          setOpenMic(venue.openMic || false);
+          setBio(venue.bio || '');
+          setDescription(venue.description || '');
+          setGoogleReviewsLink(venue.googleReviewsLink || '');
+          setWebsite(venue.website || '');
+          setPhone(venue.phone || '');
+          setEmail(venue.email || '');
+
+          if (venue.venueImageKeys && venue.venueImageKeys.length > 0) {
+            const validKeys = venue.venueImageKeys.filter(
+              (key): key is string => key !== null && key !== undefined,
+            );
+            setExistingImageKeys(validKeys);
+            // Load existing image URLs
+            const urls = await Promise.all(
+              validKeys.map(key => getPublicUrl(key)),
+            );
+            setExistingImageUrls(urls.map(url => url.toString()));
+          }
+        }
+      } catch (err: any) {
+        onError?.(err?.message || 'Failed to load venue');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void loadVenue();
+  }, [venueId, onError]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
     setSubmitting(true);
     try {
-      // Upload images first
-      const imageKeys: string[] = [];
+      // Upload new images
+      const newImageKeys: string[] = [];
       for (const imageFile of venueImages) {
         if (imageFile.file) {
           const ext = imageFile.file.name.split('.').pop() || 'jpg';
           const key = `venue-images/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
           await uploadPublicImage(key, imageFile.file, imageFile.file.type);
-          imageKeys.push(key);
+          newImageKeys.push(key);
         }
       }
 
+      // Combine existing and new image keys
+      const allImageKeys = [...existingImageKeys, ...newImageKeys];
+
       const input = {
+        id: venueId,
         name,
         address: address || null,
         city: city || null,
@@ -57,7 +114,7 @@ const PromoterVenueCreateForm = ({
         openMic,
         bio: bio || null,
         description: description || null,
-        venueImageKeys: imageKeys.length > 0 ? imageKeys : null,
+        venueImageKeys: allImageKeys.length > 0 ? allImageKeys : null,
         googleReviewsLink: googleReviewsLink || null,
         website: website || null,
         phone: phone || null,
@@ -65,7 +122,7 @@ const PromoterVenueCreateForm = ({
       } as any;
 
       const result = await client.graphql({
-        query: (createVenue as string).replace(/__typename/g, ''),
+        query: (updateVenue as string).replace(/__typename/g, ''),
         variables: { input },
       });
 
@@ -74,28 +131,32 @@ const PromoterVenueCreateForm = ({
         throw new Error(message);
       }
 
-      // Reset form
-      setName('');
-      setAddress('');
-      setCity('');
-      setState('');
-      setPostalCode('');
-      setCountry('');
-      setOpenMic(false);
-      setBio('');
-      setDescription('');
-      setGoogleReviewsLink('');
-      setWebsite('');
-      setPhone('');
-      setEmail('');
-      setVenueImages([]);
-      onCreated?.();
+      onUpdated?.();
     } catch (err: any) {
-      onError?.(err?.message || 'Failed to create venue');
+      onError?.(err?.message || 'Failed to update venue');
     } finally {
       setSubmitting(false);
     }
   };
+
+  const handleRemoveExistingImage = (index: number) => {
+    const newKeys = existingImageKeys.filter((_, i) => i !== index);
+    const newUrls = existingImageUrls.filter((_, i) => i !== index);
+    setExistingImageKeys(newKeys);
+    setExistingImageUrls(newUrls);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <div
+          className="spinner-border spinner-border-sm text-primary"
+          role="status"
+        />
+        <span className="ml-2 text-gray-600">Loading venue...</span>
+      </div>
+    );
+  }
 
   return (
     <form className="card-body flex flex-col gap-5 p-0" onSubmit={handleSubmit}>
@@ -178,10 +239,9 @@ const PromoterVenueCreateForm = ({
 
       <div className="flex flex-col gap-1">
         <label className="form-label font-normal text-gray-900">Bio</label>
-        <input
+        <textarea
           className="input"
-          type="text"
-          // rows={5}
+          rows={3}
           placeholder="Short bio or tagline for the venue"
           value={bio}
           onChange={e => setBio(e.target.value)}
@@ -205,6 +265,41 @@ const PromoterVenueCreateForm = ({
         <label className="form-label font-normal text-gray-900">
           Venue Images
         </label>
+        {existingImageUrls.length > 0 && (
+          <div className="mb-3">
+            <p className="text-sm text-gray-600 mb-2">Existing Images:</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {existingImageUrls.map((url, index) => (
+                <div key={index} className="relative group">
+                  <img
+                    src={url}
+                    alt={`Venue image ${index + 1}`}
+                    className="w-full h-32 object-cover rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveExistingImage(index)}
+                    className="absolute top-2 right-2 bg-danger text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <ImageInput
           value={venueImages}
           onChange={setVenueImages}
@@ -345,35 +440,12 @@ const PromoterVenueCreateForm = ({
       </div>
 
       <div className="flex gap-3">
-        <button
-          type="button"
-          className="btn btn-light"
-          onClick={() => {
-            setName('');
-            setAddress('');
-            setCity('');
-            setState('');
-            setPostalCode('');
-            setCountry('');
-            setOpenMic(false);
-            setBio('');
-            setDescription('');
-            setGoogleReviewsLink('');
-            setWebsite('');
-            setPhone('');
-            setEmail('');
-            setVenueImages([]);
-          }}
-          disabled={submitting}
-        >
-          Clear
-        </button>
         <button className="btn btn-primary" type="submit" disabled={submitting}>
-          {submitting ? 'Submitting…' : 'Submit'}
+          {submitting ? 'Updating…' : 'Update Venue'}
         </button>
       </div>
     </form>
   );
 };
 
-export { PromoterVenueCreateForm };
+export { PromoterVenueUpdateForm };

@@ -1,8 +1,7 @@
 /* tslint:disable */
-/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from '../API';
 type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryInput: InputType;
   __generatedQueryOutput: OutputType;
@@ -112,7 +111,17 @@ export const getVenue = /* GraphQL */ `query GetVenue($id: ID!) {
     name
     address
     city
+    state
+    postalCode
+    country
     openMic
+    bio
+    description
+    venueImageKeys
+    googleReviewsLink
+    website
+    phone
+    email
     createdAt
     updatedAt
     __typename
@@ -130,7 +139,17 @@ export const listVenues = /* GraphQL */ `query ListVenues(
       name
       address
       city
+      state
+      postalCode
+      country
       openMic
+      bio
+      description
+      venueImageKeys
+      googleReviewsLink
+      website
+      phone
+      email
       createdAt
       updatedAt
       __typename

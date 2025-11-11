@@ -1,14 +1,14 @@
 /* tslint:disable */
-/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from '../API';
 type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionInput: InputType;
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateUserProfile = /* GraphQL */ `subscription OnCreateUserProfile(
+export const onCreateUserProfile =
+  /* GraphQL */ `subscription OnCreateUserProfile(
   $filter: ModelSubscriptionUserProfileFilterInput
   $owner: String
 ) {
@@ -35,10 +35,11 @@ export const onCreateUserProfile = /* GraphQL */ `subscription OnCreateUserProfi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateUserProfileSubscriptionVariables,
-  APITypes.OnCreateUserProfileSubscription
->;
-export const onUpdateUserProfile = /* GraphQL */ `subscription OnUpdateUserProfile(
+    APITypes.OnCreateUserProfileSubscriptionVariables,
+    APITypes.OnCreateUserProfileSubscription
+  >;
+export const onUpdateUserProfile =
+  /* GraphQL */ `subscription OnUpdateUserProfile(
   $filter: ModelSubscriptionUserProfileFilterInput
   $owner: String
 ) {
@@ -65,10 +66,11 @@ export const onUpdateUserProfile = /* GraphQL */ `subscription OnUpdateUserProfi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateUserProfileSubscriptionVariables,
-  APITypes.OnUpdateUserProfileSubscription
->;
-export const onDeleteUserProfile = /* GraphQL */ `subscription OnDeleteUserProfile(
+    APITypes.OnUpdateUserProfileSubscriptionVariables,
+    APITypes.OnUpdateUserProfileSubscription
+  >;
+export const onDeleteUserProfile =
+  /* GraphQL */ `subscription OnDeleteUserProfile(
   $filter: ModelSubscriptionUserProfileFilterInput
   $owner: String
 ) {
@@ -95,10 +97,11 @@ export const onDeleteUserProfile = /* GraphQL */ `subscription OnDeleteUserProfi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteUserProfileSubscriptionVariables,
-  APITypes.OnDeleteUserProfileSubscription
->;
-export const onCreateShow = /* GraphQL */ `subscription OnCreateShow($filter: ModelSubscriptionShowFilterInput) {
+    APITypes.OnDeleteUserProfileSubscriptionVariables,
+    APITypes.OnDeleteUserProfileSubscription
+  >;
+export const onCreateShow =
+  /* GraphQL */ `subscription OnCreateShow($filter: ModelSubscriptionShowFilterInput) {
   onCreateShow(filter: $filter) {
     id
     title
@@ -112,10 +115,11 @@ export const onCreateShow = /* GraphQL */ `subscription OnCreateShow($filter: Mo
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateShowSubscriptionVariables,
-  APITypes.OnCreateShowSubscription
->;
-export const onUpdateShow = /* GraphQL */ `subscription OnUpdateShow($filter: ModelSubscriptionShowFilterInput) {
+    APITypes.OnCreateShowSubscriptionVariables,
+    APITypes.OnCreateShowSubscription
+  >;
+export const onUpdateShow =
+  /* GraphQL */ `subscription OnUpdateShow($filter: ModelSubscriptionShowFilterInput) {
   onUpdateShow(filter: $filter) {
     id
     title
@@ -129,10 +133,11 @@ export const onUpdateShow = /* GraphQL */ `subscription OnUpdateShow($filter: Mo
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateShowSubscriptionVariables,
-  APITypes.OnUpdateShowSubscription
->;
-export const onDeleteShow = /* GraphQL */ `subscription OnDeleteShow($filter: ModelSubscriptionShowFilterInput) {
+    APITypes.OnUpdateShowSubscriptionVariables,
+    APITypes.OnUpdateShowSubscription
+  >;
+export const onDeleteShow =
+  /* GraphQL */ `subscription OnDeleteShow($filter: ModelSubscriptionShowFilterInput) {
   onDeleteShow(filter: $filter) {
     id
     title
@@ -146,54 +151,87 @@ export const onDeleteShow = /* GraphQL */ `subscription OnDeleteShow($filter: Mo
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteShowSubscriptionVariables,
-  APITypes.OnDeleteShowSubscription
->;
-export const onCreateVenue = /* GraphQL */ `subscription OnCreateVenue($filter: ModelSubscriptionVenueFilterInput) {
+    APITypes.OnDeleteShowSubscriptionVariables,
+    APITypes.OnDeleteShowSubscription
+  >;
+export const onCreateVenue =
+  /* GraphQL */ `subscription OnCreateVenue($filter: ModelSubscriptionVenueFilterInput) {
   onCreateVenue(filter: $filter) {
     id
     name
     address
     city
+    state
+    postalCode
+    country
     openMic
+    bio
+    description
+    venueImageKeys
+    googleReviewsLink
+    website
+    phone
+    email
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateVenueSubscriptionVariables,
-  APITypes.OnCreateVenueSubscription
->;
-export const onUpdateVenue = /* GraphQL */ `subscription OnUpdateVenue($filter: ModelSubscriptionVenueFilterInput) {
+    APITypes.OnCreateVenueSubscriptionVariables,
+    APITypes.OnCreateVenueSubscription
+  >;
+export const onUpdateVenue =
+  /* GraphQL */ `subscription OnUpdateVenue($filter: ModelSubscriptionVenueFilterInput) {
   onUpdateVenue(filter: $filter) {
     id
     name
     address
     city
+    state
+    postalCode
+    country
     openMic
+    bio
+    description
+    venueImageKeys
+    googleReviewsLink
+    website
+    phone
+    email
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateVenueSubscriptionVariables,
-  APITypes.OnUpdateVenueSubscription
->;
-export const onDeleteVenue = /* GraphQL */ `subscription OnDeleteVenue($filter: ModelSubscriptionVenueFilterInput) {
+    APITypes.OnUpdateVenueSubscriptionVariables,
+    APITypes.OnUpdateVenueSubscription
+  >;
+export const onDeleteVenue =
+  /* GraphQL */ `subscription OnDeleteVenue($filter: ModelSubscriptionVenueFilterInput) {
   onDeleteVenue(filter: $filter) {
     id
     name
     address
     city
+    state
+    postalCode
+    country
     openMic
+    bio
+    description
+    venueImageKeys
+    googleReviewsLink
+    website
+    phone
+    email
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteVenueSubscriptionVariables,
-  APITypes.OnDeleteVenueSubscription
->;
+    APITypes.OnDeleteVenueSubscriptionVariables,
+    APITypes.OnDeleteVenueSubscription
+  >;
