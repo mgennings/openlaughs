@@ -11,11 +11,13 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
     <Fragment>
       <Link to="/" className="dark:hidden">
         <img
-          src={toAbsoluteUrl('/media/app/default-logo.svg')}
+          src={toAbsoluteUrl('/media/app/OpenLaughs-logo-desktop.png')}
           className="default-logo min-h-[22px] max-w-none"
+          width={136}
         />
         <img
-          src={toAbsoluteUrl('/media/app/mini-logo.svg')}
+          src={toAbsoluteUrl('/media/app/OpenLaughs-logo-mobile.png')}
+          width={136}
           className="small-logo min-h-[22px] max-w-none"
         />
       </Link>
@@ -25,7 +27,7 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
           className="default-logo min-h-[22px] max-w-none"
         />
         <img
-          src={toAbsoluteUrl('/media/app/mini-logo.svg')}
+          src={toAbsoluteUrl('/media/app/OpenLaughs-logo-mobile.png')}
           className="small-logo min-h-[22px] max-w-none"
         />
       </Link>
@@ -39,7 +41,7 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
         className="default-logo min-h-[22px] max-w-none"
       />
       <img
-        src={toAbsoluteUrl('/media/app/mini-logo.svg')}
+        src={toAbsoluteUrl('/media/app/OpenLaughs-logo-mobile.png')}
         className="small-logo min-h-[22px] max-w-none"
       />
     </Link>

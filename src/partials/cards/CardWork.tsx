@@ -8,6 +8,7 @@ interface IWorkProps {
   title: string;
   description?: string;
   authorAvatar: string;
+  authorAvatarUrl?: string; // Optional full URL - takes precedence over authorAvatar
   authorName: string;
   likes: number;
   comments: number;
@@ -17,10 +18,14 @@ const CardWork = ({
   image,
   title,
   authorAvatar,
+  authorAvatarUrl,
   authorName,
   likes,
   comments,
 }: IWorkProps) => {
+  const avatarSrc =
+    authorAvatarUrl || toAbsoluteUrl(`/media/avatars/${authorAvatar}`);
+
   return (
     <div className="card border-0">
       <img
@@ -39,11 +44,7 @@ const CardWork = ({
 
         <div className="flex items-center justify-between grow">
           <div className="flex items-center grow">
-            <img
-              src={toAbsoluteUrl(`/media/avatars/${authorAvatar}`)}
-              className="rounded-full size-7 me-2"
-              alt=""
-            />
+            <img src={avatarSrc} className="rounded-full size-7 me-2" alt="" />
 
             <Link
               to="/public-profile/profiles/nft"

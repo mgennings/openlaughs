@@ -7,6 +7,7 @@ import { generateClient } from 'aws-amplify/api';
 import { listShows } from '@/graphql/queries';
 import type { ListShowsQuery, Show } from '@/API';
 import { useAuthContext } from '@/auth/useAuthContext';
+import { useUserAvatar } from '@/hooks';
 
 const client = generateClient({ authMode: 'userPool' });
 
@@ -20,6 +21,8 @@ const PromoterShowsPage = () => {
     () => currentUser?.email || currentUser?.username || '',
     [currentUser?.email, currentUser?.username],
   );
+
+  const avatarUrl = useUserAvatar(currentUser?.email);
 
   const fetchShows = async () => {
     if (!createdBy) return;
@@ -99,6 +102,7 @@ const PromoterShowsPage = () => {
                   currentUser?.fullname || currentUser?.username || 'Me'
                 }
                 authorAvatar={'300-1.png'}
+                authorAvatarUrl={avatarUrl}
                 likes={0}
                 comments={0}
               />
