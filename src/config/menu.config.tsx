@@ -536,7 +536,7 @@ export const MENU_SIDEBAR: TMenuConfig = [
 export const MENU_MEGA: TMenuConfig = [
   {
     title: 'Home',
-    path: '/',
+    path: '/dashboard',
   },
   {
     title: 'Profiles',

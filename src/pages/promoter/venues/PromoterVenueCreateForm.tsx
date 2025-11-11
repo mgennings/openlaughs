@@ -3,6 +3,7 @@ import { generateClient } from 'aws-amplify/api';
 import { createVenue } from '@/graphql/mutations';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage } from '@/lib/storage';
+import { US_STATES } from '@/config/constants';
 
 interface PromoterVenueCreateFormProps {
   onCreated?: () => void;
@@ -18,9 +19,9 @@ const PromoterVenueCreateForm = ({
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
-  const [state, setState] = useState('');
+  const [state, setState] = useState('TX');
   const [postalCode, setPostalCode] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState('United States');
   const [openMic, setOpenMic] = useState(false);
   const [bio, setBio] = useState('');
   const [description, setDescription] = useState('');
@@ -140,13 +141,17 @@ const PromoterVenueCreateForm = ({
 
         <div className="flex flex-col gap-1">
           <label className="form-label font-normal text-gray-900">State</label>
-          <input
-            className="input"
-            type="text"
-            placeholder="State/Province"
+          <select
+            className="select"
             value={state}
             onChange={e => setState(e.target.value)}
-          />
+          >
+            {US_STATES.map(stateOption => (
+              <option key={stateOption.value} value={stateOption.value}>
+                {stateOption.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -171,6 +176,7 @@ const PromoterVenueCreateForm = ({
             type="text"
             placeholder="Country"
             value={country}
+            disabled
             onChange={e => setCountry(e.target.value)}
           />
         </div>
@@ -178,10 +184,9 @@ const PromoterVenueCreateForm = ({
 
       <div className="flex flex-col gap-1">
         <label className="form-label font-normal text-gray-900">Bio</label>
-        <input
-          className="input"
-          type="text"
-          // rows={5}
+        <textarea
+          className="textarea"
+          rows={3}
           placeholder="Short bio or tagline for the venue"
           value={bio}
           onChange={e => setBio(e.target.value)}
@@ -193,7 +198,7 @@ const PromoterVenueCreateForm = ({
           Description
         </label>
         <textarea
-          className="input"
+          className="textarea"
           rows={5}
           placeholder="Detailed description of the venue"
           value={description}

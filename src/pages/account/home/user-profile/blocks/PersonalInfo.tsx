@@ -6,6 +6,7 @@ import { createUserProfile, updateUserProfile } from '@/graphql/mutations';
 import type { UserProfile } from '@/API';
 import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
 import { getPublicUrl, uploadPublicImage } from '@/lib/storage';
+import { US_STATES } from '@/config/constants';
 
 const PersonalInfo = () => {
   const { execute } = useGraphQL();
@@ -232,32 +233,81 @@ const PersonalInfo = () => {
             <tr>
               <td className="py-2 min-w-28 text-gray-600 font-normal">Photo</td>
               <td className="py-2 text-gray700 font-normal min-w-32 text-2sm">
-                150x150px JPEG, PNG Image
-              </td>
-              <td className="py-2 text-center">
-                <div className="flex justify-center items-center">
-                  <label className="image-input size-16 cursor-pointer relative">
+                {isEditing ? (
+                  <div>
+                    {/* <label
+                      htmlFor="profile_photo_input"
+                      className="block text-sm/6 font-medium text-gray-900"
+                    >
+                      Photo
+                    </label> */}
+                    <div className="mt-2 flex items-center gap-x-3">
+                      {avatarUrl ? (
+                        <img
+                          src={avatarUrl}
+                          alt="avatar"
+                          className="size-12 rounded-full object-cover"
+                        />
+                      ) : (
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          data-slot="icon"
+                          aria-hidden="true"
+                          className="size-12 text-gray-300"
+                        >
+                          <path
+                            d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                            clipRule="evenodd"
+                            fillRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        id="profile_photo_input"
+                        className="hidden"
+                        onChange={e => {
+                          const f = e.target.files?.[0];
+                          if (f) void onAvatarSelected(f);
+                        }}
+                      />
+                      <label
+                        htmlFor="profile_photo_input"
+                        className="button rounded-md bg-white px-3 py-2 text-sm text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer"
+                      >
+                        Change
+                      </label>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-x-3">
                     {avatarUrl ? (
                       <img
                         src={avatarUrl}
                         alt="avatar"
-                        className="rounded-full"
+                        className="size-12 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="rounded-full border-2 border-gray-300 size-16" />
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        data-slot="icon"
+                        aria-hidden="true"
+                        className="size-12 text-gray-300"
+                      >
+                        <path
+                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                          clipRule="evenodd"
+                          fillRule="evenodd"
+                        />
+                      </svg>
                     )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={e => {
-                        const f = e.target.files?.[0];
-                        if (f) void onAvatarSelected(f);
-                      }}
-                    />
-                  </label>
-                </div>
+                  </div>
+                )}
               </td>
+              <td className="py-2 text-center"></td>
             </tr>
             <tr>
               <td className="py-2 text-gray-600 font-normal">First name</td>
@@ -296,10 +346,10 @@ const PersonalInfo = () => {
               <td className="py-2 text-center"></td>
             </tr>
             <tr>
-              <td className="py-3 text-gray-600 font-normal">Availability</td>
+              <td className="py-3 text-gray-600 font-normal">Status</td>
               <td className="py-3 text-gray-800 font-normal">
                 <span className="badge badge-sm badge-outline badge-success">
-                  Available now
+                  Online
                 </span>
               </td>
               <td className="py-3 text-center"></td>
@@ -316,8 +366,12 @@ const PersonalInfo = () => {
                       setForm({ ...form, birthdate: e.target.value })
                     }
                   />
+                ) : display.birthdate && display.birthdate !== '—' ? (
+                  new Date(display.birthdate + 'T12:00:00Z').toLocaleDateString(
+                    'en-US',
+                  )
                 ) : (
-                  display.birthdate
+                  ''
                 )}
               </td>
               <td className="py-3 text-center"></td>
@@ -394,12 +448,17 @@ const PersonalInfo = () => {
               <td className="py-3">State</td>
               <td className="py-3 text-gray-700 text-2sm font-normal">
                 {isEditing ? (
-                  <input
+                  <select
                     className="input"
-                    type="text"
                     value={form.state}
                     onChange={e => setForm({ ...form, state: e.target.value })}
-                  />
+                  >
+                    {US_STATES.map(stateOption => (
+                      <option key={stateOption.value} value={stateOption.value}>
+                        {stateOption.label}
+                      </option>
+                    ))}
+                  </select>
                 ) : (
                   display.state
                 )}

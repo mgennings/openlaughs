@@ -5,6 +5,7 @@ import { getVenue } from '@/graphql/queries';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage, getPublicUrl } from '@/lib/storage';
 import type { Venue } from '@/API';
+import { US_STATES } from '@/config/constants';
 
 interface PromoterVenueUpdateFormProps {
   venueId: string;
@@ -201,13 +202,17 @@ const PromoterVenueUpdateForm = ({
 
         <div className="flex flex-col gap-1">
           <label className="form-label font-normal text-gray-900">State</label>
-          <input
+          <select
             className="input"
-            type="text"
-            placeholder="State/Province"
             value={state}
             onChange={e => setState(e.target.value)}
-          />
+          >
+            {US_STATES.map(stateOption => (
+              <option key={stateOption.value} value={stateOption.value}>
+                {stateOption.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="flex flex-col gap-1">

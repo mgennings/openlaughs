@@ -7,53 +7,9 @@ import { generateClient } from 'aws-amplify/api';
 import { createUserProfile } from '@/graphql/mutations';
 import { listUserProfiles } from '@/graphql/queries';
 import type { CreateUserProfileInput } from '@/API';
+import { ROLE_OPTIONS, type UserRole } from '@/config/constants';
 
 const client = generateClient({ authMode: 'userPool' });
-
-type UserRole = 'comedian' | 'fan' | 'promoter' | 'admin';
-
-interface RoleOption {
-  role: UserRole;
-  icon: string;
-  title: string;
-  description: string;
-  emoji: string;
-}
-
-const roleOptions: RoleOption[] = [
-  {
-    role: 'comedian',
-    icon: 'microphone-2',
-    title: 'Comedian',
-    description:
-      'You perform comedy! Create your profile, manage bookings, track shows, and connect with venues.',
-    emoji: '🎤',
-  },
-  {
-    role: 'fan',
-    icon: 'heart',
-    title: 'Fan',
-    description:
-      'You love comedy! Discover shows, save favorites, follow comedians, and never miss a laugh.',
-    emoji: '❤️',
-  },
-  {
-    role: 'promoter',
-    icon: 'chart-line-up',
-    title: 'Promoter',
-    description:
-      'You book shows! Manage events, connect with comedians, track performances, and grow your venue.',
-    emoji: '📈',
-  },
-  {
-    role: 'admin',
-    icon: 'setting-2',
-    title: 'Admin',
-    description:
-      'System administrator. Full access to manage users, venues, shows, and platform settings.',
-    emoji: '⚙️',
-  },
-];
 
 const OnboardingPage = () => {
   const navigate = useNavigate();
@@ -190,7 +146,7 @@ const OnboardingPage = () => {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {roleOptions.map(option => {
+          {ROLE_OPTIONS.map(option => {
             const isSelected = selectedRole === option.role;
             const isLoading = loading && isSelected;
 

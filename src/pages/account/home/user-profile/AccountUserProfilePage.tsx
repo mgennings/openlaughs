@@ -25,7 +25,7 @@ const AccountUserProfilePage = () => {
             <ToolbarHeading>
               <ToolbarPageTitle />
               <ToolbarDescription>
-                Central Hub for Personal Customization
+                View and manage your profile information
               </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
