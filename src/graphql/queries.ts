@@ -119,6 +119,7 @@ export const getVenue = /* GraphQL */ `query GetVenue($id: ID!) {
     description
     venueImageKeys
     googleReviewsLink
+    googlePlaceId
     website
     phone
     email

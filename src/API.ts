@@ -116,6 +116,7 @@ export type CreateVenueInput = {
   description?: string | null;
   venueImageKeys?: Array<string> | null;
   googleReviewsLink?: string | null;
+  googlePlaceId?: string | null;
   website?: string | null;
   phone?: string | null;
   email?: string | null;
@@ -133,6 +134,7 @@ export type ModelVenueConditionInput = {
   description?: ModelStringInput | null;
   venueImageKeys?: ModelStringInput | null;
   googleReviewsLink?: ModelStringInput | null;
+  googlePlaceId?: ModelStringInput | null;
   website?: ModelStringInput | null;
   phone?: ModelStringInput | null;
   email?: ModelStringInput | null;
@@ -184,6 +186,7 @@ export type UpdateVenueInput = {
   description?: string | null;
   venueImageKeys?: Array<string> | null;
   googleReviewsLink?: string | null;
+  googlePlaceId?: string | null;
   website?: string | null;
   phone?: string | null;
   email?: string | null;
@@ -341,6 +344,7 @@ export type ModelVenueFilterInput = {
   description?: ModelStringInput | null;
   venueImageKeys?: ModelStringInput | null;
   googleReviewsLink?: ModelStringInput | null;
+  googlePlaceId?: ModelStringInput | null;
   website?: ModelStringInput | null;
   phone?: ModelStringInput | null;
   email?: ModelStringInput | null;
@@ -436,6 +440,7 @@ export type ModelSubscriptionVenueFilterInput = {
   description?: ModelSubscriptionStringInput | null;
   venueImageKeys?: ModelSubscriptionStringInput | null;
   googleReviewsLink?: ModelSubscriptionStringInput | null;
+  googlePlaceId?: ModelSubscriptionStringInput | null;
   website?: ModelSubscriptionStringInput | null;
   phone?: ModelSubscriptionStringInput | null;
   email?: ModelSubscriptionStringInput | null;

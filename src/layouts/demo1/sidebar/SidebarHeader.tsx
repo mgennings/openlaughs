@@ -23,11 +23,13 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
       </Link>
       <Link to="/" className="hidden dark:block">
         <img
-          src={toAbsoluteUrl('/media/app/default-logo-dark.svg')}
+          src={toAbsoluteUrl('/media/app/OpenLaughs-logo-desktop--dark.png')}
+          width={136}
           className="default-logo min-h-[22px] max-w-none"
         />
         <img
-          src={toAbsoluteUrl('/media/app/OpenLaughs-logo-mobile.png')}
+          src={toAbsoluteUrl('/media/app/OpenLaughs-logo-mobile--dark.png')}
+          width={136}
           className="small-logo min-h-[22px] max-w-none"
         />
       </Link>

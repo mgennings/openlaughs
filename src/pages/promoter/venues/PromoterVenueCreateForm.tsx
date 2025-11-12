@@ -4,6 +4,7 @@ import { createVenue } from '@/graphql/mutations';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage } from '@/lib/storage';
 import { US_STATES } from '@/config/constants';
+import { GooglePlacesAutocomplete } from '@/components/google-places';
 
 interface PromoterVenueCreateFormProps {
   onCreated?: () => void;
@@ -26,6 +27,7 @@ const PromoterVenueCreateForm = ({
   const [bio, setBio] = useState('');
   const [description, setDescription] = useState('');
   const [googleReviewsLink, setGoogleReviewsLink] = useState('');
+  const [googlePlaceId, setGooglePlaceId] = useState('');
   const [website, setWebsite] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -60,6 +62,7 @@ const PromoterVenueCreateForm = ({
         description: description || null,
         venueImageKeys: imageKeys.length > 0 ? imageKeys : null,
         googleReviewsLink: googleReviewsLink || null,
+        googlePlaceId: googlePlaceId || null,
         website: website || null,
         phone: phone || null,
         email: email || null,
@@ -86,6 +89,7 @@ const PromoterVenueCreateForm = ({
       setBio('');
       setDescription('');
       setGoogleReviewsLink('');
+      setGooglePlaceId('');
       setWebsite('');
       setPhone('');
       setEmail('');
@@ -100,6 +104,46 @@ const PromoterVenueCreateForm = ({
 
   return (
     <form className="card-body flex flex-col gap-5 p-0" onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-1">
+        <label className="form-label font-normal text-gray-900">
+          Search for Venue
+        </label>
+        <GooglePlacesAutocomplete
+          placeholder="Search for a venue on Google Maps..."
+          className="input"
+          onPlaceSelect={place => {
+            setName(place.name);
+            setAddress(place.address);
+            setCity(place.city);
+            setState(place.state);
+            setPostalCode(place.postalCode);
+            setCountry(place.country);
+            setGooglePlaceId(place.placeId);
+            // Auto-populate additional fields if available
+            if (place.website) {
+              setWebsite(place.website);
+            }
+            if (place.phone) {
+              setPhone(place.phone);
+            }
+            if (place.description) {
+              setDescription(place.description);
+            }
+            // Auto-generate Google Reviews link from Place ID
+            if (place.placeId) {
+              setGoogleReviewsLink(
+                `https://www.google.com/maps/place/?q=place_id:${place.placeId}`,
+              );
+            }
+            // Note: Photos are available in place.photos but would need to be
+            // downloaded from Google and uploaded to S3 to use them
+          }}
+        />
+        <p className="text-xs text-gray-500 mt-1">
+          Start typing to search for your venue on Google Maps
+        </p>
+      </div>
+
       <div className="flex flex-col gap-1">
         <label className="form-label font-normal text-gray-900">
           Name <span className="text-danger">*</span>
@@ -364,6 +408,7 @@ const PromoterVenueCreateForm = ({
             setBio('');
             setDescription('');
             setGoogleReviewsLink('');
+            setGooglePlaceId('');
             setWebsite('');
             setPhone('');
             setEmail('');
