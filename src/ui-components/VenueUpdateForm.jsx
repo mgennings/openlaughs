@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from 'react';
+import * as React from "react";
 import {
   Badge,
   Button,
@@ -18,11 +18,11 @@ import {
   Text,
   TextField,
   useTheme,
-} from '@aws-amplify/ui-react';
-import { fetchByPath, getOverrideProps, validateField } from './utils';
-import { generateClient } from 'aws-amplify/api';
-import { getVenue } from '../graphql/queries';
-import { updateVenue } from '../graphql/mutations';
+} from "@aws-amplify/ui-react";
+import { fetchByPath, getOverrideProps, validateField } from "./utils";
+import { generateClient } from "aws-amplify/api";
+import { getVenue } from "../graphql/queries";
+import { updateVenue } from "../graphql/mutations";
 const client = generateClient();
 function ArrayField({
   items = [],
@@ -54,7 +54,7 @@ function ArrayField({
       inputFieldRef?.current?.focus();
     }
   }, [isEditing]);
-  const removeItem = async removeIndex => {
+  const removeItem = async (removeIndex) => {
     const newItems = items.filter((value, index) => index !== removeIndex);
     await onChange(newItems);
     setSelectedBadgeIndex(undefined);
@@ -64,7 +64,7 @@ function ArrayField({
     if (
       currentFieldValue !== undefined &&
       currentFieldValue !== null &&
-      currentFieldValue !== '' &&
+      currentFieldValue !== "" &&
       !hasError
     ) {
       const newItems = [...items];
@@ -81,18 +81,18 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
+        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: 'pointer',
-                  alignItems: 'center',
+                  cursor: "pointer",
+                  alignItems: "center",
                   marginRight: 3,
                   marginTop: 3,
                   backgroundColor:
-                    index === selectedBadgeIndex ? '#B8CEF9' : '',
+                    index === selectedBadgeIndex ? "#B8CEF9" : "",
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -103,7 +103,7 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: 'pointer',
+                    cursor: "pointer",
                     paddingLeft: 3,
                     width: 20,
                     height: 20,
@@ -111,12 +111,12 @@ function ArrayField({
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
-                      stroke: 'black',
+                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
+                      stroke: "black",
                     },
                   ]}
                   ariaLabel="button"
-                  onClick={event => {
+                  onClick={(event) => {
                     event.stopPropagation();
                     removeItem(index);
                   }}
@@ -171,7 +171,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
+            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
           </Button>
         </Flex>
       )}
@@ -192,20 +192,21 @@ export default function VenueUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: '',
-    address: '',
-    city: '',
-    state: '',
-    postalCode: '',
-    country: '',
+    name: "",
+    address: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
     openMic: false,
-    bio: '',
-    description: '',
+    bio: "",
+    description: "",
     venueImageKeys: [],
-    googleReviewsLink: '',
-    website: '',
-    phone: '',
-    email: '',
+    googleReviewsLink: "",
+    googlePlaceId: "",
+    website: "",
+    phone: "",
+    email: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [address, setAddress] = React.useState(initialValues.address);
@@ -216,13 +217,16 @@ export default function VenueUpdateForm(props) {
   const [openMic, setOpenMic] = React.useState(initialValues.openMic);
   const [bio, setBio] = React.useState(initialValues.bio);
   const [description, setDescription] = React.useState(
-    initialValues.description,
+    initialValues.description
   );
   const [venueImageKeys, setVenueImageKeys] = React.useState(
-    initialValues.venueImageKeys,
+    initialValues.venueImageKeys
   );
   const [googleReviewsLink, setGoogleReviewsLink] = React.useState(
-    initialValues.googleReviewsLink,
+    initialValues.googleReviewsLink
+  );
+  const [googlePlaceId, setGooglePlaceId] = React.useState(
+    initialValues.googlePlaceId
   );
   const [website, setWebsite] = React.useState(initialValues.website);
   const [phone, setPhone] = React.useState(initialValues.phone);
@@ -242,8 +246,9 @@ export default function VenueUpdateForm(props) {
     setBio(cleanValues.bio);
     setDescription(cleanValues.description);
     setVenueImageKeys(cleanValues.venueImageKeys ?? []);
-    setCurrentVenueImageKeysValue('');
+    setCurrentVenueImageKeysValue("");
     setGoogleReviewsLink(cleanValues.googleReviewsLink);
+    setGooglePlaceId(cleanValues.googlePlaceId);
     setWebsite(cleanValues.website);
     setPhone(cleanValues.phone);
     setEmail(cleanValues.email);
@@ -255,7 +260,7 @@ export default function VenueUpdateForm(props) {
       const record = idProp
         ? (
             await client.graphql({
-              query: getVenue.replaceAll('__typename', ''),
+              query: getVenue.replaceAll("__typename", ""),
               variables: { id: idProp },
             })
           )?.data?.getVenue
@@ -266,10 +271,10 @@ export default function VenueUpdateForm(props) {
   }, [idProp, venueModelProp]);
   React.useEffect(resetStateValues, [venueRecord]);
   const [currentVenueImageKeysValue, setCurrentVenueImageKeysValue] =
-    React.useState('');
+    React.useState("");
   const venueImageKeysRef = React.createRef();
   const validations = {
-    name: [{ type: 'Required' }],
+    name: [{ type: "Required" }],
     address: [],
     city: [],
     state: [],
@@ -278,8 +283,9 @@ export default function VenueUpdateForm(props) {
     openMic: [],
     bio: [],
     description: [],
-    venueImageKeys: [{ type: 'Required' }],
+    venueImageKeys: [{ type: "Required" }],
     googleReviewsLink: [],
+    googlePlaceId: [],
     website: [],
     phone: [],
     email: [],
@@ -287,7 +293,7 @@ export default function VenueUpdateForm(props) {
   const runValidationTasks = async (
     fieldName,
     currentValue,
-    getDisplayValue,
+    getDisplayValue
   ) => {
     const value =
       currentValue && getDisplayValue
@@ -298,7 +304,7 @@ export default function VenueUpdateForm(props) {
     if (customValidator) {
       validationResponse = await customValidator(value, validationResponse);
     }
-    setErrors(errors => ({ ...errors, [fieldName]: validationResponse }));
+    setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
   return (
@@ -307,7 +313,7 @@ export default function VenueUpdateForm(props) {
       rowGap="15px"
       columnGap="15px"
       padding="20px"
-      onSubmit={async event => {
+      onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
           name,
@@ -321,6 +327,7 @@ export default function VenueUpdateForm(props) {
           description: description ?? null,
           venueImageKeys,
           googleReviewsLink: googleReviewsLink ?? null,
+          googlePlaceId: googlePlaceId ?? null,
           website: website ?? null,
           phone: phone ?? null,
           email: email ?? null,
@@ -329,19 +336,19 @@ export default function VenueUpdateForm(props) {
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
-                ...modelFields[fieldName].map(item =>
-                  runValidationTasks(fieldName, item),
-                ),
+                ...modelFields[fieldName].map((item) =>
+                  runValidationTasks(fieldName, item)
+                )
               );
               return promises;
             }
             promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName]),
+              runValidationTasks(fieldName, modelFields[fieldName])
             );
             return promises;
-          }, []),
+          }, [])
         );
-        if (validationResponses.some(r => r.hasError)) {
+        if (validationResponses.some((r) => r.hasError)) {
           return;
         }
         if (onSubmit) {
@@ -349,12 +356,12 @@ export default function VenueUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === 'string' && value === '') {
+            if (typeof value === "string" && value === "") {
               modelFields[key] = null;
             }
           });
           await client.graphql({
-            query: updateVenue.replaceAll('__typename', ''),
+            query: updateVenue.replaceAll("__typename", ""),
             variables: {
               input: {
                 id: venueRecord.id,
@@ -367,12 +374,12 @@ export default function VenueUpdateForm(props) {
           }
         } catch (err) {
           if (onError) {
-            const messages = err.errors.map(e => e.message).join('\n');
+            const messages = err.errors.map((e) => e.message).join("\n");
             onError(modelFields, messages);
           }
         }
       }}
-      {...getOverrideProps(overrides, 'VenueUpdateForm')}
+      {...getOverrideProps(overrides, "VenueUpdateForm")}
       {...rest}
     >
       <TextField
@@ -380,7 +387,7 @@ export default function VenueUpdateForm(props) {
         isRequired={true}
         isReadOnly={false}
         value={name}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -395,6 +402,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -403,21 +411,21 @@ export default function VenueUpdateForm(props) {
             value = result?.name ?? value;
           }
           if (errors.name?.hasError) {
-            runValidationTasks('name', value);
+            runValidationTasks("name", value);
           }
           setName(value);
         }}
-        onBlur={() => runValidationTasks('name', name)}
+        onBlur={() => runValidationTasks("name", name)}
         errorMessage={errors.name?.errorMessage}
         hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, 'name')}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
         label="Address"
         isRequired={false}
         isReadOnly={false}
         value={address}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -432,6 +440,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -440,21 +449,21 @@ export default function VenueUpdateForm(props) {
             value = result?.address ?? value;
           }
           if (errors.address?.hasError) {
-            runValidationTasks('address', value);
+            runValidationTasks("address", value);
           }
           setAddress(value);
         }}
-        onBlur={() => runValidationTasks('address', address)}
+        onBlur={() => runValidationTasks("address", address)}
         errorMessage={errors.address?.errorMessage}
         hasError={errors.address?.hasError}
-        {...getOverrideProps(overrides, 'address')}
+        {...getOverrideProps(overrides, "address")}
       ></TextField>
       <TextField
         label="City"
         isRequired={false}
         isReadOnly={false}
         value={city}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -469,6 +478,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -477,21 +487,21 @@ export default function VenueUpdateForm(props) {
             value = result?.city ?? value;
           }
           if (errors.city?.hasError) {
-            runValidationTasks('city', value);
+            runValidationTasks("city", value);
           }
           setCity(value);
         }}
-        onBlur={() => runValidationTasks('city', city)}
+        onBlur={() => runValidationTasks("city", city)}
         errorMessage={errors.city?.errorMessage}
         hasError={errors.city?.hasError}
-        {...getOverrideProps(overrides, 'city')}
+        {...getOverrideProps(overrides, "city")}
       ></TextField>
       <TextField
         label="State"
         isRequired={false}
         isReadOnly={false}
         value={state}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -506,6 +516,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -514,21 +525,21 @@ export default function VenueUpdateForm(props) {
             value = result?.state ?? value;
           }
           if (errors.state?.hasError) {
-            runValidationTasks('state', value);
+            runValidationTasks("state", value);
           }
           setState(value);
         }}
-        onBlur={() => runValidationTasks('state', state)}
+        onBlur={() => runValidationTasks("state", state)}
         errorMessage={errors.state?.errorMessage}
         hasError={errors.state?.hasError}
-        {...getOverrideProps(overrides, 'state')}
+        {...getOverrideProps(overrides, "state")}
       ></TextField>
       <TextField
         label="Postal code"
         isRequired={false}
         isReadOnly={false}
         value={postalCode}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -543,6 +554,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -551,21 +563,21 @@ export default function VenueUpdateForm(props) {
             value = result?.postalCode ?? value;
           }
           if (errors.postalCode?.hasError) {
-            runValidationTasks('postalCode', value);
+            runValidationTasks("postalCode", value);
           }
           setPostalCode(value);
         }}
-        onBlur={() => runValidationTasks('postalCode', postalCode)}
+        onBlur={() => runValidationTasks("postalCode", postalCode)}
         errorMessage={errors.postalCode?.errorMessage}
         hasError={errors.postalCode?.hasError}
-        {...getOverrideProps(overrides, 'postalCode')}
+        {...getOverrideProps(overrides, "postalCode")}
       ></TextField>
       <TextField
         label="Country"
         isRequired={false}
         isReadOnly={false}
         value={country}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -580,6 +592,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -588,21 +601,21 @@ export default function VenueUpdateForm(props) {
             value = result?.country ?? value;
           }
           if (errors.country?.hasError) {
-            runValidationTasks('country', value);
+            runValidationTasks("country", value);
           }
           setCountry(value);
         }}
-        onBlur={() => runValidationTasks('country', country)}
+        onBlur={() => runValidationTasks("country", country)}
         errorMessage={errors.country?.errorMessage}
         hasError={errors.country?.hasError}
-        {...getOverrideProps(overrides, 'country')}
+        {...getOverrideProps(overrides, "country")}
       ></TextField>
       <SwitchField
         label="Open mic"
         defaultChecked={false}
         isDisabled={false}
         isChecked={openMic}
-        onChange={e => {
+        onChange={(e) => {
           let value = e.target.checked;
           if (onChange) {
             const modelFields = {
@@ -617,6 +630,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -625,21 +639,21 @@ export default function VenueUpdateForm(props) {
             value = result?.openMic ?? value;
           }
           if (errors.openMic?.hasError) {
-            runValidationTasks('openMic', value);
+            runValidationTasks("openMic", value);
           }
           setOpenMic(value);
         }}
-        onBlur={() => runValidationTasks('openMic', openMic)}
+        onBlur={() => runValidationTasks("openMic", openMic)}
         errorMessage={errors.openMic?.errorMessage}
         hasError={errors.openMic?.hasError}
-        {...getOverrideProps(overrides, 'openMic')}
+        {...getOverrideProps(overrides, "openMic")}
       ></SwitchField>
       <TextField
         label="Bio"
         isRequired={false}
         isReadOnly={false}
         value={bio}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -654,6 +668,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -662,21 +677,21 @@ export default function VenueUpdateForm(props) {
             value = result?.bio ?? value;
           }
           if (errors.bio?.hasError) {
-            runValidationTasks('bio', value);
+            runValidationTasks("bio", value);
           }
           setBio(value);
         }}
-        onBlur={() => runValidationTasks('bio', bio)}
+        onBlur={() => runValidationTasks("bio", bio)}
         errorMessage={errors.bio?.errorMessage}
         hasError={errors.bio?.hasError}
-        {...getOverrideProps(overrides, 'bio')}
+        {...getOverrideProps(overrides, "bio")}
       ></TextField>
       <TextField
         label="Description"
         isRequired={false}
         isReadOnly={false}
         value={description}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -691,6 +706,7 @@ export default function VenueUpdateForm(props) {
               description: value,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -699,17 +715,17 @@ export default function VenueUpdateForm(props) {
             value = result?.description ?? value;
           }
           if (errors.description?.hasError) {
-            runValidationTasks('description', value);
+            runValidationTasks("description", value);
           }
           setDescription(value);
         }}
-        onBlur={() => runValidationTasks('description', description)}
+        onBlur={() => runValidationTasks("description", description)}
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
-        {...getOverrideProps(overrides, 'description')}
+        {...getOverrideProps(overrides, "description")}
       ></TextField>
       <ArrayField
-        onChange={async items => {
+        onChange={async (items) => {
           let values = items;
           if (onChange) {
             const modelFields = {
@@ -724,6 +740,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys: values,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -732,40 +749,40 @@ export default function VenueUpdateForm(props) {
             values = result?.venueImageKeys ?? values;
           }
           setVenueImageKeys(values);
-          setCurrentVenueImageKeysValue('');
+          setCurrentVenueImageKeysValue("");
         }}
         currentFieldValue={currentVenueImageKeysValue}
-        label={'Venue image keys'}
+        label={"Venue image keys"}
         items={venueImageKeys}
         hasError={errors?.venueImageKeys?.hasError}
         runValidationTasks={async () =>
-          await runValidationTasks('venueImageKeys', currentVenueImageKeysValue)
+          await runValidationTasks("venueImageKeys", currentVenueImageKeysValue)
         }
         errorMessage={errors?.venueImageKeys?.errorMessage}
         setFieldValue={setCurrentVenueImageKeysValue}
         inputFieldRef={venueImageKeysRef}
-        defaultFieldValue={''}
+        defaultFieldValue={""}
       >
         <TextField
           label="Venue image keys"
           isRequired={true}
           isReadOnly={false}
           value={currentVenueImageKeysValue}
-          onChange={e => {
+          onChange={(e) => {
             let { value } = e.target;
             if (errors.venueImageKeys?.hasError) {
-              runValidationTasks('venueImageKeys', value);
+              runValidationTasks("venueImageKeys", value);
             }
             setCurrentVenueImageKeysValue(value);
           }}
           onBlur={() =>
-            runValidationTasks('venueImageKeys', currentVenueImageKeysValue)
+            runValidationTasks("venueImageKeys", currentVenueImageKeysValue)
           }
           errorMessage={errors.venueImageKeys?.errorMessage}
           hasError={errors.venueImageKeys?.hasError}
           ref={venueImageKeysRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, 'venueImageKeys')}
+          {...getOverrideProps(overrides, "venueImageKeys")}
         ></TextField>
       </ArrayField>
       <TextField
@@ -773,7 +790,7 @@ export default function VenueUpdateForm(props) {
         isRequired={false}
         isReadOnly={false}
         value={googleReviewsLink}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -788,6 +805,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink: value,
+              googlePlaceId,
               website,
               phone,
               email,
@@ -796,23 +814,23 @@ export default function VenueUpdateForm(props) {
             value = result?.googleReviewsLink ?? value;
           }
           if (errors.googleReviewsLink?.hasError) {
-            runValidationTasks('googleReviewsLink', value);
+            runValidationTasks("googleReviewsLink", value);
           }
           setGoogleReviewsLink(value);
         }}
         onBlur={() =>
-          runValidationTasks('googleReviewsLink', googleReviewsLink)
+          runValidationTasks("googleReviewsLink", googleReviewsLink)
         }
         errorMessage={errors.googleReviewsLink?.errorMessage}
         hasError={errors.googleReviewsLink?.hasError}
-        {...getOverrideProps(overrides, 'googleReviewsLink')}
+        {...getOverrideProps(overrides, "googleReviewsLink")}
       ></TextField>
       <TextField
-        label="Website"
+        label="Google place id"
         isRequired={false}
         isReadOnly={false}
-        value={website}
-        onChange={e => {
+        value={googlePlaceId}
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -827,6 +845,45 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId: value,
+              website,
+              phone,
+              email,
+            };
+            const result = onChange(modelFields);
+            value = result?.googlePlaceId ?? value;
+          }
+          if (errors.googlePlaceId?.hasError) {
+            runValidationTasks("googlePlaceId", value);
+          }
+          setGooglePlaceId(value);
+        }}
+        onBlur={() => runValidationTasks("googlePlaceId", googlePlaceId)}
+        errorMessage={errors.googlePlaceId?.errorMessage}
+        hasError={errors.googlePlaceId?.hasError}
+        {...getOverrideProps(overrides, "googlePlaceId")}
+      ></TextField>
+      <TextField
+        label="Website"
+        isRequired={false}
+        isReadOnly={false}
+        value={website}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              address,
+              city,
+              state,
+              postalCode,
+              country,
+              openMic,
+              bio,
+              description,
+              venueImageKeys,
+              googleReviewsLink,
+              googlePlaceId,
               website: value,
               phone,
               email,
@@ -835,21 +892,21 @@ export default function VenueUpdateForm(props) {
             value = result?.website ?? value;
           }
           if (errors.website?.hasError) {
-            runValidationTasks('website', value);
+            runValidationTasks("website", value);
           }
           setWebsite(value);
         }}
-        onBlur={() => runValidationTasks('website', website)}
+        onBlur={() => runValidationTasks("website", website)}
         errorMessage={errors.website?.errorMessage}
         hasError={errors.website?.hasError}
-        {...getOverrideProps(overrides, 'website')}
+        {...getOverrideProps(overrides, "website")}
       ></TextField>
       <TextField
         label="Phone"
         isRequired={false}
         isReadOnly={false}
         value={phone}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -864,6 +921,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone: value,
               email,
@@ -872,21 +930,21 @@ export default function VenueUpdateForm(props) {
             value = result?.phone ?? value;
           }
           if (errors.phone?.hasError) {
-            runValidationTasks('phone', value);
+            runValidationTasks("phone", value);
           }
           setPhone(value);
         }}
-        onBlur={() => runValidationTasks('phone', phone)}
+        onBlur={() => runValidationTasks("phone", phone)}
         errorMessage={errors.phone?.errorMessage}
         hasError={errors.phone?.hasError}
-        {...getOverrideProps(overrides, 'phone')}
+        {...getOverrideProps(overrides, "phone")}
       ></TextField>
       <TextField
         label="Email"
         isRequired={false}
         isReadOnly={false}
         value={email}
-        onChange={e => {
+        onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
@@ -901,6 +959,7 @@ export default function VenueUpdateForm(props) {
               description,
               venueImageKeys,
               googleReviewsLink,
+              googlePlaceId,
               website,
               phone,
               email: value,
@@ -909,32 +968,32 @@ export default function VenueUpdateForm(props) {
             value = result?.email ?? value;
           }
           if (errors.email?.hasError) {
-            runValidationTasks('email', value);
+            runValidationTasks("email", value);
           }
           setEmail(value);
         }}
-        onBlur={() => runValidationTasks('email', email)}
+        onBlur={() => runValidationTasks("email", email)}
         errorMessage={errors.email?.errorMessage}
         hasError={errors.email?.hasError}
-        {...getOverrideProps(overrides, 'email')}
+        {...getOverrideProps(overrides, "email")}
       ></TextField>
       <Flex
         justifyContent="space-between"
-        {...getOverrideProps(overrides, 'CTAFlex')}
+        {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
           children="Reset"
           type="reset"
-          onClick={event => {
+          onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
           isDisabled={!(idProp || venueModelProp)}
-          {...getOverrideProps(overrides, 'ResetButton')}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
-          {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}
+          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
             children="Submit"
@@ -942,9 +1001,9 @@ export default function VenueUpdateForm(props) {
             variation="primary"
             isDisabled={
               !(idProp || venueModelProp) ||
-              Object.values(errors).some(e => e?.hasError)
+              Object.values(errors).some((e) => e?.hasError)
             }
-            {...getOverrideProps(overrides, 'SubmitButton')}
+            {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>
       </Flex>

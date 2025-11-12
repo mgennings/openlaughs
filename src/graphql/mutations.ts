@@ -1,7 +1,8 @@
 /* tslint:disable */
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from '../API';
+import * as APITypes from "../API";
 type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationInput: InputType;
   __generatedMutationOutput: OutputType;
@@ -84,6 +85,7 @@ export const createVenue = /* GraphQL */ `mutation CreateVenue(
     description
     venueImageKeys
     googleReviewsLink
+    googlePlaceId
     website
     phone
     email
@@ -113,6 +115,7 @@ export const updateVenue = /* GraphQL */ `mutation UpdateVenue(
     description
     venueImageKeys
     googleReviewsLink
+    googlePlaceId
     website
     phone
     email
@@ -142,6 +145,7 @@ export const deleteVenue = /* GraphQL */ `mutation DeleteVenue(
     description
     venueImageKeys
     googleReviewsLink
+    googlePlaceId
     website
     phone
     email
