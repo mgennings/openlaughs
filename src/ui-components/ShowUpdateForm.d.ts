@@ -28,6 +28,7 @@ export declare type ShowUpdateFormInputValues = {
     dateTime?: string;
     venueID?: string;
     createdBy?: string;
+    showImageKey?: string;
 };
 export declare type ShowUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
@@ -35,6 +36,7 @@ export declare type ShowUpdateFormValidationValues = {
     dateTime?: ValidationFunction<string>;
     venueID?: ValidationFunction<string>;
     createdBy?: ValidationFunction<string>;
+    showImageKey?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ShowUpdateFormOverridesProps = {
@@ -44,6 +46,7 @@ export declare type ShowUpdateFormOverridesProps = {
     dateTime?: PrimitiveOverrideProps<TextFieldProps>;
     venueID?: PrimitiveOverrideProps<TextFieldProps>;
     createdBy?: PrimitiveOverrideProps<TextFieldProps>;
+    showImageKey?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ShowUpdateFormProps = React.PropsWithChildren<{
     overrides?: ShowUpdateFormOverridesProps | undefined | null;

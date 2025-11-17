@@ -78,6 +78,7 @@ export const getShow = /* GraphQL */ `query GetShow($id: ID!) {
     dateTime
     venueID
     createdBy
+    showImageKey
     createdAt
     updatedAt
     __typename
@@ -97,6 +98,7 @@ export const listShows = /* GraphQL */ `query ListShows(
       dateTime
       venueID
       createdBy
+      showImageKey
       createdAt
       updatedAt
       __typename

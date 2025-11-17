@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { DefaultPage, Demo1DarkSidebarPage } from '@/pages/dashboards';
-import { LandingPage } from '@/pages/landing/LandingPage';
+import { RootRoute } from './RootRoute';
 import {
   ProfileActivityPage,
   ProfileBloggerPage,
@@ -78,7 +78,6 @@ import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
 import { RequireOnboarding } from '@/auth/RequireOnboarding';
 import { OnboardingPage } from '@/pages/onboarding';
-import { LandingLayout } from '@/layouts/landing/LandingLayout';
 import { Demo1Layout } from '@/layouts/demo1';
 import { ErrorsRouting } from '@/errors';
 import {
@@ -91,21 +90,15 @@ import { Demo3Layout } from '@/layouts/demo3';
 import { Demo4Layout } from '@/layouts/demo4';
 import { Demo5Layout } from '@/layouts/demo5';
 import { PromoterShowsPage } from '@/pages/promoter/shows/PromoterShowsPage';
+import { PromoterShowDetailPage } from '@/pages/promoter/shows/PromoterShowDetailPage';
 import { PromoterVenuesPage } from '@/pages/promoter/venues/PromoterVenuesPage';
 import { PromoterVenueDetailPage } from '@/pages/promoter/venues/PromoterVenueDetailPage';
 
 const AppRoutingSetup = (): ReactElement => {
   return (
     <Routes>
-      {/* Landing Page - Public */}
-      <Route
-        path="/"
-        element={
-          <LandingLayout>
-            <LandingPage />
-          </LandingLayout>
-        }
-      />
+      {/* Root Route - Redirects to dashboard if authenticated, shows landing page if not */}
+      <Route path="/" element={<RootRoute />} />
 
       {/* Onboarding - Must be authenticated but doesn't require onboarding */}
       <Route element={<RequireAuth />}>
@@ -124,6 +117,10 @@ const AppRoutingSetup = (): ReactElement => {
             <Route path="/demo4-layout" element={<Demo4Layout />} />
             <Route path="/demo5-layout" element={<Demo5Layout />} />
             <Route path="/promoter/shows" element={<PromoterShowsPage />} />
+            <Route
+              path="/promoter/shows/:id"
+              element={<PromoterShowDetailPage />}
+            />
             <Route path="/promoter/venues" element={<PromoterVenuesPage />} />
             <Route
               path="/promoter/venues/:id"

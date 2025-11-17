@@ -17,6 +17,7 @@ type Show
   dateTime: AWSDateTime!
   venueID: ID!
   createdBy: String
+  showImageKey: String
 }
 
 type Venue

@@ -1,46 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { generateClient } from 'aws-amplify/api';
-import { createShow } from '@/graphql/mutations';
-import { listVenues } from '@/graphql/queries';
+import { updateShow } from '@/graphql/mutations';
+import { getShow, listVenues } from '@/graphql/queries';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
-import { uploadPublicImage } from '@/lib/storage';
-import type { ListVenuesQuery, Venue } from '@/API';
+import { uploadPublicImage, getPublicUrl } from '@/lib/storage';
+import type { Show, Venue, ListVenuesQuery } from '@/API';
 
-interface PromoterShowCreateFormProps {
-  createdBy: string;
-  onCreated?: () => void;
+interface PromoterShowUpdateFormProps {
+  showId: string;
+  onUpdated?: () => void;
   onError?: (message: string) => void;
 }
 
 const client = generateClient({ authMode: 'userPool' });
 
-const PromoterShowCreateForm = ({
-  createdBy,
-  onCreated,
+const PromoterShowUpdateForm = ({
+  showId,
+  onUpdated,
   onError,
-}: PromoterShowCreateFormProps) => {
+}: PromoterShowUpdateFormProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dateTime, setDateTime] = useState('');
   const [venueID, setVenueID] = useState('');
   const [showImage, setShowImage] = useState<TImageInputFiles>([]);
-  const [submitting, setSubmitting] = useState(false);
+  const [existingImageKey, setExistingImageKey] = useState<string | null>(null);
+  const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const [venues, setVenues] = useState<Venue[]>([]);
-  const [venuesLoading, setVenuesLoading] = useState(false);
-  const [venuesError, setVenuesError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    const fetchVenues = async () => {
-      setVenuesLoading(true);
-      setVenuesError(null);
+    const loadShow = async () => {
       try {
+        // Load show data
         const result = await client.graphql({
+          query: (getShow as string).replace(/__typename/g, ''),
+          variables: { id: showId },
+        });
+
+        if ('data' in result && result.data?.getShow) {
+          const show = result.data.getShow as Show;
+          setTitle(show.title || '');
+          setDescription(show.description || '');
+          setVenueID(show.venueID || '');
+
+          // Format dateTime for datetime-local input
+          if (show.dateTime) {
+            const date = new Date(show.dateTime);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            setDateTime(`${year}-${month}-${day}T${hours}:${minutes}`);
+          }
+
+          // Load existing image if available
+          if (show.showImageKey) {
+            setExistingImageKey(show.showImageKey);
+            const url = await getPublicUrl(show.showImageKey);
+            setExistingImageUrl(url.toString());
+          }
+        }
+
+        // Load venues
+        const venuesResult = await client.graphql({
           query: (listVenues as string).replace(/__typename/g, ''),
           variables: { limit: 100 },
         });
-        if ('data' in result) {
+
+        if ('data' in venuesResult) {
           const items =
-            (result.data as ListVenuesQuery).listVenues?.items ?? [];
+            (venuesResult.data as ListVenuesQuery).listVenues?.items ?? [];
           setVenues(
             (items.filter(Boolean) as Venue[]).sort((a, b) =>
               (a.name || '').localeCompare(b.name || ''),
@@ -48,22 +80,22 @@ const PromoterShowCreateForm = ({
           );
         }
       } catch (err: any) {
-        setVenuesError(err?.message || 'Failed to load venues');
+        onError?.(err?.message || 'Failed to load show');
       } finally {
-        setVenuesLoading(false);
+        setLoading(false);
       }
     };
-    fetchVenues();
-  }, []);
+
+    void loadShow();
+  }, [showId, onError]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
-
     setSubmitting(true);
     try {
-      // Upload image if provided
-      let showImageKey: string | null = null;
+      // Upload new image if provided, otherwise keep existing
+      let showImageKey: string | null = existingImageKey;
       if (showImage.length > 0 && showImage[0].file) {
         const ext = showImage[0].file.name.split('.').pop() || 'jpg';
         const key = `show-images/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
@@ -72,16 +104,16 @@ const PromoterShowCreateForm = ({
       }
 
       const input = {
+        id: showId,
         title,
         description: description || null,
         dateTime: dateTime ? new Date(dateTime).toISOString() : null,
-        venueID,
-        createdBy,
+        venueID: venueID || null,
         showImageKey,
       } as any;
 
       const result = await client.graphql({
-        query: (createShow as string).replace(/__typename/g, ''),
+        query: (updateShow as string).replace(/__typename/g, ''),
         variables: { input },
       });
 
@@ -90,23 +122,32 @@ const PromoterShowCreateForm = ({
         throw new Error(message);
       }
 
-      setTitle('');
-      setDescription('');
-      setDateTime('');
-      setVenueID('');
-      setShowImage([]);
-      onCreated?.();
+      onUpdated?.();
     } catch (err: any) {
-      onError?.(err?.message || 'Failed to create show');
+      onError?.(err?.message || 'Failed to update show');
     } finally {
       setSubmitting(false);
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <div
+          className="spinner-border spinner-border-sm text-primary"
+          role="status"
+        />
+        <span className="ml-2 text-gray-600">Loading show...</span>
+      </div>
+    );
+  }
+
   return (
     <form className="card-body flex flex-col gap-5 p-0" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-1">
-        <label className="form-label font-normal text-gray-900">Title</label>
+        <label className="form-label font-normal text-gray-900">
+          Title <span className="text-danger">*</span>
+        </label>
         <input
           className="input"
           type="text"
@@ -121,9 +162,9 @@ const PromoterShowCreateForm = ({
         <label className="form-label font-normal text-gray-900">
           Description
         </label>
-        <input
-          className="input"
-          type="text"
+        <textarea
+          className="textarea"
+          rows={5}
           placeholder="Optional description"
           value={description}
           onChange={e => setDescription(e.target.value)}
@@ -132,7 +173,7 @@ const PromoterShowCreateForm = ({
 
       <div className="flex flex-col gap-1">
         <label className="form-label font-normal text-gray-900">
-          Date time
+          Date & Time <span className="text-danger">*</span>
         </label>
         <input
           className="input"
@@ -145,16 +186,16 @@ const PromoterShowCreateForm = ({
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="form-label font-normal text-gray-900">Venue</label>
+        <label className="form-label font-normal text-gray-900">
+          Venue <span className="text-danger">*</span>
+        </label>
         <select
-          className="input"
+          className="select"
           value={venueID}
           onChange={e => setVenueID(e.target.value)}
           required
         >
-          <option value="">
-            {venuesLoading ? 'Loading venues…' : 'Select a venue'}
-          </option>
+          <option value="">Select a venue</option>
           {venues.map(v => (
             <option key={v.id} value={v.id || ''}>
               {v.name}
@@ -162,9 +203,6 @@ const PromoterShowCreateForm = ({
             </option>
           ))}
         </select>
-        {venuesError && (
-          <span className="text-danger text-2sm">{venuesError}</span>
-        )}
       </div>
 
       <div className="flex flex-col gap-1">
@@ -185,6 +223,38 @@ const PromoterShowCreateForm = ({
             dragProps,
           }) => (
             <div className="flex flex-col gap-3">
+              {existingImageUrl && !fileList.length && (
+                <div className="relative group">
+                  <img
+                    src={existingImageUrl}
+                    alt="Current show image"
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setExistingImageKey(null);
+                      setExistingImageUrl(null);
+                    }}
+                    className="absolute top-2 right-2 bg-danger text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    title="Remove image"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              )}
               <div
                 {...dragProps}
                 className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
@@ -196,7 +266,9 @@ const PromoterShowCreateForm = ({
               >
                 <div className="text-gray-600">
                   <p className="mb-2">
-                    Click to upload or drag and drop image here
+                    {existingImageUrl && !fileList.length
+                      ? 'Click to replace image or drag and drop new image'
+                      : 'Click to upload or drag and drop image here'}
                   </p>
                   <p className="text-sm text-gray-500">
                     PNG, JPG, WEBP (recommended: 600x400px)
@@ -238,26 +310,12 @@ const PromoterShowCreateForm = ({
       </div>
 
       <div className="flex gap-3">
-        <button
-          type="button"
-          className="btn btn-light"
-          onClick={() => {
-            setTitle('');
-            setDescription('');
-            setDateTime('');
-            setVenueID('');
-            setShowImage([]);
-          }}
-          disabled={submitting}
-        >
-          Clear
-        </button>
         <button className="btn btn-primary" type="submit" disabled={submitting}>
-          {submitting ? 'Submitting…' : 'Submit'}
+          {submitting ? 'Updating…' : 'Update Show'}
         </button>
       </div>
     </form>
   );
 };
 
-export { PromoterShowCreateForm };
+export { PromoterShowUpdateForm };

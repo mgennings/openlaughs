@@ -5,42 +5,75 @@ import { toAbsoluteUrl } from '@/utils/Assets';
 
 interface IWorkProps {
   image: string;
+  showImageUrl?: string; // Optional full URL for show image - takes precedence over image
   title: string;
   description?: string;
+  dateTime?: string; // Optional date/time string to display
   authorAvatar: string;
   authorAvatarUrl?: string; // Optional full URL - takes precedence over authorAvatar
   authorName: string;
   likes: number;
   comments: number;
+  titleLink?: string; // Optional link for the title - if not provided, uses default
 }
 
 const CardWork = ({
   image,
+  showImageUrl,
   title,
+  description,
+  dateTime,
   authorAvatar,
   authorAvatarUrl,
   authorName,
   likes,
   comments,
+  titleLink,
 }: IWorkProps) => {
   const avatarSrc =
     authorAvatarUrl || toAbsoluteUrl(`/media/avatars/${authorAvatar}`);
+  const imageSrc =
+    showImageUrl || toAbsoluteUrl(`/media/images/600x400/${image}`);
+
+  const formatDateTime = (dateTimeString?: string) => {
+    if (!dateTimeString) return '';
+    try {
+      const date = new Date(dateTimeString);
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      }).format(date);
+    } catch {
+      return dateTimeString;
+    }
+  };
 
   return (
     <div className="card border-0">
-      <img
-        src={toAbsoluteUrl(`/media/images/600x400/${image}`)}
-        className="w-full h-auto rounded-t-xl"
-        alt=""
-      />
+      <img src={imageSrc} className="w-full h-auto rounded-t-xl" alt="" />
 
       <div className="card-border card-rounded-b flex flex-col gap-2 px-5 py-4.5">
         <Link
-          to="/public-profile/profiles/company"
+          to={titleLink || '/public-profile/profiles/company'}
           className="text-lg font-medium text-gray-900 hover:text-primary"
         >
           {title}
         </Link>
+
+        {description && (
+          <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+        )}
+
+        {dateTime && (
+          <div className="text-sm text-gray-700 flex items-center gap-2">
+            <KeenIcon icon="calendar" className="text-primary" />
+            {formatDateTime(dateTime)}
+          </div>
+        )}
 
         <div className="flex items-center justify-between grow">
           <div className="flex items-center grow">

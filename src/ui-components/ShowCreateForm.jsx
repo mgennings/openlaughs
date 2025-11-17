@@ -28,6 +28,7 @@ export default function ShowCreateForm(props) {
     dateTime: "",
     venueID: "",
     createdBy: "",
+    showImageKey: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [description, setDescription] = React.useState(
@@ -36,6 +37,9 @@ export default function ShowCreateForm(props) {
   const [dateTime, setDateTime] = React.useState(initialValues.dateTime);
   const [venueID, setVenueID] = React.useState(initialValues.venueID);
   const [createdBy, setCreatedBy] = React.useState(initialValues.createdBy);
+  const [showImageKey, setShowImageKey] = React.useState(
+    initialValues.showImageKey
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setTitle(initialValues.title);
@@ -43,6 +47,7 @@ export default function ShowCreateForm(props) {
     setDateTime(initialValues.dateTime);
     setVenueID(initialValues.venueID);
     setCreatedBy(initialValues.createdBy);
+    setShowImageKey(initialValues.showImageKey);
     setErrors({});
   };
   const validations = {
@@ -51,6 +56,7 @@ export default function ShowCreateForm(props) {
     dateTime: [{ type: "Required" }],
     venueID: [{ type: "Required" }],
     createdBy: [],
+    showImageKey: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -100,6 +106,7 @@ export default function ShowCreateForm(props) {
           dateTime,
           venueID,
           createdBy,
+          showImageKey,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -167,6 +174,7 @@ export default function ShowCreateForm(props) {
               dateTime,
               venueID,
               createdBy,
+              showImageKey,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -195,6 +203,7 @@ export default function ShowCreateForm(props) {
               dateTime,
               venueID,
               createdBy,
+              showImageKey,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -225,6 +234,7 @@ export default function ShowCreateForm(props) {
               dateTime: value,
               venueID,
               createdBy,
+              showImageKey,
             };
             const result = onChange(modelFields);
             value = result?.dateTime ?? value;
@@ -253,6 +263,7 @@ export default function ShowCreateForm(props) {
               dateTime,
               venueID: value,
               createdBy,
+              showImageKey,
             };
             const result = onChange(modelFields);
             value = result?.venueID ?? value;
@@ -281,6 +292,7 @@ export default function ShowCreateForm(props) {
               dateTime,
               venueID,
               createdBy: value,
+              showImageKey,
             };
             const result = onChange(modelFields);
             value = result?.createdBy ?? value;
@@ -294,6 +306,35 @@ export default function ShowCreateForm(props) {
         errorMessage={errors.createdBy?.errorMessage}
         hasError={errors.createdBy?.hasError}
         {...getOverrideProps(overrides, "createdBy")}
+      ></TextField>
+      <TextField
+        label="Show image key"
+        isRequired={false}
+        isReadOnly={false}
+        value={showImageKey}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              dateTime,
+              venueID,
+              createdBy,
+              showImageKey: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.showImageKey ?? value;
+          }
+          if (errors.showImageKey?.hasError) {
+            runValidationTasks("showImageKey", value);
+          }
+          setShowImageKey(value);
+        }}
+        onBlur={() => runValidationTasks("showImageKey", showImageKey)}
+        errorMessage={errors.showImageKey?.errorMessage}
+        hasError={errors.showImageKey?.hasError}
+        {...getOverrideProps(overrides, "showImageKey")}
       ></TextField>
       <Flex
         justifyContent="space-between"

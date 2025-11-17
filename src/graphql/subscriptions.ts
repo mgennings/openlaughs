@@ -106,6 +106,7 @@ export const onCreateShow = /* GraphQL */ `subscription OnCreateShow($filter: Mo
     dateTime
     venueID
     createdBy
+    showImageKey
     createdAt
     updatedAt
     __typename
@@ -123,6 +124,7 @@ export const onUpdateShow = /* GraphQL */ `subscription OnUpdateShow($filter: Mo
     dateTime
     venueID
     createdBy
+    showImageKey
     createdAt
     updatedAt
     __typename
@@ -140,6 +142,7 @@ export const onDeleteShow = /* GraphQL */ `subscription OnDeleteShow($filter: Mo
     dateTime
     venueID
     createdBy
+    showImageKey
     createdAt
     updatedAt
     __typename

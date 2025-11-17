@@ -27,6 +27,7 @@ export declare type ShowCreateFormInputValues = {
     dateTime?: string;
     venueID?: string;
     createdBy?: string;
+    showImageKey?: string;
 };
 export declare type ShowCreateFormValidationValues = {
     title?: ValidationFunction<string>;
@@ -34,6 +35,7 @@ export declare type ShowCreateFormValidationValues = {
     dateTime?: ValidationFunction<string>;
     venueID?: ValidationFunction<string>;
     createdBy?: ValidationFunction<string>;
+    showImageKey?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ShowCreateFormOverridesProps = {
@@ -43,6 +45,7 @@ export declare type ShowCreateFormOverridesProps = {
     dateTime?: PrimitiveOverrideProps<TextFieldProps>;
     venueID?: PrimitiveOverrideProps<TextFieldProps>;
     createdBy?: PrimitiveOverrideProps<TextFieldProps>;
+    showImageKey?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ShowCreateFormProps = React.PropsWithChildren<{
     overrides?: ShowCreateFormOverridesProps | undefined | null;
