@@ -30,10 +30,14 @@ const CardWork = ({
   comments,
   titleLink,
 }: IWorkProps) => {
+  const hasAvatarUrl = !!authorAvatarUrl;
   const avatarSrc =
     authorAvatarUrl || toAbsoluteUrl(`/media/avatars/${authorAvatar}`);
   const imageSrc =
     showImageUrl || toAbsoluteUrl(`/media/images/600x400/${image}`);
+
+  // Get first letter for fallback
+  const firstLetter = authorName?.charAt(0)?.toUpperCase() || '?';
 
   const formatDateTime = (dateTimeString?: string) => {
     if (!dateTimeString) return '';
@@ -77,7 +81,26 @@ const CardWork = ({
 
         <div className="flex items-center justify-between grow">
           <div className="flex items-center grow">
-            <img src={avatarSrc} className="rounded-full size-7 me-2" alt="" />
+            {hasAvatarUrl ? (
+              <img
+                src={avatarSrc}
+                className="rounded-full size-7 me-2 object-cover"
+                alt={authorName}
+                onError={e => {
+                  // Replace image with letter circle if it fails to load
+                  const target = e.target as HTMLImageElement;
+                  const fallback = document.createElement('div');
+                  fallback.className =
+                    'rounded-full size-7 me-2 bg-primary text-white flex items-center justify-center font-semibold text-sm';
+                  fallback.textContent = firstLetter;
+                  target.replaceWith(fallback);
+                }}
+              />
+            ) : (
+              <div className="rounded-full size-7 me-2 bg-primary text-white flex items-center justify-center font-semibold text-sm">
+                {firstLetter}
+              </div>
+            )}
 
             <Link
               to="/public-profile/profiles/nft"

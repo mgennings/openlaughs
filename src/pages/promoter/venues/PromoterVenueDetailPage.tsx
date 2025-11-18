@@ -16,6 +16,7 @@ const PromoterVenueDetailPage = () => {
   const navigate = useNavigate();
   const [venue, setVenue] = useState<Venue | null>(null);
   const [venueImageUrls, setVenueImageUrls] = useState<string[]>([]);
+  const [venueLogoUrl, setVenueLogoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -59,6 +60,16 @@ const PromoterVenueDetailPage = () => {
                 validKeys.map(key => getPublicUrl(key)),
               );
               setVenueImageUrls(urls.map(url => url.toString()));
+            }
+          }
+
+          // Load venue logo
+          if (venueData.logoKey) {
+            try {
+              const logoUrl = await getPublicUrl(venueData.logoKey);
+              setVenueLogoUrl(logoUrl.toString());
+            } catch (err) {
+              console.error('Failed to load logo URL:', err);
             }
           }
         } else {
@@ -125,41 +136,118 @@ const PromoterVenueDetailPage = () => {
     );
   }
 
+  // Get first letter for logo fallback
+  const firstLetter = venue.name?.charAt(0)?.toUpperCase() || '?';
+
   return (
     <Container>
+      {/* Header with back button and edit */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <button
-            className="btn btn-icon btn-light"
-            onClick={() => navigate('/promoter/venues')}
-          >
-            <KeenIcon icon="arrow-left" />
-          </button>
-          <h2 className="text-2xl font-semibold text-gray-900">{venue.name}</h2>
-        </div>
+        <button
+          className="btn btn-icon btn-light"
+          onClick={() => navigate('/promoter/venues')}
+        >
+          <KeenIcon icon="arrow-left" />
+        </button>
         <button className="btn btn-primary" onClick={() => setIsEditing(true)}>
           <KeenIcon icon="notepad-edit" className="mr-2" />
           Edit Venue
         </button>
       </div>
 
-      {venueImageUrls.length > 0 && (
-        <div className="card p-5 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {venueImageUrls.map((url, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={url}
-                  alt={`${venue.name} - Image ${index + 1}`}
-                  className="w-full h-64 object-cover rounded-lg"
-                />
+      {/* Hero Section with Logo and Venue Name */}
+      <div className="card p-6 mb-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            {venueLogoUrl ? (
+              <img
+                src={venueLogoUrl}
+                alt={`${venue.name} logo`}
+                className="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover border-2 border-gray-200"
+                onError={e => {
+                  // Fallback to letter circle if image fails
+                  const target = e.target as HTMLImageElement;
+                  const fallback = document.createElement('div');
+                  fallback.className =
+                    'w-24 h-24 md:w-32 md:h-32 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-3xl md:text-4xl';
+                  fallback.textContent = firstLetter;
+                  target.replaceWith(fallback);
+                }}
+              />
+            ) : (
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-3xl md:text-4xl">
+                {firstLetter}
               </div>
-            ))}
+            )}
           </div>
+
+          {/* Venue Name and Quick Info */}
+          <div className="flex-1">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+              {venue.name}
+            </h1>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+              {venue.city && venue.state && (
+                <div className="flex items-center gap-1">
+                  <KeenIcon icon="geolocation" className="text-primary" />
+                  <span>
+                    {venue.city}, {venue.state}
+                  </span>
+                </div>
+              )}
+              {venue.openMic ? (
+                <span className="badge badge-success">Open Mic</span>
+              ) : (
+                <span className="badge badge-light">Venue</span>
+              )}
+              {venue.phone && (
+                <a
+                  href={`tel:${venue.phone}`}
+                  className="flex items-center gap-1 text-primary hover:underline"
+                >
+                  <KeenIcon icon="phone" />
+                  <span>{venue.phone}</span>
+                </a>
+              )}
+            </div>
+            {venue.bio && (
+              <p className="text-gray-700 mt-3 line-clamp-2">{venue.bio}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Image Gallery */}
+      {venueImageUrls.length > 0 && (
+        <div className="mb-6">
+          {venueImageUrls.length === 1 ? (
+            <div className="card p-0 overflow-hidden">
+              <img
+                src={venueImageUrls[0]}
+                alt={`${venue.name}`}
+                className="w-full h-96 object-cover"
+              />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {venueImageUrls.map((url, index) => (
+                <div key={index} className="card p-0 overflow-hidden">
+                  <img
+                    src={url}
+                    alt={`${venue.name} - Image ${index + 1}`}
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
+      {/* Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Column - Bio and Description */}
         <div className="lg:col-span-2 space-y-6">
           {venue.bio && (
             <div className="card p-5">
@@ -180,6 +268,7 @@ const PromoterVenueDetailPage = () => {
           )}
         </div>
 
+        {/* Right Column - Venue Details */}
         <div className="space-y-6">
           <div className="card p-5">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
@@ -259,14 +348,6 @@ const PromoterVenueDetailPage = () => {
                   </a>
                 </div>
               )}
-              <div>
-                <div className="text-sm text-gray-600 mb-1">Type</div>
-                {venue.openMic ? (
-                  <span className="badge badge-success">Open Mic</span>
-                ) : (
-                  <span className="badge badge-light">Venue</span>
-                )}
-              </div>
             </div>
           </div>
         </div>
