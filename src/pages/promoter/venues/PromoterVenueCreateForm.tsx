@@ -32,6 +32,7 @@ const PromoterVenueCreateForm = ({
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [venueImages, setVenueImages] = useState<TImageInputFiles>([]);
+  const [logoImage, setLogoImage] = useState<TImageInputFiles>([]);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,6 +51,15 @@ const PromoterVenueCreateForm = ({
         }
       }
 
+      // Upload logo if provided
+      let logoKey: string | null = null;
+      if (logoImage.length > 0 && logoImage[0].file) {
+        const ext = logoImage[0].file.name.split('.').pop() || 'jpg';
+        const key = `venue-logos/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+        await uploadPublicImage(key, logoImage[0].file, logoImage[0].file.type);
+        logoKey = key;
+      }
+
       const input = {
         name,
         address: address || null,
@@ -61,6 +71,7 @@ const PromoterVenueCreateForm = ({
         bio: bio || null,
         description: description || null,
         venueImageKeys: imageKeys.length > 0 ? imageKeys : null,
+        logoKey: logoKey,
         googleReviewsLink: googleReviewsLink || null,
         googlePlaceId: googlePlaceId || null,
         website: website || null,
@@ -94,6 +105,7 @@ const PromoterVenueCreateForm = ({
       setPhone('');
       setEmail('');
       setVenueImages([]);
+      setLogoImage([]);
       onCreated?.();
     } catch (err: any) {
       onError?.(err?.message || 'Failed to create venue');
@@ -248,6 +260,81 @@ const PromoterVenueCreateForm = ({
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label className="form-label font-normal text-gray-900">
+          Venue Logo
+        </label>
+        <p className="text-xs text-gray-500 mb-2">
+          Upload a logo for the venue (square format recommended)
+        </p>
+        <ImageInput
+          value={logoImage}
+          onChange={setLogoImage}
+          multiple={false}
+          maxNumber={1}
+          acceptType={['image/jpeg', 'image/png', 'image/webp']}
+        >
+          {({
+            fileList,
+            onImageUpload,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            <div className="flex flex-col gap-3">
+              <div
+                {...dragProps}
+                className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
+                  isDragging
+                    ? 'border-primary bg-primary/5'
+                    : 'border-gray-300 hover:border-gray-400'
+                }`}
+                onClick={onImageUpload}
+              >
+                <div className="text-gray-600">
+                  <p className="mb-2">
+                    Click to upload or drag and drop logo here
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    PNG, JPG, WEBP (single image)
+                  </p>
+                </div>
+              </div>
+              {fileList.length > 0 && (
+                <div className="flex justify-center">
+                  <div className="relative group w-32 h-32">
+                    <img
+                      src={fileList[0].dataURL}
+                      alt="Venue logo"
+                      className="w-full h-full object-contain rounded-lg border border-gray-300"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => onImageRemove(0)}
+                      className="absolute top-2 right-2 bg-danger text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </ImageInput>
       </div>
 
       <div className="flex flex-col gap-1">
@@ -413,6 +500,7 @@ const PromoterVenueCreateForm = ({
             setPhone('');
             setEmail('');
             setVenueImages([]);
+            setLogoImage([]);
           }}
           disabled={submitting}
         >

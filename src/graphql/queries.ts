@@ -121,6 +121,7 @@ export const getVenue = /* GraphQL */ `query GetVenue($id: ID!) {
     bio
     description
     venueImageKeys
+    logoKey
     googleReviewsLink
     googlePlaceId
     website
@@ -150,6 +151,7 @@ export const listVenues = /* GraphQL */ `query ListVenues(
       bio
       description
       venueImageKeys
+      logoKey
       googleReviewsLink
       googlePlaceId
       website

@@ -202,6 +202,7 @@ export default function VenueUpdateForm(props) {
     bio: "",
     description: "",
     venueImageKeys: [],
+    logoKey: "",
     googleReviewsLink: "",
     googlePlaceId: "",
     website: "",
@@ -222,6 +223,7 @@ export default function VenueUpdateForm(props) {
   const [venueImageKeys, setVenueImageKeys] = React.useState(
     initialValues.venueImageKeys
   );
+  const [logoKey, setLogoKey] = React.useState(initialValues.logoKey);
   const [googleReviewsLink, setGoogleReviewsLink] = React.useState(
     initialValues.googleReviewsLink
   );
@@ -247,6 +249,7 @@ export default function VenueUpdateForm(props) {
     setDescription(cleanValues.description);
     setVenueImageKeys(cleanValues.venueImageKeys ?? []);
     setCurrentVenueImageKeysValue("");
+    setLogoKey(cleanValues.logoKey);
     setGoogleReviewsLink(cleanValues.googleReviewsLink);
     setGooglePlaceId(cleanValues.googlePlaceId);
     setWebsite(cleanValues.website);
@@ -284,6 +287,7 @@ export default function VenueUpdateForm(props) {
     bio: [],
     description: [],
     venueImageKeys: [{ type: "Required" }],
+    logoKey: [],
     googleReviewsLink: [],
     googlePlaceId: [],
     website: [],
@@ -326,6 +330,7 @@ export default function VenueUpdateForm(props) {
           bio: bio ?? null,
           description: description ?? null,
           venueImageKeys,
+          logoKey: logoKey ?? null,
           googleReviewsLink: googleReviewsLink ?? null,
           googlePlaceId: googlePlaceId ?? null,
           website: website ?? null,
@@ -401,6 +406,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -439,6 +445,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -477,6 +484,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -515,6 +523,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -553,6 +562,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -591,6 +601,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -629,6 +640,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -667,6 +679,7 @@ export default function VenueUpdateForm(props) {
               bio: value,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -705,6 +718,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description: value,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -739,6 +753,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys: values,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -786,6 +801,45 @@ export default function VenueUpdateForm(props) {
         ></TextField>
       </ArrayField>
       <TextField
+        label="Logo key"
+        isRequired={false}
+        isReadOnly={false}
+        value={logoKey}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              address,
+              city,
+              state,
+              postalCode,
+              country,
+              openMic,
+              bio,
+              description,
+              venueImageKeys,
+              logoKey: value,
+              googleReviewsLink,
+              googlePlaceId,
+              website,
+              phone,
+              email,
+            };
+            const result = onChange(modelFields);
+            value = result?.logoKey ?? value;
+          }
+          if (errors.logoKey?.hasError) {
+            runValidationTasks("logoKey", value);
+          }
+          setLogoKey(value);
+        }}
+        onBlur={() => runValidationTasks("logoKey", logoKey)}
+        errorMessage={errors.logoKey?.errorMessage}
+        hasError={errors.logoKey?.hasError}
+        {...getOverrideProps(overrides, "logoKey")}
+      ></TextField>
+      <TextField
         label="Google reviews link"
         isRequired={false}
         isReadOnly={false}
@@ -804,6 +858,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink: value,
               googlePlaceId,
               website,
@@ -844,6 +899,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId: value,
               website,
@@ -882,6 +938,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website: value,
@@ -920,6 +977,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -958,6 +1016,7 @@ export default function VenueUpdateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,

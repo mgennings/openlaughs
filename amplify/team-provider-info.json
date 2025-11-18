@@ -20,6 +20,12 @@
       },
       "storage": {
         "s31c1a7e4e": {}
+      },
+      "function": {
+        "imageResizer": {
+          "deploymentBucketName": "amplify-openlaughs-dev-13b80-deployment",
+          "s3Key": "amplify-builds/imageResizer-52634a5073714a425437-build.zip"
+        }
       }
     }
   }

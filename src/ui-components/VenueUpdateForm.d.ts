@@ -33,6 +33,7 @@ export declare type VenueUpdateFormInputValues = {
     bio?: string;
     description?: string;
     venueImageKeys?: string[];
+    logoKey?: string;
     googleReviewsLink?: string;
     googlePlaceId?: string;
     website?: string;
@@ -50,6 +51,7 @@ export declare type VenueUpdateFormValidationValues = {
     bio?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
     venueImageKeys?: ValidationFunction<string>;
+    logoKey?: ValidationFunction<string>;
     googleReviewsLink?: ValidationFunction<string>;
     googlePlaceId?: ValidationFunction<string>;
     website?: ValidationFunction<string>;
@@ -69,6 +71,7 @@ export declare type VenueUpdateFormOverridesProps = {
     bio?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
     venueImageKeys?: PrimitiveOverrideProps<TextFieldProps>;
+    logoKey?: PrimitiveOverrideProps<TextFieldProps>;
     googleReviewsLink?: PrimitiveOverrideProps<TextFieldProps>;
     googlePlaceId?: PrimitiveOverrideProps<TextFieldProps>;
     website?: PrimitiveOverrideProps<TextFieldProps>;

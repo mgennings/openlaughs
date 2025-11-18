@@ -6,6 +6,7 @@ import {
   TeamMeeting,
   Teams,
 } from './blocks';
+import { ShowsWidget } from '@/partials/shows';
 
 const Demo1LightSidebarContent = () => {
   return (
@@ -40,6 +41,10 @@ const Demo1LightSidebarContent = () => {
         <div className="lg:col-span-2">
           <Teams />
         </div>
+      </div>
+
+      <div className="grid lg:grid-cols-1 gap-5 lg:gap-7.5 items-stretch">
+        <ShowsWidget limit={6} />
       </div>
     </div>
   );

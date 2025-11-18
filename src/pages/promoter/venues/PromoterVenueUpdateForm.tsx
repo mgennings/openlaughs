@@ -36,6 +36,9 @@ const PromoterVenueUpdateForm = ({
   const [venueImages, setVenueImages] = useState<TImageInputFiles>([]);
   const [existingImageKeys, setExistingImageKeys] = useState<string[]>([]);
   const [existingImageUrls, setExistingImageUrls] = useState<string[]>([]);
+  const [logoImage, setLogoImage] = useState<TImageInputFiles>([]);
+  const [existingLogoKey, setExistingLogoKey] = useState<string | null>(null);
+  const [existingLogoUrl, setExistingLogoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -74,6 +77,17 @@ const PromoterVenueUpdateForm = ({
             );
             setExistingImageUrls(urls.map(url => url.toString()));
           }
+
+          // Load existing logo if available
+          if (venue.logoKey) {
+            setExistingLogoKey(venue.logoKey);
+            try {
+              const logoUrl = await getPublicUrl(venue.logoKey);
+              setExistingLogoUrl(logoUrl.toString());
+            } catch (err) {
+              console.error('Failed to load logo URL:', err);
+            }
+          }
         }
       } catch (err: any) {
         onError?.(err?.message || 'Failed to load venue');
@@ -104,6 +118,18 @@ const PromoterVenueUpdateForm = ({
       // Combine existing and new image keys
       const allImageKeys = [...existingImageKeys, ...newImageKeys];
 
+      // Upload new logo if provided, otherwise keep existing (or null if removed)
+      let logoKey: string | null = existingLogoKey;
+      if (logoImage.length > 0 && logoImage[0].file) {
+        const ext = logoImage[0].file.name.split('.').pop() || 'jpg';
+        const key = `venue-logos/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+        await uploadPublicImage(key, logoImage[0].file, logoImage[0].file.type);
+        logoKey = key;
+      } else if (!existingLogoKey) {
+        // If no existing logo and no new logo uploaded, set to null
+        logoKey = null;
+      }
+
       const input = {
         id: venueId,
         name,
@@ -116,6 +142,7 @@ const PromoterVenueUpdateForm = ({
         bio: bio || null,
         description: description || null,
         venueImageKeys: allImageKeys.length > 0 ? allImageKeys : null,
+        logoKey: logoKey,
         googleReviewsLink: googleReviewsLink || null,
         website: website || null,
         phone: phone || null,
@@ -145,6 +172,11 @@ const PromoterVenueUpdateForm = ({
     const newUrls = existingImageUrls.filter((_, i) => i !== index);
     setExistingImageKeys(newKeys);
     setExistingImageUrls(newUrls);
+  };
+
+  const handleRemoveExistingLogo = () => {
+    setExistingLogoKey(null);
+    setExistingLogoUrl(null);
   };
 
   if (loading) {
@@ -245,7 +277,7 @@ const PromoterVenueUpdateForm = ({
       <div className="flex flex-col gap-1">
         <label className="form-label font-normal text-gray-900">Bio</label>
         <textarea
-          className="input"
+          className="textarea"
           rows={3}
           placeholder="Short bio or tagline for the venue"
           value={bio}
@@ -258,12 +290,120 @@ const PromoterVenueUpdateForm = ({
           Description
         </label>
         <textarea
-          className="input"
+          className="textarea"
           rows={5}
           placeholder="Detailed description of the venue"
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label className="form-label font-normal text-gray-900">
+          Venue Logo
+        </label>
+        <p className="text-xs text-gray-500 mb-2">
+          Upload a logo for the venue (square format recommended)
+        </p>
+        {existingLogoUrl && (
+          <div className="mb-3">
+            <p className="text-sm text-gray-600 mb-2">Current Logo:</p>
+            <div className="flex justify-start">
+              <div className="relative group w-32 h-32">
+                <img
+                  src={existingLogoUrl}
+                  alt="Venue logo"
+                  className="w-full h-full object-contain rounded-lg border border-gray-300"
+                />
+                <button
+                  type="button"
+                  onClick={handleRemoveExistingLogo}
+                  className="absolute top-2 right-2 bg-danger text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        <ImageInput
+          value={logoImage}
+          onChange={setLogoImage}
+          multiple={false}
+          maxNumber={1}
+          acceptType={['image/jpeg', 'image/png', 'image/webp']}
+        >
+          {({
+            fileList,
+            onImageUpload,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            <div className="flex flex-col gap-3">
+              <div
+                {...dragProps}
+                className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
+                  isDragging
+                    ? 'border-primary bg-primary/5'
+                    : 'border-gray-300 hover:border-gray-400'
+                }`}
+                onClick={onImageUpload}
+              >
+                <div className="text-gray-600">
+                  <p className="mb-2">
+                    Click to upload or drag and drop logo here
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    PNG, JPG, WEBP (single image)
+                  </p>
+                </div>
+              </div>
+              {fileList.length > 0 && (
+                <div className="flex justify-center">
+                  <div className="relative group w-32 h-32">
+                    <img
+                      src={fileList[0].dataURL}
+                      alt="Venue logo"
+                      className="w-full h-full object-contain rounded-lg border border-gray-300"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => onImageRemove(0)}
+                      className="absolute top-2 right-2 bg-danger text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </ImageInput>
       </div>
 
       <div className="flex flex-col gap-1">

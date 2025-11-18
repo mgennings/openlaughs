@@ -44,6 +44,7 @@ type Venue
   bio: String
   description: String
   venueImageKeys: [String!]
+  logoKey: String
   googleReviewsLink: String
   googlePlaceId: String
   website: String

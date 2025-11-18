@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [],
+  "permissions": {
+    "storage": {
+      "s31c1a7e4e": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  }
+}

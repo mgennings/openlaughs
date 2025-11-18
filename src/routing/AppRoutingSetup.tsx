@@ -93,6 +93,7 @@ import { PromoterShowsPage } from '@/pages/promoter/shows/PromoterShowsPage';
 import { PromoterShowDetailPage } from '@/pages/promoter/shows/PromoterShowDetailPage';
 import { PromoterVenuesPage } from '@/pages/promoter/venues/PromoterVenuesPage';
 import { PromoterVenueDetailPage } from '@/pages/promoter/venues/PromoterVenueDetailPage';
+import { ShowsPage, ShowDetailPage } from '@/pages/shows';
 
 const AppRoutingSetup = (): ReactElement => {
   return (
@@ -126,6 +127,8 @@ const AppRoutingSetup = (): ReactElement => {
               path="/promoter/venues/:id"
               element={<PromoterVenueDetailPage />}
             />
+            <Route path="/shows" element={<ShowsPage />} />
+            <Route path="/shows/:id" element={<ShowDetailPage />} />
             <Route
               path="/public-profile/profiles/default"
               element={<ProfileDefaultPage />}

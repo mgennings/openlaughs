@@ -16,6 +16,11 @@ export const MENU_SIDEBAR: TMenuConfig = [
     ],
   },
   {
+    title: 'Shows',
+    icon: 'calendar',
+    path: '/shows',
+  },
+  {
     title: 'Promoter',
     icon: 'profile-circle',
     children: [

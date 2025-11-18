@@ -165,6 +165,7 @@ export const onCreateVenue = /* GraphQL */ `subscription OnCreateVenue($filter: 
     bio
     description
     venueImageKeys
+    logoKey
     googleReviewsLink
     googlePlaceId
     website
@@ -192,6 +193,7 @@ export const onUpdateVenue = /* GraphQL */ `subscription OnUpdateVenue($filter: 
     bio
     description
     venueImageKeys
+    logoKey
     googleReviewsLink
     googlePlaceId
     website
@@ -219,6 +221,7 @@ export const onDeleteVenue = /* GraphQL */ `subscription OnDeleteVenue($filter: 
     bio
     description
     venueImageKeys
+    logoKey
     googleReviewsLink
     googlePlaceId
     website

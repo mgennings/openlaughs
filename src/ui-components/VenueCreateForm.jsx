@@ -200,6 +200,7 @@ export default function VenueCreateForm(props) {
     bio: "",
     description: "",
     venueImageKeys: [],
+    logoKey: "",
     googleReviewsLink: "",
     googlePlaceId: "",
     website: "",
@@ -220,6 +221,7 @@ export default function VenueCreateForm(props) {
   const [venueImageKeys, setVenueImageKeys] = React.useState(
     initialValues.venueImageKeys
   );
+  const [logoKey, setLogoKey] = React.useState(initialValues.logoKey);
   const [googleReviewsLink, setGoogleReviewsLink] = React.useState(
     initialValues.googleReviewsLink
   );
@@ -242,6 +244,7 @@ export default function VenueCreateForm(props) {
     setDescription(initialValues.description);
     setVenueImageKeys(initialValues.venueImageKeys);
     setCurrentVenueImageKeysValue("");
+    setLogoKey(initialValues.logoKey);
     setGoogleReviewsLink(initialValues.googleReviewsLink);
     setGooglePlaceId(initialValues.googlePlaceId);
     setWebsite(initialValues.website);
@@ -263,6 +266,7 @@ export default function VenueCreateForm(props) {
     bio: [],
     description: [],
     venueImageKeys: [{ type: "Required" }],
+    logoKey: [],
     googleReviewsLink: [],
     googlePlaceId: [],
     website: [],
@@ -305,6 +309,7 @@ export default function VenueCreateForm(props) {
           bio,
           description,
           venueImageKeys,
+          logoKey,
           googleReviewsLink,
           googlePlaceId,
           website,
@@ -382,6 +387,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -420,6 +426,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -458,6 +465,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -496,6 +504,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -534,6 +543,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -572,6 +582,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -610,6 +621,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -648,6 +660,7 @@ export default function VenueCreateForm(props) {
               bio: value,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -686,6 +699,7 @@ export default function VenueCreateForm(props) {
               bio,
               description: value,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -720,6 +734,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys: values,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -767,6 +782,45 @@ export default function VenueCreateForm(props) {
         ></TextField>
       </ArrayField>
       <TextField
+        label="Logo key"
+        isRequired={false}
+        isReadOnly={false}
+        value={logoKey}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              address,
+              city,
+              state,
+              postalCode,
+              country,
+              openMic,
+              bio,
+              description,
+              venueImageKeys,
+              logoKey: value,
+              googleReviewsLink,
+              googlePlaceId,
+              website,
+              phone,
+              email,
+            };
+            const result = onChange(modelFields);
+            value = result?.logoKey ?? value;
+          }
+          if (errors.logoKey?.hasError) {
+            runValidationTasks("logoKey", value);
+          }
+          setLogoKey(value);
+        }}
+        onBlur={() => runValidationTasks("logoKey", logoKey)}
+        errorMessage={errors.logoKey?.errorMessage}
+        hasError={errors.logoKey?.hasError}
+        {...getOverrideProps(overrides, "logoKey")}
+      ></TextField>
+      <TextField
         label="Google reviews link"
         isRequired={false}
         isReadOnly={false}
@@ -785,6 +839,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink: value,
               googlePlaceId,
               website,
@@ -825,6 +880,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId: value,
               website,
@@ -863,6 +919,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website: value,
@@ -901,6 +958,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,
@@ -939,6 +997,7 @@ export default function VenueCreateForm(props) {
               bio,
               description,
               venueImageKeys,
+              logoKey,
               googleReviewsLink,
               googlePlaceId,
               website,

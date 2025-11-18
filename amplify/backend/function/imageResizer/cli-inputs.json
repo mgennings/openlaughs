@@ -1,0 +1,7 @@
+{
+  "resourceName": "imageResizer",
+  "service": "Lambda",
+  "functionName": "imageResizer",
+  "providerPlugin": "awscloudformation",
+  "build": true
+}

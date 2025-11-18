@@ -87,6 +87,7 @@ export const createVenue = /* GraphQL */ `mutation CreateVenue(
     bio
     description
     venueImageKeys
+    logoKey
     googleReviewsLink
     googlePlaceId
     website
@@ -117,6 +118,7 @@ export const updateVenue = /* GraphQL */ `mutation UpdateVenue(
     bio
     description
     venueImageKeys
+    logoKey
     googleReviewsLink
     googlePlaceId
     website
@@ -147,6 +149,7 @@ export const deleteVenue = /* GraphQL */ `mutation DeleteVenue(
     bio
     description
     venueImageKeys
+    logoKey
     googleReviewsLink
     googlePlaceId
     website
