@@ -4,9 +4,11 @@ import { Container } from '@/components/container';
 import { KeenIcon } from '@/components';
 import { generateClient } from 'aws-amplify/api';
 import { getShow, getVenue } from '@/graphql/queries';
+import { deleteShow } from '@/graphql/mutations';
 import { getPublicUrl } from '@/lib/storage';
 import type { Show, Venue } from '@/API';
 import { PromoterShowUpdateForm } from './PromoterShowUpdateForm';
+import { ModalDeleteShow } from './ModalDeleteShow';
 
 const userClient = generateClient({ authMode: 'userPool' });
 const publicClient = generateClient({ authMode: 'apiKey' });
@@ -21,6 +23,8 @@ const PromoterShowDetailPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     if (!id) {
@@ -163,14 +167,44 @@ const PromoterShowDetailPage = () => {
     );
   }
 
+  const handleDeleteShow = async () => {
+    if (!show) return;
+    setIsDeleting(true);
+    try {
+      await userClient.graphql({
+        query: (deleteShow as string).replace(/__typename/g, ''),
+        variables: {
+          input: {
+            id: show.id,
+          },
+        },
+      });
+      // Navigate back to shows list after successful deletion
+      navigate('/promoter/shows');
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete show');
+      setIsDeleting(false);
+      setIsDeleteModalOpen(false);
+    }
+  };
+
   if (isEditing) {
     return (
       <Container>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-semibold text-gray-900">Edit Show</h2>
-          <button className="btn btn-light" onClick={() => setIsEditing(false)}>
-            Cancel
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              className="btn btn-danger"
+              onClick={() => setIsDeleteModalOpen(true)}
+            >
+              <KeenIcon icon="trash" className="me-2" />
+              Delete Show
+            </button>
+            <button className="btn btn-light" onClick={() => setIsEditing(false)}>
+              Cancel
+            </button>
+          </div>
         </div>
         <div className="card p-5">
           <PromoterShowUpdateForm
@@ -183,6 +217,13 @@ const PromoterShowDetailPage = () => {
             onError={m => setError(m)}
           />
         </div>
+        <ModalDeleteShow
+          open={isDeleteModalOpen}
+          onOpenChange={setIsDeleteModalOpen}
+          showTitle={show.title}
+          onConfirm={handleDeleteShow}
+          isDeleting={isDeleting}
+        />
       </Container>
     );
   }
