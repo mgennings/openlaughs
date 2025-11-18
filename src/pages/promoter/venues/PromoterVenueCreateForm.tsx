@@ -66,7 +66,7 @@ const PromoterVenueCreateForm = ({
         city: city || null,
         state: state || null,
         postalCode: postalCode || null,
-        country: country || 'United States',
+        country: country || null,
         openMic,
         bio: bio || null,
         description: description || null,
@@ -93,9 +93,9 @@ const PromoterVenueCreateForm = ({
       setName('');
       setAddress('');
       setCity('');
-      setState('TX');
+      setState('');
       setPostalCode('');
-      setCountry('United States');
+      setCountry('');
       setOpenMic(false);
       setBio('');
       setDescription('');
@@ -220,6 +220,20 @@ const PromoterVenueCreateForm = ({
             placeholder="Postal/ZIP code"
             value={postalCode}
             onChange={e => setPostalCode(e.target.value)}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label className="form-label font-normal text-gray-900">
+            Country
+          </label>
+          <input
+            className="input"
+            type="text"
+            placeholder="Country"
+            value={country}
+            disabled
+            onChange={e => setCountry(e.target.value)}
           />
         </div>
       </div>
@@ -474,9 +488,9 @@ const PromoterVenueCreateForm = ({
             setName('');
             setAddress('');
             setCity('');
-            setState('TX');
+            setState('');
             setPostalCode('');
-            setCountry('United States');
+            setCountry('');
             setOpenMic(false);
             setBio('');
             setDescription('');

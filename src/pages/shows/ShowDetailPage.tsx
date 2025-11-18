@@ -107,7 +107,7 @@ const ShowDetailPage = () => {
     void fetchShow();
   }, [id]);
 
-  const formatDate = (dateTimeString: string) => {
+  const formatDateTime = (dateTimeString: string) => {
     try {
       const date = new Date(dateTimeString);
       return new Intl.DateTimeFormat('en-US', {
@@ -115,22 +115,12 @@ const ShowDetailPage = () => {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-      }).format(date);
-    } catch {
-      return dateTimeString;
-    }
-  };
-
-  const formatTime = (dateTimeString: string) => {
-    try {
-      const date = new Date(dateTimeString);
-      return new Intl.DateTimeFormat('en-US', {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true,
       }).format(date);
     } catch {
-      return '';
+      return dateTimeString;
     }
   };
 
@@ -231,10 +221,7 @@ const ShowDetailPage = () => {
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
               <div className="flex items-center gap-1">
                 <KeenIcon icon="calendar" className="text-primary" />
-                <div className="flex flex-col">
-                  <span className="font-medium">{formatDate(show.dateTime)}</span>
-                  <span className="text-xs">{formatTime(show.dateTime)}</span>
-                </div>
+                <span>{formatDateTime(show.dateTime)}</span>
               </div>
               {venue && (
                 <div className="flex items-center gap-2">
@@ -269,24 +256,6 @@ const ShowDetailPage = () => {
             </div>
             {show.description && (
               <p className="text-gray-700 line-clamp-2">{show.description}</p>
-            )}
-            {show.ticketUrl && (
-              <div className="mt-4">
-                <a
-                  href={show.ticketUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary inline-flex items-center gap-2"
-                >
-                  <KeenIcon icon="link" />
-                  Get Tickets
-                  {show.ticketPrice !== null && show.ticketPrice !== undefined && (
-                    <span className="ml-1">
-                      • ${show.ticketPrice.toFixed(2)}
-                    </span>
-                  )}
-                </a>
-              </div>
             )}
           </div>
         </div>
@@ -410,12 +379,9 @@ const ShowDetailPage = () => {
             <div className="space-y-3">
               <div>
                 <div className="text-sm text-gray-600 mb-1">Date & Time</div>
-                <div className="text-gray-900 flex items-start gap-2">
-                  <KeenIcon icon="calendar" className="text-primary mt-0.5" />
-                  <div className="flex flex-col">
-                    <span className="font-medium">{formatDate(show.dateTime)}</span>
-                    <span className="text-sm text-gray-600">{formatTime(show.dateTime)}</span>
-                  </div>
+                <div className="text-gray-900 flex items-center gap-2">
+                  <KeenIcon icon="calendar" className="text-primary" />
+                  {formatDateTime(show.dateTime)}
                 </div>
               </div>
 
@@ -431,39 +397,7 @@ const ShowDetailPage = () => {
                   </Link>
                 </div>
               )}
-
-              {show.ticketPrice !== null && show.ticketPrice !== undefined && (
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">Ticket Price</div>
-                  <div className="text-gray-900 font-semibold text-lg">
-                    ${show.ticketPrice.toFixed(2)}
-                  </div>
-                </div>
-              )}
-
-              {show.ageRestriction && (
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">Age Restriction</div>
-                  <div className="text-gray-900">
-                    <span className="badge badge-light-info">{show.ageRestriction}</span>
-                  </div>
-                </div>
-              )}
             </div>
-
-            {show.ticketUrl && (
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <a
-                  href={show.ticketUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary w-full"
-                >
-                  <KeenIcon icon="link" className="me-2" />
-                  Get Tickets
-                </a>
-              </div>
-            )}
 
             {!isPast && (
               <div className="mt-6 pt-6 border-t border-gray-200">
@@ -471,7 +405,7 @@ const ShowDetailPage = () => {
                   href={generateCalendarLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-light w-full"
+                  className="btn btn-primary w-full"
                 >
                   <KeenIcon icon="calendar" className="me-2" />
                   Add to Calendar
