@@ -1,5 +1,6 @@
 export * from './keenicons';
 export * from './container';
+export * from './dashboard-switcher';
 export * from './loaders';
 export * from './menu';
 export * from './scrollspy';

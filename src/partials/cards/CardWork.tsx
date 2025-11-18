@@ -79,7 +79,7 @@ const CardWork = ({
           </div>
         )}
 
-        <div className="flex items-center justify-between grow">
+        <div className="flex items-end justify-between grow">
           <div className="flex items-center grow">
             {hasAvatarUrl ? (
               <img

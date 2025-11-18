@@ -5,17 +5,17 @@ import {
   ToolbarActions,
   ToolbarHeading,
 } from '@/layouts/demo1/toolbar';
-import { Demo1LightSidebarContent } from './';
+import { FanDashboardContent } from './FanDashboardContent';
 import { DashboardSwitcher } from '@/components/dashboard-switcher';
 
-const Demo1LightSidebarPage = () => {
+const FanDashboardPage = () => {
   return (
     <Fragment>
       <Container>
         <Toolbar>
           <ToolbarHeading
-            title="Dashboard"
-            description="Central Hub for Personal Customization"
+            title="Discover Comedy"
+            description="Find shows, follow comedians, and never miss a laugh"
           />
           <ToolbarActions>
             <DashboardSwitcher />
@@ -24,10 +24,10 @@ const Demo1LightSidebarPage = () => {
       </Container>
 
       <Container>
-        <Demo1LightSidebarContent />
+        <FanDashboardContent />
       </Container>
     </Fragment>
   );
 };
 
-export { Demo1LightSidebarPage };
+export { FanDashboardPage };
