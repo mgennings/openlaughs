@@ -16,7 +16,7 @@ const ShowDetailPage = () => {
   const [show, setShow] = useState<Show | null>(null);
   const [venue, setVenue] = useState<Venue | null>(null);
   const [showImageUrl, setShowImageUrl] = useState<string | null>(null);
-  const [venueImageUrl, setVenueImageUrl] = useState<string | null>(null);
+  const [venueLogoUrl, setVenueLogoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -79,13 +79,13 @@ const ShowDetailPage = () => {
                 const venueData = venueResult.data.getVenue as Venue;
                 setVenue(venueData);
 
-                // Fetch venue image if available
-                if (venueData.venueImageKeys && venueData.venueImageKeys.length > 0) {
+                // Fetch venue logo if available
+                if (venueData.logoKey) {
                   try {
-                    const url = await getPublicUrl(venueData.venueImageKeys[0]);
-                    setVenueImageUrl(url.toString());
+                    const url = await getPublicUrl(venueData.logoKey);
+                    setVenueLogoUrl(url.toString());
                   } catch (err) {
-                    console.error('Failed to load venue image:', err);
+                    console.error('Failed to load venue logo:', err);
                   }
                 }
               }
@@ -176,28 +176,96 @@ const ShowDetailPage = () => {
   }
 
   const isPast = new Date(show.dateTime).getTime() < new Date().getTime();
+  const venueFirstLetter = venue?.name?.charAt(0)?.toUpperCase() || '?';
 
   return (
     <Container>
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <button
-            className="btn btn-icon btn-light"
-            onClick={() => navigate('/shows')}
-          >
-            <KeenIcon icon="arrow-left" />
-          </button>
-          <h2 className="text-2xl font-semibold text-gray-900">
-            {show.title}
-          </h2>
-          {isPast && (
-            <span className="badge badge-light-warning">Past Show</span>
+      {/* Header with back button */}
+      <div className="mb-6">
+        <button
+          className="btn btn-icon btn-light"
+          onClick={() => navigate('/shows')}
+        >
+          <KeenIcon icon="arrow-left" />
+        </button>
+      </div>
+
+      {/* Hero Section with Show Title and Key Info */}
+      <div className="card p-6 mb-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          {/* Show Image or Placeholder */}
+          {showImageUrl ? (
+            <div className="flex-shrink-0">
+              <img
+                src={showImageUrl}
+                alt={show.title || 'Show image'}
+                className="w-32 h-32 md:w-40 md:h-40 rounded-lg object-cover border-2 border-gray-200"
+              />
+            </div>
+          ) : (
+            <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 rounded-lg bg-primary/10 flex items-center justify-center border-2 border-gray-200">
+              <KeenIcon icon="calendar" className="text-4xl md:text-5xl text-primary" />
+            </div>
           )}
+
+          {/* Show Title and Info */}
+          <div className="flex-1">
+            <div className="flex items-center gap-3 mb-3">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+                {show.title}
+              </h1>
+              {isPast && (
+                <span className="badge badge-light-warning">Past Show</span>
+              )}
+            </div>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
+              <div className="flex items-center gap-1">
+                <KeenIcon icon="calendar" className="text-primary" />
+                <span>{formatDateTime(show.dateTime)}</span>
+              </div>
+              {venue && (
+                <div className="flex items-center gap-2">
+                  {venueLogoUrl ? (
+                    <img
+                      src={venueLogoUrl}
+                      alt={`${venue.name} logo`}
+                      className="w-6 h-6 rounded-full object-cover"
+                      onError={e => {
+                        const target = e.target as HTMLImageElement;
+                        const fallback = document.createElement('div');
+                        fallback.className =
+                          'w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-xs';
+                        fallback.textContent = venueFirstLetter;
+                        target.replaceWith(fallback);
+                      }}
+                    />
+                  ) : (
+                    <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-xs">
+                      {venueFirstLetter}
+                    </div>
+                  )}
+                  <Link
+                    to={`/promoter/venues/${venue.id}`}
+                    className="text-primary hover:underline flex items-center gap-1"
+                  >
+                    {venue.name}
+                    <KeenIcon icon="arrow-top-right" className="text-xs" />
+                  </Link>
+                </div>
+              )}
+            </div>
+            {show.description && (
+              <p className="text-gray-700 line-clamp-2">{show.description}</p>
+            )}
+          </div>
         </div>
       </div>
 
+      {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Column - Main Content */}
         <div className="lg:col-span-2 space-y-6">
+          {/* Full Show Image */}
           {showImageUrl && (
             <div className="card p-0 overflow-hidden">
               <img
@@ -208,6 +276,7 @@ const ShowDetailPage = () => {
             </div>
           )}
 
+          {/* About This Show */}
           {show.description && (
             <div className="card p-5">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">
@@ -219,18 +288,31 @@ const ShowDetailPage = () => {
             </div>
           )}
 
+          {/* Venue Information */}
           {venue && (
             <div className="card p-5">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 Venue Information
               </h3>
               <div className="flex items-start gap-4">
-                {venueImageUrl && (
+                {venueLogoUrl ? (
                   <img
-                    src={venueImageUrl}
-                    alt={venue.name}
-                    className="w-24 h-24 object-cover rounded-lg"
+                    src={venueLogoUrl}
+                    alt={`${venue.name} logo`}
+                    className="w-20 h-20 rounded-lg object-cover border-2 border-gray-200 flex-shrink-0"
+                    onError={e => {
+                      const target = e.target as HTMLImageElement;
+                      const fallback = document.createElement('div');
+                      fallback.className =
+                        'w-20 h-20 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-2xl flex-shrink-0';
+                      fallback.textContent = venueFirstLetter;
+                      target.replaceWith(fallback);
+                    }}
                   />
+                ) : (
+                  <div className="w-20 h-20 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-2xl flex-shrink-0">
+                    {venueFirstLetter}
+                  </div>
                 )}
                 <div className="flex-1">
                   <Link
@@ -288,6 +370,7 @@ const ShowDetailPage = () => {
           )}
         </div>
 
+        {/* Right Column - Show Details Sidebar */}
         <div className="space-y-6">
           <div className="card p-5">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
