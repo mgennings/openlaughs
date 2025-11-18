@@ -44,7 +44,7 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Handler": "index.handler",
+        "Handler": "src/index.handler",
         "Role": {
           "Fn::GetAtt": [
             "LambdaExecutionRole",
