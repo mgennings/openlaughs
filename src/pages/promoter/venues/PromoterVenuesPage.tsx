@@ -5,7 +5,7 @@ import { KeenIcon } from '@/components';
 import { generateClient } from 'aws-amplify/api';
 import { listVenues } from '@/graphql/queries';
 import type { ListVenuesQuery, Venue } from '@/API';
-import { PromoterVenueCreateForm } from './PromoterVenueCreateForm';
+import { ModalCreateVenue } from './ModalCreateVenue';
 
 const userClient = generateClient({ authMode: 'userPool' });
 const publicClient = generateClient({ authMode: 'apiKey' });
@@ -14,6 +14,7 @@ const PromoterVenuesPage = () => {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const fetchVenues = async () => {
     setLoading(true);
@@ -55,21 +56,27 @@ const PromoterVenuesPage = () => {
     <Container>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold text-gray-900">My Venues</h2>
-        <div className="text-gray-600 flex items-center gap-2">
-          <KeenIcon icon="home" />
-          <span>{venues.length} total</span>
+        <div className="flex items-center gap-4">
+          <div className="text-gray-600 flex items-center gap-2">
+            <KeenIcon icon="home" />
+            <span>{venues.length} total</span>
+          </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            <KeenIcon icon="plus" className="me-2" />
+            Create Venue
+          </button>
         </div>
       </div>
 
-      <div className="card p-5 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">
-          Create a Venue
-        </h3>
-        <PromoterVenueCreateForm
-          onCreated={fetchVenues}
-          onError={m => setError(m)}
-        />
-      </div>
+      <ModalCreateVenue
+        open={isCreateModalOpen}
+        onOpenChange={setIsCreateModalOpen}
+        onCreated={() => fetchVenues()}
+        onError={message => setError(message)}
+      />
 
       {error && (
         <div className="alert alert-danger mb-6">

@@ -57,7 +57,7 @@ const PromoterVenueUpdateForm = ({
           setCity(venue.city || '');
           setState(venue.state || '');
           setPostalCode(venue.postalCode || '');
-          setCountry(venue.country || '');
+          setCountry(venue.country || 'United States');
           setOpenMic(venue.openMic || false);
           setBio(venue.bio || '');
           setDescription(venue.description || '');
@@ -137,7 +137,7 @@ const PromoterVenueUpdateForm = ({
         city: city || null,
         state: state || null,
         postalCode: postalCode || null,
-        country: country || null,
+        country: country || 'United States',
         openMic,
         bio: bio || null,
         description: description || null,
@@ -260,18 +260,6 @@ const PromoterVenueUpdateForm = ({
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="form-label font-normal text-gray-900">
-            Country
-          </label>
-          <input
-            className="input"
-            type="text"
-            placeholder="Country"
-            value={country}
-            onChange={e => setCountry(e.target.value)}
-          />
-        </div>
       </div>
 
       <div className="flex flex-col gap-1">
