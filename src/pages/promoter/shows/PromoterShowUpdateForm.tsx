@@ -26,6 +26,9 @@ const PromoterShowUpdateForm = ({
   const [showImage, setShowImage] = useState<TImageInputFiles>([]);
   const [existingImageKey, setExistingImageKey] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
+  const [ticketUrl, setTicketUrl] = useState('');
+  const [ticketPrice, setTicketPrice] = useState('');
+  const [ageRestriction, setAgeRestriction] = useState('');
   const [venues, setVenues] = useState<Venue[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -44,6 +47,9 @@ const PromoterShowUpdateForm = ({
           setTitle(show.title || '');
           setDescription(show.description || '');
           setVenueID(show.venueID || '');
+          setTicketUrl(show.ticketUrl || '');
+          setTicketPrice(show.ticketPrice?.toString() || '');
+          setAgeRestriction(show.ageRestriction || '');
 
           // Format dateTime for datetime-local input
           if (show.dateTime) {
@@ -110,6 +116,9 @@ const PromoterShowUpdateForm = ({
         dateTime: dateTime ? new Date(dateTime).toISOString() : null,
         venueID: venueID || null,
         showImageKey,
+        ticketUrl: ticketUrl || null,
+        ticketPrice: ticketPrice ? parseFloat(ticketPrice) : null,
+        ageRestriction: ageRestriction || null,
       } as any;
 
       const result = await client.graphql({
@@ -203,6 +212,62 @@ const PromoterShowUpdateForm = ({
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label className="form-label font-normal text-gray-900">
+          Ticket URL
+        </label>
+        <input
+          className="input"
+          type="url"
+          placeholder="https://example.com/tickets"
+          value={ticketUrl}
+          onChange={e => setTicketUrl(e.target.value)}
+        />
+        <span className="text-sm text-gray-500">
+          Link to ticketing page (Eventbrite, Ticketmaster, etc.)
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="flex flex-col gap-1">
+          <label className="form-label font-normal text-gray-900">
+            Ticket Price
+          </label>
+          <div className="flex items-center gap-2">
+            <span className="text-gray-600">$</span>
+            <input
+              className="input"
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="0.00"
+              value={ticketPrice}
+              onChange={e => setTicketPrice(e.target.value)}
+            />
+          </div>
+          <span className="text-sm text-gray-500">
+            Price per ticket (leave empty if free or price varies)
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label className="form-label font-normal text-gray-900">
+            Age Restriction
+          </label>
+          <select
+            className="select"
+            value={ageRestriction}
+            onChange={e => setAgeRestriction(e.target.value)}
+          >
+            <option value="">Select age restriction</option>
+            <option value="All Ages">All Ages</option>
+            <option value="18+">18+</option>
+            <option value="21+">21+</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
       </div>
 
       <div className="flex flex-col gap-1">

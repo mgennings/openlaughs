@@ -60,7 +60,7 @@ const CardWork = ({
     <div className="card border-0">
       <img src={imageSrc} className="w-full h-auto rounded-t-xl" alt="" />
 
-      <div className="card-border card-rounded-b flex flex-col gap-2 px-5 py-4.5">
+      <div className="card-border card-rounded-b flex flex-col gap-2 px-5 py-4.5 h-full">
         <Link
           to={titleLink || '/public-profile/profiles/company'}
           className="text-lg font-medium text-gray-900 hover:text-primary"

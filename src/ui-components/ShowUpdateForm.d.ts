@@ -29,6 +29,9 @@ export declare type ShowUpdateFormInputValues = {
     venueID?: string;
     createdBy?: string;
     showImageKey?: string;
+    ticketUrl?: string;
+    ticketPrice?: number;
+    ageRestriction?: string;
 };
 export declare type ShowUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
@@ -37,6 +40,9 @@ export declare type ShowUpdateFormValidationValues = {
     venueID?: ValidationFunction<string>;
     createdBy?: ValidationFunction<string>;
     showImageKey?: ValidationFunction<string>;
+    ticketUrl?: ValidationFunction<string>;
+    ticketPrice?: ValidationFunction<number>;
+    ageRestriction?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ShowUpdateFormOverridesProps = {
@@ -47,6 +53,9 @@ export declare type ShowUpdateFormOverridesProps = {
     venueID?: PrimitiveOverrideProps<TextFieldProps>;
     createdBy?: PrimitiveOverrideProps<TextFieldProps>;
     showImageKey?: PrimitiveOverrideProps<TextFieldProps>;
+    ticketUrl?: PrimitiveOverrideProps<TextFieldProps>;
+    ticketPrice?: PrimitiveOverrideProps<TextFieldProps>;
+    ageRestriction?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ShowUpdateFormProps = React.PropsWithChildren<{
     overrides?: ShowUpdateFormOverridesProps | undefined | null;

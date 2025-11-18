@@ -79,6 +79,9 @@ export const getShow = /* GraphQL */ `query GetShow($id: ID!) {
     venueID
     createdBy
     showImageKey
+    ticketUrl
+    ticketPrice
+    ageRestriction
     createdAt
     updatedAt
     __typename
@@ -99,6 +102,9 @@ export const listShows = /* GraphQL */ `query ListShows(
       venueID
       createdBy
       showImageKey
+      ticketUrl
+      ticketPrice
+      ageRestriction
       createdAt
       updatedAt
       __typename

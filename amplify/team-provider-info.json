@@ -24,7 +24,7 @@
       "function": {
         "imageResizer": {
           "deploymentBucketName": "amplify-openlaughs-dev-13b80-deployment",
-          "s3Key": "amplify-builds/imageResizer-4e796b4e35624e5a6270-build.zip"
+          "s3Key": "amplify-builds/imageResizer-345a4a53453237724e6e-build.zip"
         }
       }
     }

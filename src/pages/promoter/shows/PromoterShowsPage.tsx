@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Container } from '@/components/container';
 import { KeenIcon } from '@/components';
 import { CardWork } from '@/partials/cards/CardWork';
-import { PromoterShowCreateForm } from './PromoterShowCreateForm';
+import { ModalCreateShow } from './ModalCreateShow';
 import { generateClient } from 'aws-amplify/api';
 import { listShows } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
@@ -20,6 +20,7 @@ const PromoterShowsPage = () => {
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const createdBy = useMemo(
     () => currentUser?.email || currentUser?.username || '',
@@ -82,22 +83,28 @@ const PromoterShowsPage = () => {
     <Container>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold text-gray-900">My Shows</h2>
-        <div className="text-gray-600 flex items-center gap-2">
-          <KeenIcon icon="calendar" />
-          <span>{shows.length} total</span>
+        <div className="flex items-center gap-4">
+          <div className="text-gray-600 flex items-center gap-2">
+            <KeenIcon icon="calendar" />
+            <span>{shows.length} total</span>
+          </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            <KeenIcon icon="plus" className="me-2" />
+            Create Show
+          </button>
         </div>
       </div>
 
-      <div className="card p-5 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">
-          Create a Show
-        </h3>
-        <PromoterShowCreateForm
-          createdBy={createdBy}
-          onCreated={() => fetchShows()}
-          onError={message => setError(message)}
-        />
-      </div>
+      <ModalCreateShow
+        open={isCreateModalOpen}
+        onOpenChange={setIsCreateModalOpen}
+        createdBy={createdBy}
+        onCreated={() => fetchShows()}
+        onError={message => setError(message)}
+      />
 
       {error && (
         <div className="alert alert-danger mb-6">

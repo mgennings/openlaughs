@@ -24,6 +24,9 @@ const PromoterShowCreateForm = ({
   const [dateTime, setDateTime] = useState('');
   const [venueID, setVenueID] = useState('');
   const [showImage, setShowImage] = useState<TImageInputFiles>([]);
+  const [ticketUrl, setTicketUrl] = useState('');
+  const [ticketPrice, setTicketPrice] = useState('');
+  const [ageRestriction, setAgeRestriction] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [venues, setVenues] = useState<Venue[]>([]);
   const [venuesLoading, setVenuesLoading] = useState(false);
@@ -78,6 +81,9 @@ const PromoterShowCreateForm = ({
         venueID,
         createdBy,
         showImageKey,
+        ticketUrl: ticketUrl || null,
+        ticketPrice: ticketPrice ? parseFloat(ticketPrice) : null,
+        ageRestriction: ageRestriction || null,
       } as any;
 
       const result = await client.graphql({
@@ -95,6 +101,9 @@ const PromoterShowCreateForm = ({
       setDateTime('');
       setVenueID('');
       setShowImage([]);
+      setTicketUrl('');
+      setTicketPrice('');
+      setAgeRestriction('');
       onCreated?.();
     } catch (err: any) {
       onError?.(err?.message || 'Failed to create show');
@@ -165,6 +174,62 @@ const PromoterShowCreateForm = ({
         {venuesError && (
           <span className="text-danger text-2sm">{venuesError}</span>
         )}
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label className="form-label font-normal text-gray-900">
+          Ticket URL
+        </label>
+        <input
+          className="input"
+          type="url"
+          placeholder="https://example.com/tickets"
+          value={ticketUrl}
+          onChange={e => setTicketUrl(e.target.value)}
+        />
+        <span className="text-xs text-gray-500">
+          Link to ticketing page (Eventbrite, Ticketmaster, etc.)
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="flex flex-col gap-1">
+          <label className="form-label font-normal text-gray-900">
+            Ticket Price
+          </label>
+          <div className="flex items-center gap-2">
+            <span className="text-gray-600">$</span>
+            <input
+              className="input"
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="0.00"
+              value={ticketPrice}
+              onChange={e => setTicketPrice(e.target.value)}
+            />
+          </div>
+          <span className="text-xs text-gray-500">
+            Price per ticket (leave empty if free or price varies)
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label className="form-label font-normal text-gray-900">
+            Age Restriction
+          </label>
+          <select
+            className="input"
+            value={ageRestriction}
+            onChange={e => setAgeRestriction(e.target.value)}
+          >
+            <option value="">Select age restriction</option>
+            <option value="All Ages">All Ages</option>
+            <option value="18+">18+</option>
+            <option value="21+">21+</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
       </div>
 
       <div className="flex flex-col gap-1">
@@ -247,6 +312,9 @@ const PromoterShowCreateForm = ({
             setDateTime('');
             setVenueID('');
             setShowImage([]);
+            setTicketUrl('');
+            setTicketPrice('');
+            setAgeRestriction('');
           }}
           disabled={submitting}
         >

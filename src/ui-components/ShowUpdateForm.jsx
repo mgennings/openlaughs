@@ -31,6 +31,9 @@ export default function ShowUpdateForm(props) {
     venueID: "",
     createdBy: "",
     showImageKey: "",
+    ticketUrl: "",
+    ticketPrice: "",
+    ageRestriction: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [description, setDescription] = React.useState(
@@ -41,6 +44,13 @@ export default function ShowUpdateForm(props) {
   const [createdBy, setCreatedBy] = React.useState(initialValues.createdBy);
   const [showImageKey, setShowImageKey] = React.useState(
     initialValues.showImageKey
+  );
+  const [ticketUrl, setTicketUrl] = React.useState(initialValues.ticketUrl);
+  const [ticketPrice, setTicketPrice] = React.useState(
+    initialValues.ticketPrice
+  );
+  const [ageRestriction, setAgeRestriction] = React.useState(
+    initialValues.ageRestriction
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -53,6 +63,9 @@ export default function ShowUpdateForm(props) {
     setVenueID(cleanValues.venueID);
     setCreatedBy(cleanValues.createdBy);
     setShowImageKey(cleanValues.showImageKey);
+    setTicketUrl(cleanValues.ticketUrl);
+    setTicketPrice(cleanValues.ticketPrice);
+    setAgeRestriction(cleanValues.ageRestriction);
     setErrors({});
   };
   const [showRecord, setShowRecord] = React.useState(showModelProp);
@@ -78,6 +91,9 @@ export default function ShowUpdateForm(props) {
     venueID: [{ type: "Required" }],
     createdBy: [],
     showImageKey: [],
+    ticketUrl: [],
+    ticketPrice: [],
+    ageRestriction: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -128,6 +144,9 @@ export default function ShowUpdateForm(props) {
           venueID,
           createdBy: createdBy ?? null,
           showImageKey: showImageKey ?? null,
+          ticketUrl: ticketUrl ?? null,
+          ticketPrice: ticketPrice ?? null,
+          ageRestriction: ageRestriction ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -194,6 +213,9 @@ export default function ShowUpdateForm(props) {
               venueID,
               createdBy,
               showImageKey,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -223,6 +245,9 @@ export default function ShowUpdateForm(props) {
               venueID,
               createdBy,
               showImageKey,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -254,6 +279,9 @@ export default function ShowUpdateForm(props) {
               venueID,
               createdBy,
               showImageKey,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction,
             };
             const result = onChange(modelFields);
             value = result?.dateTime ?? value;
@@ -283,6 +311,9 @@ export default function ShowUpdateForm(props) {
               venueID: value,
               createdBy,
               showImageKey,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction,
             };
             const result = onChange(modelFields);
             value = result?.venueID ?? value;
@@ -312,6 +343,9 @@ export default function ShowUpdateForm(props) {
               venueID,
               createdBy: value,
               showImageKey,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction,
             };
             const result = onChange(modelFields);
             value = result?.createdBy ?? value;
@@ -341,6 +375,9 @@ export default function ShowUpdateForm(props) {
               venueID,
               createdBy,
               showImageKey: value,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction,
             };
             const result = onChange(modelFields);
             value = result?.showImageKey ?? value;
@@ -354,6 +391,106 @@ export default function ShowUpdateForm(props) {
         errorMessage={errors.showImageKey?.errorMessage}
         hasError={errors.showImageKey?.hasError}
         {...getOverrideProps(overrides, "showImageKey")}
+      ></TextField>
+      <TextField
+        label="Ticket url"
+        isRequired={false}
+        isReadOnly={false}
+        value={ticketUrl}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              dateTime,
+              venueID,
+              createdBy,
+              showImageKey,
+              ticketUrl: value,
+              ticketPrice,
+              ageRestriction,
+            };
+            const result = onChange(modelFields);
+            value = result?.ticketUrl ?? value;
+          }
+          if (errors.ticketUrl?.hasError) {
+            runValidationTasks("ticketUrl", value);
+          }
+          setTicketUrl(value);
+        }}
+        onBlur={() => runValidationTasks("ticketUrl", ticketUrl)}
+        errorMessage={errors.ticketUrl?.errorMessage}
+        hasError={errors.ticketUrl?.hasError}
+        {...getOverrideProps(overrides, "ticketUrl")}
+      ></TextField>
+      <TextField
+        label="Ticket price"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={ticketPrice}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              dateTime,
+              venueID,
+              createdBy,
+              showImageKey,
+              ticketUrl,
+              ticketPrice: value,
+              ageRestriction,
+            };
+            const result = onChange(modelFields);
+            value = result?.ticketPrice ?? value;
+          }
+          if (errors.ticketPrice?.hasError) {
+            runValidationTasks("ticketPrice", value);
+          }
+          setTicketPrice(value);
+        }}
+        onBlur={() => runValidationTasks("ticketPrice", ticketPrice)}
+        errorMessage={errors.ticketPrice?.errorMessage}
+        hasError={errors.ticketPrice?.hasError}
+        {...getOverrideProps(overrides, "ticketPrice")}
+      ></TextField>
+      <TextField
+        label="Age restriction"
+        isRequired={false}
+        isReadOnly={false}
+        value={ageRestriction}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              dateTime,
+              venueID,
+              createdBy,
+              showImageKey,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.ageRestriction ?? value;
+          }
+          if (errors.ageRestriction?.hasError) {
+            runValidationTasks("ageRestriction", value);
+          }
+          setAgeRestriction(value);
+        }}
+        onBlur={() => runValidationTasks("ageRestriction", ageRestriction)}
+        errorMessage={errors.ageRestriction?.errorMessage}
+        hasError={errors.ageRestriction?.hasError}
+        {...getOverrideProps(overrides, "ageRestriction")}
       ></TextField>
       <Flex
         justifyContent="space-between"

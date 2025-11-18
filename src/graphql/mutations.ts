@@ -20,6 +20,9 @@ export const createShow = /* GraphQL */ `mutation CreateShow(
     venueID
     createdBy
     showImageKey
+    ticketUrl
+    ticketPrice
+    ageRestriction
     createdAt
     updatedAt
     __typename
@@ -41,6 +44,9 @@ export const updateShow = /* GraphQL */ `mutation UpdateShow(
     venueID
     createdBy
     showImageKey
+    ticketUrl
+    ticketPrice
+    ageRestriction
     createdAt
     updatedAt
     __typename
@@ -62,6 +68,9 @@ export const deleteShow = /* GraphQL */ `mutation DeleteShow(
     venueID
     createdBy
     showImageKey
+    ticketUrl
+    ticketPrice
+    ageRestriction
     createdAt
     updatedAt
     __typename

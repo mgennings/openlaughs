@@ -107,6 +107,9 @@ export const onCreateShow = /* GraphQL */ `subscription OnCreateShow($filter: Mo
     venueID
     createdBy
     showImageKey
+    ticketUrl
+    ticketPrice
+    ageRestriction
     createdAt
     updatedAt
     __typename
@@ -125,6 +128,9 @@ export const onUpdateShow = /* GraphQL */ `subscription OnUpdateShow($filter: Mo
     venueID
     createdBy
     showImageKey
+    ticketUrl
+    ticketPrice
+    ageRestriction
     createdAt
     updatedAt
     __typename
@@ -143,6 +149,9 @@ export const onDeleteShow = /* GraphQL */ `subscription OnDeleteShow($filter: Mo
     venueID
     createdBy
     showImageKey
+    ticketUrl
+    ticketPrice
+    ageRestriction
     createdAt
     updatedAt
     __typename

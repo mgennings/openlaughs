@@ -18,6 +18,9 @@ type Show
   venueID: ID!
   createdBy: String
   showImageKey: String
+  ticketUrl: String
+  ticketPrice: Float
+  ageRestriction: String
 }
 
 type Venue
