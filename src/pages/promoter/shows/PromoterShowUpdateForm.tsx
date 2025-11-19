@@ -174,7 +174,7 @@ const PromoterShowUpdateForm = ({
         </label>
         <textarea
           className="textarea"
-          rows={5}
+          rows={3}
           placeholder="Optional description"
           value={description}
           onChange={e => setDescription(e.target.value)}

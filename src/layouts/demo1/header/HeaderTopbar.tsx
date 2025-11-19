@@ -14,9 +14,11 @@ import { listUserProfiles } from '@/graphql/queries';
 import type { UserProfile } from '@/API';
 import { getPublicUrl } from '@/lib/storage';
 import { getInitials } from '@/lib/userDisplay';
+import { useSettings } from '@/providers/SettingsProvider';
 
 const HeaderTopbar = () => {
   const { isRTL } = useLanguage();
+  const { settings } = useSettings();
   const itemChatRef = useRef<any>(null);
   const itemAppsRef = useRef<any>(null);
   const itemUserRef = useRef<any>(null);
@@ -25,6 +27,7 @@ const HeaderTopbar = () => {
   const { execute } = useGraphQL();
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>();
   const [initials, setInitials] = useState<string>('U');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleShow = () => {
     window.dispatchEvent(new Event('resize'));
@@ -37,7 +40,10 @@ const HeaderTopbar = () => {
       const first = currentUser?.first_name;
       const last = currentUser?.last_name;
       setInitials(getInitials({ firstName: first, lastName: last, email }));
-      if (!email) return;
+      if (!email) {
+        setIsAdmin(false);
+        return;
+      }
       const data = await execute<{
         listUserProfiles: { items: (UserProfile | null)[] };
       }>(listUserProfiles, {
@@ -50,6 +56,8 @@ const HeaderTopbar = () => {
         const url = await getPublicUrl(prof.profileImageKey, 300);
         setAvatarUrl(url.toString());
       }
+      // Check if user is admin
+      setIsAdmin(prof?.role === 'admin' || false);
     };
     void init();
   }, [
@@ -58,6 +66,9 @@ const HeaderTopbar = () => {
     currentUser?.last_name,
     execute,
   ]);
+
+  // Determine if preview features should be visible
+  const showPreviewFeatures = isAdmin && settings.previewMode;
   const handleOpen = () => setSearchModalOpen(true);
   const handleClose = () => {
     setSearchModalOpen(false);
@@ -65,88 +76,91 @@ const HeaderTopbar = () => {
 
   return (
     <div className="flex items-center gap-2 lg:gap-3.5">
-      <button
-        onClick={handleOpen}
-        className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary text-gray-500"
-      >
-        <KeenIcon icon="magnifier" />
-      </button>
-      <ModalSearch open={searchModalOpen} onOpenChange={handleClose} />
-
-      <Menu>
-        <MenuItem
-          ref={itemChatRef}
-          onShow={handleShow}
-          toggle="dropdown"
-          trigger="click"
-          dropdownProps={{
-            placement: isRTL() ? 'bottom-start' : 'bottom-end',
-            modifiers: [
-              {
-                name: 'offset',
-                options: {
-                  offset: isRTL() ? [-170, 10] : [170, 10],
-                },
-              },
-            ],
-          }}
+      {/* Preview features - hide with CSS to avoid hooks issues */}
+      <div className={showPreviewFeatures ? 'contents' : 'hidden'}>
+        <button
+          onClick={() => setSearchModalOpen(true)}
+          className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary text-gray-500"
         >
-          <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
-            <KeenIcon icon="messages" />
-          </MenuToggle>
+          <KeenIcon icon="magnifier" />
+        </button>
+        <ModalSearch open={searchModalOpen} onOpenChange={handleClose} />
 
-          {DropdownChat({ menuTtemRef: itemChatRef })}
-        </MenuItem>
-      </Menu>
-
-      <Menu>
-        <MenuItem
-          ref={itemAppsRef}
-          toggle="dropdown"
-          trigger="click"
-          dropdownProps={{
-            placement: isRTL() ? 'bottom-start' : 'bottom-end',
-            modifiers: [
-              {
-                name: 'offset',
-                options: {
-                  offset: isRTL() ? [-10, 10] : [10, 10],
+        <Menu>
+          <MenuItem
+            ref={itemChatRef}
+            onShow={handleShow}
+            toggle="dropdown"
+            trigger="click"
+            dropdownProps={{
+              placement: isRTL() ? 'bottom-start' : 'bottom-end',
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: isRTL() ? [-170, 10] : [170, 10],
+                  },
                 },
-              },
-            ],
-          }}
-        >
-          <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
-            <KeenIcon icon="element-11" />
-          </MenuToggle>
+              ],
+            }}
+          >
+            <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
+              <KeenIcon icon="messages" />
+            </MenuToggle>
 
-          {DropdownApps()}
-        </MenuItem>
-      </Menu>
+            {DropdownChat({ menuTtemRef: itemChatRef })}
+          </MenuItem>
+        </Menu>
 
-      <Menu>
-        <MenuItem
-          ref={itemNotificationsRef}
-          toggle="dropdown"
-          trigger="click"
-          dropdownProps={{
-            placement: isRTL() ? 'bottom-start' : 'bottom-end',
-            modifiers: [
-              {
-                name: 'offset',
-                options: {
-                  offset: isRTL() ? [-70, 10] : [70, 10], // [skid, distance]
+        <Menu>
+          <MenuItem
+            ref={itemAppsRef}
+            toggle="dropdown"
+            trigger="click"
+            dropdownProps={{
+              placement: isRTL() ? 'bottom-start' : 'bottom-end',
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: isRTL() ? [-10, 10] : [10, 10],
+                  },
                 },
-              },
-            ],
-          }}
-        >
-          <MenuToggle className="btn btn-icon btn-icon-lg relative cursor-pointer size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
-            <KeenIcon icon="notification-status" />
-          </MenuToggle>
-          {DropdownNotifications({ menuTtemRef: itemNotificationsRef })}
-        </MenuItem>
-      </Menu>
+              ],
+            }}
+          >
+            <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
+              <KeenIcon icon="element-11" />
+            </MenuToggle>
+
+            {DropdownApps()}
+          </MenuItem>
+        </Menu>
+
+        <Menu>
+          <MenuItem
+            ref={itemNotificationsRef}
+            toggle="dropdown"
+            trigger="click"
+            dropdownProps={{
+              placement: isRTL() ? 'bottom-start' : 'bottom-end',
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: isRTL() ? [-70, 10] : [70, 10], // [skid, distance]
+                  },
+                },
+              ],
+            }}
+          >
+            <MenuToggle className="btn btn-icon btn-icon-lg relative cursor-pointer size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
+              <KeenIcon icon="notification-status" />
+            </MenuToggle>
+            {DropdownNotifications({ menuTtemRef: itemNotificationsRef })}
+          </MenuItem>
+        </Menu>
+      </div>
 
       <Menu>
         <MenuItem

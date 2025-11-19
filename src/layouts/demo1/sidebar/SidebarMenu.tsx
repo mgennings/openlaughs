@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useEffect, useState, useMemo } from 'react';
 
 import { KeenIcon } from '@/components/keenicons';
 import {
@@ -17,8 +18,51 @@ import {
   MenuTitle,
 } from '@/components/menu';
 import { useMenus } from '@/providers';
+import { useSettings } from '@/providers/SettingsProvider';
+import { useAuthContext } from '@/auth';
+import { useGraphQL } from '@/lib/useGraphQL';
+import { listUserProfiles } from '@/graphql/queries';
+import type { UserProfile } from '@/API';
 
 const SidebarMenu = () => {
+  const { settings } = useSettings();
+  const { currentUser } = useAuthContext();
+  const { execute } = useGraphQL();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Check if user is admin
+  useEffect(() => {
+    const init = async () => {
+      const email = currentUser?.email;
+      if (!email) {
+        setIsAdmin(false);
+        return;
+      }
+      const data = await execute<{
+        listUserProfiles: { items: (UserProfile | null)[] };
+      }>(listUserProfiles, {
+        variables: { filter: { email: { eq: email } }, limit: 1 },
+      });
+      const prof = data.listUserProfiles.items.filter(Boolean)[0] as
+        | UserProfile
+        | undefined;
+      setIsAdmin(prof?.role === 'admin' || false);
+    };
+    void init();
+  }, [currentUser?.email, execute]);
+
+  const { getMenuConfig } = useMenus();
+  const menuConfig = getMenuConfig('primary');
+
+  // Filter menu items based on admin status and preview mode
+  const visibleMenuConfig = useMemo(() => {
+    if (!menuConfig) return [];
+    const productionItems = menuConfig.slice(0, 4); // Dashboards, Shows, Promoter, Comedians
+    if (!isAdmin || !settings.previewMode) {
+      return productionItems;
+    }
+    return menuConfig; // All items for admins with preview on
+  }, [menuConfig, isAdmin, settings.previewMode]);
   const linkPl = 'ps-[10px]';
   const linkPr = 'pe-[10px]';
   const linkPy = 'py-[6px]';
@@ -335,16 +379,13 @@ const SidebarMenu = () => {
     );
   };
 
-  const { getMenuConfig } = useMenus();
-  const menuConfig = getMenuConfig('primary');
-
   return (
     <Menu
       highlight={true}
       multipleExpand={false}
       className={clsx('flex flex-col grow', itemsGap)}
     >
-      {menuConfig && buildMenu(menuConfig)}
+      {buildMenu(visibleMenuConfig)}
     </Menu>
   );
 };

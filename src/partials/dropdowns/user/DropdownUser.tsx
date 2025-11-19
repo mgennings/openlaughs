@@ -64,6 +64,16 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
     });
   };
 
+  const handlePreviewMode = (event: ChangeEvent<HTMLInputElement>) => {
+    storeSettings({
+      previewMode: event.target.checked,
+    });
+  };
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 'admin';
+  }, [profile?.role]);
+
   const buildHeader = () => {
     const userName = getUserDisplayName({
       firstName: profile?.firstName || currentUser?.first_name,
@@ -301,6 +311,36 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
             </label>
           </div>
         </div>
+
+        {isAdmin && (
+          <div className="menu-item mb-0.5">
+            <div className="menu-link">
+              <span className="menu-icon">
+                <KeenIcon icon="eye" />
+              </span>
+              <span className="menu-title">Preview Mode</span>
+              <DefaultTooltip
+                title="Show template features (search, chat, etc.)"
+                placement="left"
+                className="max-w-48"
+              >
+                <KeenIcon
+                  icon="information-2"
+                  className="text-gray-500 text-md mr-1"
+                />
+              </DefaultTooltip>
+              <label className="switch switch-sm">
+                <input
+                  name="preview"
+                  type="checkbox"
+                  checked={settings.previewMode}
+                  onChange={handlePreviewMode}
+                  value="1"
+                />
+              </label>
+            </div>
+          </div>
+        )}
 
         <div className="menu-item px-4 py-1.5">
           <a

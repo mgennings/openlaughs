@@ -161,9 +161,9 @@ const PromoterShowCreateForm = ({
         <label className="form-label font-normal text-gray-900">
           Description
         </label>
-        <input
-          className="input"
-          type="text"
+        <textarea
+          className="textarea"
+          rows={3}
           placeholder="Optional description"
           value={description}
           onChange={e => setDescription(e.target.value)}
