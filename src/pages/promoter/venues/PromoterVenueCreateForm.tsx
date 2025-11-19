@@ -5,6 +5,13 @@ import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage } from '@/lib/storage';
 import { US_STATES } from '@/config/constants';
 import { GooglePlacesAutocomplete } from '@/components/google-places';
+import {
+  validatePhoneNumber,
+  validateEmail,
+  formatPhoneInput,
+  cleanPhoneNumber,
+  cleanEmail,
+} from '@/utils/validation';
 
 interface PromoterVenueCreateFormProps {
   onCreated?: () => void;
@@ -34,6 +41,40 @@ const PromoterVenueCreateForm = ({
   const [venueImages, setVenueImages] = useState<TImageInputFiles>([]);
   const [logoImage, setLogoImage] = useState<TImageInputFiles>([]);
   const [submitting, setSubmitting] = useState(false);
+  const [contactErrors, setContactErrors] = useState<Record<string, string>>(
+    {},
+  );
+
+  const handlePhoneChange = (value: string) => {
+    const formatted = formatPhoneInput(value);
+    setPhone(formatted);
+
+    const validation = validatePhoneNumber(formatted);
+    if (!validation.valid && validation.error) {
+      setContactErrors({ ...contactErrors, phone: validation.error });
+    } else {
+      const { phone: _, ...rest } = contactErrors;
+      setContactErrors(rest);
+    }
+  };
+
+  const handleEmailChange = (value: string) => {
+    const cleanValue = cleanEmail(value);
+    setEmail(cleanValue);
+
+    if (cleanValue) {
+      const validation = validateEmail(cleanValue);
+      if (!validation.valid && validation.error) {
+        setContactErrors({ ...contactErrors, email: validation.error });
+      } else {
+        const { email: _, ...rest } = contactErrors;
+        setContactErrors(rest);
+      }
+    } else {
+      const { email: _, ...rest } = contactErrors;
+      setContactErrors(rest);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,7 +116,7 @@ const PromoterVenueCreateForm = ({
         googleReviewsLink: googleReviewsLink || null,
         googlePlaceId: googlePlaceId || null,
         website: website || null,
-        phone: phone || null,
+        phone: phone ? cleanPhoneNumber(phone) : null,
         email: email || null,
       } as any;
 
@@ -444,23 +485,30 @@ const PromoterVenueCreateForm = ({
         <div className="flex flex-col gap-1">
           <label className="form-label font-normal text-gray-900">Phone</label>
           <input
-            className="input"
+            className={`input ${contactErrors.phone ? 'border-danger' : ''}`}
             type="tel"
-            placeholder="+1 (555) 123-4567"
+            placeholder="(555) 555-5555"
             value={phone}
-            onChange={e => setPhone(e.target.value)}
+            onChange={e => handlePhoneChange(e.target.value)}
+            maxLength={14}
           />
+          {contactErrors.phone && (
+            <p className="text-xs text-danger mt-1">{contactErrors.phone}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
           <label className="form-label font-normal text-gray-900">Email</label>
           <input
-            className="input"
+            className={`input ${contactErrors.email ? 'border-danger' : ''}`}
             type="email"
             placeholder="venue@example.com"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={e => handleEmailChange(e.target.value)}
           />
+          {contactErrors.email && (
+            <p className="text-xs text-danger mt-1">{contactErrors.email}</p>
+          )}
         </div>
       </div>
 

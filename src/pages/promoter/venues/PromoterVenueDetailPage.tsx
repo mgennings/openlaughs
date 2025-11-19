@@ -7,6 +7,7 @@ import { getVenue } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
 import type { GetVenueQuery, Venue } from '@/API';
 import { PromoterVenueUpdateForm } from './PromoterVenueUpdateForm';
+import { cleanPhoneNumber, formatPhoneForDisplay } from '@/utils/validation';
 
 const userClient = generateClient({ authMode: 'userPool' });
 const publicClient = generateClient({ authMode: 'apiKey' });
@@ -203,11 +204,11 @@ const PromoterVenueDetailPage = () => {
               )}
               {venue.phone && (
                 <a
-                  href={`tel:${venue.phone}`}
+                  href={`tel:${cleanPhoneNumber(venue.phone)}`}
                   className="flex items-center gap-1 text-primary hover:underline"
                 >
                   <KeenIcon icon="phone" />
-                  <span>{venue.phone}</span>
+                  <span>{formatPhoneForDisplay(venue.phone)}</span>
                 </a>
               )}
             </div>
@@ -301,10 +302,10 @@ const PromoterVenueDetailPage = () => {
                 <div>
                   <div className="text-sm text-gray-600 mb-1">Phone</div>
                   <a
-                    href={`tel:${venue.phone}`}
+                    href={`tel:${cleanPhoneNumber(venue.phone)}`}
                     className="text-primary hover:underline"
                   >
-                    {venue.phone}
+                    {formatPhoneForDisplay(venue.phone)}
                   </a>
                 </div>
               )}

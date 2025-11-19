@@ -1,3 +1,7 @@
+// ============================================================================
+// TYPES & INTERFACES
+// ============================================================================
+
 export interface StateOption {
   value: string;
   label: string;
@@ -12,6 +16,10 @@ export interface RoleOption {
   description: string;
   emoji: string;
 }
+
+// ============================================================================
+// USER & AUTHENTICATION
+// ============================================================================
 
 export const ROLE_OPTIONS: RoleOption[] = [
   {
@@ -47,6 +55,10 @@ export const ROLE_OPTIONS: RoleOption[] = [
     emoji: '⚙️',
   },
 ];
+
+// ============================================================================
+// LOCATION
+// ============================================================================
 
 export const US_STATES: StateOption[] = [
   { value: '', label: 'Select a state' },
@@ -102,3 +114,56 @@ export const US_STATES: StateOption[] = [
   { value: 'WY', label: 'Wyoming' },
   { value: 'DC', label: 'District of Columbia' },
 ];
+
+// ============================================================================
+// COMEDIAN CONSTANTS
+// ============================================================================
+
+export const COMEDY_STYLES = [
+  'Observational',
+  'Dark Comedy',
+  'Physical Comedy',
+  'Storytelling',
+  'Character Comedy',
+  'Political',
+  'Self-Deprecating',
+  'Absurdist',
+  'Musical Comedy',
+  'Clean',
+  'Roast',
+  'Impressions',
+  'Crowd Work',
+];
+
+export const PERFORMANCE_TYPES = [
+  'Stand-up',
+  'Improv',
+  'Sketch',
+  'Character Work',
+  'Musical Comedy',
+  'Hosting',
+  'Roasting',
+];
+
+export const CONTENT_RATINGS = ['Clean', 'PG-13', 'Adult', 'NSFW', 'Mixed'];
+
+export const COMEDIAN_AVAILABILITY_OPTIONS = [
+  'Available for Bookings',
+  'Limited Availability',
+  'On Tour',
+  'Not Currently Booking',
+  'By Request Only',
+];
+
+// ============================================================================
+// SHOW CONSTANTS
+// ============================================================================
+
+export const AGE_RESTRICTIONS = ['All Ages', '18+', '21+', 'Other'];
+
+// ============================================================================
+// VENUE CONSTANTS
+// ============================================================================
+
+// Add venue-specific constants here as needed
+// export const VENUE_TYPES = ['Comedy Club', 'Bar', 'Theater', 'Other'];

@@ -10,6 +10,7 @@ import type {
   ListComediansQuery,
   Comedian,
 } from '@/API';
+import { AGE_RESTRICTIONS } from '@/config/constants';
 
 interface PromoterShowCreateFormProps {
   createdBy: string;
@@ -308,10 +309,11 @@ const PromoterShowCreateForm = ({
             onChange={e => setAgeRestriction(e.target.value)}
           >
             <option value="">Select age restriction</option>
-            <option value="All Ages">All Ages</option>
-            <option value="18+">18+</option>
-            <option value="21+">21+</option>
-            <option value="Other">Other</option>
+            {AGE_RESTRICTIONS.map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
         </div>
       </div>

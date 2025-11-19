@@ -6,44 +6,26 @@ import type { Comedian, UpdateComedianInput } from '@/API';
 import { KeenIcon, Alert } from '@/components';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage, getPublicUrl } from '@/lib/storage';
+import {
+  validateSocialMediaUsername,
+  cleanSocialMediaInput,
+} from '@/utils/socialMedia';
+import {
+  validatePhoneNumber,
+  validateEmail,
+  formatPhoneInput,
+  formatPhoneForDisplay,
+  cleanPhoneNumber,
+  cleanEmail,
+} from '@/utils/validation';
+import {
+  COMEDY_STYLES,
+  PERFORMANCE_TYPES,
+  CONTENT_RATINGS,
+  COMEDIAN_AVAILABILITY_OPTIONS,
+} from '@/config/constants';
 
 const client = generateClient({ authMode: 'userPool' });
-
-const COMEDY_STYLES = [
-  'Observational',
-  'Dark Comedy',
-  'Physical Comedy',
-  'Storytelling',
-  'Character Comedy',
-  'Political',
-  'Self-Deprecating',
-  'Absurdist',
-  'Musical Comedy',
-  'Clean',
-  'Roast',
-  'Impressions',
-  'Crowd Work',
-];
-
-const PERFORMANCE_TYPES = [
-  'Stand-up',
-  'Improv',
-  'Sketch',
-  'Character Work',
-  'Musical Comedy',
-  'Hosting',
-  'Roasting',
-];
-
-const CONTENT_RATINGS = ['Clean', 'PG-13', 'Adult', 'NSFW', 'Mixed'];
-
-const AVAILABILITY_OPTIONS = [
-  'Available for Bookings',
-  'Limited Availability',
-  'On Tour',
-  'Not Currently Booking',
-  'By Request Only',
-];
 
 interface ComedianUpdateFormProps {
   comedianId: string;
@@ -62,6 +44,10 @@ const ComedianUpdateForm = ({
   const [profileImage, setProfileImage] = useState<TImageInputFiles>([]);
   const [existingImageKey, setExistingImageKey] = useState<string | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
+  const [socialErrors, setSocialErrors] = useState<Record<string, string>>({});
+  const [contactErrors, setContactErrors] = useState<Record<string, string>>(
+    {},
+  );
 
   const [formData, setFormData] = useState<Partial<UpdateComedianInput>>({
     stageName: '',
@@ -119,7 +105,7 @@ const ComedianUpdateForm = ({
             youtube: comedian.youtube || '',
             facebook: comedian.facebook || '',
             businessEmail: comedian.businessEmail || '',
-            businessPhone: comedian.businessPhone || '',
+            businessPhone: formatPhoneForDisplay(comedian.businessPhone || ''),
             isVerified: comedian.isVerified ?? false,
             isFeatured: comedian.isFeatured ?? false,
             status: comedian.status || 'active',
@@ -153,6 +139,15 @@ const ComedianUpdateForm = ({
 
     if (!formData.stageName) {
       setError('Stage name is required');
+      return;
+    }
+
+    // Check for validation errors
+    if (
+      Object.keys(socialErrors).length > 0 ||
+      Object.keys(contactErrors).length > 0
+    ) {
+      setError('Please fix validation errors before submitting');
       return;
     }
 
@@ -202,7 +197,9 @@ const ComedianUpdateForm = ({
         youtube: formData.youtube || undefined,
         facebook: formData.facebook || undefined,
         businessEmail: formData.businessEmail || undefined,
-        businessPhone: formData.businessPhone || undefined,
+        businessPhone: formData.businessPhone
+          ? cleanPhoneNumber(formData.businessPhone)
+          : undefined,
         isVerified: formData.isVerified || false,
         isFeatured: formData.isFeatured || false,
         status: formData.status || 'active',
@@ -255,6 +252,59 @@ const ComedianUpdateForm = ({
         ...formData,
         performanceTypes: [...types, type],
       });
+    }
+  };
+
+  const handleSocialMediaChange = (platform: string, value: string) => {
+    const cleanValue = cleanSocialMediaInput(value);
+    setFormData({ ...formData, [platform]: cleanValue });
+
+    // Validate on change
+    if (cleanValue) {
+      const validation = validateSocialMediaUsername(platform, cleanValue);
+      if (!validation.valid && validation.error) {
+        setSocialErrors({ ...socialErrors, [platform]: validation.error });
+      } else {
+        const { [platform]: _, ...rest } = socialErrors;
+        setSocialErrors(rest);
+      }
+    } else {
+      const { [platform]: _, ...rest } = socialErrors;
+      setSocialErrors(rest);
+    }
+  };
+
+  const handlePhoneChange = (value: string) => {
+    // Format for display
+    const formatted = formatPhoneInput(value);
+    setFormData({ ...formData, businessPhone: formatted });
+
+    // Validate
+    const validation = validatePhoneNumber(formatted);
+    if (!validation.valid && validation.error) {
+      setContactErrors({ ...contactErrors, businessPhone: validation.error });
+    } else {
+      const { businessPhone: _, ...rest } = contactErrors;
+      setContactErrors(rest);
+    }
+  };
+
+  const handleEmailChange = (value: string) => {
+    const cleanValue = cleanEmail(value);
+    setFormData({ ...formData, businessEmail: cleanValue });
+
+    // Validate
+    if (cleanValue) {
+      const validation = validateEmail(cleanValue);
+      if (!validation.valid && validation.error) {
+        setContactErrors({ ...contactErrors, businessEmail: validation.error });
+      } else {
+        const { businessEmail: _, ...rest } = contactErrors;
+        setContactErrors(rest);
+      }
+    } else {
+      const { businessEmail: _, ...rest } = contactErrors;
+      setContactErrors(rest);
     }
   };
 
@@ -530,7 +580,7 @@ const ComedianUpdateForm = ({
                 setFormData({ ...formData, availability: e.target.value })
               }
             >
-              {AVAILABILITY_OPTIONS.map(option => (
+              {COMEDIAN_AVAILABILITY_OPTIONS.map(option => (
                 <option key={option} value={option}>
                   {option}
                 </option>
@@ -563,88 +613,114 @@ const ComedianUpdateForm = ({
             <label className="form-label">Business Email</label>
             <input
               type="email"
-              className="input"
+              className={`input ${contactErrors.businessEmail ? 'border-danger' : ''}`}
               value={formData.businessEmail || ''}
-              onChange={e =>
-                setFormData({ ...formData, businessEmail: e.target.value })
-              }
+              onChange={e => handleEmailChange(e.target.value)}
               placeholder="bookings@example.com"
             />
+            {contactErrors.businessEmail && (
+              <p className="text-xs text-danger mt-1">
+                {contactErrors.businessEmail}
+              </p>
+            )}
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
             <label className="form-label">Instagram</label>
-            <div className="flex items-center gap-2">
-              <span className="text-gray-500">@</span>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 z-10">
+                @
+              </span>
               <input
                 type="text"
-                className="input flex-1"
+                className={`input pl-8 ${socialErrors.instagram ? 'border-danger' : ''}`}
                 value={formData.instagram || ''}
                 onChange={e =>
-                  setFormData({ ...formData, instagram: e.target.value })
+                  handleSocialMediaChange('instagram', e.target.value)
                 }
                 placeholder="username"
               />
             </div>
+            {socialErrors.instagram && (
+              <p className="text-xs text-danger mt-1">
+                {socialErrors.instagram}
+              </p>
+            )}
           </div>
           <div>
             <label className="form-label">Twitter</label>
-            <div className="flex items-center gap-2">
-              <span className="text-gray-500">@</span>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 z-10">
+                @
+              </span>
               <input
                 type="text"
-                className="input flex-1"
+                className={`input pl-8 ${socialErrors.twitter ? 'border-danger' : ''}`}
                 value={formData.twitter || ''}
                 onChange={e =>
-                  setFormData({ ...formData, twitter: e.target.value })
+                  handleSocialMediaChange('twitter', e.target.value)
                 }
                 placeholder="username"
               />
             </div>
+            {socialErrors.twitter && (
+              <p className="text-xs text-danger mt-1">{socialErrors.twitter}</p>
+            )}
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
           <div>
             <label className="form-label">TikTok</label>
-            <div className="flex items-center gap-2">
-              <span className="text-gray-500">@</span>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 z-10">
+                @
+              </span>
               <input
                 type="text"
-                className="input flex-1"
+                className={`input pl-8 ${socialErrors.tiktok ? 'border-danger' : ''}`}
                 value={formData.tiktok || ''}
                 onChange={e =>
-                  setFormData({ ...formData, tiktok: e.target.value })
+                  handleSocialMediaChange('tiktok', e.target.value)
                 }
                 placeholder="username"
               />
             </div>
+            {socialErrors.tiktok && (
+              <p className="text-xs text-danger mt-1">{socialErrors.tiktok}</p>
+            )}
           </div>
           <div>
             <label className="form-label">YouTube</label>
             <input
               type="text"
-              className="input"
+              className={`input ${socialErrors.youtube ? 'border-danger' : ''}`}
               value={formData.youtube || ''}
-              onChange={e =>
-                setFormData({ ...formData, youtube: e.target.value })
-              }
-              placeholder="Channel URL or handle"
+              onChange={e => handleSocialMediaChange('youtube', e.target.value)}
+              placeholder="@handle or channel URL"
             />
+            {socialErrors.youtube && (
+              <p className="text-xs text-danger mt-1">{socialErrors.youtube}</p>
+            )}
           </div>
           <div>
             <label className="form-label">Facebook</label>
             <input
               type="text"
-              className="input"
+              className={`input ${socialErrors.facebook ? 'border-danger' : ''}`}
               value={formData.facebook || ''}
               onChange={e =>
-                setFormData({ ...formData, facebook: e.target.value })
+                handleSocialMediaChange('facebook', e.target.value)
               }
-              placeholder="Page URL"
+              placeholder="username or page URL"
             />
+            {socialErrors.facebook && (
+              <p className="text-xs text-danger mt-1">
+                {socialErrors.facebook}
+              </p>
+            )}
           </div>
         </div>
 
@@ -652,13 +728,17 @@ const ComedianUpdateForm = ({
           <label className="form-label">Business Phone</label>
           <input
             type="tel"
-            className="input"
+            className={`input ${contactErrors.businessPhone ? 'border-danger' : ''}`}
             value={formData.businessPhone || ''}
-            onChange={e =>
-              setFormData({ ...formData, businessPhone: e.target.value })
-            }
+            onChange={e => handlePhoneChange(e.target.value)}
             placeholder="(555) 555-5555"
+            maxLength={14}
           />
+          {contactErrors.businessPhone && (
+            <p className="text-xs text-danger mt-1">
+              {contactErrors.businessPhone}
+            </p>
+          )}
         </div>
       </div>
 
@@ -710,7 +790,12 @@ const ComedianUpdateForm = ({
         <button
           type="submit"
           className="btn btn-primary"
-          disabled={submitting || !formData.stageName}
+          disabled={
+            submitting ||
+            !formData.stageName ||
+            Object.keys(socialErrors).length > 0 ||
+            Object.keys(contactErrors).length > 0
+          }
         >
           {submitting ? (
             <>

@@ -5,4 +5,6 @@ export * from './Dom';
 export * from './LocalStorage';
 export * from './Router';
 export * from './String';
+export * from './validation';
+export * from './socialMedia';
 export * from './Common';

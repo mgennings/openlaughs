@@ -5,6 +5,7 @@ import { getShow, listVenues } from '@/graphql/queries';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage, getPublicUrl } from '@/lib/storage';
 import type { Show, Venue, ListVenuesQuery } from '@/API';
+import { AGE_RESTRICTIONS } from '@/config/constants';
 
 interface PromoterShowUpdateFormProps {
   showId: string;
@@ -262,10 +263,11 @@ const PromoterShowUpdateForm = ({
             onChange={e => setAgeRestriction(e.target.value)}
           >
             <option value="">Select age restriction</option>
-            <option value="All Ages">All Ages</option>
-            <option value="18+">18+</option>
-            <option value="21+">21+</option>
-            <option value="Other">Other</option>
+            {AGE_RESTRICTIONS.map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
         </div>
       </div>
