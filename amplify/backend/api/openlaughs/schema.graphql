@@ -16,6 +16,7 @@ type Show
   description: String
   dateTime: AWSDateTime!
   venueID: ID!
+  comedianIDs: [ID]
   createdBy: String
   showImageKey: String
   ticketUrl: String
@@ -53,6 +54,54 @@ type Venue
   website: String
   phone: String
   email: String
+}
+
+type Comedian
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin", "promoter"]
+        operations: [create, update, delete]
+      }
+      { allow: owner, ownerField: "userProfileId", operations: [read, update] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  stageName: String!
+  bio: String
+  profileImageKey: String
+  firstName: String
+  lastName: String
+  pronouns: String
+  basedIn: String
+  isActive: Boolean
+  availability: String
+  comedyStyles: [String]
+  performanceTypes: [String]
+  contentRating: String
+  performingSince: Int
+  headline: String
+  website: String
+  instagram: String
+  twitter: String
+  tiktok: String
+  youtube: String
+  facebook: String
+  businessEmail: String
+  businessPhone: String
+  notableCredits: [String]
+  awards: [String]
+  pressKitUrl: String
+  videoSampleUrl: String
+  userProfileId: ID
+  isVerified: Boolean
+  isFeatured: Boolean
+  status: String
+  createdBy: String
 }
 
 type UserProfile

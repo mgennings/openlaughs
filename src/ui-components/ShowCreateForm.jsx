@@ -6,11 +6,177 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Badge,
+  Button,
+  Divider,
+  Flex,
+  Grid,
+  Icon,
+  ScrollView,
+  Text,
+  TextField,
+  useTheme,
+} from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createShow } from "../graphql/mutations";
 const client = generateClient();
+function ArrayField({
+  items = [],
+  onChange,
+  label,
+  inputFieldRef,
+  children,
+  hasError,
+  setFieldValue,
+  currentFieldValue,
+  defaultFieldValue,
+  lengthLimit,
+  getBadgeText,
+  runValidationTasks,
+  errorMessage,
+}) {
+  const labelElement = <Text>{label}</Text>;
+  const {
+    tokens: {
+      components: {
+        fieldmessages: { error: errorStyles },
+      },
+    },
+  } = useTheme();
+  const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
+  const [isEditing, setIsEditing] = React.useState();
+  React.useEffect(() => {
+    if (isEditing) {
+      inputFieldRef?.current?.focus();
+    }
+  }, [isEditing]);
+  const removeItem = async (removeIndex) => {
+    const newItems = items.filter((value, index) => index !== removeIndex);
+    await onChange(newItems);
+    setSelectedBadgeIndex(undefined);
+  };
+  const addItem = async () => {
+    const { hasError } = runValidationTasks();
+    if (
+      currentFieldValue !== undefined &&
+      currentFieldValue !== null &&
+      currentFieldValue !== "" &&
+      !hasError
+    ) {
+      const newItems = [...items];
+      if (selectedBadgeIndex !== undefined) {
+        newItems[selectedBadgeIndex] = currentFieldValue;
+        setSelectedBadgeIndex(undefined);
+      } else {
+        newItems.push(currentFieldValue);
+      }
+      await onChange(newItems);
+      setIsEditing(false);
+    }
+  };
+  const arraySection = (
+    <React.Fragment>
+      {!!items?.length && (
+        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+          {items.map((value, index) => {
+            return (
+              <Badge
+                key={index}
+                style={{
+                  cursor: "pointer",
+                  alignItems: "center",
+                  marginRight: 3,
+                  marginTop: 3,
+                  backgroundColor:
+                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                }}
+                onClick={() => {
+                  setSelectedBadgeIndex(index);
+                  setFieldValue(items[index]);
+                  setIsEditing(true);
+                }}
+              >
+                {getBadgeText ? getBadgeText(value) : value.toString()}
+                <Icon
+                  style={{
+                    cursor: "pointer",
+                    paddingLeft: 3,
+                    width: 20,
+                    height: 20,
+                  }}
+                  viewBox={{ width: 20, height: 20 }}
+                  paths={[
+                    {
+                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
+                      stroke: "black",
+                    },
+                  ]}
+                  ariaLabel="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    removeItem(index);
+                  }}
+                />
+              </Badge>
+            );
+          })}
+        </ScrollView>
+      )}
+      <Divider orientation="horizontal" marginTop={5} />
+    </React.Fragment>
+  );
+  if (lengthLimit !== undefined && items.length >= lengthLimit && !isEditing) {
+    return (
+      <React.Fragment>
+        {labelElement}
+        {arraySection}
+      </React.Fragment>
+    );
+  }
+  return (
+    <React.Fragment>
+      {labelElement}
+      {isEditing && children}
+      {!isEditing ? (
+        <>
+          <Button
+            onClick={() => {
+              setIsEditing(true);
+            }}
+          >
+            Add item
+          </Button>
+          {errorMessage && hasError && (
+            <Text color={errorStyles.color} fontSize={errorStyles.fontSize}>
+              {errorMessage}
+            </Text>
+          )}
+        </>
+      ) : (
+        <Flex justifyContent="flex-end">
+          {(currentFieldValue || isEditing) && (
+            <Button
+              children="Cancel"
+              type="button"
+              size="small"
+              onClick={() => {
+                setFieldValue(defaultFieldValue);
+                setIsEditing(false);
+                setSelectedBadgeIndex(undefined);
+              }}
+            ></Button>
+          )}
+          <Button size="small" variation="link" onClick={addItem}>
+            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+          </Button>
+        </Flex>
+      )}
+      {arraySection}
+    </React.Fragment>
+  );
+}
 export default function ShowCreateForm(props) {
   const {
     clearOnSuccess = true,
@@ -27,6 +193,7 @@ export default function ShowCreateForm(props) {
     description: "",
     dateTime: "",
     venueID: "",
+    comedianIDs: [],
     createdBy: "",
     showImageKey: "",
     ticketUrl: "",
@@ -39,6 +206,9 @@ export default function ShowCreateForm(props) {
   );
   const [dateTime, setDateTime] = React.useState(initialValues.dateTime);
   const [venueID, setVenueID] = React.useState(initialValues.venueID);
+  const [comedianIDs, setComedianIDs] = React.useState(
+    initialValues.comedianIDs
+  );
   const [createdBy, setCreatedBy] = React.useState(initialValues.createdBy);
   const [showImageKey, setShowImageKey] = React.useState(
     initialValues.showImageKey
@@ -56,6 +226,8 @@ export default function ShowCreateForm(props) {
     setDescription(initialValues.description);
     setDateTime(initialValues.dateTime);
     setVenueID(initialValues.venueID);
+    setComedianIDs(initialValues.comedianIDs);
+    setCurrentComedianIDsValue("");
     setCreatedBy(initialValues.createdBy);
     setShowImageKey(initialValues.showImageKey);
     setTicketUrl(initialValues.ticketUrl);
@@ -63,11 +235,15 @@ export default function ShowCreateForm(props) {
     setAgeRestriction(initialValues.ageRestriction);
     setErrors({});
   };
+  const [currentComedianIDsValue, setCurrentComedianIDsValue] =
+    React.useState("");
+  const comedianIDsRef = React.createRef();
   const validations = {
     title: [{ type: "Required" }],
     description: [],
     dateTime: [{ type: "Required" }],
     venueID: [{ type: "Required" }],
+    comedianIDs: [],
     createdBy: [],
     showImageKey: [],
     ticketUrl: [],
@@ -121,6 +297,7 @@ export default function ShowCreateForm(props) {
           description,
           dateTime,
           venueID,
+          comedianIDs,
           createdBy,
           showImageKey,
           ticketUrl,
@@ -192,6 +369,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime,
               venueID,
+              comedianIDs,
               createdBy,
               showImageKey,
               ticketUrl,
@@ -224,6 +402,7 @@ export default function ShowCreateForm(props) {
               description: value,
               dateTime,
               venueID,
+              comedianIDs,
               createdBy,
               showImageKey,
               ticketUrl,
@@ -258,6 +437,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime: value,
               venueID,
+              comedianIDs,
               createdBy,
               showImageKey,
               ticketUrl,
@@ -290,6 +470,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime,
               venueID: value,
+              comedianIDs,
               createdBy,
               showImageKey,
               ticketUrl,
@@ -309,6 +490,62 @@ export default function ShowCreateForm(props) {
         hasError={errors.venueID?.hasError}
         {...getOverrideProps(overrides, "venueID")}
       ></TextField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              dateTime,
+              venueID,
+              comedianIDs: values,
+              createdBy,
+              showImageKey,
+              ticketUrl,
+              ticketPrice,
+              ageRestriction,
+            };
+            const result = onChange(modelFields);
+            values = result?.comedianIDs ?? values;
+          }
+          setComedianIDs(values);
+          setCurrentComedianIDsValue("");
+        }}
+        currentFieldValue={currentComedianIDsValue}
+        label={"Comedian i ds"}
+        items={comedianIDs}
+        hasError={errors?.comedianIDs?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("comedianIDs", currentComedianIDsValue)
+        }
+        errorMessage={errors?.comedianIDs?.errorMessage}
+        setFieldValue={setCurrentComedianIDsValue}
+        inputFieldRef={comedianIDsRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Comedian i ds"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentComedianIDsValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.comedianIDs?.hasError) {
+              runValidationTasks("comedianIDs", value);
+            }
+            setCurrentComedianIDsValue(value);
+          }}
+          onBlur={() =>
+            runValidationTasks("comedianIDs", currentComedianIDsValue)
+          }
+          errorMessage={errors.comedianIDs?.errorMessage}
+          hasError={errors.comedianIDs?.hasError}
+          ref={comedianIDsRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "comedianIDs")}
+        ></TextField>
+      </ArrayField>
       <TextField
         label="Created by"
         isRequired={false}
@@ -322,6 +559,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime,
               venueID,
+              comedianIDs,
               createdBy: value,
               showImageKey,
               ticketUrl,
@@ -354,6 +592,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime,
               venueID,
+              comedianIDs,
               createdBy,
               showImageKey: value,
               ticketUrl,
@@ -386,6 +625,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime,
               venueID,
+              comedianIDs,
               createdBy,
               showImageKey,
               ticketUrl: value,
@@ -422,6 +662,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime,
               venueID,
+              comedianIDs,
               createdBy,
               showImageKey,
               ticketUrl,
@@ -454,6 +695,7 @@ export default function ShowCreateForm(props) {
               description,
               dateTime,
               venueID,
+              comedianIDs,
               createdBy,
               showImageKey,
               ticketUrl,

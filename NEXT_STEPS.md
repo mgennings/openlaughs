@@ -49,8 +49,8 @@ comedians to create their own profiles.
 
 - [x] Venue creation (modal)
 - [x] Venue editing
-- [ ] Venue listing/directory page
-- [ ] Venue detail pages
+- [x] Venue listing/directory page
+- [x] Venue detail pages
 - [ ] Venue photos and details
 - [ ] Link venues to promoters
 - [ ] Venue search and filters
@@ -61,7 +61,7 @@ comedians to create their own profiles.
 - [x] Show display widgets
 - [x] Show detail pages
 - [x] Show deletion
-- [ ] Show editing
+- [x] Show editing
 - [ ] Link shows to comedians (not just venues)
 - [ ] Show ticketing/RSVP system
 - [ ] Show capacity and availability

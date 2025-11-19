@@ -26,6 +26,7 @@ export declare type ShowCreateFormInputValues = {
     description?: string;
     dateTime?: string;
     venueID?: string;
+    comedianIDs?: string[];
     createdBy?: string;
     showImageKey?: string;
     ticketUrl?: string;
@@ -37,6 +38,7 @@ export declare type ShowCreateFormValidationValues = {
     description?: ValidationFunction<string>;
     dateTime?: ValidationFunction<string>;
     venueID?: ValidationFunction<string>;
+    comedianIDs?: ValidationFunction<string>;
     createdBy?: ValidationFunction<string>;
     showImageKey?: ValidationFunction<string>;
     ticketUrl?: ValidationFunction<string>;
@@ -50,6 +52,7 @@ export declare type ShowCreateFormOverridesProps = {
     description?: PrimitiveOverrideProps<TextFieldProps>;
     dateTime?: PrimitiveOverrideProps<TextFieldProps>;
     venueID?: PrimitiveOverrideProps<TextFieldProps>;
+    comedianIDs?: PrimitiveOverrideProps<TextFieldProps>;
     createdBy?: PrimitiveOverrideProps<TextFieldProps>;
     showImageKey?: PrimitiveOverrideProps<TextFieldProps>;
     ticketUrl?: PrimitiveOverrideProps<TextFieldProps>;

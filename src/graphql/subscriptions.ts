@@ -105,6 +105,7 @@ export const onCreateShow = /* GraphQL */ `subscription OnCreateShow($filter: Mo
     description
     dateTime
     venueID
+    comedianIDs
     createdBy
     showImageKey
     ticketUrl
@@ -126,6 +127,7 @@ export const onUpdateShow = /* GraphQL */ `subscription OnUpdateShow($filter: Mo
     description
     dateTime
     venueID
+    comedianIDs
     createdBy
     showImageKey
     ticketUrl
@@ -147,6 +149,7 @@ export const onDeleteShow = /* GraphQL */ `subscription OnDeleteShow($filter: Mo
     description
     dateTime
     venueID
+    comedianIDs
     createdBy
     showImageKey
     ticketUrl
@@ -244,4 +247,142 @@ export const onDeleteVenue = /* GraphQL */ `subscription OnDeleteVenue($filter: 
 ` as GeneratedSubscription<
   APITypes.OnDeleteVenueSubscriptionVariables,
   APITypes.OnDeleteVenueSubscription
+>;
+export const onCreateComedian = /* GraphQL */ `subscription OnCreateComedian(
+  $filter: ModelSubscriptionComedianFilterInput
+  $userProfileId: String
+) {
+  onCreateComedian(filter: $filter, userProfileId: $userProfileId) {
+    id
+    stageName
+    bio
+    profileImageKey
+    firstName
+    lastName
+    pronouns
+    basedIn
+    isActive
+    availability
+    comedyStyles
+    performanceTypes
+    contentRating
+    performingSince
+    headline
+    website
+    instagram
+    twitter
+    tiktok
+    youtube
+    facebook
+    businessEmail
+    businessPhone
+    notableCredits
+    awards
+    pressKitUrl
+    videoSampleUrl
+    userProfileId
+    isVerified
+    isFeatured
+    status
+    createdBy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateComedianSubscriptionVariables,
+  APITypes.OnCreateComedianSubscription
+>;
+export const onUpdateComedian = /* GraphQL */ `subscription OnUpdateComedian(
+  $filter: ModelSubscriptionComedianFilterInput
+  $userProfileId: String
+) {
+  onUpdateComedian(filter: $filter, userProfileId: $userProfileId) {
+    id
+    stageName
+    bio
+    profileImageKey
+    firstName
+    lastName
+    pronouns
+    basedIn
+    isActive
+    availability
+    comedyStyles
+    performanceTypes
+    contentRating
+    performingSince
+    headline
+    website
+    instagram
+    twitter
+    tiktok
+    youtube
+    facebook
+    businessEmail
+    businessPhone
+    notableCredits
+    awards
+    pressKitUrl
+    videoSampleUrl
+    userProfileId
+    isVerified
+    isFeatured
+    status
+    createdBy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateComedianSubscriptionVariables,
+  APITypes.OnUpdateComedianSubscription
+>;
+export const onDeleteComedian = /* GraphQL */ `subscription OnDeleteComedian(
+  $filter: ModelSubscriptionComedianFilterInput
+  $userProfileId: String
+) {
+  onDeleteComedian(filter: $filter, userProfileId: $userProfileId) {
+    id
+    stageName
+    bio
+    profileImageKey
+    firstName
+    lastName
+    pronouns
+    basedIn
+    isActive
+    availability
+    comedyStyles
+    performanceTypes
+    contentRating
+    performingSince
+    headline
+    website
+    instagram
+    twitter
+    tiktok
+    youtube
+    facebook
+    businessEmail
+    businessPhone
+    notableCredits
+    awards
+    pressKitUrl
+    videoSampleUrl
+    userProfileId
+    isVerified
+    isFeatured
+    status
+    createdBy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteComedianSubscriptionVariables,
+  APITypes.OnDeleteComedianSubscription
 >;

@@ -32,7 +32,16 @@ export const MENU_SIDEBAR: TMenuConfig = [
         title: 'Venues',
         path: '/promoter/venues',
       },
+      // {
+      //   title: 'Comedians',
+      //   path: '/comedians',
+      // },
     ],
+  },
+  {
+    title: 'Comedians',
+    icon: 'users',
+    path: '/comedians',
   },
   {
     heading: 'User',

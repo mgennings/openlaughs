@@ -18,6 +18,7 @@ export const createShow = /* GraphQL */ `mutation CreateShow(
     description
     dateTime
     venueID
+    comedianIDs
     createdBy
     showImageKey
     ticketUrl
@@ -42,6 +43,7 @@ export const updateShow = /* GraphQL */ `mutation UpdateShow(
     description
     dateTime
     venueID
+    comedianIDs
     createdBy
     showImageKey
     ticketUrl
@@ -66,6 +68,7 @@ export const deleteShow = /* GraphQL */ `mutation DeleteShow(
     description
     dateTime
     venueID
+    comedianIDs
     createdBy
     showImageKey
     ticketUrl
@@ -172,6 +175,144 @@ export const deleteVenue = /* GraphQL */ `mutation DeleteVenue(
 ` as GeneratedMutation<
   APITypes.DeleteVenueMutationVariables,
   APITypes.DeleteVenueMutation
+>;
+export const createComedian = /* GraphQL */ `mutation CreateComedian(
+  $input: CreateComedianInput!
+  $condition: ModelComedianConditionInput
+) {
+  createComedian(input: $input, condition: $condition) {
+    id
+    stageName
+    bio
+    profileImageKey
+    firstName
+    lastName
+    pronouns
+    basedIn
+    isActive
+    availability
+    comedyStyles
+    performanceTypes
+    contentRating
+    performingSince
+    headline
+    website
+    instagram
+    twitter
+    tiktok
+    youtube
+    facebook
+    businessEmail
+    businessPhone
+    notableCredits
+    awards
+    pressKitUrl
+    videoSampleUrl
+    userProfileId
+    isVerified
+    isFeatured
+    status
+    createdBy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateComedianMutationVariables,
+  APITypes.CreateComedianMutation
+>;
+export const updateComedian = /* GraphQL */ `mutation UpdateComedian(
+  $input: UpdateComedianInput!
+  $condition: ModelComedianConditionInput
+) {
+  updateComedian(input: $input, condition: $condition) {
+    id
+    stageName
+    bio
+    profileImageKey
+    firstName
+    lastName
+    pronouns
+    basedIn
+    isActive
+    availability
+    comedyStyles
+    performanceTypes
+    contentRating
+    performingSince
+    headline
+    website
+    instagram
+    twitter
+    tiktok
+    youtube
+    facebook
+    businessEmail
+    businessPhone
+    notableCredits
+    awards
+    pressKitUrl
+    videoSampleUrl
+    userProfileId
+    isVerified
+    isFeatured
+    status
+    createdBy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateComedianMutationVariables,
+  APITypes.UpdateComedianMutation
+>;
+export const deleteComedian = /* GraphQL */ `mutation DeleteComedian(
+  $input: DeleteComedianInput!
+  $condition: ModelComedianConditionInput
+) {
+  deleteComedian(input: $input, condition: $condition) {
+    id
+    stageName
+    bio
+    profileImageKey
+    firstName
+    lastName
+    pronouns
+    basedIn
+    isActive
+    availability
+    comedyStyles
+    performanceTypes
+    contentRating
+    performingSince
+    headline
+    website
+    instagram
+    twitter
+    tiktok
+    youtube
+    facebook
+    businessEmail
+    businessPhone
+    notableCredits
+    awards
+    pressKitUrl
+    videoSampleUrl
+    userProfileId
+    isVerified
+    isFeatured
+    status
+    createdBy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteComedianMutationVariables,
+  APITypes.DeleteComedianMutation
 >;
 export const createUserProfile = /* GraphQL */ `mutation CreateUserProfile(
   $input: CreateUserProfileInput!

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { createShow } from '@/graphql/mutations';
-import { listVenues } from '@/graphql/queries';
+import { listVenues, listComedians } from '@/graphql/queries';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage } from '@/lib/storage';
-import type { ListVenuesQuery, Venue } from '@/API';
+import type {
+  ListVenuesQuery,
+  Venue,
+  ListComediansQuery,
+  Comedian,
+} from '@/API';
 
 interface PromoterShowCreateFormProps {
   createdBy: string;
@@ -31,32 +36,54 @@ const PromoterShowCreateForm = ({
   const [venues, setVenues] = useState<Venue[]>([]);
   const [venuesLoading, setVenuesLoading] = useState(false);
   const [venuesError, setVenuesError] = useState<string | null>(null);
+  const [comedians, setComedians] = useState<Comedian[]>([]);
+  const [selectedComedianIDs, setSelectedComedianIDs] = useState<string[]>([]);
+  const [comediansLoading, setComediansLoading] = useState(false);
 
   useEffect(() => {
-    const fetchVenues = async () => {
+    const fetchData = async () => {
       setVenuesLoading(true);
+      setComediansLoading(true);
       setVenuesError(null);
       try {
-        const result = await client.graphql({
+        // Fetch venues
+        const venuesResult = await client.graphql({
           query: (listVenues as string).replace(/__typename/g, ''),
           variables: { limit: 100 },
         });
-        if ('data' in result) {
+        if ('data' in venuesResult) {
           const items =
-            (result.data as ListVenuesQuery).listVenues?.items ?? [];
+            (venuesResult.data as ListVenuesQuery).listVenues?.items ?? [];
           setVenues(
             (items.filter(Boolean) as Venue[]).sort((a, b) =>
               (a.name || '').localeCompare(b.name || ''),
             ),
           );
         }
+
+        // Fetch comedians
+        const comediansResult = await client.graphql({
+          query: (listComedians as string).replace(/__typename/g, ''),
+          variables: { limit: 100 },
+        });
+        if ('data' in comediansResult) {
+          const items =
+            (comediansResult.data as ListComediansQuery).listComedians?.items ??
+            [];
+          setComedians(
+            (items.filter(Boolean) as Comedian[]).sort((a, b) =>
+              (a.stageName || '').localeCompare(b.stageName || ''),
+            ),
+          );
+        }
       } catch (err: any) {
-        setVenuesError(err?.message || 'Failed to load venues');
+        setVenuesError(err?.message || 'Failed to load data');
       } finally {
         setVenuesLoading(false);
+        setComediansLoading(false);
       }
     };
-    fetchVenues();
+    fetchData();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -79,6 +106,8 @@ const PromoterShowCreateForm = ({
         description: description || null,
         dateTime: dateTime ? new Date(dateTime).toISOString() : null,
         venueID,
+        comedianIDs:
+          selectedComedianIDs.length > 0 ? selectedComedianIDs : null,
         createdBy,
         showImageKey,
         ticketUrl: ticketUrl || null,
@@ -100,6 +129,7 @@ const PromoterShowCreateForm = ({
       setDescription('');
       setDateTime('');
       setVenueID('');
+      setSelectedComedianIDs([]);
       setShowImage([]);
       setTicketUrl('');
       setTicketPrice('');
@@ -174,6 +204,60 @@ const PromoterShowCreateForm = ({
         {venuesError && (
           <span className="text-danger text-2sm">{venuesError}</span>
         )}
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label className="form-label font-normal text-gray-900">
+          Comedians
+        </label>
+        <div className="border border-gray-300 rounded-lg p-3 max-h-48 overflow-y-auto">
+          {comediansLoading ? (
+            <span className="text-gray-500 text-sm">Loading comedians...</span>
+          ) : comedians.length === 0 ? (
+            <span className="text-gray-500 text-sm">
+              No comedians available
+            </span>
+          ) : (
+            <div className="space-y-2">
+              {comedians.map(comedian => (
+                <label
+                  key={comedian.id}
+                  className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded"
+                >
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={selectedComedianIDs.includes(comedian.id)}
+                    onChange={e => {
+                      if (e.target.checked) {
+                        setSelectedComedianIDs([
+                          ...selectedComedianIDs,
+                          comedian.id,
+                        ]);
+                      } else {
+                        setSelectedComedianIDs(
+                          selectedComedianIDs.filter(id => id !== comedian.id),
+                        );
+                      }
+                    }}
+                  />
+                  <span className="text-sm text-gray-900">
+                    {comedian.stageName}
+                    {comedian.basedIn && (
+                      <span className="text-gray-500">
+                        {' '}
+                        — {comedian.basedIn}
+                      </span>
+                    )}
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+        <span className="text-xs text-gray-500">
+          Select one or more comedians performing in this show
+        </span>
       </div>
 
       <div className="flex flex-col gap-1">

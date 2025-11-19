@@ -3,9 +3,9 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Container } from '@/components/container';
 import { KeenIcon } from '@/components';
 import { generateClient } from 'aws-amplify/api';
-import { getShow, getVenue } from '@/graphql/queries';
+import { getShow, getVenue, getComedian } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
-import type { Show, Venue } from '@/API';
+import type { Show, Venue, Comedian } from '@/API';
 
 const userClient = generateClient({ authMode: 'userPool' });
 const publicClient = generateClient({ authMode: 'apiKey' });
@@ -15,6 +15,7 @@ const ShowDetailPage = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState<Show | null>(null);
   const [venue, setVenue] = useState<Venue | null>(null);
+  const [comedians, setComedians] = useState<Comedian[]>([]);
   const [showImageUrl, setShowImageUrl] = useState<string | null>(null);
   const [venueLogoUrl, setVenueLogoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -92,6 +93,59 @@ const ShowDetailPage = () => {
             } catch (venueErr: any) {
               console.error('Failed to load venue:', venueErr);
               // Don't fail the whole page if venue can't be loaded
+            }
+          }
+
+          // Fetch comedian information
+          if (showData.comedianIDs && showData.comedianIDs.length > 0) {
+            try {
+              const comedianPromises = showData.comedianIDs.map(
+                async comedianId => {
+                  if (!comedianId) return null;
+                  try {
+                    let comedianResult: any;
+                    try {
+                      comedianResult = await userClient.graphql({
+                        query: (getComedian as string).replace(
+                          /__typename/g,
+                          '',
+                        ),
+                        variables: { id: comedianId },
+                      });
+                    } catch (e: any) {
+                      comedianResult = await publicClient.graphql({
+                        query: (getComedian as string).replace(
+                          /__typename/g,
+                          '',
+                        ),
+                        variables: { id: comedianId },
+                      });
+                    }
+
+                    if (
+                      'data' in comedianResult &&
+                      comedianResult.data?.getComedian
+                    ) {
+                      return comedianResult.data.getComedian as Comedian;
+                    }
+                    return null;
+                  } catch (err) {
+                    console.error(
+                      `Failed to load comedian ${comedianId}:`,
+                      err,
+                    );
+                    return null;
+                  }
+                },
+              );
+
+              const comedianResults = await Promise.all(comedianPromises);
+              setComedians(
+                comedianResults.filter((c): c is Comedian => c !== null),
+              );
+            } catch (comedianErr: any) {
+              console.error('Failed to load comedians:', comedianErr);
+              // Don't fail the whole page if comedians can't be loaded
             }
           }
         } else {
@@ -204,7 +258,10 @@ const ShowDetailPage = () => {
             </div>
           ) : (
             <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 rounded-lg bg-primary/10 flex items-center justify-center border-2 border-gray-200">
-              <KeenIcon icon="calendar" className="text-4xl md:text-5xl text-primary" />
+              <KeenIcon
+                icon="calendar"
+                className="text-4xl md:text-5xl text-primary"
+              />
             </div>
           )}
 
@@ -285,6 +342,87 @@ const ShowDetailPage = () => {
               <p className="text-gray-700 whitespace-pre-line">
                 {show.description}
               </p>
+            </div>
+          )}
+
+          {/* Comedians Performing */}
+          {comedians && comedians.length > 0 && (
+            <div className="card p-5">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Comedians Performing
+              </h3>
+              <div className="space-y-4">
+                {comedians.map(comedian => {
+                  const yearsExp = comedian.performingSince
+                    ? new Date().getFullYear() - comedian.performingSince
+                    : null;
+
+                  return (
+                    <Link
+                      key={comedian.id}
+                      to={`/comedians/${comedian.id}`}
+                      className="flex items-start gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary text-xl flex-shrink-0">
+                        {comedian.stageName.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-lg font-semibold text-gray-900">
+                            {comedian.stageName}
+                          </span>
+                          {comedian.isVerified && (
+                            <KeenIcon icon="verify" className="text-success" />
+                          )}
+                          {comedian.isFeatured && (
+                            <span className="badge badge-warning badge-sm">
+                              Featured
+                            </span>
+                          )}
+                        </div>
+                        {comedian.headline && (
+                          <p className="text-sm text-gray-600 italic mb-2">
+                            "{comedian.headline}"
+                          </p>
+                        )}
+                        <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
+                          {comedian.basedIn && (
+                            <div className="flex items-center gap-1">
+                              <KeenIcon icon="geolocation" />
+                              <span>{comedian.basedIn}</span>
+                            </div>
+                          )}
+                          {yearsExp !== null && (
+                            <div className="flex items-center gap-1">
+                              <KeenIcon icon="calendar" />
+                              <span>{yearsExp} years</span>
+                            </div>
+                          )}
+                        </div>
+                        {comedian.comedyStyles &&
+                          comedian.comedyStyles.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {comedian.comedyStyles
+                                .slice(0, 3)
+                                .map((style, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="badge badge-sm badge-light"
+                                  >
+                                    {style}
+                                  </span>
+                                ))}
+                            </div>
+                          )}
+                      </div>
+                      <KeenIcon
+                        icon="arrow-top-right"
+                        className="text-gray-400 flex-shrink-0"
+                      />
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           )}
 
@@ -420,4 +558,3 @@ const ShowDetailPage = () => {
 };
 
 export { ShowDetailPage };
-

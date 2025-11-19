@@ -77,6 +77,7 @@ export const getShow = /* GraphQL */ `query GetShow($id: ID!) {
     description
     dateTime
     venueID
+    comedianIDs
     createdBy
     showImageKey
     ticketUrl
@@ -100,6 +101,7 @@ export const listShows = /* GraphQL */ `query ListShows(
       description
       dateTime
       venueID
+      comedianIDs
       createdBy
       showImageKey
       ticketUrl
@@ -174,4 +176,98 @@ export const listVenues = /* GraphQL */ `query ListVenues(
 ` as GeneratedQuery<
   APITypes.ListVenuesQueryVariables,
   APITypes.ListVenuesQuery
+>;
+export const getComedian = /* GraphQL */ `query GetComedian($id: ID!) {
+  getComedian(id: $id) {
+    id
+    stageName
+    bio
+    profileImageKey
+    firstName
+    lastName
+    pronouns
+    basedIn
+    isActive
+    availability
+    comedyStyles
+    performanceTypes
+    contentRating
+    performingSince
+    headline
+    website
+    instagram
+    twitter
+    tiktok
+    youtube
+    facebook
+    businessEmail
+    businessPhone
+    notableCredits
+    awards
+    pressKitUrl
+    videoSampleUrl
+    userProfileId
+    isVerified
+    isFeatured
+    status
+    createdBy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetComedianQueryVariables,
+  APITypes.GetComedianQuery
+>;
+export const listComedians = /* GraphQL */ `query ListComedians(
+  $filter: ModelComedianFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listComedians(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      stageName
+      bio
+      profileImageKey
+      firstName
+      lastName
+      pronouns
+      basedIn
+      isActive
+      availability
+      comedyStyles
+      performanceTypes
+      contentRating
+      performingSince
+      headline
+      website
+      instagram
+      twitter
+      tiktok
+      youtube
+      facebook
+      businessEmail
+      businessPhone
+      notableCredits
+      awards
+      pressKitUrl
+      videoSampleUrl
+      userProfileId
+      isVerified
+      isFeatured
+      status
+      createdBy
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListComediansQueryVariables,
+  APITypes.ListComediansQuery
 >;
