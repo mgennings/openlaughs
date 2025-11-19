@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { generateClient } from 'aws-amplify/api';
-import { listUserProfiles, listShows, listVenues } from '@/graphql/queries';
+import {
+  listUserProfiles,
+  listShows,
+  listVenues,
+  listComedians,
+} from '@/graphql/queries';
 import { KeenIcon } from '@/components';
 
 const client = generateClient({ authMode: 'userPool' });
@@ -9,6 +15,7 @@ interface StatsData {
   totalUsers: number;
   totalShows: number;
   totalVenues: number;
+  totalComedians: number;
   usersByRole: {
     fans: number;
     comedians: number;
@@ -22,6 +29,7 @@ const PlatformStats = () => {
     totalUsers: 0,
     totalShows: 0,
     totalVenues: 0,
+    totalComedians: 0,
     usersByRole: {
       fans: 0,
       comedians: 0,
@@ -37,20 +45,25 @@ const PlatformStats = () => {
         setLoading(true);
 
         // Fetch all data in parallel
-        const [usersResult, showsResult, venuesResult] = await Promise.all([
-          client.graphql({
-            query: (listUserProfiles as string).replace(/__typename/g, ''),
-            variables: { limit: 1000 },
-          }),
-          client.graphql({
-            query: (listShows as string).replace(/__typename/g, ''),
-            variables: { limit: 1000 },
-          }),
-          client.graphql({
-            query: (listVenues as string).replace(/__typename/g, ''),
-            variables: { limit: 1000 },
-          }),
-        ]);
+        const [usersResult, showsResult, venuesResult, comediansResult] =
+          await Promise.all([
+            client.graphql({
+              query: (listUserProfiles as string).replace(/__typename/g, ''),
+              variables: { limit: 1000 },
+            }),
+            client.graphql({
+              query: (listShows as string).replace(/__typename/g, ''),
+              variables: { limit: 1000 },
+            }),
+            client.graphql({
+              query: (listVenues as string).replace(/__typename/g, ''),
+              variables: { limit: 1000 },
+            }),
+            client.graphql({
+              query: (listComedians as string).replace(/__typename/g, ''),
+              variables: { limit: 1000 },
+            }),
+          ]);
 
         // Count users by role
         const users =
@@ -83,11 +96,16 @@ const PlatformStats = () => {
           'data' in venuesResult
             ? venuesResult.data?.listVenues?.items || []
             : [];
+        const comedians =
+          'data' in comediansResult
+            ? comediansResult.data?.listComedians?.items || []
+            : [];
 
         setStats({
           totalUsers: users.length,
           totalShows: shows.length,
           totalVenues: venues.length,
+          totalComedians: comedians.length,
           usersByRole,
         });
       } catch (error) {
@@ -124,7 +142,10 @@ const PlatformStats = () => {
       <div className="card-body">
         <div className="grid grid-cols-2 gap-5">
           {/* Total Users */}
-          <div className="flex items-center gap-4">
+          <Link
+            to="/account/members/team-members"
+            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+          >
             <div className="flex items-center justify-center size-12 rounded-lg bg-primary/10">
               <KeenIcon icon="people" className="text-2xl text-primary" />
             </div>
@@ -134,10 +155,13 @@ const PlatformStats = () => {
               </div>
               <div className="text-sm text-gray-600">Total Users</div>
             </div>
-          </div>
+          </Link>
 
           {/* Total Shows */}
-          <div className="flex items-center gap-4">
+          <Link
+            to="/promoter/shows"
+            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+          >
             <div className="flex items-center justify-center size-12 rounded-lg bg-success/10">
               <KeenIcon icon="calendar" className="text-2xl text-success" />
             </div>
@@ -147,10 +171,13 @@ const PlatformStats = () => {
               </div>
               <div className="text-sm text-gray-600">Total Shows</div>
             </div>
-          </div>
+          </Link>
 
           {/* Total Venues */}
-          <div className="flex items-center gap-4">
+          <Link
+            to="/promoter/venues"
+            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+          >
             <div className="flex items-center justify-center size-12 rounded-lg bg-warning/10">
               <KeenIcon icon="geolocation" className="text-2xl text-warning" />
             </div>
@@ -160,20 +187,23 @@ const PlatformStats = () => {
               </div>
               <div className="text-sm text-gray-600">Total Venues</div>
             </div>
-          </div>
+          </Link>
 
           {/* Comedians Count */}
-          <div className="flex items-center gap-4">
+          <Link
+            to="/comedians"
+            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+          >
             <div className="flex items-center justify-center size-12 rounded-lg bg-info/10">
               <KeenIcon icon="microphone-2" className="text-2xl text-info" />
             </div>
             <div>
               <div className="text-2xl font-semibold text-gray-900">
-                {stats.usersByRole.comedians}
+                {stats.totalComedians}
               </div>
               <div className="text-sm text-gray-600">Comedians</div>
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* User Role Breakdown */}

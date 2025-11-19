@@ -133,6 +133,10 @@ export const COMEDY_STYLES = [
   'Roast',
   'Impressions',
   'Crowd Work',
+  'Wordplay',
+  'Deadpan',
+  'Satire',
+  'Improv',
 ];
 
 export const PERFORMANCE_TYPES = [
@@ -142,7 +146,9 @@ export const PERFORMANCE_TYPES = [
   'Character Work',
   'Musical Comedy',
   'Hosting',
+  'Acting',
   'Roasting',
+  'Podcasting',
 ];
 
 export const CONTENT_RATINGS = ['Clean', 'PG-13', 'Adult', 'NSFW', 'Mixed'];

@@ -335,17 +335,23 @@ const ComedianCreateForm = ({
             multiple={false}
             acceptType={['image/jpeg', 'image/png', 'image/webp']}
           >
-            {() =>
-              profileImage.length > 0 ? (
+            {({
+              fileList,
+              onImageUpload,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) =>
+              fileList.length > 0 ? (
                 <div className="relative group">
                   <img
-                    src={profileImage[0].preview}
+                    src={fileList[0].dataURL}
                     alt="Profile preview"
                     className="w-32 h-32 rounded-lg object-cover border-2 border-gray-200"
                   />
                   <button
                     type="button"
-                    onClick={() => setProfileImage([])}
+                    onClick={() => onImageRemove(0)}
                     className="absolute top-2 right-2 bg-danger text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
                     aria-label="Remove image"
                   >
@@ -353,7 +359,15 @@ const ComedianCreateForm = ({
                   </button>
                 </div>
               ) : (
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer">
+                <div
+                  {...dragProps}
+                  onClick={onImageUpload}
+                  className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
+                    isDragging
+                      ? 'border-primary bg-primary/5'
+                      : 'border-gray-300 hover:border-primary'
+                  }`}
+                >
                   <KeenIcon
                     icon="picture"
                     className="text-4xl text-gray-400 mb-2"
@@ -361,7 +375,9 @@ const ComedianCreateForm = ({
                   <p className="text-sm text-gray-600 mb-1">
                     Click to upload profile image
                   </p>
-                  <p className="text-xs text-gray-500">PNG, JPG up to 10MB</p>
+                  <p className="text-xs text-gray-500">
+                    PNG, JPG, WEBP up to 10MB
+                  </p>
                 </div>
               )
             }

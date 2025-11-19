@@ -26,11 +26,24 @@ const ComediansListPage = () => {
   const [profileImageUrls, setProfileImageUrls] = useState<
     Record<string, string>
   >({});
+  const [expandedStyles, setExpandedStyles] = useState<Set<string>>(new Set());
 
   const createdBy = useMemo(
     () => currentUser?.email || currentUser?.username || '',
     [currentUser?.email, currentUser?.username],
   );
+
+  const toggleStylesExpanded = (comedianId: string) => {
+    setExpandedStyles(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(comedianId)) {
+        newSet.delete(comedianId);
+      } else {
+        newSet.add(comedianId);
+      }
+      return newSet;
+    });
+  };
 
   const fetchComedians = async () => {
     try {
@@ -211,27 +224,44 @@ const ComediansListPage = () => {
                       {comedian.comedyStyles &&
                         comedian.comedyStyles.length > 0 && (
                           <div className="flex flex-wrap gap-1 justify-center mb-3">
-                            {comedian.comedyStyles
-                              .slice(0, 2)
-                              .map((style, idx) => (
-                                <span
-                                  key={idx}
-                                  className="badge badge-sm badge-light"
-                                >
-                                  {style}
-                                </span>
-                              ))}
-                            {comedian.comedyStyles.length > 2 && (
-                              <span className="badge badge-sm badge-light">
-                                +{comedian.comedyStyles.length - 2}
+                            {(expandedStyles.has(comedian.id)
+                              ? comedian.comedyStyles
+                              : comedian.comedyStyles.slice(0, 2)
+                            ).map((style, idx) => (
+                              <span
+                                key={idx}
+                                className="badge badge-sm badge-light"
+                              >
+                                {style}
                               </span>
+                            ))}
+                            {comedian.comedyStyles.length > 2 && (
+                              <button
+                                onClick={e => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  toggleStylesExpanded(comedian.id);
+                                }}
+                                className={
+                                  expandedStyles.has(comedian.id)
+                                    ? 'badge badge-xs badge-primary hover:badge-primary-active cursor-pointer transition-colors'
+                                    : 'badge badge-sm badge-light hover:badge-primary cursor-pointer transition-colors'
+                                }
+                              >
+                                {expandedStyles.has(comedian.id)
+                                  ? 'Show less'
+                                  : `+${comedian.comedyStyles.length - 2}`}
+                              </button>
                             )}
                           </div>
                         )}
 
                       {/* Bio Preview */}
                       {comedian.bio && (
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+                        <p
+                          title={comedian.bio}
+                          className="text-sm text-gray-600 line-clamp-2 mb-3"
+                        >
                           {comedian.bio}
                         </p>
                       )}

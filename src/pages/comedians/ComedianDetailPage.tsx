@@ -12,6 +12,7 @@ import { getComedian, listShows } from '@/graphql/queries';
 import type { Comedian, Show } from '@/API';
 import { getPublicUrl } from '@/lib/storage';
 import { ModalUpdateComedian } from './ModalUpdateComedian';
+import { getSocialMediaUrl } from '@/utils/socialMedia';
 
 const client = generateClient({ authMode: 'userPool' });
 
@@ -329,7 +330,7 @@ const ComedianDetailPage = () => {
                 )}
                 {comedian.instagram && (
                   <a
-                    href={`https://instagram.com/${comedian.instagram.replace('@', '')}`}
+                    href={getSocialMediaUrl('instagram', comedian.instagram)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-700 hover:text-primary"
@@ -340,7 +341,7 @@ const ComedianDetailPage = () => {
                 )}
                 {comedian.twitter && (
                   <a
-                    href={`https://twitter.com/${comedian.twitter.replace('@', '')}`}
+                    href={getSocialMediaUrl('twitter', comedian.twitter)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-700 hover:text-primary"
@@ -351,7 +352,7 @@ const ComedianDetailPage = () => {
                 )}
                 {comedian.tiktok && (
                   <a
-                    href={`https://tiktok.com/@${comedian.tiktok.replace('@', '')}`}
+                    href={getSocialMediaUrl('tiktok', comedian.tiktok)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-700 hover:text-primary"
@@ -362,7 +363,7 @@ const ComedianDetailPage = () => {
                 )}
                 {comedian.youtube && (
                   <a
-                    href={comedian.youtube}
+                    href={getSocialMediaUrl('youtube', comedian.youtube)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-700 hover:text-primary"
@@ -373,7 +374,7 @@ const ComedianDetailPage = () => {
                 )}
                 {comedian.facebook && (
                   <a
-                    href={comedian.facebook}
+                    href={getSocialMediaUrl('facebook', comedian.facebook)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-700 hover:text-primary"

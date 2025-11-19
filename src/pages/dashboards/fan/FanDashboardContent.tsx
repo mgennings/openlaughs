@@ -1,4 +1,5 @@
 import { ShowsWidget } from '@/partials/shows';
+import { ComediansWidget } from '@/partials/comedians';
 import { KeenIcon } from '@/components';
 
 const FanDashboardContent = () => {
@@ -76,6 +77,11 @@ const FanDashboardContent = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Featured Comedians */}
+      <div className="grid lg:grid-cols-1 gap-5 lg:gap-7.5">
+        <ComediansWidget limit={8} featured={true} />
       </div>
 
       {/* Upcoming Shows */}
