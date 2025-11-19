@@ -30,7 +30,7 @@ const initialValues = {
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const { login } = useAuthContext();
+  const { login, loginWithGoogle, loginWithApple } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -82,6 +82,28 @@ const Login = () => {
     },
   });
 
+  const handleGoogleLogin = async () => {
+    if (!loginWithGoogle) return;
+
+    try {
+      setLoading(true);
+      await loginWithGoogle(); // will redirect to Cognito Hosted UI
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAppleLogin = async () => {
+    if (!loginWithApple) return;
+
+    try {
+      setLoading(true);
+      await loginWithApple(); // will redirect to Cognito Hosted UI
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const togglePassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setShowPassword(!showPassword);
@@ -119,15 +141,25 @@ const Login = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-2.5">
-          <a href="#" className="btn btn-light btn-sm justify-center">
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="btn btn-light btn-sm justify-center"
+            disabled={loading || formik.isSubmitting}
+          >
             <img
               src={toAbsoluteUrl('/media/brand-logos/google.svg')}
               className="size-3.5 shrink-0"
             />
             Use Google
-          </a>
+          </button>
 
-          <a href="#" className="btn btn-light btn-sm justify-center">
+          <button
+            type="button"
+            onClick={handleAppleLogin}
+            className="btn btn-light btn-sm justify-center"
+            disabled={loading || formik.isSubmitting}
+          >
             <img
               src={toAbsoluteUrl('/media/brand-logos/apple-black.svg')}
               className="size-3.5 shrink-0 dark:hidden"
@@ -137,7 +169,7 @@ const Login = () => {
               className="size-3.5 shrink-0 light:hidden"
             />
             Use Apple
-          </a>
+          </button>
         </div>
 
         <div className="flex items-center gap-2">

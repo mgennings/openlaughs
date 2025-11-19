@@ -35,6 +35,7 @@ interface AuthContextProps {
   setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>;
   login: (email: string, password: string) => Promise<void>;
   loginWithGoogle?: () => Promise<void>;
+  loginWithApple?: () => Promise<void>;
   loginWithFacebook?: () => Promise<void>;
   loginWithGithub?: () => Promise<void>;
   register: (
@@ -188,6 +189,61 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  // const loginWithGoogle = async () => {
+  //   try {
+  //     // Kick off OAuth redirect to Cognito Hosted UI for Google
+  //     window.location.assign(
+  //       `${import.meta.env.VITE_COGNITO_DOMAIN}/oauth2/authorize?identity_provider=Google&redirect_uri=${encodeURIComponent(import.meta.env.VITE_COGNITO_REDIRECT_URL)}&response_type=CODE&client_id=${import.meta.env.VITE_COGNITO_CLIENT_ID}`,
+  //     );
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
+
+  // const loginWithApple = async () => {
+  //   try {
+  //     // Kick off OAuth redirect to Cognito Hosted UI for Sign in with Apple
+  //     window.location.assign(
+  //       `${import.meta.env.VITE_COGNITO_DOMAIN}/oauth2/authorize?identity_provider=SignInWithApple&redirect_uri=${encodeURIComponent(import.meta.env.VITE_COGNITO_REDIRECT_URL)}&response_type=CODE&client_id=${import.meta.env.VITE_COGNITO_CLIENT_ID}`,
+  //     );
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
+
+  const loginWithGoogle = async () => {
+    // No try/catch needed; this is a full-page redirect
+    const domain = import.meta.env.VITE_COGNITO_DOMAIN;
+    const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
+    const redirectUri = import.meta.env.VITE_COGNITO_REDIRECT_URL;
+
+    const url =
+      `${domain}/oauth2/authorize` +
+      `?identity_provider=Google` +
+      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+      `&response_type=code` + // <- lowercase
+      `&client_id=${encodeURIComponent(clientId)}` +
+      `&scope=${encodeURIComponent('openid email profile')}`;
+
+    window.location.assign(url);
+  };
+
+  const loginWithApple = async () => {
+    const domain = import.meta.env.VITE_COGNITO_DOMAIN;
+    const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
+    const redirectUri = import.meta.env.VITE_COGNITO_REDIRECT_URL;
+
+    const url =
+      `${domain}/oauth2/authorize` +
+      `?identity_provider=SignInWithApple` +
+      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+      `&response_type=code` + // <- lowercase
+      `&client_id=${encodeURIComponent(clientId)}` +
+      `&scope=${encodeURIComponent('openid email profile')}`;
+
+    window.location.assign(url);
+  };
+
   const register = async (
     email: string,
     password: string,
@@ -322,6 +378,8 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         currentUser,
         setCurrentUser,
         login,
+        loginWithGoogle,
+        loginWithApple,
         register,
         confirmRegistration,
         resendConfirmationCode,

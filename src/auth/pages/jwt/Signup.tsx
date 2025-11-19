@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -36,7 +36,7 @@ const signupSchema = Yup.object().shape({
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
-  const { register } = useAuthContext();
+  const { register, loginWithGoogle, loginWithApple } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -100,6 +100,20 @@ const Signup = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  const handleGoogleSignup = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (loginWithGoogle) {
+      await loginWithGoogle();
+    }
+  };
+
+  const handleAppleSignup = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (loginWithApple) {
+      await loginWithApple();
+    }
+  };
+
   return (
     <div className="card max-w-[370px] w-full">
       <form
@@ -132,15 +146,23 @@ const Signup = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-2.5">
-          <a href="#" className="btn btn-light btn-sm justify-center">
+          <button
+            type="button"
+            onClick={handleGoogleSignup}
+            className="btn btn-light btn-sm justify-center"
+          >
             <img
               src={toAbsoluteUrl('/media/brand-logos/google.svg')}
               className="size-3.5 shrink-0"
             />
             Use Google
-          </a>
+          </button>
 
-          <a href="#" className="btn btn-light btn-sm justify-center">
+          <button
+            type="button"
+            onClick={handleAppleSignup}
+            className="btn btn-light btn-sm justify-center"
+          >
             <img
               src={toAbsoluteUrl('/media/brand-logos/apple-black.svg')}
               className="size-3.5 shrink-0 dark:hidden"
@@ -150,7 +172,7 @@ const Signup = () => {
               className="size-3.5 shrink-0 light:hidden"
             />
             Use Apple
-          </a>
+          </button>
         </div>
 
         <div className="flex items-center gap-2">

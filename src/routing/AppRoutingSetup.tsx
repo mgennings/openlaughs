@@ -77,6 +77,7 @@ import {
 import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
 import { RequireOnboarding } from '@/auth/RequireOnboarding';
+import { CognitoCallback } from '@/auth/CognitoCallback';
 import { OnboardingPage } from '@/pages/onboarding';
 import { Demo1Layout } from '@/layouts/demo1';
 import { ErrorsRouting } from '@/errors';
@@ -402,6 +403,7 @@ const AppRoutingSetup = (): ReactElement => {
         </Route>
       </Route>
       <Route path="error/*" element={<ErrorsRouting />} />
+      <Route path="/auth/callback" element={<CognitoCallback />} />
       <Route path="auth/*" element={<AuthPage />} />
       <Route path="*" element={<Navigate to="/error/404" />} />
     </Routes>
