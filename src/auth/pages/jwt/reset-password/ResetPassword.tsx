@@ -64,9 +64,9 @@ const ResetPassword = () => {
     },
   });
   return (
-    <div className="card max-w-[370px] w-full">
+    <div className="card max-w-[420px] w-full">
       <form
-        className="card-body flex flex-col gap-5 p-10"
+        className="card-body flex flex-col gap-5 p-5 md:p-10"
         noValidate
         onSubmit={formik.handleSubmit}
       >

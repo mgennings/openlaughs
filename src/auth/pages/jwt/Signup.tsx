@@ -115,9 +115,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="card max-w-[370px] w-full">
+    <div className="card max-w-[420px] w-full">
       <form
-        className="card-body flex flex-col gap-5 p-10"
+        className="card-body flex flex-col gap-5 p-5 md:p-10"
         noValidate
         onSubmit={formik.handleSubmit}
       >
@@ -149,19 +149,19 @@ const Signup = () => {
           <button
             type="button"
             onClick={handleGoogleSignup}
-            className="btn btn-light btn-sm justify-center"
+            className="btn btn-light btn-sm justify-center p-1 md:p-2"
           >
             <img
               src={toAbsoluteUrl('/media/brand-logos/google.svg')}
               className="size-3.5 shrink-0"
             />
-            Use Google
+            Sign Up with Google
           </button>
 
           <button
             type="button"
             onClick={handleAppleSignup}
-            className="btn btn-light btn-sm justify-center"
+            className="btn btn-light btn-sm justify-center px-1 md:p-2"
           >
             <img
               src={toAbsoluteUrl('/media/brand-logos/apple-black.svg')}
@@ -171,7 +171,7 @@ const Signup = () => {
               src={toAbsoluteUrl('/media/brand-logos/apple-white.svg')}
               className="size-3.5 shrink-0 light:hidden"
             />
-            Use Apple
+            Sign Up with Apple
           </button>
         </div>
 
