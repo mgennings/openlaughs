@@ -1,7 +1,7 @@
 import { toAbsoluteUrl } from '@/utils';
 import { MiscCreateTeam } from '@/partials/misc';
 import { BlockList } from '@/pages/account/security/privacy-settings';
-import { Highlights, Teams } from '@/pages/dashboards/demo1';
+import { Highlights, Venues } from '@/pages/dashboards/demo1';
 import { ManageData } from '@/pages/dashboards/demo2/blocks';
 import { Integrations } from './blocks';
 
@@ -50,7 +50,7 @@ const Demo3Content = () => {
 
       <div className="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div className="lg:col-span-2">
-          <Teams />
+          <Venues />
         </div>
 
         <div className="lg:col-span-1">

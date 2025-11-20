@@ -12,7 +12,27 @@ import {
 } from '@/components/ui/select';
 
 const fetchEarningsChart = () => {
-  return axios.get<number[]>(`${import.meta.env.VITE_APP_API_URL}/sales/index`);
+  // return axios.get<number[]>(`${import.meta.env.VITE_APP_API_URL}/sales/index`);
+
+  // Generate realistic comedy venue earnings data
+  // Comedy shows tend to peak in summer (Jun-Aug) and winter holidays (Dec)
+  // with lower attendance in Jan-Feb and slower spring months
+  return {
+    data: [
+      28, // Jan - Post-holiday slump
+      32, // Feb - Still slow, Valentine's shows help
+      45, // Mar - Spring picking up
+      52, // Apr - Tax returns, people spending more
+      58, // May - Nice weather, more shows
+      72, // Jun - Summer season starts strong
+      85, // Jul - Peak summer, festivals, tourists
+      78, // Aug - Still strong summer
+      65, // Sep - Back to school dip
+      68, // Oct - Halloween events boost
+      55, // Nov - Pre-holiday slowdown
+      82, // Dec - Holiday parties, corporate events
+    ],
+  };
 };
 
 const EarningsChart = () => {
@@ -33,7 +53,10 @@ const EarningsChart = () => {
   ];
 
   useEffect(() => {
-    fetchEarningsChart().then(value => setCharData(value.data));
+    const data = fetchEarningsChart();
+    if (data && 'data' in data) {
+      setCharData(data.data);
+    }
   }, []);
 
   const options: ApexOptions = {
@@ -114,8 +137,7 @@ const EarningsChart = () => {
       enabled: true,
       custom({ series, seriesIndex, dataPointIndex, w }) {
         const number = parseInt(series[seriesIndex][dataPointIndex]) * 1000;
-        const month = w.globals.seriesX[seriesIndex][dataPointIndex];
-        const monthName = categories[month];
+        const monthName = categories[dataPointIndex];
 
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
@@ -124,12 +146,29 @@ const EarningsChart = () => {
 
         const formattedNumber = formatter.format(number);
 
+        // Calculate month-over-month growth
+        let growthBadge = '';
+        if (dataPointIndex > 0) {
+          const currentValue = parseInt(series[seriesIndex][dataPointIndex]);
+          const previousValue = parseInt(
+            series[seriesIndex][dataPointIndex - 1],
+          );
+          const growthPercent = (
+            ((currentValue - previousValue) / previousValue) *
+            100
+          ).toFixed(1);
+          const isPositive = parseFloat(growthPercent) >= 0;
+          const badgeClass = isPositive ? 'badge-success' : 'badge-danger';
+          const sign = isPositive ? '+' : '';
+          growthBadge = `<span class="badge badge-outline ${badgeClass} badge-xs">${sign}${growthPercent}%</span>`;
+        }
+
         return `
           <div class="flex flex-col gap-2 p-3.5">
-            <div class="font-medium text-2sm text-gray-600">${monthName}, 2024 Sales</div>
+            <div class="font-medium text-2sm text-gray-600">${monthName}, 2025 Earnings</div>
             <div class="flex items-center gap-1.5">
               <div class="font-semibold text-md text-gray-900">${formattedNumber}</div>
-              <span class="badge badge-outline badge-success badge-xs">+24%</span>
+              ${growthBadge}
             </div>
           </div>
           `;

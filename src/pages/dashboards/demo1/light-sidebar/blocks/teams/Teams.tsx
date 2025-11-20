@@ -141,54 +141,54 @@ const Teams = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const fetchTeams = async (params: TDataGridRequestParams) => {
-    try {
-      const queryParams = new URLSearchParams();
+  // const fetchTeams = async (params: TDataGridRequestParams) => {
+  //   try {
+  //     const queryParams = new URLSearchParams();
 
-      queryParams.set('page', String(params.pageIndex + 1)); // Page is 1-indexed on server
-      queryParams.set('items_per_page', String(params.pageSize));
+  //     queryParams.set('page', String(params.pageIndex + 1)); // Page is 1-indexed on server
+  //     queryParams.set('items_per_page', String(params.pageSize));
 
-      if (params.sorting?.[0]?.id) {
-        queryParams.set('sort', params.sorting[0].id);
-        queryParams.set('order', params.sorting[0].desc ? 'desc' : 'asc');
-      }
+  //     if (params.sorting?.[0]?.id) {
+  //       queryParams.set('sort', params.sorting[0].id);
+  //       queryParams.set('order', params.sorting[0].desc ? 'desc' : 'asc');
+  //     }
 
-      if (searchQuery.trim().length > 0) {
-        queryParams.set('query', searchQuery);
-      }
+  //     if (searchQuery.trim().length > 0) {
+  //       queryParams.set('query', searchQuery);
+  //     }
 
-      // Column filters
-      if (params.columnFilters) {
-        params.columnFilters.forEach(({ id, value }) => {
-          if (value !== undefined && value !== null) {
-            queryParams.set(`filter[${id}]`, String(value)); // Properly serialize filter values
-          }
-        });
-      }
+  //     // Column filters
+  //     if (params.columnFilters) {
+  //       params.columnFilters.forEach(({ id, value }) => {
+  //         if (value !== undefined && value !== null) {
+  //           queryParams.set(`filter[${id}]`, String(value)); // Properly serialize filter values
+  //         }
+  //       });
+  //     }
 
-      const response = await axios.get<TeamsQueryApiResponse>(
-        `${import.meta.env.VITE_APP_API_URL}/teams/query?${queryParams.toString()}`,
-      );
+  //     const response = await axios.get<TeamsQueryApiResponse>(
+  //       `${import.meta.env.VITE_APP_API_URL}/teams/query?${queryParams.toString()}`,
+  //     );
 
-      return {
-        data: response.data.data, // Server response data
-        totalCount: response.data.pagination.total, // Total count for pagination
-      };
-    } catch (error) {
-      toast(`Connection Error`, {
-        description: `An error occurred while fetching data. Please try again later`,
-        action: {
-          label: 'Ok',
-          onClick: () => console.log('Ok'),
-        },
-      });
+  //     return {
+  //       data: response.data.data, // Server response data
+  //       totalCount: response.data.pagination.total, // Total count for pagination
+  //     };
+  //   } catch (error) {
+  //     toast(`Connection Error`, {
+  //       description: `An error occurred while fetching data. Please try again later`,
+  //       action: {
+  //         label: 'Ok',
+  //         onClick: () => console.log('Ok'),
+  //       },
+  //     });
 
-      return {
-        data: [],
-        totalCount: 0,
-      };
-    }
-  };
+  //     return {
+  //       data: [],
+  //       totalCount: 0,
+  //     };
+  //   }
+  // };
 
   const handleRowSelection = (state: RowSelectionState) => {
     const selectedRowIds = Object.keys(state);
@@ -259,7 +259,12 @@ const Teams = () => {
     <DataGrid
       columns={columns}
       serverSide={true}
-      onFetchData={fetchTeams}
+      onFetchData={async () => {
+        return {
+          data: [],
+          totalCount: 0,
+        };
+      }}
       rowSelection={true}
       getRowId={(row: any) => row.id}
       onRowSelectionChange={handleRowSelection}

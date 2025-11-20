@@ -121,8 +121,11 @@ const PlatformStats = () => {
   if (loading) {
     return (
       <div className="card h-full">
-        <div className="card-header">
+        <div className="card-header flex-col items-start gap-1">
           <h3 className="card-title">Platform Statistics</h3>
+          <div className="text-sm text-gray-600">
+            Real-time platform metrics
+          </div>
         </div>
         <div className="card-body flex items-center justify-center">
           <div className="spinner-border text-primary" role="status">
@@ -135,7 +138,7 @@ const PlatformStats = () => {
 
   return (
     <div className="card h-full">
-      <div className="card-header">
+      <div className="card-header flex-col items-start gap-1">
         <h3 className="card-title">Platform Statistics</h3>
         <div className="text-sm text-gray-600">Real-time platform metrics</div>
       </div>
@@ -144,65 +147,65 @@ const PlatformStats = () => {
           {/* Total Users */}
           <Link
             to="/account/members/team-members"
-            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex flex-col gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <div className="flex items-center justify-center size-12 rounded-lg bg-primary/10">
-              <KeenIcon icon="people" className="text-2xl text-primary" />
-            </div>
-            <div>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10">
+                <KeenIcon icon="people" className="text-xl text-primary" />
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalUsers}
               </div>
-              <div className="text-sm text-gray-600">Total Users</div>
             </div>
+            <div className="text-sm text-gray-600">Total Users</div>
           </Link>
 
           {/* Total Shows */}
           <Link
             to="/promoter/shows"
-            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex flex-col gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <div className="flex items-center justify-center size-12 rounded-lg bg-success/10">
-              <KeenIcon icon="calendar" className="text-2xl text-success" />
-            </div>
-            <div>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center size-10 rounded-lg bg-success/10">
+                <KeenIcon icon="calendar" className="text-xl text-success" />
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalShows}
               </div>
-              <div className="text-sm text-gray-600">Total Shows</div>
             </div>
+            <div className="text-sm text-gray-600">Total Shows</div>
           </Link>
 
           {/* Total Venues */}
           <Link
             to="/promoter/venues"
-            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex flex-col gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <div className="flex items-center justify-center size-12 rounded-lg bg-warning/10">
-              <KeenIcon icon="geolocation" className="text-2xl text-warning" />
-            </div>
-            <div>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center size-10 rounded-lg bg-warning/10">
+                <KeenIcon icon="geolocation" className="text-xl text-warning" />
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalVenues}
               </div>
-              <div className="text-sm text-gray-600">Total Venues</div>
             </div>
+            <div className="text-sm text-gray-600">Total Venues</div>
           </Link>
 
           {/* Comedians Count */}
           <Link
             to="/comedians"
-            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex flex-col gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <div className="flex items-center justify-center size-12 rounded-lg bg-info/10">
-              <KeenIcon icon="microphone-2" className="text-2xl text-info" />
-            </div>
-            <div>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center size-10 rounded-lg bg-info/10">
+                <KeenIcon icon="microphone-2" className="text-xl text-info" />
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalComedians}
               </div>
-              <div className="text-sm text-gray-600">Comedians</div>
             </div>
+            <div className="text-sm text-gray-600">Comedians</div>
           </Link>
         </div>
 

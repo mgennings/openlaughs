@@ -1,4 +1,4 @@
-import { Teams } from '@/pages/dashboards/demo1';
+import { Venues } from '@/pages/dashboards/demo1';
 import { TeamInfo } from '@/pages/account/members/team-info';
 import { MiscFaq } from '@/partials/misc';
 import { Options } from './blocks';
@@ -21,7 +21,7 @@ const Demo5Content = () => {
       </div>
 
       <div className="grid lg:grid-cols-1 gap-5 lg:gap-7.5 items-stretch">
-        <Teams />
+        <Venues />
 
         <MiscFaq />
       </div>

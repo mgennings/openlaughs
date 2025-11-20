@@ -190,6 +190,12 @@ export const DataGridProvider = <TData extends object>(
     manualPagination: mergedProps.serverSide,
     manualSorting: mergedProps.serverSide,
     manualFiltering: mergedProps.serverSide,
+    columnResizeMode: 'onChange',
+    defaultColumn: {
+      size: 150,
+      minSize: 20,
+      maxSize: Number.MAX_SAFE_INTEGER,
+    },
   });
 
   return (

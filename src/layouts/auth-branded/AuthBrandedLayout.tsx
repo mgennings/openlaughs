@@ -26,7 +26,7 @@ const Layout = () => {
           <Outlet />
         </div>
 
-        <div className="lg:rounded-xl lg:border lg:border-gray-200 lg:m-5 order-1 lg:order-2 bg-top xxl:bg-center xl:bg-cover bg-no-repeat branded-bg">
+        <div className="lg:rounded-xl lg:border lg:border-gray-200 lg:m-5 order-1 lg:order-2 bg-top xxl:bg-center xl:bg-cover bg-no-repeat branded-bg flex items-center">
           <div className="flex flex-col p-8 mx-auto lg:p-16 gap-4 bg-black/95 card max-w-[420px] w-full">
             <Link to="/">
               <img

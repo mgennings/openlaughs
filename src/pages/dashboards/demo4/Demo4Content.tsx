@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { BlockList } from '@/pages/account/security/privacy-settings';
 import { MiscCreateTeam } from '@/partials/misc';
 import { toAbsoluteUrl } from '@/utils';
-import { Highlights, Teams } from '..';
+import { Highlights, Venues } from '..';
 
 const Demo4Content = () => {
   return (
@@ -49,7 +49,7 @@ const Demo4Content = () => {
 
       <div className="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div className="lg:col-span-2">
-          <Teams />
+          <Venues />
         </div>
         <div className="lg:col-span-1">
           <BlockList

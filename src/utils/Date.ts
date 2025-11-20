@@ -17,5 +17,5 @@ export const formatIsoDate = (isoDate: string) => {
   const day = date.getDate();
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
-  return `${day} ${month}, ${year}`;
+  return `${month} ${day}, ${year}`;
 };

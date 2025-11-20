@@ -5,7 +5,7 @@ import {
   Highlights,
   PlatformStats,
   TeamMeeting,
-  Teams,
+  Venues,
 } from './blocks';
 import { ShowsWidget } from '@/partials/shows';
 
@@ -45,7 +45,7 @@ const Demo1LightSidebarContent = () => {
         </div>
 
         <div className="lg:col-span-2">
-          <Teams />
+          <Venues />
         </div>
       </div>
 

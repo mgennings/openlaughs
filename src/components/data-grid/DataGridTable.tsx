@@ -83,7 +83,7 @@ const DataGridTable = <TData,>() => {
                     bodyCellSpacing,
                     cellBorder && 'border-e',
                     'align-middle [&:has([role=checkbox])]:pe-0',
-                    cell.column.columnDef.meta?.cellClassName,
+                    cell.column.columnDef.meta?.className,
                   )}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

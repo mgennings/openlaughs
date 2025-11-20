@@ -2,7 +2,7 @@ import {
   BlockList,
   ReportSettings,
 } from '@/pages/account/security/privacy-settings';
-import { EntryCallout, Teams } from '@/pages/dashboards/demo1';
+import { EntryCallout, Venues } from '@/pages/dashboards/demo1';
 import { Integrations, ManageData, MyBalance, Options } from './blocks';
 
 const Demo2Content = () => {
@@ -45,7 +45,7 @@ const Demo2Content = () => {
 
       <div className="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div className="lg:col-span-2">
-          <Teams />
+          <Venues />
         </div>
 
         <div className="lg:col-span-1">
