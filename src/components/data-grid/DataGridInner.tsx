@@ -16,6 +16,7 @@ const DataGridInner = () => {
         props.layout?.card &&
           `
         card
+        w-full
         [&>[data-container]]:border-x-0
         [&>[data-container]]:rounded-none
         [&>[data-container]>[data-table]>thead>tr>th:first-child]:px-5
