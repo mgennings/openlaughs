@@ -195,7 +195,7 @@ const FanDashboardContent = () => {
                 className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:shadow-sm transition-all"
               >
                 <KeenIcon
-                  icon="profile-circle"
+                  icon="users"
                   className="text-2xl text-primary mt-0.5"
                 />
                 <div>
@@ -231,7 +231,7 @@ const FanDashboardContent = () => {
                 className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:shadow-sm transition-all"
               >
                 <KeenIcon
-                  icon="profile-user"
+                  icon="profile-circle"
                   className="text-2xl text-primary mt-0.5"
                 />
                 <div>
