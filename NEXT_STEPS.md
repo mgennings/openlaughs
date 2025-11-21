@@ -1,188 +1,297 @@
 # OpenLaughs - Next Steps & Strategic Roadmap
 
-## Current State (As of Nov 18, 2025)
+> **Last Updated**: November 21, 2025  
+> **Phase 1 Status**: ✅ COMPLETE  
+> **Next Priority**: User Engagement Features (Favorites, RSVPs, Reviews)
+
+---
+
+## 📊 Quick Summary
+
+### ✅ What's Complete (Phase 1)
+
+- **Comedian Management**: Full CRUD system with 25+ fields, search, profiles
+- **Role-Based Dashboards**: Infrastructure, Fan Dashboard, Admin Dashboard
+- **Show Management**: Link multiple comedians, full CRUD, display
+- **Venue Management**: Complete CRUD with Google Places integration
+- **Auth & Onboarding**: Role selection working for 4 user types
+
+### ⚠️ What's In Progress
+
+- **Comedian Dashboard**: Falls back to Fan Dashboard (TODO)
+- **Promoter Dashboard**: Shows Admin Dashboard (TODO)
+
+### 🎯 What's Missing (Phase 2 - Critical)
+
+- **Favorites/Follow System**: Let fans follow comedians and venues
+- **RSVP/Save Shows**: Let fans track shows they want to attend
+- **Reviews & Ratings**: Let fans rate and review shows/comedians
+- **Recently Viewed**: Help users return to what they were browsing
+
+---
+
+## Current State (As of Nov 21, 2025)
 
 ### ✅ Recently Completed Features
 
-- Show display components with links and age requirements
-- Dashboard shows widget integration
-- Show deletion capability
-- Modal-based create flows for Shows and Venues
-- Lambda function for automatic image resizing
-- User onboarding with role selection (Fan, Comedian, Promoter, Admin)
-- UserProfile database model with role field
+#### Core Infrastructure
 
-### 🎯 Current Challenge
+- ✅ User onboarding with role selection (Fan, Comedian, Promoter, Admin)
+- ✅ UserProfile database model with role field
+- ✅ Lambda function for automatic image resizing
+- ✅ `useUserProfile()` hook for role-based features
+- ✅ Dashboard Switcher component for testing different role views
 
-The dashboard is currently designed from an **admin/promoter perspective** with
-business-focused widgets (earnings, social stats, team meetings) that aren't
-relevant to the average user (Fans). We need role-specific dashboards.
+#### Comedian Management System (COMPLETE) 🎤
+
+- ✅ Comedian GraphQL schema with 25+ fields
+- ✅ Comedian CRUD operations (Create, Read, Update, Delete)
+- ✅ Comedian directory/listing page with search
+- ✅ Comedian detail/profile pages
+- ✅ Link comedians to shows (via `comedianIDs` array)
+- ✅ Display comedians on show detail pages
+- ✅ Image upload for comedian profiles
+- ✅ Social media validation and display
+- ✅ Admin/promoter authorization controls
+
+#### Role-Based Dashboards (FOUNDATION COMPLETE) 📊
+
+- ✅ Dashboard routing based on user role
+- ✅ Fan Dashboard with "Coming Soon" feature preview
+- ✅ Admin Dashboard with Platform Statistics widget
+- ✅ Loading and error states
+- ⚠️ Comedian Dashboard (falls back to Fan Dashboard)
+- ⚠️ Promoter Dashboard (shows Admin Dashboard)
+
+#### Show Management (COMPLETE)
+
+- ✅ Show creation with venue and comedian selection
+- ✅ Show editing and deletion
+- ✅ Show detail pages with comedian listings
+- ✅ Show display widgets for dashboards
+- ✅ Age restriction and ticket URL support
+
+#### Venue Management (COMPLETE)
+
+- ✅ Venue creation and editing
+- ✅ Venue listing/directory page
+- ✅ Venue detail pages
+- ✅ Google Places integration
+- ✅ Multiple venue images support
+
+### 🎯 Current Focus Areas
+
+**Next Priority**: User engagement features to make the platform useful for fans
+
+- Favorites/Follow system
+- RSVP/Attendance tracking
+- Reviews & Ratings
+- Search & Discovery enhancements
 
 ---
 
 ## Critical Missing Features
 
-### 1. **Comedian Management System** 🎤
+### 1. **Comedian Management System** 🎤 ✅ COMPLETE
 
-**Problem**: No way for admins/promoters to add comedians to the platform or for
-comedians to create their own profiles.
+**Status**: Fully implemented and operational!
 
-**What's Needed**:
+**What's Built**:
 
-- [ ] Comedian data model (already exists in schema?)
-- [ ] Comedian creation form (admin/promoter access)
-- [ ] Comedian self-registration/profile creation
-- [ ] Comedian profile pages (public-facing)
-- [ ] Comedian listing/directory page
-- [ ] Search and filter comedians
-- [ ] Link comedians to shows
-- [ ] Comedian availability management
+- [x] Comedian data model (separate entity with 25+ fields)
+- [x] Comedian creation form (admin/promoter access)
+- [x] Comedian update/edit form with image upload
+- [x] Comedian profile pages (public-facing with all details)
+- [x] Comedian listing/directory page with responsive grid
+- [x] Search and filter comedians (real-time search)
+- [x] Link comedians to shows (via `comedianIDs` array)
+- [x] Comedian availability management
+- [x] Social media validation and links
+- [x] Comedy styles, performance types, content ratings
+- [x] Verified and Featured badges
+- [x] Authorization controls (admin/promoter CRUD, public read)
 
-**Questions to Answer**:
+**Design Decisions Made**:
 
-- Can comedians self-register, or only admins/promoters can add them?
-- Should comedians be UserProfiles with role='comedian' or a separate Comedian
-  model?
-- How do we handle comedian photos, bios, social links, etc.?
+- ✅ Comedian is a separate entity linked to UserProfile (cleaner architecture)
+- ✅ Admins/Promoters can create comedian profiles
+- ✅ Comedians can later "claim" their profile via `userProfileId`
+- ✅ Shows support multiple comedians (headliner + openers)
+- ✅ Profile images stored in S3 with Lambda resizing
 
-### 2. **Venue Management (Partially Complete)**
+**Documentation**: See `COMEDIAN_BUILD_SUMMARY.md` for full details
 
-- [x] Venue creation (modal)
+### 2. **Venue Management** ✅ COMPLETE
+
+- [x] Venue creation (modal with Google Places integration)
 - [x] Venue editing
 - [x] Venue listing/directory page
 - [x] Venue detail pages
-- [ ] Venue photos and details
-- [ ] Link venues to promoters
-- [ ] Venue search and filters
+- [x] Venue photos (multiple images support)
+- [x] Venue details (address, contact info, open mic status)
+- [x] Google Reviews integration
+- [ ] Link venues to promoters (ownership tracking - TODO)
+- [ ] Venue search and filters (basic exists, advanced TODO)
 
-### 3. **Show Management (Partially Complete)**
+### 3. **Show Management** ✅ MOSTLY COMPLETE
 
-- [x] Show creation (modal)
+- [x] Show creation (modal with venue and comedian selection)
 - [x] Show display widgets
 - [x] Show detail pages
 - [x] Show deletion
 - [x] Show editing
-- [ ] Link shows to comedians (not just venues)
-- [ ] Show ticketing/RSVP system
-- [ ] Show capacity and availability
-- [ ] Show status (upcoming, past, cancelled)
+- [x] Link shows to comedians (multiple comedians per show)
+- [x] Display comedians on show pages with clickable profiles
+- [x] Age restriction support
+- [x] Ticket URL integration
+- [ ] Show ticketing/RSVP system (not built yet)
+- [ ] Show capacity and availability tracking
+- [ ] Show status filtering (upcoming, past, cancelled)
 
 ---
 
-## Role-Based Dashboard Strategy
+## Role-Based Dashboard Strategy ⚠️ PARTIALLY COMPLETE
 
-### Current Issue
+### Status
 
-All users see the same dashboard regardless of their role. The current dashboard
-is business-focused and not relevant to Fans (your primary user base).
+✅ **Infrastructure Complete**: Role-based routing and `useUserProfile()` hook
+✅ **Fan Dashboard**: Built with "Coming Soon" feature preview ✅ **Admin
+Dashboard**: Enhanced with Platform Statistics widget ⚠️ **Comedian Dashboard**:
+Falls back to Fan Dashboard (TODO) ⚠️ **Promoter Dashboard**: Shows Admin
+Dashboard (TODO)
 
-### Proposed Solution: Role-Specific Dashboards
+### Implemented Dashboards
 
-#### 🎭 **FAN Dashboard** (Priority: HIGH)
+#### 🎭 **FAN Dashboard** ✅ FOUNDATION COMPLETE
 
 **Focus**: Discovery, personalization, engagement
 
-**Widgets to Build**:
+**Widgets Built**:
 
-- **Upcoming Shows** - Shows near their location or at favorited venues
-- **Favorited Comedians** - Quick access to comedians they follow
-- **Recommended Shows** - Based on location, preferences, followed comedians
-- **Recently Viewed** - Shows/Comedians they've checked out
-- **Saved Venues** - Their favorite comedy clubs
-- **Ticket Reminders** - Shows they plan to attend
-- **Quick Stats Card**:
-  - Shows attended
-  - Comedians following
-  - Reviews written
-  - Venues saved
+- [x] **Welcome Banner** - Friendly introduction to the platform
+- [x] **Quick Stats Card** (placeholders for future features):
+  - Shows attended (ready for data)
+  - Comedians following (ready for data)
+  - Favorites (ready for data)
+  - Saved shows (ready for data)
+- [x] **Upcoming Shows Widget** - Displays all shows
+- [x] **Featured Comedians Widget** - Shows featured comedians
+- [x] **"Coming Soon" Preview** - Shows fans what's being built next
 
-**Missing Data Models for Fans**:
+**Widgets to Build** (Need Data Models First):
 
-- [ ] User favorites (comedians, venues)
+- [ ] **Favorited Comedians** - Quick access to comedians they follow
+- [ ] **Recommended Shows** - Based on location, preferences, followed comedians
+- [ ] **Recently Viewed** - Shows/Comedians they've checked out
+- [ ] **Saved Venues** - Their favorite comedy clubs
+- [ ] **Ticket Reminders** - Shows they plan to attend
+
+**Missing Data Models for Fans** (CRITICAL NEXT STEP):
+
+- [ ] User favorites (comedians, venues, shows)
 - [ ] Show attendance/RSVPs
 - [ ] User reviews/ratings
-- [ ] View history
+- [ ] View history/recently viewed
 
 ---
 
-#### 🎤 **COMEDIAN Dashboard** (Priority: MEDIUM)
+#### 🎤 **COMEDIAN Dashboard** ⚠️ TODO (Priority: MEDIUM)
+
+**Status**: Currently falls back to Fan Dashboard
 
 **Focus**: Career management, bookings, audience engagement
 
 **Widgets to Build**:
 
-- **My Upcoming Shows** - Their booked performances (chronological)
-- **Performance Stats**:
-  - Total shows completed
-  - Average audience size
-  - Average rating
-  - Profile views this month
-- **Booking Requests** - From promoters (if we build booking system)
-- **Recent Activity Feed**:
-  - New followers
-  - Reviews received
-  - Comments on shows
-- **Profile Completeness** - Encourage filling out bio, photos, etc.
-- **Quick Actions**:
+- [ ] **My Upcoming Shows** - Their booked performances (chronological)
+  - CAN BUILD NOW: Query shows where `comedianIDs` contains their comedian ID
+- [ ] **Performance Stats**:
+  - Total shows completed (can count from shows)
+  - Average audience size (need attendance tracking)
+  - Average rating (need reviews system)
+  - Profile views this month (need analytics)
+- [ ] **Profile Completeness Meter** - Encourage filling out bio, photos, etc.
+  - CAN BUILD NOW: Check which Comedian fields are filled
+- [ ] **Quick Actions Card**:
   - Update availability
   - View public profile
-  - Respond to bookings
+  - Edit profile
+- [ ] **Booking Requests** - From promoters (requires booking system)
+- [ ] **Recent Activity Feed**:
+  - New followers (requires follower system)
+  - Reviews received (requires review system)
+  - Comments on shows (requires comments system)
 
-**Missing Features for Comedians**:
+**Prerequisites** (What's Needed):
 
-- [ ] Comedian profiles (bio, photos, socials, style/tags)
-- [ ] Availability calendar
+- [x] Comedian profiles exist (DONE)
+- [ ] Follower system (users can follow comedians)
 - [ ] Booking request system
-- [ ] Follower system
-- [ ] Analytics (profile views, fan engagement)
+- [ ] Reviews/ratings system
+- [ ] Analytics tracking (profile views, engagement)
 
 ---
 
-#### 📈 **PROMOTER Dashboard** (Priority: MEDIUM)
+#### 📈 **PROMOTER Dashboard** ⚠️ TODO (Priority: MEDIUM)
+
+**Status**: Currently shows Admin Dashboard (not ideal)
 
 **Focus**: Venue/show management, comedian booking, analytics
 
 **Widgets to Build**:
 
-- **My Venues** - Quick access to venues they manage
-- **Upcoming Shows** - Shows at their venues
-- **Venue Performance**:
-  - Ticket sales (if we add ticketing)
-  - Attendance rates
-  - Revenue trends
-- **Comedian Roster** - Talent they've worked with or booked
-- **Show Management** - Create/edit shows quickly
-- **Booking Calendar** - Visualize show schedule
-- **Quick Actions**:
-  - Create show
-  - Create venue
-  - Contact comedian
-  - View analytics
+- [ ] **My Venues** - Quick access to venues they created/manage
+  - CAN BUILD NOW: Query venues where `createdBy` matches user
+- [ ] **Upcoming Shows** - Shows at their venues
+  - CAN BUILD NOW: Query shows where venue is in their venues list
+- [ ] **Quick Actions Card**:
+  - Create show button
+  - Create venue button
+  - Browse comedians button
+- [ ] **Show Management Calendar** - Visual calendar of booked shows
+  - CAN BUILD NOW: Display shows in calendar format
+- [ ] **Comedian Roster** - Comedians they've worked with
+  - CAN BUILD NOW: Get unique comedians from their shows
+- [ ] **Venue Performance** (requires additional systems):
+  - Ticket sales (need ticketing system)
+  - Attendance rates (need RSVP/attendance tracking)
+  - Revenue trends (need payment tracking)
 
 **Current State**:
 
-- Have venues and shows partially implemented
-- Missing: Analytics, booking system, comedian connections
+- [x] Venues fully implemented
+- [x] Shows fully implemented
+- [x] Comedian connections working
+- [ ] Need promoter-specific filtering and views
+- [ ] Missing: Analytics, booking system, payment tracking
 
 ---
 
-#### ⚙️ **ADMIN Dashboard** (Priority: LOW - Current dashboard works)
+#### ⚙️ **ADMIN Dashboard** ✅ ENHANCED & WORKING
 
 **Focus**: Platform management, content moderation, system health
 
-**Keep Current Widgets + Add**:
+**Current Widgets**:
 
-- **Platform Stats**:
-  - Total users (by role)
+- [x] **Platform Statistics** (real-time):
+  - Total users (with breakdown by role)
   - Total shows
   - Total venues
   - Total comedians
-- **Recent Activity** - New signups, shows created, etc.
-- **Content Moderation** - Flagged content queue
-- **System Health** - Error logs, performance metrics
-- **User Management** - Quick access to manage users
-- **Quick Actions**:
-  - Create any content type
+- [x] **Channel Stats** - Platform activity metrics
+- [x] **Earnings Chart** (can be repurposed for platform analytics)
+- [x] **Team Meetings** (can be repurposed for admin tasks)
+- [x] **Shows Widget** - View all shows
+- [x] **Venues Widget** - View all venues
+
+**Future Enhancements** (Nice to Have):
+
+- [ ] **Recent Activity Feed** - New signups, shows created, etc.
+- [ ] **Content Moderation Queue** - Flagged content review
+- [ ] **System Health Dashboard** - Error logs, performance metrics
+- [ ] **User Management Panel** - Quick access to manage users
+- [ ] **Quick Actions Widget**:
+  - Create show/venue/comedian
   - Moderate content
   - Manage users
 
@@ -190,45 +299,58 @@ is business-focused and not relevant to Fans (your primary user base).
 
 ## Technical Implementation Plan
 
-### Phase 1: Core Data Models & Comedian System (Foundation)
+### Phase 1: Core Data Models & Comedian System ✅ COMPLETE
 
-**Priority: CRITICAL** - Can't build much without this
+**Status**: Fully implemented and operational!
 
-1. **Define Comedian Model** (or use UserProfile with role='comedian')
+1. **Comedian Model** ✅
 
    ```graphql
-   type Comedian {
+   type Comedian @model {
      id: ID!
-     userId: ID! # Link to UserProfile
      stageName: String!
      bio: String
      profileImageKey: String
-     genres: [String]
-     socialLinks: AWSJSON
-     yearsActive: Int
+     firstName: String
+     lastName: String
+     pronouns: String
      basedIn: String
-     createdAt: AWSDateTime!
-     updatedAt: AWSDateTime!
+     isActive: Boolean
+     availability: String
+     comedyStyles: [String]
+     performanceTypes: [String]
+     contentRating: String
+     performingSince: Int
+     headline: String
+     # ... 25+ total fields including social media, contact info
+     userProfileId: ID
+     isVerified: Boolean
+     isFeatured: Boolean
+     status: String
+     createdBy: String
    }
    ```
 
-2. **Comedian CRUD Operations**
+2. **Comedian CRUD Operations** ✅
 
-   - [ ] Create comedian form (admin/promoter)
-   - [ ] Comedian self-registration flow
-   - [ ] Edit comedian profile
-   - [ ] Delete comedian (admin only)
+   - [x] Create comedian form (admin/promoter) - Full 25+ field form
+   - [x] Edit comedian profile - Complete update form with image upload
+   - [x] Delete comedian (admin/promoter via auth rules)
+   - [ ] Comedian self-registration flow (TODO - low priority)
 
-3. **Comedian Directory**
+3. **Comedian Directory** ✅
 
-   - [ ] List all comedians page
-   - [ ] Search/filter functionality
-   - [ ] Comedian detail/profile pages
+   - [x] List all comedians page with responsive grid
+   - [x] Real-time search functionality
+   - [x] Comedian detail/profile pages with all info
+   - [x] Verified and Featured badges
+   - [x] Social media integration
 
-4. **Link Comedians to Shows**
-   - [ ] Update Show model to include comedian references
-   - [ ] UI for selecting comedians when creating shows
-   - [ ] Display comedians on show detail pages
+4. **Link Comedians to Shows** ✅
+   - [x] Update Show model to include `comedianIDs: [ID]` array
+   - [x] UI for selecting multiple comedians when creating shows
+   - [x] Display comedians on show detail pages with profile cards
+   - [x] Bidirectional navigation (show→comedian, comedian→shows)
 
 ### Phase 2: User Engagement Features (Fan Focus)
 
@@ -258,40 +380,50 @@ is business-focused and not relevant to Fans (your primary user base).
    - [ ] View history
    - [ ] Personalized recommendations
 
-### Phase 3: Role-Based Dashboards
+### Phase 3: Role-Based Dashboards ⚠️ PARTIALLY COMPLETE
 
 **Priority: HIGH** - Different experiences for different users
 
-1. **Infrastructure**
+1. **Infrastructure** ✅ COMPLETE
 
-   - [ ] Create `useUserProfile()` hook to fetch current user's profile + role
-   - [ ] Create dashboard routing based on role
-   - [ ] Design reusable dashboard widget components
+   - [x] Create `useUserProfile()` hook to fetch current user's profile + role
+   - [x] Create dashboard routing based on role (DefaultPage.tsx)
+   - [x] Design reusable dashboard widget components (ShowsWidget,
+         ComediansWidget)
+   - [x] Dashboard Switcher component for testing different roles
 
-2. **Build Fan Dashboard**
+2. **Build Fan Dashboard** ✅ FOUNDATION COMPLETE
 
-   - [ ] Upcoming shows widget
-   - [ ] Favorited comedians widget
-   - [ ] Recommended shows widget
-   - [ ] Quick stats card
-   - [ ] Recently viewed widget
+   - [x] Welcome banner
+   - [x] Quick stats card (placeholders ready for data)
+   - [x] Upcoming shows widget
+   - [x] Featured comedians widget
+   - [x] "Coming Soon" feature preview
+   - [ ] Favorited comedians widget (needs Favorites data model)
+   - [ ] Recommended shows widget (needs algorithm + user preferences)
+   - [ ] Recently viewed widget (needs view history tracking)
+   - [ ] Saved shows widget (needs RSVP data model)
 
-3. **Build Comedian Dashboard**
+3. **Build Comedian Dashboard** ⚠️ TODO
 
-   - [ ] My shows widget
-   - [ ] Performance stats widget
-   - [ ] Recent activity feed
-   - [ ] Profile completeness card
+   - [ ] My shows widget (CAN BUILD NOW - query shows by comedianID)
+   - [ ] Profile completeness card (CAN BUILD NOW - check filled fields)
+   - [ ] Quick actions (edit profile, update availability)
+   - [ ] Performance stats widget (needs attendance/review data)
+   - [ ] Recent activity feed (needs follower/review systems)
 
-4. **Build Promoter Dashboard**
+4. **Build Promoter Dashboard** ⚠️ TODO
 
-   - [ ] My venues widget
-   - [ ] Upcoming shows widget
-   - [ ] Show management tools
-   - [ ] Analytics widgets (if data available)
+   - [ ] My venues widget (CAN BUILD NOW - query by createdBy)
+   - [ ] Upcoming shows widget (CAN BUILD NOW - shows at their venues)
+   - [ ] Quick actions (create show, create venue, browse comedians)
+   - [ ] Show management calendar view
+   - [ ] Analytics widgets (needs attendance/ticketing data)
 
-5. **Enhance Admin Dashboard**
-   - [ ] Platform-wide statistics
+5. **Enhance Admin Dashboard** ✅ COMPLETE
+   - [x] Platform-wide statistics (real-time counts)
+   - [x] Users breakdown by role
+   - [x] Shows, Venues, Comedians counts
    - [ ] User management quick access
    - [ ] Content moderation tools
 
@@ -335,49 +467,114 @@ is business-focused and not relevant to Fans (your primary user base).
 
 ## Immediate Next Steps (Priority Order)
 
-### 1. **Decide on Comedian Model** ⚡
+### ✅ COMPLETED MILESTONES
 
-**Decision needed**:
+- ✅ **Comedian Model** - Separate entity with full feature set (Option B
+  chosen)
+- ✅ **Comedian Management** - Complete CRUD system with search and profiles
+- ✅ **`useUserProfile()` Hook** - Fully implemented and working
+- ✅ **Role-Based Dashboard Infrastructure** - Routing and foundation complete
+- ✅ **Admin Dashboard Enhancement** - Platform statistics widget added
 
-- Option A: Use existing `UserProfile` with `role='comedian'` + add
-  comedian-specific fields
-- Option B: Create separate `Comedian` model linked to `UserProfile`
-- **Recommendation**: Option B - cleaner separation, easier to extend
+---
 
-### 2. **Build Comedian Management** ⚡
+### 🎯 CURRENT PRIORITIES
 
-- Create Comedian GraphQL schema
-- Build comedian creation form (admin/promoter access)
-- Create comedian directory/listing page
-- Build comedian profile pages
-- Link comedians to shows
+### 1. **User Engagement Features** ⚡ CRITICAL
 
-### 3. **Create `useUserProfile()` Hook** ⚡
+**Why Critical**: The Fan Dashboard has placeholders but no actual engagement
+features. Fans need reasons to return to the platform.
 
-```typescript
-// Hook to fetch current user's UserProfile and role
-const useUserProfile = () => {
-  const { currentUser } = useAuthContext();
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [role, setRole] = useState<UserRole | null>(null);
-  const [loading, setLoading] = useState(true);
+**Phase 2A: Favorites System** (Highest Impact)
 
-  // Fetch user's profile from GraphQL using their email
-  // Return { profile, role, loading }
-};
-```
+- [ ] Define data models:
+  ```graphql
+  type FavoriteComedian @model {
+    id: ID!
+    userProfileId: ID!
+    comedianId: ID!
+  }
+  type FavoriteVenue @model {
+    id: ID!
+    userProfileId: ID!
+    venueId: ID!
+  }
+  ```
+- [ ] Add "Follow" button to comedian profiles
+- [ ] Add "Favorite" button to venue pages
+- [ ] Create "My Favorites" sections in Fan Dashboard
+- [ ] Update quick stats to show real counts
 
-### 4. **Build Fan Dashboard** ⚡
+**Phase 2B: RSVP/Save Shows System**
 
-- Start with simplest, most useful widgets for fans
-- Focus on discovery and engagement
-- Make the app actually useful for regular comedy fans
+- [ ] Define data model:
+  ```graphql
+  type ShowRSVP @model {
+    id: ID!
+    userProfileId: ID!
+    showId: ID!
+    status: String # 'interested', 'going', 'attended'
+    createdAt: AWSDateTime!
+  }
+  ```
+- [ ] Add "Save Show" / "I'm Going" buttons to show pages
+- [ ] Create "Saved Shows" widget for Fan Dashboard
+- [ ] Add "Upcoming Events" list to dashboard
 
-### 5. **Iterate on Other Dashboards**
+**Phase 2C: Recently Viewed Tracking**
 
-- Comedian dashboard
-- Promoter dashboard
-- Enhance admin dashboard
+- [ ] Track when users view comedians/shows (client-side or DB)
+- [ ] Create "Recently Viewed" widget for Fan Dashboard
+- [ ] Enable quick return to browsing
+
+**Estimated Time**: 3-4 days for all of Phase 2
+
+---
+
+### 2. **Complete Missing Dashboards** ⚡ MEDIUM PRIORITY
+
+**Comedian Dashboard** (Can Build Now with Existing Data)
+
+- [ ] Create `src/pages/dashboards/comedian/` directory
+- [ ] Build "My Shows" widget (query shows where `comedianIDs` includes user's
+      comedian)
+- [ ] Build "Profile Completeness" meter
+- [ ] Add quick action buttons (edit profile, update availability)
+- [ ] Update DefaultPage.tsx routing
+
+**Estimated Time**: 1 day
+
+**Promoter Dashboard** (Can Build Now with Existing Data)
+
+- [ ] Create `src/pages/dashboards/promoter/` directory
+- [ ] Build "My Venues" widget (query by createdBy)
+- [ ] Build "My Shows" widget (shows at their venues)
+- [ ] Add quick action buttons (create show, create venue)
+- [ ] Create calendar view of upcoming shows
+- [ ] Update DefaultPage.tsx routing
+
+**Estimated Time**: 1-2 days
+
+---
+
+### 3. **Search & Discovery Enhancements** ⚡ MEDIUM PRIORITY
+
+**Global Search**
+
+- [ ] Create unified search bar in header
+- [ ] Search across shows, comedians, venues
+- [ ] Add filters (date, location, comedy style, price)
+- [ ] Create search results page
+
+**Show Filters**
+
+- [ ] Filter by date range
+- [ ] Filter by venue
+- [ ] Filter by comedian
+- [ ] Filter by age restriction
+- [ ] Sort by date, popularity, price
+
+**Estimated Time**: 2-3 days
 
 ---
 
@@ -511,38 +708,118 @@ const useUserProfile = () => {
 
 ## Getting Started with Next Phase
 
-### Recommended First Steps:
+### ✅ Phase 1 Complete! What's Next?
 
-1. **Define Comedian schema** in `amplify/backend/api/openlaughs/schema.graphql`
-2. **Create Comedian management pages** in `src/pages/comedians/`
-3. **Build `useUserProfile()` hook** in `src/hooks/useUserProfile.ts`
-4. **Create role-based dashboard routing** in `src/pages/dashboards/`
-5. **Build Fan dashboard widgets** in `src/pages/dashboards/fan/`
+You've built an excellent foundation:
 
-### Time Estimates (Rough)
+- ✅ Comedian management system (complete CRUD)
+- ✅ Role-based dashboard infrastructure
+- ✅ Show and venue management
+- ✅ User onboarding and profiles
 
-- **Comedian System**: 2-3 days
-- **useUserProfile Hook + Routing**: 0.5 day
-- **Fan Dashboard**: 2-3 days
-- **Other Dashboards**: 1-2 days each
-- **Total for Core Features**: ~2 weeks
+### 🎯 Recommended Next Steps (In Order):
+
+#### Option A: **User Engagement Features** (RECOMMENDED - Highest Impact)
+
+Build the features shown in the Fan Dashboard's "Coming Soon" section:
+
+1. **Favorites System** (3-4 days)
+
+   - Add FavoriteComedian and FavoriteVenue data models
+   - Add "Follow" buttons throughout the app
+   - Build "My Favorites" sections in dashboard
+   - Update quick stats with real data
+
+2. **RSVP/Save Shows** (2-3 days)
+
+   - Add ShowRSVP data model
+   - Add "I'm Going" / "Save" buttons to shows
+   - Build "Saved Shows" widget
+   - Enable event reminders
+
+3. **Recently Viewed** (1 day)
+   - Track viewing history
+   - Build "Recently Viewed" widget
+   - Enable quick return to browsing
+
+**Total: ~1.5 weeks** | **Impact: Makes the platform sticky and useful for
+fans**
+
+---
+
+#### Option B: **Complete Role-Specific Dashboards** (Good - Quick Wins)
+
+Fill in the missing dashboards using existing data:
+
+1. **Comedian Dashboard** (1 day)
+
+   - My Shows widget
+   - Profile completeness meter
+   - Quick actions
+
+2. **Promoter Dashboard** (1-2 days)
+   - My Venues widget
+   - Upcoming shows calendar
+   - Quick actions
+
+**Total: 2-3 days** | **Impact: Better experience for comedians and promoters**
+
+---
+
+#### Option C: **Advanced Search & Discovery** (Medium - User Acquisition)
+
+Make it easier for users to find content:
+
+1. **Global Search** (2 days)
+   - Search bar in header
+   - Search across shows, comedians, venues
+2. **Advanced Filters** (1-2 days)
+   - Date, location, style filters
+   - Sort options
+
+**Total: 3-4 days** | **Impact: Better content discovery**
 
 ---
 
 ## Conclusion
 
-You've made excellent progress on the foundation! The next phase requires:
+### 🎉 Excellent Progress!
 
-1. **Comedian management** (critical missing piece)
-2. **Role-based dashboards** (make app useful for all user types)
-3. **User engagement features** (favorites, RSVPs, etc.)
+You've completed the foundational Phase 1:
 
-Focus on building the **Fan experience first** since they'll be your primary
-user base. Once fans can discover and engage with comedy content effectively,
-you can enhance comedian and promoter tools.
+- ✅ **Complete Comedian Management System** (CRUD, profiles, search)
+- ✅ **Role-Based Dashboard Infrastructure** (routing, hooks, Fan + Admin
+  dashboards)
+- ✅ **Show & Venue Management** (full CRUD with comedian linking)
+- ✅ **Authentication & Onboarding** (role selection working)
 
-Remember: **Start simple, iterate based on real usage patterns.**
+### 🎯 What Should You Build Next?
+
+**Recommendation: Focus on User Engagement Features (Phase 2)**
+
+The platform has great content (comedians, shows, venues) but lacks the
+**engagement loops** that make users want to return:
+
+1. **Favorites/Follow System** - Let fans build their personal comedy network
+2. **RSVP/Save Shows** - Let fans track shows they want to attend
+3. **Recently Viewed** - Help users pick up where they left off
+
+These features will:
+
+- Make the Fan Dashboard actually functional (fill in the placeholders)
+- Increase user retention and return visits
+- Create the foundation for future features (recommendations, notifications)
+
+### Alternative Paths
+
+- **Quick Wins**: Build Comedian and Promoter dashboards (2-3 days)
+- **Discovery Focus**: Build advanced search and filters (3-4 days)
+- **Content**: Add reviews/ratings system for shows and comedians
+
+Remember: **Your current foundation is solid. Focus on engagement to make fans
+love the platform.**
 
 ---
 
-**Last Updated**: November 18, 2025
+**Last Updated**: November 21, 2025  
+**Status**: Phase 1 Complete ✅ | Ready for Phase 2 (User Engagement)

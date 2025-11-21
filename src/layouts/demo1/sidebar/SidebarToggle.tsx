@@ -42,9 +42,13 @@ const SidebarToggle = () => {
 
   const darkToggle = () => {
     return (
-      <div onClick={handleClick}>
+      <div>
         <div className="hidden [html.dark_&]:block">
-          <button className={clsx(buttonBaseClass, 'border-gray-300')}>
+          <button
+            onClick={handleClick}
+            className={clsx(buttonBaseClass, 'border-gray-300')}
+            aria-label="Toggle sidebar"
+          >
             <KeenIcon icon="black-left-line" className={iconClass} />
           </button>
         </div>

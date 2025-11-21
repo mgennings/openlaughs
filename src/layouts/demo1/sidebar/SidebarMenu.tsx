@@ -49,7 +49,7 @@ const SidebarMenu = () => {
       setIsAdmin(prof?.role === 'admin' || false);
     };
     void init();
-  }, [currentUser?.email, execute]);
+  }, [currentUser?.email]);
 
   const { getMenuConfig } = useMenus();
   const menuConfig = getMenuConfig('primary');

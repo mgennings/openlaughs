@@ -15,7 +15,7 @@ const Demo1LightSidebarPage = () => {
         <Toolbar>
           <ToolbarHeading
             title="Dashboard"
-            description="Central Hub for Personal Customization"
+            description="All your comedy shows, venues, and performers at a glance"
           />
           <ToolbarActions>
             <DashboardSwitcher />

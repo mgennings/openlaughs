@@ -152,7 +152,7 @@ const PlatformStats = () => {
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10">
                 <KeenIcon icon="people" className="text-xl text-primary" />
-            </div>
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalUsers}
               </div>
@@ -168,7 +168,7 @@ const PlatformStats = () => {
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center size-10 rounded-lg bg-success/10">
                 <KeenIcon icon="calendar" className="text-xl text-success" />
-            </div>
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalShows}
               </div>
@@ -184,7 +184,7 @@ const PlatformStats = () => {
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center size-10 rounded-lg bg-warning/10">
                 <KeenIcon icon="geolocation" className="text-xl text-warning" />
-            </div>
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalVenues}
               </div>
@@ -200,7 +200,7 @@ const PlatformStats = () => {
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center size-10 rounded-lg bg-info/10">
                 <KeenIcon icon="microphone-2" className="text-xl text-info" />
-            </div>
+              </div>
               <div className="text-2xl font-semibold text-gray-900">
                 {stats.totalComedians}
               </div>

@@ -17,6 +17,7 @@ export const Sidebar = () => {
   const selfRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [scrollableHeight, setScrollableHeight] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const scrollableOffset = 40;
   const [viewportHeight] = useViewport();
   const { pathname, prevPathname } = usePathname();
@@ -35,6 +36,21 @@ export const Sidebar = () => {
   const { mobileSidebarOpen, setSidebarMouseLeave, setMobileSidebarOpen } =
     useDemo1Layout();
   const { layout } = useDemo1Layout();
+
+  // Handle animation state when collapse changes
+  useEffect(() => {
+    if (desktopMode && selfRef.current) {
+      setIsAnimating(true);
+      // Force mouse to be considered "left" when collapsing
+      if (layout.options.sidebar.collapse) {
+        setSidebarMouseLeave(true);
+      }
+      const timer = setTimeout(() => {
+        setIsAnimating(false);
+      }, 600); // Longer delay to ensure collapse stays
+      return () => clearTimeout(timer);
+    }
+  }, [layout.options.sidebar.collapse, desktopMode, setSidebarMouseLeave]);
   const themeClass: string =
     layout.options.sidebar.theme === 'dark' || pathname === '/dark-sidebar'
       ? 'dark [&.dark]:bg-coal-600'
@@ -45,11 +61,15 @@ export const Sidebar = () => {
   };
 
   const handleMouseEnter = () => {
-    setSidebarMouseLeave(false);
+    if (!isAnimating) {
+      setSidebarMouseLeave(false);
+    }
   };
 
   const handleMouseLeave = () => {
-    setSidebarMouseLeave(true);
+    if (!isAnimating) {
+      setSidebarMouseLeave(true);
+    }
   };
 
   const renderContent = () => {
@@ -61,9 +81,10 @@ export const Sidebar = () => {
         className={clsx(
           'sidebar bg-light lg:border-e lg:border-e-gray-200 dark:border-e-coal-100 lg:fixed lg:top-0 lg:bottom-0 lg:z-20 lg:flex flex-col items-stretch shrink-0',
           themeClass,
+          isAnimating && 'animating',
         )}
       >
-        {desktopMode && <SidebarHeader ref={headerRef} />}
+        <SidebarHeader ref={headerRef} />
         <SidebarContent {...(desktopMode && { height: scrollableHeight })} />
       </div>
     );
