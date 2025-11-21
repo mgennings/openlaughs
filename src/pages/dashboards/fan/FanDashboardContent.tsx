@@ -1,8 +1,93 @@
 import { ShowsWidget } from '@/partials/shows';
 import { ComediansWidget } from '@/partials/comedians';
 import { KeenIcon } from '@/components';
+import { useState, useEffect } from 'react';
+import { generateClient } from 'aws-amplify/api';
+import {
+  listFavoriteComedians,
+  listFavoriteVenues,
+  listShowRSVPS,
+} from '@/graphql/queries';
+import { useUserProfile } from '@/hooks';
+
+const client = generateClient({ authMode: 'userPool' });
 
 const FanDashboardContent = () => {
+  const { profile } = useUserProfile();
+  const [stats, setStats] = useState({
+    comediansFollowing: 0,
+    venuesFavorited: 0,
+    showsSaved: 0,
+    showsAttended: 0,
+  });
+  const [loadingStats, setLoadingStats] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      if (!profile?.id) {
+        setLoadingStats(false);
+        return;
+      }
+
+      try {
+        const [
+          comediansResult,
+          venuesResult,
+          showsSavedResult,
+          showsAttendedResult,
+        ] = await Promise.all([
+          client.graphql({
+            query: listFavoriteComedians,
+            variables: {
+              filter: { userProfileId: { eq: profile.id } },
+            },
+          }),
+          client.graphql({
+            query: listFavoriteVenues,
+            variables: {
+              filter: { userProfileId: { eq: profile.id } },
+            },
+          }),
+          client.graphql({
+            query: listShowRSVPS,
+            variables: {
+              filter: {
+                userProfileId: { eq: profile.id },
+                or: [
+                  { status: { eq: 'going' } },
+                  { status: { eq: 'interested' } },
+                ],
+              },
+            },
+          }),
+          client.graphql({
+            query: listShowRSVPS,
+            variables: {
+              filter: {
+                userProfileId: { eq: profile.id },
+                status: { eq: 'attended' },
+              },
+            },
+          }),
+        ]);
+
+        setStats({
+          comediansFollowing:
+            comediansResult.data.listFavoriteComedians.items.length,
+          venuesFavorited: venuesResult.data.listFavoriteVenues.items.length,
+          showsSaved: showsSavedResult.data.listShowRSVPS.items.length,
+          showsAttended: showsAttendedResult.data.listShowRSVPS.items.length,
+        });
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      } finally {
+        setLoadingStats(false);
+      }
+    };
+
+    void fetchStats();
+  }, [profile?.id]);
+
   return (
     <div className="grid gap-5 lg:gap-7.5">
       {/* Welcome Banner */}
@@ -14,7 +99,7 @@ const FanDashboardContent = () => {
             </div>
             <div className="flex flex-col gap-1">
               <h2 className="text-xl font-semibold text-gray-900">
-                Welcome to Austin Comedy! 🎭
+                Welcome to OpenLaughs! 🎭
               </h2>
               <p className="text-sm text-gray-600">
                 Discover amazing comedy shows, follow your favorite comedians,
@@ -25,7 +110,7 @@ const FanDashboardContent = () => {
         </div>
       </div>
 
-      {/* Quick Stats - Coming Soon */}
+      {/* Quick Stats - Real Data */}
       <div className="grid lg:grid-cols-4 gap-5 lg:gap-7.5">
         <div className="card">
           <div className="card-body flex items-center gap-4">
@@ -36,7 +121,9 @@ const FanDashboardContent = () => {
               />
             </div>
             <div>
-              <div className="text-2xl font-semibold text-gray-900">0</div>
+              <div className="text-2xl font-semibold text-gray-900">
+                {loadingStats ? '...' : stats.showsAttended}
+              </div>
               <div className="text-sm text-gray-600">Shows Attended</div>
             </div>
           </div>
@@ -44,11 +131,13 @@ const FanDashboardContent = () => {
 
         <div className="card">
           <div className="card-body flex items-center gap-4">
-            <div className="flex items-center justify-center size-12 rounded-lg bg-primary/10">
-              <KeenIcon icon="user-tick" className="text-2xl text-primary" />
+            <div className="flex items-center justify-center size-12 rounded-lg bg-danger/10">
+              <KeenIcon icon="user-tick" className="text-2xl text-danger" />
             </div>
             <div>
-              <div className="text-2xl font-semibold text-gray-900">0</div>
+              <div className="text-2xl font-semibold text-gray-900">
+                {loadingStats ? '...' : stats.comediansFollowing}
+              </div>
               <div className="text-sm text-gray-600">Following</div>
             </div>
           </div>
@@ -60,19 +149,23 @@ const FanDashboardContent = () => {
               <KeenIcon icon="star" className="text-2xl text-warning" />
             </div>
             <div>
-              <div className="text-2xl font-semibold text-gray-900">0</div>
-              <div className="text-sm text-gray-600">Favorites</div>
+              <div className="text-2xl font-semibold text-gray-900">
+                {loadingStats ? '...' : stats.venuesFavorited}
+              </div>
+              <div className="text-sm text-gray-600">Favorite Venues</div>
             </div>
           </div>
         </div>
 
         <div className="card">
           <div className="card-body flex items-center gap-4">
-            <div className="flex items-center justify-center size-12 rounded-lg bg-danger/10">
-              <KeenIcon icon="heart" className="text-2xl text-danger" />
+            <div className="flex items-center justify-center size-12 rounded-lg bg-primary/10">
+              <KeenIcon icon="heart" className="text-2xl text-primary" />
             </div>
             <div>
-              <div className="text-2xl font-semibold text-gray-900">0</div>
+              <div className="text-2xl font-semibold text-gray-900">
+                {loadingStats ? '...' : stats.showsSaved}
+              </div>
               <div className="text-sm text-gray-600">Saved Shows</div>
             </div>
           </div>
@@ -89,74 +182,71 @@ const FanDashboardContent = () => {
         <ShowsWidget limit={6} />
       </div>
 
-      {/* Coming Soon Section */}
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Coming Soon</h3>
-        </div>
-        <div className="card-body">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200">
-              <KeenIcon
-                icon="profile-circle"
-                className="text-xl text-primary mt-0.5"
-              />
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-1">
-                  Follow Comedians
-                </h4>
-                <p className="text-sm text-gray-600">
-                  Stay updated with your favorite comedians and get notified
-                  about their shows
-                </p>
-              </div>
-            </div>
+      {/* Quick Actions */}
+      {profile && (
+        <div className="card">
+          <div className="card-header">
+            <h3 className="card-title">Quick Actions</h3>
+          </div>
+          <div className="card-body">
+            <div className="grid md:grid-cols-3 gap-4">
+              <a
+                href="/comedians"
+                className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:shadow-sm transition-all"
+              >
+                <KeenIcon
+                  icon="profile-circle"
+                  className="text-2xl text-primary mt-0.5"
+                />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">
+                    Browse Comedians
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Discover and follow your favorite comedians
+                  </p>
+                </div>
+              </a>
 
-            <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200">
-              <KeenIcon
-                icon="search-list"
-                className="text-xl text-primary mt-0.5"
-              />
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-1">
-                  Discover & Search
-                </h4>
-                <p className="text-sm text-gray-600">
-                  Find shows by comedian, venue, date, or comedy style
-                </p>
-              </div>
-            </div>
+              <a
+                href="/shows"
+                className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:shadow-sm transition-all"
+              >
+                <KeenIcon
+                  icon="calendar"
+                  className="text-2xl text-primary mt-0.5"
+                />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">
+                    Find Shows
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    RSVP to shows and never miss a show
+                  </p>
+                </div>
+              </a>
 
-            <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200">
-              <KeenIcon icon="star" className="text-xl text-primary mt-0.5" />
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-1">
-                  Rate & Review
-                </h4>
-                <p className="text-sm text-gray-600">
-                  Share your experience and help others discover great comedy
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200">
-              <KeenIcon
-                icon="notification-on"
-                className="text-xl text-primary mt-0.5"
-              />
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-1">
-                  RSVP & Reminders
-                </h4>
-                <p className="text-sm text-gray-600">
-                  Save shows you want to attend and get reminded before they
-                  happen
-                </p>
-              </div>
+              <a
+                href="/account/home/user-profile"
+                className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:shadow-sm transition-all"
+              >
+                <KeenIcon
+                  icon="profile-user"
+                  className="text-2xl text-primary mt-0.5"
+                />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">
+                    My Profile
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    View your favorites and saved shows
+                  </p>
+                </div>
+              </a>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

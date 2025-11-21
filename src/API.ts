@@ -483,6 +483,270 @@ export type DeleteUserProfileInput = {
   id: string,
 };
 
+export type CreateFavoriteComedianInput = {
+  id?: string | null,
+  userProfileId: string,
+  comedianId: string,
+  createdAt?: string | null,
+};
+
+export type ModelFavoriteComedianConditionInput = {
+  userProfileId?: ModelIDInput | null,
+  comedianId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelFavoriteComedianConditionInput | null > | null,
+  or?: Array< ModelFavoriteComedianConditionInput | null > | null,
+  not?: ModelFavoriteComedianConditionInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type FavoriteComedian = {
+  __typename: "FavoriteComedian",
+  id: string,
+  userProfileId: string,
+  comedianId: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateFavoriteComedianInput = {
+  id: string,
+  userProfileId?: string | null,
+  comedianId?: string | null,
+  createdAt?: string | null,
+};
+
+export type DeleteFavoriteComedianInput = {
+  id: string,
+};
+
+export type CreateFavoriteVenueInput = {
+  id?: string | null,
+  userProfileId: string,
+  venueId: string,
+  createdAt?: string | null,
+};
+
+export type ModelFavoriteVenueConditionInput = {
+  userProfileId?: ModelIDInput | null,
+  venueId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelFavoriteVenueConditionInput | null > | null,
+  or?: Array< ModelFavoriteVenueConditionInput | null > | null,
+  not?: ModelFavoriteVenueConditionInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type FavoriteVenue = {
+  __typename: "FavoriteVenue",
+  id: string,
+  userProfileId: string,
+  venueId: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateFavoriteVenueInput = {
+  id: string,
+  userProfileId?: string | null,
+  venueId?: string | null,
+  createdAt?: string | null,
+};
+
+export type DeleteFavoriteVenueInput = {
+  id: string,
+};
+
+export type CreateShowRSVPInput = {
+  id?: string | null,
+  userProfileId: string,
+  showId: string,
+  status?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelShowRSVPConditionInput = {
+  userProfileId?: ModelIDInput | null,
+  showId?: ModelIDInput | null,
+  status?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelShowRSVPConditionInput | null > | null,
+  or?: Array< ModelShowRSVPConditionInput | null > | null,
+  not?: ModelShowRSVPConditionInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ShowRSVP = {
+  __typename: "ShowRSVP",
+  id: string,
+  userProfileId: string,
+  showId: string,
+  status?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateShowRSVPInput = {
+  id: string,
+  userProfileId?: string | null,
+  showId?: string | null,
+  status?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteShowRSVPInput = {
+  id: string,
+};
+
+export type CreateUserActivityInput = {
+  id?: string | null,
+  userProfileId: string,
+  activityType?: string | null,
+  entityId: string,
+  entityType?: string | null,
+  createdAt?: string | null,
+};
+
+export type ModelUserActivityConditionInput = {
+  userProfileId?: ModelIDInput | null,
+  activityType?: ModelStringInput | null,
+  entityId?: ModelIDInput | null,
+  entityType?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelUserActivityConditionInput | null > | null,
+  or?: Array< ModelUserActivityConditionInput | null > | null,
+  not?: ModelUserActivityConditionInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type UserActivity = {
+  __typename: "UserActivity",
+  id: string,
+  userProfileId: string,
+  activityType?: string | null,
+  entityId: string,
+  entityType?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateUserActivityInput = {
+  id: string,
+  userProfileId?: string | null,
+  activityType?: string | null,
+  entityId?: string | null,
+  entityType?: string | null,
+  createdAt?: string | null,
+};
+
+export type DeleteUserActivityInput = {
+  id: string,
+};
+
+export type CreateShowReviewInput = {
+  id?: string | null,
+  userProfileId: string,
+  showId: string,
+  rating?: number | null,
+  review?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelShowReviewConditionInput = {
+  userProfileId?: ModelIDInput | null,
+  showId?: ModelIDInput | null,
+  rating?: ModelIntInput | null,
+  review?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelShowReviewConditionInput | null > | null,
+  or?: Array< ModelShowReviewConditionInput | null > | null,
+  not?: ModelShowReviewConditionInput | null,
+};
+
+export type ShowReview = {
+  __typename: "ShowReview",
+  id: string,
+  userProfileId: string,
+  showId: string,
+  rating?: number | null,
+  review?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateShowReviewInput = {
+  id: string,
+  userProfileId?: string | null,
+  showId?: string | null,
+  rating?: number | null,
+  review?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteShowReviewInput = {
+  id: string,
+};
+
+export type CreateComedianReviewInput = {
+  id?: string | null,
+  userProfileId: string,
+  comedianId: string,
+  rating?: number | null,
+  review?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelComedianReviewConditionInput = {
+  userProfileId?: ModelIDInput | null,
+  comedianId?: ModelIDInput | null,
+  rating?: ModelIntInput | null,
+  review?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelComedianReviewConditionInput | null > | null,
+  or?: Array< ModelComedianReviewConditionInput | null > | null,
+  not?: ModelComedianReviewConditionInput | null,
+};
+
+export type ComedianReview = {
+  __typename: "ComedianReview",
+  id: string,
+  userProfileId: string,
+  comedianId: string,
+  rating?: number | null,
+  review?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateComedianReviewInput = {
+  id: string,
+  userProfileId?: string | null,
+  comedianId?: string | null,
+  rating?: number | null,
+  review?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteComedianReviewInput = {
+  id: string,
+};
+
 export type ModelUserProfileFilterInput = {
   id?: ModelIDInput | null,
   email?: ModelStringInput | null,
@@ -510,6 +774,26 @@ export type ModelUserProfileFilterInput = {
 export type ModelUserProfileConnection = {
   __typename: "ModelUserProfileConnection",
   items:  Array<UserProfile | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUserActivityFilterInput = {
+  id?: ModelIDInput | null,
+  userProfileId?: ModelIDInput | null,
+  activityType?: ModelStringInput | null,
+  entityId?: ModelIDInput | null,
+  entityType?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelUserActivityFilterInput | null > | null,
+  or?: Array< ModelUserActivityFilterInput | null > | null,
+  not?: ModelUserActivityFilterInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelUserActivityConnection = {
+  __typename: "ModelUserActivityConnection",
+  items:  Array<UserActivity | null >,
   nextToken?: string | null,
 };
 
@@ -615,6 +899,99 @@ export type ModelComedianConnection = {
   nextToken?: string | null,
 };
 
+export type ModelFavoriteComedianFilterInput = {
+  id?: ModelIDInput | null,
+  userProfileId?: ModelIDInput | null,
+  comedianId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelFavoriteComedianFilterInput | null > | null,
+  or?: Array< ModelFavoriteComedianFilterInput | null > | null,
+  not?: ModelFavoriteComedianFilterInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelFavoriteComedianConnection = {
+  __typename: "ModelFavoriteComedianConnection",
+  items:  Array<FavoriteComedian | null >,
+  nextToken?: string | null,
+};
+
+export type ModelFavoriteVenueFilterInput = {
+  id?: ModelIDInput | null,
+  userProfileId?: ModelIDInput | null,
+  venueId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelFavoriteVenueFilterInput | null > | null,
+  or?: Array< ModelFavoriteVenueFilterInput | null > | null,
+  not?: ModelFavoriteVenueFilterInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelFavoriteVenueConnection = {
+  __typename: "ModelFavoriteVenueConnection",
+  items:  Array<FavoriteVenue | null >,
+  nextToken?: string | null,
+};
+
+export type ModelShowRSVPFilterInput = {
+  id?: ModelIDInput | null,
+  userProfileId?: ModelIDInput | null,
+  showId?: ModelIDInput | null,
+  status?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelShowRSVPFilterInput | null > | null,
+  or?: Array< ModelShowRSVPFilterInput | null > | null,
+  not?: ModelShowRSVPFilterInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelShowRSVPConnection = {
+  __typename: "ModelShowRSVPConnection",
+  items:  Array<ShowRSVP | null >,
+  nextToken?: string | null,
+};
+
+export type ModelShowReviewFilterInput = {
+  id?: ModelIDInput | null,
+  userProfileId?: ModelIDInput | null,
+  showId?: ModelIDInput | null,
+  rating?: ModelIntInput | null,
+  review?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelShowReviewFilterInput | null > | null,
+  or?: Array< ModelShowReviewFilterInput | null > | null,
+  not?: ModelShowReviewFilterInput | null,
+};
+
+export type ModelShowReviewConnection = {
+  __typename: "ModelShowReviewConnection",
+  items:  Array<ShowReview | null >,
+  nextToken?: string | null,
+};
+
+export type ModelComedianReviewFilterInput = {
+  id?: ModelIDInput | null,
+  userProfileId?: ModelIDInput | null,
+  comedianId?: ModelIDInput | null,
+  rating?: ModelIntInput | null,
+  review?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelComedianReviewFilterInput | null > | null,
+  or?: Array< ModelComedianReviewFilterInput | null > | null,
+  not?: ModelComedianReviewFilterInput | null,
+};
+
+export type ModelComedianReviewConnection = {
+  __typename: "ModelComedianReviewConnection",
+  items:  Array<ComedianReview | null >,
+  nextToken?: string | null,
+};
+
 export type ModelSubscriptionUserProfileFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   email?: ModelSubscriptionStringInput | null,
@@ -666,6 +1043,19 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionUserActivityFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userProfileId?: ModelSubscriptionIDInput | null,
+  activityType?: ModelSubscriptionStringInput | null,
+  entityId?: ModelSubscriptionIDInput | null,
+  entityType?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionUserActivityFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserActivityFilterInput | null > | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelSubscriptionShowFilterInput = {
@@ -776,6 +1166,64 @@ export type ModelSubscriptionIntInput = {
   between?: Array< number | null > | null,
   in?: Array< number | null > | null,
   notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionFavoriteComedianFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userProfileId?: ModelSubscriptionIDInput | null,
+  comedianId?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionFavoriteComedianFilterInput | null > | null,
+  or?: Array< ModelSubscriptionFavoriteComedianFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionFavoriteVenueFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userProfileId?: ModelSubscriptionIDInput | null,
+  venueId?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionFavoriteVenueFilterInput | null > | null,
+  or?: Array< ModelSubscriptionFavoriteVenueFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionShowRSVPFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userProfileId?: ModelSubscriptionIDInput | null,
+  showId?: ModelSubscriptionIDInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionShowRSVPFilterInput | null > | null,
+  or?: Array< ModelSubscriptionShowRSVPFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionShowReviewFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  showId?: ModelSubscriptionIDInput | null,
+  rating?: ModelSubscriptionIntInput | null,
+  review?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionShowReviewFilterInput | null > | null,
+  or?: Array< ModelSubscriptionShowReviewFilterInput | null > | null,
+  userProfileId?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionComedianReviewFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  comedianId?: ModelSubscriptionIDInput | null,
+  rating?: ModelSubscriptionIntInput | null,
+  review?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionComedianReviewFilterInput | null > | null,
+  or?: Array< ModelSubscriptionComedianReviewFilterInput | null > | null,
+  userProfileId?: ModelStringInput | null,
 };
 
 export type CreateShowMutationVariables = {
@@ -1162,6 +1610,327 @@ export type DeleteUserProfileMutation = {
   } | null,
 };
 
+export type CreateFavoriteComedianMutationVariables = {
+  input: CreateFavoriteComedianInput,
+  condition?: ModelFavoriteComedianConditionInput | null,
+};
+
+export type CreateFavoriteComedianMutation = {
+  createFavoriteComedian?:  {
+    __typename: "FavoriteComedian",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateFavoriteComedianMutationVariables = {
+  input: UpdateFavoriteComedianInput,
+  condition?: ModelFavoriteComedianConditionInput | null,
+};
+
+export type UpdateFavoriteComedianMutation = {
+  updateFavoriteComedian?:  {
+    __typename: "FavoriteComedian",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteFavoriteComedianMutationVariables = {
+  input: DeleteFavoriteComedianInput,
+  condition?: ModelFavoriteComedianConditionInput | null,
+};
+
+export type DeleteFavoriteComedianMutation = {
+  deleteFavoriteComedian?:  {
+    __typename: "FavoriteComedian",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateFavoriteVenueMutationVariables = {
+  input: CreateFavoriteVenueInput,
+  condition?: ModelFavoriteVenueConditionInput | null,
+};
+
+export type CreateFavoriteVenueMutation = {
+  createFavoriteVenue?:  {
+    __typename: "FavoriteVenue",
+    id: string,
+    userProfileId: string,
+    venueId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateFavoriteVenueMutationVariables = {
+  input: UpdateFavoriteVenueInput,
+  condition?: ModelFavoriteVenueConditionInput | null,
+};
+
+export type UpdateFavoriteVenueMutation = {
+  updateFavoriteVenue?:  {
+    __typename: "FavoriteVenue",
+    id: string,
+    userProfileId: string,
+    venueId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteFavoriteVenueMutationVariables = {
+  input: DeleteFavoriteVenueInput,
+  condition?: ModelFavoriteVenueConditionInput | null,
+};
+
+export type DeleteFavoriteVenueMutation = {
+  deleteFavoriteVenue?:  {
+    __typename: "FavoriteVenue",
+    id: string,
+    userProfileId: string,
+    venueId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateShowRSVPMutationVariables = {
+  input: CreateShowRSVPInput,
+  condition?: ModelShowRSVPConditionInput | null,
+};
+
+export type CreateShowRSVPMutation = {
+  createShowRSVP?:  {
+    __typename: "ShowRSVP",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    status?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateShowRSVPMutationVariables = {
+  input: UpdateShowRSVPInput,
+  condition?: ModelShowRSVPConditionInput | null,
+};
+
+export type UpdateShowRSVPMutation = {
+  updateShowRSVP?:  {
+    __typename: "ShowRSVP",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    status?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteShowRSVPMutationVariables = {
+  input: DeleteShowRSVPInput,
+  condition?: ModelShowRSVPConditionInput | null,
+};
+
+export type DeleteShowRSVPMutation = {
+  deleteShowRSVP?:  {
+    __typename: "ShowRSVP",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    status?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateUserActivityMutationVariables = {
+  input: CreateUserActivityInput,
+  condition?: ModelUserActivityConditionInput | null,
+};
+
+export type CreateUserActivityMutation = {
+  createUserActivity?:  {
+    __typename: "UserActivity",
+    id: string,
+    userProfileId: string,
+    activityType?: string | null,
+    entityId: string,
+    entityType?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateUserActivityMutationVariables = {
+  input: UpdateUserActivityInput,
+  condition?: ModelUserActivityConditionInput | null,
+};
+
+export type UpdateUserActivityMutation = {
+  updateUserActivity?:  {
+    __typename: "UserActivity",
+    id: string,
+    userProfileId: string,
+    activityType?: string | null,
+    entityId: string,
+    entityType?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteUserActivityMutationVariables = {
+  input: DeleteUserActivityInput,
+  condition?: ModelUserActivityConditionInput | null,
+};
+
+export type DeleteUserActivityMutation = {
+  deleteUserActivity?:  {
+    __typename: "UserActivity",
+    id: string,
+    userProfileId: string,
+    activityType?: string | null,
+    entityId: string,
+    entityType?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateShowReviewMutationVariables = {
+  input: CreateShowReviewInput,
+  condition?: ModelShowReviewConditionInput | null,
+};
+
+export type CreateShowReviewMutation = {
+  createShowReview?:  {
+    __typename: "ShowReview",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateShowReviewMutationVariables = {
+  input: UpdateShowReviewInput,
+  condition?: ModelShowReviewConditionInput | null,
+};
+
+export type UpdateShowReviewMutation = {
+  updateShowReview?:  {
+    __typename: "ShowReview",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteShowReviewMutationVariables = {
+  input: DeleteShowReviewInput,
+  condition?: ModelShowReviewConditionInput | null,
+};
+
+export type DeleteShowReviewMutation = {
+  deleteShowReview?:  {
+    __typename: "ShowReview",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateComedianReviewMutationVariables = {
+  input: CreateComedianReviewInput,
+  condition?: ModelComedianReviewConditionInput | null,
+};
+
+export type CreateComedianReviewMutation = {
+  createComedianReview?:  {
+    __typename: "ComedianReview",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateComedianReviewMutationVariables = {
+  input: UpdateComedianReviewInput,
+  condition?: ModelComedianReviewConditionInput | null,
+};
+
+export type UpdateComedianReviewMutation = {
+  updateComedianReview?:  {
+    __typename: "ComedianReview",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteComedianReviewMutationVariables = {
+  input: DeleteComedianReviewInput,
+  condition?: ModelComedianReviewConditionInput | null,
+};
+
+export type DeleteComedianReviewMutation = {
+  deleteComedianReview?:  {
+    __typename: "ComedianReview",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetUserProfileQueryVariables = {
   id: string,
 };
@@ -1216,6 +1985,48 @@ export type ListUserProfilesQuery = {
       postalCode?: string | null,
       country?: string | null,
       role: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUserActivityQueryVariables = {
+  id: string,
+};
+
+export type GetUserActivityQuery = {
+  getUserActivity?:  {
+    __typename: "UserActivity",
+    id: string,
+    userProfileId: string,
+    activityType?: string | null,
+    entityId: string,
+    entityType?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListUserActivitiesQueryVariables = {
+  filter?: ModelUserActivityFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUserActivitiesQuery = {
+  listUserActivities?:  {
+    __typename: "ModelUserActivityConnection",
+    items:  Array< {
+      __typename: "UserActivity",
+      id: string,
+      userProfileId: string,
+      activityType?: string | null,
+      entityId: string,
+      entityType?: string | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1434,6 +2245,202 @@ export type ListComediansQuery = {
   } | null,
 };
 
+export type GetFavoriteComedianQueryVariables = {
+  id: string,
+};
+
+export type GetFavoriteComedianQuery = {
+  getFavoriteComedian?:  {
+    __typename: "FavoriteComedian",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListFavoriteComediansQueryVariables = {
+  filter?: ModelFavoriteComedianFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFavoriteComediansQuery = {
+  listFavoriteComedians?:  {
+    __typename: "ModelFavoriteComedianConnection",
+    items:  Array< {
+      __typename: "FavoriteComedian",
+      id: string,
+      userProfileId: string,
+      comedianId: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFavoriteVenueQueryVariables = {
+  id: string,
+};
+
+export type GetFavoriteVenueQuery = {
+  getFavoriteVenue?:  {
+    __typename: "FavoriteVenue",
+    id: string,
+    userProfileId: string,
+    venueId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListFavoriteVenuesQueryVariables = {
+  filter?: ModelFavoriteVenueFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFavoriteVenuesQuery = {
+  listFavoriteVenues?:  {
+    __typename: "ModelFavoriteVenueConnection",
+    items:  Array< {
+      __typename: "FavoriteVenue",
+      id: string,
+      userProfileId: string,
+      venueId: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetShowRSVPQueryVariables = {
+  id: string,
+};
+
+export type GetShowRSVPQuery = {
+  getShowRSVP?:  {
+    __typename: "ShowRSVP",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    status?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListShowRSVPSQueryVariables = {
+  filter?: ModelShowRSVPFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListShowRSVPSQuery = {
+  listShowRSVPS?:  {
+    __typename: "ModelShowRSVPConnection",
+    items:  Array< {
+      __typename: "ShowRSVP",
+      id: string,
+      userProfileId: string,
+      showId: string,
+      status?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetShowReviewQueryVariables = {
+  id: string,
+};
+
+export type GetShowReviewQuery = {
+  getShowReview?:  {
+    __typename: "ShowReview",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListShowReviewsQueryVariables = {
+  filter?: ModelShowReviewFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListShowReviewsQuery = {
+  listShowReviews?:  {
+    __typename: "ModelShowReviewConnection",
+    items:  Array< {
+      __typename: "ShowReview",
+      id: string,
+      userProfileId: string,
+      showId: string,
+      rating?: number | null,
+      review?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetComedianReviewQueryVariables = {
+  id: string,
+};
+
+export type GetComedianReviewQuery = {
+  getComedianReview?:  {
+    __typename: "ComedianReview",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListComedianReviewsQueryVariables = {
+  filter?: ModelComedianReviewFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListComedianReviewsQuery = {
+  listComedianReviews?:  {
+    __typename: "ModelComedianReviewConnection",
+    items:  Array< {
+      __typename: "ComedianReview",
+      id: string,
+      userProfileId: string,
+      comedianId: string,
+      rating?: number | null,
+      review?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateUserProfileSubscriptionVariables = {
   filter?: ModelSubscriptionUserProfileFilterInput | null,
   owner?: string | null,
@@ -1515,6 +2522,63 @@ export type OnDeleteUserProfileSubscription = {
     postalCode?: string | null,
     country?: string | null,
     role: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateUserActivitySubscriptionVariables = {
+  filter?: ModelSubscriptionUserActivityFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreateUserActivitySubscription = {
+  onCreateUserActivity?:  {
+    __typename: "UserActivity",
+    id: string,
+    userProfileId: string,
+    activityType?: string | null,
+    entityId: string,
+    entityType?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateUserActivitySubscriptionVariables = {
+  filter?: ModelSubscriptionUserActivityFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdateUserActivitySubscription = {
+  onUpdateUserActivity?:  {
+    __typename: "UserActivity",
+    id: string,
+    userProfileId: string,
+    activityType?: string | null,
+    entityId: string,
+    entityType?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteUserActivitySubscriptionVariables = {
+  filter?: ModelSubscriptionUserActivityFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeleteUserActivitySubscription = {
+  onDeleteUserActivity?:  {
+    __typename: "UserActivity",
+    id: string,
+    userProfileId: string,
+    activityType?: string | null,
+    entityId: string,
+    entityType?: string | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1807,6 +2871,270 @@ export type OnDeleteComedianSubscription = {
     isFeatured?: boolean | null,
     status?: string | null,
     createdBy?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateFavoriteComedianSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteComedianFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreateFavoriteComedianSubscription = {
+  onCreateFavoriteComedian?:  {
+    __typename: "FavoriteComedian",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateFavoriteComedianSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteComedianFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdateFavoriteComedianSubscription = {
+  onUpdateFavoriteComedian?:  {
+    __typename: "FavoriteComedian",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteFavoriteComedianSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteComedianFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeleteFavoriteComedianSubscription = {
+  onDeleteFavoriteComedian?:  {
+    __typename: "FavoriteComedian",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateFavoriteVenueSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteVenueFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreateFavoriteVenueSubscription = {
+  onCreateFavoriteVenue?:  {
+    __typename: "FavoriteVenue",
+    id: string,
+    userProfileId: string,
+    venueId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateFavoriteVenueSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteVenueFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdateFavoriteVenueSubscription = {
+  onUpdateFavoriteVenue?:  {
+    __typename: "FavoriteVenue",
+    id: string,
+    userProfileId: string,
+    venueId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteFavoriteVenueSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteVenueFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeleteFavoriteVenueSubscription = {
+  onDeleteFavoriteVenue?:  {
+    __typename: "FavoriteVenue",
+    id: string,
+    userProfileId: string,
+    venueId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateShowRSVPSubscriptionVariables = {
+  filter?: ModelSubscriptionShowRSVPFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreateShowRSVPSubscription = {
+  onCreateShowRSVP?:  {
+    __typename: "ShowRSVP",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    status?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateShowRSVPSubscriptionVariables = {
+  filter?: ModelSubscriptionShowRSVPFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdateShowRSVPSubscription = {
+  onUpdateShowRSVP?:  {
+    __typename: "ShowRSVP",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    status?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteShowRSVPSubscriptionVariables = {
+  filter?: ModelSubscriptionShowRSVPFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeleteShowRSVPSubscription = {
+  onDeleteShowRSVP?:  {
+    __typename: "ShowRSVP",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    status?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateShowReviewSubscriptionVariables = {
+  filter?: ModelSubscriptionShowReviewFilterInput | null,
+  userProfileId?: string | null,
+};
+
+export type OnCreateShowReviewSubscription = {
+  onCreateShowReview?:  {
+    __typename: "ShowReview",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateShowReviewSubscriptionVariables = {
+  filter?: ModelSubscriptionShowReviewFilterInput | null,
+  userProfileId?: string | null,
+};
+
+export type OnUpdateShowReviewSubscription = {
+  onUpdateShowReview?:  {
+    __typename: "ShowReview",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteShowReviewSubscriptionVariables = {
+  filter?: ModelSubscriptionShowReviewFilterInput | null,
+  userProfileId?: string | null,
+};
+
+export type OnDeleteShowReviewSubscription = {
+  onDeleteShowReview?:  {
+    __typename: "ShowReview",
+    id: string,
+    userProfileId: string,
+    showId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateComedianReviewSubscriptionVariables = {
+  filter?: ModelSubscriptionComedianReviewFilterInput | null,
+  userProfileId?: string | null,
+};
+
+export type OnCreateComedianReviewSubscription = {
+  onCreateComedianReview?:  {
+    __typename: "ComedianReview",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateComedianReviewSubscriptionVariables = {
+  filter?: ModelSubscriptionComedianReviewFilterInput | null,
+  userProfileId?: string | null,
+};
+
+export type OnUpdateComedianReviewSubscription = {
+  onUpdateComedianReview?:  {
+    __typename: "ComedianReview",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    rating?: number | null,
+    review?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteComedianReviewSubscriptionVariables = {
+  filter?: ModelSubscriptionComedianReviewFilterInput | null,
+  userProfileId?: string | null,
+};
+
+export type OnDeleteComedianReviewSubscription = {
+  onDeleteComedianReview?:  {
+    __typename: "ComedianReview",
+    id: string,
+    userProfileId: string,
+    comedianId: string,
+    rating?: number | null,
+    review?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

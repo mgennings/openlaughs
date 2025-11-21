@@ -129,3 +129,95 @@ type UserProfile
   country: String
   role: String!
 }
+
+type FavoriteComedian
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  userProfileId: ID!
+  comedianId: ID!
+  createdAt: AWSDateTime!
+}
+
+type FavoriteVenue
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  userProfileId: ID!
+  venueId: ID!
+  createdAt: AWSDateTime!
+}
+
+type ShowRSVP
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  userProfileId: ID!
+  showId: ID!
+  status: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type UserActivity @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userProfileId: ID!
+  activityType: String
+  entityId: ID!
+  entityType: String
+  createdAt: AWSDateTime!
+}
+
+type ShowReview
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "userProfileId" }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  userProfileId: ID!
+  showId: ID!
+  rating: Int
+  review: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ComedianReview
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "userProfileId" }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  userProfileId: ID!
+  comedianId: ID!
+  rating: Int
+  review: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}

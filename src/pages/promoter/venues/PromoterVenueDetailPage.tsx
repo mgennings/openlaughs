@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Container } from '@/components/container';
-import { KeenIcon } from '@/components';
+import { KeenIcon, FavoriteVenueButton } from '@/components';
 import { generateClient } from 'aws-amplify/api';
 import { getVenue } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
-import type { GetVenueQuery, Venue } from '@/API';
+import { type GetVenueQuery, type Venue } from '@/API';
 import { PromoterVenueUpdateForm } from './PromoterVenueUpdateForm';
 import { cleanPhoneNumber, formatPhoneForDisplay } from '@/utils/validation';
 
@@ -150,10 +150,16 @@ const PromoterVenueDetailPage = () => {
         >
           <KeenIcon icon="arrow-left" />
         </button>
-        <button className="btn btn-primary" onClick={() => setIsEditing(true)}>
-          <KeenIcon icon="notepad-edit" className="mr-2" />
-          Edit Venue
-        </button>
+        <div className="flex items-center gap-2">
+          {id && <FavoriteVenueButton venueId={id} showCount />}
+          <button
+            className="btn btn-primary"
+            onClick={() => setIsEditing(true)}
+          >
+            <KeenIcon icon="notepad-edit" className="mr-2" />
+            Edit Venue
+          </button>
+        </div>
       </div>
 
       {/* Hero Section with Logo and Venue Name */}

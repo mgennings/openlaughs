@@ -6,7 +6,7 @@ import {
   ToolbarActions,
   ToolbarHeading,
 } from '@/layouts/demo1/toolbar';
-import { KeenIcon } from '@/components';
+import { KeenIcon, FavoriteButton } from '@/components';
 import { generateClient } from 'aws-amplify/api';
 import { getComedian, listShows } from '@/graphql/queries';
 import type { Comedian, Show } from '@/API';
@@ -139,6 +139,7 @@ const ComedianDetailPage = () => {
             description="Comedian Profile"
           />
           <ToolbarActions>
+            {id && <FavoriteButton comedianId={id} showCount />}
             <button
               className="btn btn-sm btn-primary"
               onClick={() => setShowEditModal(true)}

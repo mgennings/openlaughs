@@ -194,7 +194,7 @@ const PersonalInfo = () => {
   };
 
   return (
-    <div className="card min-w-full">
+    <div className="card min-w-full" id="personal-info-card">
       <div className="card-header">
         <h3 className="card-title">Personal Info</h3>
         <div className="flex items-center gap-2 ml-auto">
@@ -393,7 +393,7 @@ const PersonalInfo = () => {
               <td className="py-3 text-center"></td>
             </tr>
             <tr>
-              <td className="py-3">Address line 1</td>
+              <td className="py-3 text-gray-600 font-normal">Address line 1</td>
               <td className="py-3 text-gray-700 text-2sm font-normal">
                 {isEditing ? (
                   <input
@@ -411,7 +411,7 @@ const PersonalInfo = () => {
               <td className="py-3 text-center"></td>
             </tr>
             <tr>
-              <td className="py-3">Address line 2</td>
+              <td className="py-3 text-gray-600 font-normal">Address line 2</td>
               <td className="py-3 text-gray-700 text-2sm font-normal full-width">
                 {isEditing ? (
                   <input
@@ -429,7 +429,7 @@ const PersonalInfo = () => {
               <td className="py-3 text-center"></td>
             </tr>
             <tr>
-              <td className="py-3">City</td>
+              <td className="py-3 text-gray-600 font-normal">City</td>
               <td className="py-3 text-gray-700 text-2sm font-normal">
                 {isEditing ? (
                   <input
@@ -445,7 +445,7 @@ const PersonalInfo = () => {
               <td className="py-3 text-center"></td>
             </tr>
             <tr>
-              <td className="py-3">State</td>
+              <td className="py-3 text-gray-600 font-normal">State</td>
               <td className="py-3 text-gray-700 text-2sm font-normal">
                 {isEditing ? (
                   <select
@@ -466,7 +466,7 @@ const PersonalInfo = () => {
               <td className="py-3 text-center"></td>
             </tr>
             <tr>
-              <td className="py-3">Postal code</td>
+              <td className="py-3 text-gray-600 font-normal">Postal code</td>
               <td className="py-3 text-gray-700 text-2sm font-normal">
                 {isEditing ? (
                   <input
@@ -484,7 +484,7 @@ const PersonalInfo = () => {
               <td className="py-3 text-center"></td>
             </tr>
             <tr>
-              <td className="py-3">Country</td>
+              <td className="py-3 text-gray-600 font-normal">Country</td>
               <td className="py-3 text-gray-700 text-2sm font-normal">
                 {isEditing ? (
                   <input

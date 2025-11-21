@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Container } from '@/components/container';
-import { KeenIcon } from '@/components';
+import { KeenIcon, RSVPButton } from '@/components';
 import { generateClient } from 'aws-amplify/api';
 import { getShow, getVenue, getComedian } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
@@ -539,15 +539,18 @@ const ShowDetailPage = () => {
 
             {!isPast && (
               <div className="mt-6 pt-6 border-t border-gray-200">
-                <a
-                  href={generateCalendarLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary w-full"
-                >
-                  <KeenIcon icon="calendar" className="me-2" />
-                  Add to Calendar
-                </a>
+                <div className="grid grid-cols-2 gap-3">
+                  {id && <RSVPButton showId={id} variant="button" showCount />}
+                  <a
+                    href={generateCalendarLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-light w-full"
+                  >
+                    <KeenIcon icon="calendar" className="me-2" />
+                    Add to Calendar
+                  </a>
+                </div>
               </div>
             )}
           </div>

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { Container } from '@/components/container';
 import {
   Toolbar,
@@ -11,9 +11,19 @@ import { PageNavbar } from '@/pages/account';
 
 import { AccountUserProfileContent } from '.';
 import { useLayout } from '@/providers';
+import { useUserProfile } from '@/hooks';
+import { useSettings } from '@/providers/SettingsProvider';
 
 const AccountUserProfilePage = () => {
   const { currentLayout } = useLayout();
+  const { profile } = useUserProfile();
+  const { settings } = useSettings();
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 'admin';
+  }, [profile?.role]);
+
+  const showPreviewFeatures = isAdmin && settings.previewMode;
 
   return (
     <Fragment>
@@ -29,12 +39,22 @@ const AccountUserProfilePage = () => {
               </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
-              <a href="#" className="btn btn-sm btn-light">
-                Public Profile
-              </a>
-              <a href="#" className="btn btn-sm btn-primary">
-                Account Settings
-              </a>
+              {showPreviewFeatures && (
+                <>
+                  <a
+                    href="/public-profile/profiles/default"
+                    className="btn btn-sm btn-light"
+                  >
+                    Public Profile
+                  </a>
+                  <a
+                    href="#personal-info-card"
+                    className="btn btn-sm btn-primary"
+                  >
+                    Account Settings
+                  </a>
+                </>
+              )}
             </ToolbarActions>
           </Toolbar>
         </Container>

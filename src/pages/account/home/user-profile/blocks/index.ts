@@ -5,3 +5,7 @@ export * from './Connections';
 export * from './PersonalInfo';
 export * from './StartNow';
 export * from './Work';
+export * from './ProfileStats';
+export * from './FavoriteComedians';
+export * from './FavoriteVenues';
+export * from './SavedShows';
