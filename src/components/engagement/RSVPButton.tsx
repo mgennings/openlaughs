@@ -51,6 +51,7 @@ const RSVPButton = ({
   const [rsvpId, setRsvpId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [rsvpCount, setRsvpCount] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const checkRSVP = async () => {
@@ -176,7 +177,7 @@ const RSVPButton = ({
 
   if (variant === 'compact') {
     return (
-      <DropdownMenu>
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
         <DropdownMenuTrigger asChild>
           <button
             disabled={isLoading}
@@ -185,6 +186,7 @@ const RSVPButton = ({
                 ? `text-${currentOption?.color}`
                 : 'text-gray-700 hover:text-primary'
             } ${isLoading ? 'opacity-50' : ''}`}
+            aria-expanded={isOpen}
           >
             <KeenIcon
               icon={currentOption?.icon || 'calendar-add'}
@@ -228,13 +230,22 @@ const RSVPButton = ({
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <button
           disabled={isLoading}
           className={`btn ${
             rsvpStatus ? `btn-${currentOption?.color}` : 'btn-primary'
           } ${isLoading ? 'opacity-50' : ''} ${className}`}
+          title={currentOption?.label || 'RSVP to this event'}
+          aria-label={currentOption?.label || 'RSVP to this event'}
+          aria-disabled={isLoading}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          aria-controls="rsvp-dropdown"
+          aria-selected={rsvpStatus === currentOption?.value}
+          aria-roledescription="RSVP to this event button"
+          aria-describedby="rsvp-dropdown-description"
         >
           <KeenIcon
             icon={currentOption?.icon || 'calendar-add'}
