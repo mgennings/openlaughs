@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { useResponsive, useViewport } from '@/hooks';
+import { useEffect, useRef, useState, useMemo } from 'react';
+import { useResponsive, useViewport, useUserProfile } from '@/hooks';
 import { useDemo1Layout } from '../';
 import { SidebarContent, SidebarHeader } from './';
 import clsx from 'clsx';
 import { getHeight } from '@/utils';
 import { usePathname } from '@/providers';
+import { useSettings } from '@/providers/SettingsProvider';
 import {
   Sheet,
   SheetContent,
@@ -21,6 +22,14 @@ export const Sidebar = () => {
   const scrollableOffset = 40;
   const [viewportHeight] = useViewport();
   const { pathname, prevPathname } = usePathname();
+  const { profile } = useUserProfile();
+  const { settings } = useSettings();
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 'admin';
+  }, [profile?.role]);
+
+  const showPreviewFeatures = isAdmin && settings.previewMode;
 
   useEffect(() => {
     if (headerRef.current) {
@@ -33,9 +42,24 @@ export const Sidebar = () => {
   }, [viewportHeight]);
 
   const desktopMode = useResponsive('up', 'lg');
-  const { mobileSidebarOpen, setSidebarMouseLeave, setMobileSidebarOpen } =
-    useDemo1Layout();
+  const {
+    mobileSidebarOpen,
+    setSidebarMouseLeave,
+    setMobileSidebarOpen,
+    setSidebarCollapse,
+  } = useDemo1Layout();
   const { layout } = useDemo1Layout();
+
+  // Force sidebar to stay open when preview mode is off
+  useEffect(() => {
+    if (!showPreviewFeatures && layout.options.sidebar.collapse) {
+      setSidebarCollapse(false);
+    }
+  }, [
+    showPreviewFeatures,
+    layout.options.sidebar.collapse,
+    setSidebarCollapse,
+  ]);
 
   // Handle animation state when collapse changes
   useEffect(() => {
@@ -61,13 +85,13 @@ export const Sidebar = () => {
   };
 
   const handleMouseEnter = () => {
-    if (!isAnimating) {
+    if (!isAnimating && showPreviewFeatures) {
       setSidebarMouseLeave(false);
     }
   };
 
   const handleMouseLeave = () => {
-    if (!isAnimating) {
+    if (!isAnimating && showPreviewFeatures) {
       setSidebarMouseLeave(true);
     }
   };

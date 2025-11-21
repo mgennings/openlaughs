@@ -1,10 +1,22 @@
 import { Link } from 'react-router-dom';
 import { KeenIcon } from '@/components/keenicons';
 import { toAbsoluteUrl } from '@/utils';
+import { useUserProfile } from '@/hooks';
 
+import { useSettings } from '@/providers/SettingsProvider';
+import { useMemo } from 'react';
 import { useDemo1Layout } from '../';
 
 const HeaderLogo = () => {
+  const { profile } = useUserProfile();
+  const { settings } = useSettings();
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 'admin';
+  }, [profile?.role]);
+
+  const showPreviewFeatures = isAdmin && settings.previewMode;
+
   const { setMobileSidebarOpen, setMobileMegaMenuOpen, megaMenuEnabled } =
     useDemo1Layout();
 
@@ -35,7 +47,7 @@ const HeaderLogo = () => {
           <KeenIcon icon="menu" />
         </button>
 
-        {megaMenuEnabled && (
+        {showPreviewFeatures && (
           <button
             type="button"
             className="btn btn-icon btn-light btn-clear btn-sm"

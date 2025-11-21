@@ -2,18 +2,9 @@ import { type TMenuConfig } from '@/components/menu';
 
 export const MENU_SIDEBAR: TMenuConfig = [
   {
-    title: 'Dashboards',
-    icon: 'element-11',
-    children: [
-      {
-        title: 'Home',
-        path: '/dashboard',
-      },
-      {
-        title: 'Dark Sidebar',
-        path: '/dark-sidebar',
-      },
-    ],
+    icon: 'home',
+    title: 'Home',
+    path: '/dashboard',
   },
   {
     title: 'Shows',
@@ -42,6 +33,20 @@ export const MENU_SIDEBAR: TMenuConfig = [
     title: 'Comedians',
     icon: 'users',
     path: '/comedians',
+  },
+  {
+    title: 'Dashboards',
+    icon: 'element-11',
+    children: [
+      {
+        title: 'Light Sidebar',
+        path: '/dashboard',
+      },
+      {
+        title: 'Dark Sidebar',
+        path: '/dark-sidebar',
+      },
+    ],
   },
   {
     heading: 'User',

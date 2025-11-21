@@ -1,8 +1,9 @@
-import { useResponsive } from '@/hooks';
-import { useEffect } from 'react';
+import { useResponsive, useUserProfile } from '@/hooks';
+import { useEffect, useMemo } from 'react';
 import { usePathname } from '@/providers';
 import { useDemo1Layout } from '@/layouts/demo1';
 import { MegaMenuInner } from '.';
+import { useSettings } from '@/providers/SettingsProvider';
 import {
   Sheet,
   SheetContent,
@@ -15,6 +16,14 @@ const MegaMenu = () => {
   const desktopMode = useResponsive('up', 'lg');
   const { pathname, prevPathname } = usePathname();
   const { mobileMegaMenuOpen, setMobileMegaMenuOpen } = useDemo1Layout();
+  const { profile } = useUserProfile();
+  const { settings } = useSettings();
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 'admin';
+  }, [profile?.role]);
+
+  const showPreviewFeatures = isAdmin && settings.previewMode;
 
   const handleDrawerClose = () => {
     setMobileMegaMenuOpen(false);
@@ -26,6 +35,11 @@ const MegaMenu = () => {
       handleDrawerClose();
     }
   }, [desktopMode, pathname, prevPathname]);
+
+  // Don't render MegaMenu if preview mode is off
+  if (!showPreviewFeatures) {
+    return null;
+  }
 
   if (desktopMode) {
     return <MegaMenuInner />;

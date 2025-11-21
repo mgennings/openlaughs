@@ -75,7 +75,7 @@ const HeaderTopbar = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 lg:gap-3.5">
+    <div className="flex items-center gap-2 lg:gap-3.5 justify-end flex-1">
       {/* Preview features - hide with CSS to avoid hooks issues */}
       <div className={showPreviewFeatures ? 'contents' : 'hidden'}>
         <button

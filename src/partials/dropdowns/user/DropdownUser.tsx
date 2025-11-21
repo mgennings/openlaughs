@@ -90,29 +90,30 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
 
     return (
       <div className="flex items-center justify-between px-5 py-1.5 gap-1.5">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
           {avatarUrl ? (
             <img
-              className="size-9 rounded-full border-2 border-success"
+              className="size-9 rounded-full border-2 border-success flex-shrink-0"
               src={avatarUrl}
               alt={userName}
             />
           ) : (
-            <div className="size-9 rounded-full border-2 border-success bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
+            <div className="size-9 rounded-full border-2 border-success bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm flex-shrink-0">
               {userInitials.toUpperCase()}
             </div>
           )}
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col min-w-0 flex-1">
             <Link
               to="/account/home/user-profile"
-              className="text-sm text-gray-800 hover:text-primary font-semibold leading-none"
+              className="text-sm text-gray-800 hover:text-primary font-semibold leading-normal truncate"
             >
               {userName}
             </Link>
             {userEmail && (
               <a
                 href={`mailto:${userEmail}`}
-                className="text-xs text-gray-600 hover:text-primary font-medium leading-none"
+                className="text-xs text-gray-600 hover:text-primary font-medium leading-normal truncate"
+                title={userEmail}
               >
                 {userEmail}
               </a>

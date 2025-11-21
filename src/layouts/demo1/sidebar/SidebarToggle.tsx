@@ -2,10 +2,26 @@ import clsx from 'clsx';
 import { KeenIcon } from '@/components';
 import { useDemo1Layout } from '../Demo1LayoutProvider';
 import { useMatchPath } from '@/hooks';
+import { useUserProfile } from '@/hooks';
+import { useSettings } from '@/providers/SettingsProvider';
+import { useMemo } from 'react';
 
 const SidebarToggle = () => {
   const { layout, setSidebarCollapse } = useDemo1Layout();
   const { match } = useMatchPath('/dark-sidebar');
+  const { profile } = useUserProfile();
+  const { settings } = useSettings();
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 'admin';
+  }, [profile?.role]);
+
+  const showPreviewFeatures = isAdmin && settings.previewMode;
+
+  // Don't show toggle if preview mode is off
+  if (!showPreviewFeatures) {
+    return null;
+  }
 
   const handleClick = () => {
     if (layout.options.sidebar.collapse) {
