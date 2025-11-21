@@ -86,7 +86,7 @@ const ModalProfile = ({ open, onOpenChange }: IModalProfileProps) => {
                         className="text-gray-500 text-base"
                       />
                       <a
-                        href="https://keenthemes.com"
+                        href="https://www.austinweb.co"
                         className="text-gray-600 hover:text-primary"
                         rel="noopener noreferrer"
                       >

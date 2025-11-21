@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="flex order-2 md:order-1 gap-2 font-normal text-2sm">
             <span className="text-gray-500">{currentYear} &copy;</span>
             <a
-              href="https://keenthemes.com"
+              href="https://www.austinweb.co"
               target="_blank"
               className="text-gray-600 hover:text-primary"
             >
