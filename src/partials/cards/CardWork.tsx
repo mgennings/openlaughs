@@ -77,13 +77,13 @@ const CardWork = ({
         )}
 
         {dateTime && (
-          <div className="text-sm text-gray-700 flex items-center gap-2">
+          <div className="my-4 text-sm text-gray-700 flex items-center gap-2">
             <KeenIcon icon="calendar" className="text-primary" />
             {formatDateTime(dateTime)}
           </div>
         )}
 
-        <div className="flex items-end justify-between grow">
+        <div className="flex items-end justify-between grow mt-2">
           <Link
             to={titleLink || '/shows/:id'}
             title={authorName}
