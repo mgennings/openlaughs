@@ -58,18 +58,22 @@ const CardWork = ({
 
   return (
     <div className="card">
-      <img src={imageSrc} className="w-full h-auto rounded-t-xl" alt="" />
+      <Link to={titleLink || '/shows/:id'} className="block">
+        <img src={imageSrc} className="w-full h-auto rounded-t-xl" alt="" />
+      </Link>
 
-      <div className="flex flex-col px-5 py-4.5 h-full">
+      <div className="px-5 py-4.5 mt-auto">
         <Link
-          to={titleLink || '/public-profile/profiles/company'}
-          className="text-lg font-medium text-gray-900 hover:text-primary"
+          to={titleLink || '/shows/:id'}
+          className="text-lg md:text-md font-medium text-gray-900 hover:text-primary"
         >
           {title}
         </Link>
 
         {description && (
-          <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+          <p className="text-sm text-gray-600 line-clamp-2 my-2 min-h-[40px]">
+            {description}
+          </p>
         )}
 
         {dateTime && (
@@ -80,7 +84,11 @@ const CardWork = ({
         )}
 
         <div className="flex items-end justify-between grow">
-          <div className="flex items-center grow">
+          <Link
+            to={titleLink || '/shows/:id'}
+            title={authorName}
+            className="flex items-center grow"
+          >
             {hasAvatarUrl ? (
               <img
                 src={avatarSrc}
@@ -102,13 +110,10 @@ const CardWork = ({
               </div>
             )}
 
-            <Link
-              to="/public-profile/profiles/nft"
-              className="text-2sm text-gray-800 hover:text-primary mb-px"
-            >
+            <div className="text-2sm text-gray-800 hover:text-primary mb-px line-clamp-1">
               {authorName}
-            </Link>
-          </div>
+            </div>
+          </Link>
 
           <div className="flex gap-3 items-center">
             <div className="flex gap-1 items-center">
