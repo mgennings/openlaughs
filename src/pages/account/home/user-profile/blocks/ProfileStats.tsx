@@ -122,7 +122,7 @@ const ProfileStats = () => {
             <div className="text-2xl font-bold text-gray-900">
               {stats.showsAttended}
             </div>
-            <div className="text-sm text-gray-600 text-center">
+            <div className="text-xs md:text-sm text-gray-600 text-center">
               Shows Attended
             </div>
           </div>

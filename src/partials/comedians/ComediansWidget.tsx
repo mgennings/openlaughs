@@ -130,29 +130,27 @@ const ComediansWidget = ({
   }
 
   return (
-    <div className={`card ${className}`}>
+    <div className={className}>
       {showHeader && (
-        <div className="card-header">
-          <h3 className="card-title">
+        <div className="flex items-center justify-between mb-5">
+          <h3 className="text-lg md:text-xl font-semibold text-gray-900">
             {featured ? 'Featured Comedians' : 'Comedians'}
           </h3>
-          <Link
-            to="/comedians"
-            className="btn btn-sm btn-light hover:btn-primary"
-          >
+          <Link to="/comedians" className="btn btn-sm btn-light-primary">
             View All
+            <KeenIcon icon="arrow-right" className="ms-2" />
           </Link>
         </div>
       )}
-      <div className="card-body">
+      <div className="h-full">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {comedians.map(comedian => (
             <Link
               key={comedian.id}
               to={`/comedians/${comedian.id}`}
-              className="card card-hover group"
+              className="card"
             >
-              <div className="card-body flex flex-col items-center text-center p-5">
+              <div className="flex flex-col items-center text-center p-5">
                 {/* Profile Image */}
                 <div className="relative mb-3">
                   {profileImageUrls[comedian.id] ? (

@@ -222,7 +222,7 @@ const EarningsChart = () => {
         <h3 className="card-title">Earnings</h3>
 
         <div className="flex items-center gap-5">
-          <label className="switch switch-sm">
+          <label className="switch switch-sm hidden md:block">
             <input
               name="check"
               type="checkbox"

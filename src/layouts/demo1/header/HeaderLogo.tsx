@@ -33,7 +33,7 @@ const HeaderLogo = () => {
       <Link to="/" className="shrink-0">
         <img
           src={toAbsoluteUrl('/media/app/OpenLaughs-logo-mobile.png')}
-          className="max-h-[25px] w-full"
+          className="max-h-[35px] w-full"
           alt="mini-logo"
         />
       </Link>

@@ -348,13 +348,7 @@ const ShowsList = ({
           </p>
         </div>
       ) : (
-        <div
-          className={
-            compact
-              ? 'grid grid-cols-1 md:grid-cols-3 gap-5'
-              : 'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 lg:gap-7.5'
-          }
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {filteredAndSortedShows.map(show => {
             const venue = venueMap[show.venueID];
             const venueName = venue?.name || 'Unknown Venue';

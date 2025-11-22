@@ -111,61 +111,81 @@ const FanDashboardContent = () => {
       </div>
 
       {/* Quick Stats - Real Data */}
-      <div className="grid lg:grid-cols-4 gap-5 lg:gap-7.5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
         <div className="card">
-          <div className="card-body flex items-center gap-4">
-            <div className="flex items-center justify-center size-12 rounded-lg bg-success/10">
+          <div className="grid grid-cols-2 card-body p-2 md:p-4 gap-2 items-center lg:flex lg:items-center lg:gap-4">
+            <div className="col-span-1 flex items-center justify-center size-12 rounded-lg bg-success/10">
               <KeenIcon
                 icon="calendar-tick"
                 className="text-2xl text-success"
               />
             </div>
-            <div>
+            <div className="col-span-1 flex items-center lg:block">
               <div className="text-2xl font-semibold text-gray-900">
                 {loadingStats ? '...' : stats.showsAttended}
               </div>
+              <div className="hidden lg:block text-sm text-gray-600">
+                Shows Attended
+              </div>
+            </div>
+            <div className="col-span-2 text-center lg:hidden">
               <div className="text-sm text-gray-600">Shows Attended</div>
             </div>
           </div>
         </div>
 
         <div className="card">
-          <div className="card-body flex items-center gap-4">
-            <div className="flex items-center justify-center size-12 rounded-lg bg-danger/10">
+          <div className="grid grid-cols-2 card-body p-2 md:p-4 gap-2 items-center lg:flex lg:items-center lg:gap-4">
+            <div className="col-span-1 flex items-center justify-center size-12 rounded-lg bg-danger/10">
               <KeenIcon icon="user-tick" className="text-2xl text-danger" />
             </div>
-            <div>
+            <div className="col-span-1 flex items-center lg:block">
               <div className="text-2xl font-semibold text-gray-900">
                 {loadingStats ? '...' : stats.comediansFollowing}
               </div>
+              <div className="hidden lg:block text-sm text-gray-600">
+                Following
+              </div>
+            </div>
+            <div className="col-span-2 text-center lg:hidden">
               <div className="text-sm text-gray-600">Following</div>
             </div>
           </div>
         </div>
 
         <div className="card">
-          <div className="card-body flex items-center gap-4">
-            <div className="flex items-center justify-center size-12 rounded-lg bg-warning/10">
+          <div className="grid grid-cols-2 card-body p-2 md:p-4 gap-2 items-center lg:flex lg:items-center lg:gap-4">
+            <div className="col-span-1 flex items-center justify-center size-12 rounded-lg bg-warning/10">
               <KeenIcon icon="star" className="text-2xl text-warning" />
             </div>
-            <div>
+            <div className="col-span-1 flex items-center lg:block">
               <div className="text-2xl font-semibold text-gray-900">
                 {loadingStats ? '...' : stats.venuesFavorited}
               </div>
+              <div className="hidden lg:block text-sm text-gray-600">
+                Favorite Venues
+              </div>
+            </div>
+            <div className="col-span-2 text-center lg:hidden">
               <div className="text-sm text-gray-600">Favorite Venues</div>
             </div>
           </div>
         </div>
 
         <div className="card">
-          <div className="card-body flex items-center gap-4">
-            <div className="flex items-center justify-center size-12 rounded-lg bg-primary/10">
+          <div className="grid grid-cols-2 card-body p-2 md:p-4 gap-2 items-center lg:flex lg:items-center lg:gap-4">
+            <div className="col-span-1 flex items-center justify-center size-12 rounded-lg bg-primary/10">
               <KeenIcon icon="heart" className="text-2xl text-primary" />
             </div>
-            <div>
+            <div className="col-span-1 flex items-center lg:block">
               <div className="text-2xl font-semibold text-gray-900">
                 {loadingStats ? '...' : stats.showsSaved}
               </div>
+              <div className="hidden lg:block text-sm text-gray-600">
+                Saved Shows
+              </div>
+            </div>
+            <div className="col-span-2 text-center lg:hidden">
               <div className="text-sm text-gray-600">Saved Shows</div>
             </div>
           </div>
@@ -185,7 +205,7 @@ const FanDashboardContent = () => {
       {/* Quick Actions */}
       {profile && (
         <div className="card">
-          <div className="card-header">
+          <div className="card-header border-b border-gray-200 bg-gray-50">
             <h3 className="card-title">Quick Actions</h3>
           </div>
           <div className="card-body">
