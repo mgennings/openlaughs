@@ -4,7 +4,7 @@ import { useGraphQL } from '@/lib/useGraphQL';
 import { listUserProfiles } from '@/graphql/queries';
 import { createUserProfile, updateUserProfile } from '@/graphql/mutations';
 import type { UserProfile } from '@/API';
-import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
+import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { getPublicUrl, uploadPublicImage } from '@/lib/storage';
 import { US_STATES } from '@/config/constants';
 
@@ -34,9 +34,17 @@ const PersonalInfo = () => {
     didInit.current = true;
     const init = async () => {
       const user = await getCurrentUser();
-      const attrs = await fetchUserAttributes();
-      const email = attrs.email || '';
+      const session = await fetchAuthSession();
+      const idToken = session.tokens?.idToken;
+      const email = (idToken?.payload?.email as string) || '';
       const sub = user.userId;
+
+      // Get name from ID token
+      const tokenName = idToken?.payload?.name as string | undefined;
+      const tokenGivenName = idToken?.payload?.given_name as string | undefined;
+      const tokenFamilyName = idToken?.payload?.family_name as
+        | string
+        | undefined;
 
       // Find by email; create if missing
       const data = await execute<{
@@ -56,11 +64,35 @@ const PersonalInfo = () => {
                 id: sub,
                 email,
                 role: 'fan',
+                firstName: tokenGivenName || '',
+                lastName: tokenFamilyName || '',
+                displayName: tokenName || email,
               },
             },
           },
         );
         found = created.createUserProfile;
+      } else {
+        // Migration: Update profile with name from ID token if missing
+        const needsNameUpdate = !found.firstName || !found.lastName;
+        if (needsNameUpdate && (tokenGivenName || tokenFamilyName)) {
+          console.log('Migrating profile with name from ID token...');
+          const updated = await execute<{ updateUserProfile: UserProfile }>(
+            updateUserProfile,
+            {
+              variables: {
+                input: {
+                  id: found.id,
+                  firstName: found.firstName || tokenGivenName || '',
+                  lastName: found.lastName || tokenFamilyName || '',
+                  displayName: found.displayName || tokenName || email,
+                },
+              },
+            },
+          );
+          found = updated.updateUserProfile;
+          console.log('Profile updated with name:', found);
+        }
       }
       setProfile(found);
       setForm({

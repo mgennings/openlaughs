@@ -56,11 +56,13 @@ const OnboardingPage = () => {
         console.log('No existing profile found, creating new one');
       }
 
-      // Create UserProfile with selected role
+      // Create UserProfile with selected role and user info from OAuth/Cognito
       const input: CreateUserProfileInput = {
         email: userEmail,
         role: role,
         displayName: currentUser?.fullname || currentUser?.username || '',
+        firstName: currentUser?.first_name || '',
+        lastName: currentUser?.last_name || '',
       };
 
       console.log('Creating UserProfile with input:', input);

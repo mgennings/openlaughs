@@ -19,6 +19,8 @@ import {
   resendSignUpCode,
   getCurrentUser,
   fetchUserAttributes,
+  fetchAuthSession,
+  signInWithRedirect,
   type SignInOutput,
   type SignUpOutput,
 } from 'aws-amplify/auth';
@@ -77,7 +79,8 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     const checkAuth = async () => {
       try {
         const user = await getCurrentUser();
-        const attributes = await fetchUserAttributes();
+        const session = await fetchAuthSession();
+        const idToken = session.tokens?.idToken;
 
         // Create auth model from Cognito session
         const authModel: AuthModel = {
@@ -85,17 +88,22 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
           api_token: 'cognito-session',
         };
 
-        // Create user model from Cognito attributes
+        // Get user info from ID token (works for both OAuth and regular Cognito users)
+        const email =
+          (idToken?.payload?.email as string) || user.username || '';
+        const name = idToken?.payload?.name as string | undefined;
+        const givenName = idToken?.payload?.given_name as string | undefined;
+        const familyName = idToken?.payload?.family_name as string | undefined;
+
+        // Create user model from ID token claims
         const userModel: UserModel = {
-          id: 0, // Will be set from user attributes if available
-          username: attributes.email || user.username || '',
+          id: 0,
+          username: email,
           password: undefined,
-          email: attributes.email || '',
-          first_name: attributes.given_name || attributes.name || '',
-          last_name: attributes.family_name || '',
-          fullname:
-            attributes.name ||
-            `${attributes.given_name || ''} ${attributes.family_name || ''}`.trim(),
+          email: email,
+          first_name: givenName || name || '',
+          last_name: familyName || '',
+          fullname: name || `${givenName || ''} ${familyName || ''}`.trim(),
         };
 
         setAuth(authModel);
@@ -115,23 +123,28 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   const verify = async () => {
     try {
       const user = await getCurrentUser();
-      const attributes = await fetchUserAttributes();
+      const session = await fetchAuthSession();
+      const idToken = session.tokens?.idToken;
 
       const authModel: AuthModel = {
         access_token: 'cognito-session',
         api_token: 'cognito-session',
       };
 
+      // Get user info from ID token (works for both OAuth and regular Cognito users)
+      const email = (idToken?.payload?.email as string) || user.username || '';
+      const name = idToken?.payload?.name as string | undefined;
+      const givenName = idToken?.payload?.given_name as string | undefined;
+      const familyName = idToken?.payload?.family_name as string | undefined;
+
       const userModel: UserModel = {
         id: 0,
-        username: attributes.email || user.username || '',
+        username: email,
         password: undefined,
-        email: attributes.email || '',
-        first_name: attributes.given_name || attributes.name || '',
-        last_name: attributes.family_name || '',
-        fullname:
-          attributes.name ||
-          `${attributes.given_name || ''} ${attributes.family_name || ''}`.trim(),
+        email: email,
+        first_name: givenName || name || '',
+        last_name: familyName || '',
+        fullname: name || `${givenName || ''} ${familyName || ''}`.trim(),
       };
 
       setAuth(authModel);
@@ -189,59 +202,28 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  // const loginWithGoogle = async () => {
-  //   try {
-  //     // Kick off OAuth redirect to Cognito Hosted UI for Google
-  //     window.location.assign(
-  //       `${import.meta.env.VITE_COGNITO_DOMAIN}/oauth2/authorize?identity_provider=Google&redirect_uri=${encodeURIComponent(import.meta.env.VITE_COGNITO_REDIRECT_URL)}&response_type=CODE&client_id=${import.meta.env.VITE_COGNITO_CLIENT_ID}`,
-  //     );
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // };
-
-  // const loginWithApple = async () => {
-  //   try {
-  //     // Kick off OAuth redirect to Cognito Hosted UI for Sign in with Apple
-  //     window.location.assign(
-  //       `${import.meta.env.VITE_COGNITO_DOMAIN}/oauth2/authorize?identity_provider=SignInWithApple&redirect_uri=${encodeURIComponent(import.meta.env.VITE_COGNITO_REDIRECT_URL)}&response_type=CODE&client_id=${import.meta.env.VITE_COGNITO_CLIENT_ID}`,
-  //     );
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // };
-
   const loginWithGoogle = async () => {
-    // No try/catch needed; this is a full-page redirect
-    const domain = import.meta.env.VITE_COGNITO_DOMAIN;
-    const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
-    const redirectUri = import.meta.env.VITE_COGNITO_REDIRECT_URL;
-
-    const url =
-      `${domain}/oauth2/authorize` +
-      `?identity_provider=Google` +
-      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
-      `&response_type=code` + // <- lowercase
-      `&client_id=${encodeURIComponent(clientId)}` +
-      `&scope=${encodeURIComponent('openid email profile')}`;
-
-    window.location.assign(url);
+    try {
+      // Use Amplify's built-in OAuth redirect
+      await signInWithRedirect({
+        provider: 'Google',
+      });
+    } catch (error) {
+      console.error('Error initiating Google sign in:', error);
+      throw error;
+    }
   };
 
   const loginWithApple = async () => {
-    const domain = import.meta.env.VITE_COGNITO_DOMAIN;
-    const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
-    const redirectUri = import.meta.env.VITE_COGNITO_REDIRECT_URL;
-
-    const url =
-      `${domain}/oauth2/authorize` +
-      `?identity_provider=SignInWithApple` +
-      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
-      `&response_type=code` + // <- lowercase
-      `&client_id=${encodeURIComponent(clientId)}` +
-      `&scope=${encodeURIComponent('openid email profile')}`;
-
-    window.location.assign(url);
+    try {
+      // Use Amplify's built-in OAuth redirect
+      await signInWithRedirect({
+        provider: 'Apple',
+      });
+    } catch (error) {
+      console.error('Error initiating Apple sign in:', error);
+      throw error;
+    }
   };
 
   const register = async (
