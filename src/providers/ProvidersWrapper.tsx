@@ -20,15 +20,15 @@ const queryClient = new QueryClient();
 const amplifyConfigWithEnv = {
   ...amplifyconfig,
   oauth: {
-    ...amplifyconfig.oauth,
+    ...(amplifyconfig.oauth as any),
     // Use environment variables for redirect URLs (overrides amplifyconfig)
     redirectSignIn:
       import.meta.env.VITE_COGNITO_REDIRECT_SIGNIN ||
-      amplifyconfig.oauth?.redirectSignIn ||
+      (amplifyconfig.oauth as any)?.redirectSignIn ||
       'http://localhost:5173/auth/callback',
     redirectSignOut:
       import.meta.env.VITE_COGNITO_REDIRECT_SIGNOUT ||
-      amplifyconfig.oauth?.redirectSignOut ||
+      (amplifyconfig.oauth as any)?.redirectSignOut ||
       'http://localhost:5173/auth/login',
   },
 };
