@@ -112,13 +112,32 @@ const PromoterShowsPage = () => {
         </div>
       )}
 
-      {loading ? (
+      {loading && (
         <div className="flex items-center gap-2 text-gray-600">
           <div
             className="spinner-border spinner-border-sm text-primary"
             role="status"
           />
           <span>Loading shows…</span>
+        </div>
+      )}
+
+      {shows.length === 0 ? (
+        <div className="text-center py-20">
+          <KeenIcon icon="calendar-2" className="text-6xl text-gray-300 mb-4" />
+          <h3 className="text-xl font-semibold text-gray-700 mb-2">
+            No Shows Added Yet
+          </h3>
+          <p className="text-gray-500 mb-6">
+            Add your first show to get started
+          </p>
+          <button
+            className="btn btn-primary"
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            <KeenIcon icon="plus" className="me-2" />
+            Add Show
+          </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7.5">

@@ -107,22 +107,19 @@ const ComediansListPage = () => {
             title="Comedians"
             description="Manage comedian profiles and directory"
           />
-          <ToolbarActions>
+        </Toolbar>
+      </Container>
+
+      <Container>
+        <div className="grid lg:grid-cols-1 gap-4 lg:gap-7.5">
+          <div className="flex items-center justify-between mb-5 gap-2">
             <button
-              className="btn btn-sm btn-primary"
+              className="btn btn-sm btn-primary whitespace-nowrap"
               onClick={() => setShowCreateModal(true)}
             >
               <KeenIcon icon="plus" className="me-2" />
               Add Comedian
             </button>
-          </ToolbarActions>
-        </Toolbar>
-      </Container>
-
-      <Container>
-        <div className="card">
-          <div className="card-header">
-            <h3 className="card-title">Comedian Directory</h3>
             <div className="flex items-center gap-2">
               <div className="relative">
                 <KeenIcon
@@ -140,7 +137,7 @@ const ComediansListPage = () => {
             </div>
           </div>
 
-          <div className="card-body">
+          <div className="md:h-full">
             {loading ? (
               <div className="flex items-center justify-center py-20">
                 <div className="spinner-border text-primary" role="status">
@@ -172,7 +169,7 @@ const ComediansListPage = () => {
                 )}
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {filteredComedians.map(comedian => (
                   <Link
                     key={comedian.id}
@@ -260,7 +257,7 @@ const ComediansListPage = () => {
                       {comedian.bio && (
                         <p
                           title={comedian.bio}
-                          className="text-sm text-gray-600 line-clamp-2 mb-3"
+                          className="text-xs md:text-sm text-gray-600 line-clamp-4 mb-3 min-h-[64px] md:min-h-[80px]"
                         >
                           {comedian.bio}
                         </p>
