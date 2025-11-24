@@ -16,7 +16,11 @@ const ShowsWidget = ({ limit = 6, className = '' }: ShowsWidgetProps) => {
         <h3 className="text-lg md:text-xl font-semibold text-gray-900">
           Upcoming Shows
         </h3>
-        <Link to="/shows" className="btn btn-sm btn-light-primary">
+        <Link
+          to="/shows"
+          className="btn btn-sm btn-light-primary"
+          aria-label="View All Shows"
+        >
           View All
           <KeenIcon icon="arrow-right" className="ms-2" />
         </Link>
