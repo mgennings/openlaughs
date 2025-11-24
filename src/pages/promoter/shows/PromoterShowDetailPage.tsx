@@ -288,7 +288,7 @@ const PromoterShowDetailPage = () => {
             </div>
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
               <div className="flex items-center gap-1">
-                <KeenIcon icon="calendar" className="text-primary" />
+                <KeenIcon icon="calendar" className="text-primary mr-1" />
                 <div className="flex flex-col">
                   <span className="font-medium">
                     {formatDate(show.dateTime)}

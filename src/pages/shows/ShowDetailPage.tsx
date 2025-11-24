@@ -178,6 +178,33 @@ const ShowDetailPage = () => {
     }
   };
 
+  const formatDate = (dateTimeString: string) => {
+    try {
+      const date = new Date(dateTimeString);
+      return new Intl.DateTimeFormat('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).format(date);
+    } catch {
+      return dateTimeString;
+    }
+  };
+
+  const formatTime = (dateTimeString: string) => {
+    try {
+      const date = new Date(dateTimeString);
+      return new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      }).format(date);
+    } catch {
+      return '';
+    }
+  };
+
   const generateCalendarLink = () => {
     if (!show) return '';
     const startDate = new Date(show.dateTime);
@@ -277,8 +304,13 @@ const ShowDetailPage = () => {
             </div>
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
               <div className="flex items-center gap-1">
-                <KeenIcon icon="calendar" className="text-primary" />
-                <span>{formatDateTime(show.dateTime)}</span>
+                <KeenIcon icon="calendar" className="text-primary mr-1" />
+                <div className="flex flex-col">
+                  <span className="font-medium">
+                    {formatDate(show.dateTime)}
+                  </span>
+                  <span className="text-xs">{formatTime(show.dateTime)}</span>
+                </div>
               </div>
               {venue && (
                 <div className="flex items-center gap-2">
@@ -313,6 +345,25 @@ const ShowDetailPage = () => {
             </div>
             {show.description && (
               <p className="text-gray-700 line-clamp-2">{show.description}</p>
+            )}
+            {show.ticketUrl && (
+              <div className="mt-4">
+                <a
+                  href={show.ticketUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary inline-flex items-center gap-2"
+                >
+                  <KeenIcon icon="link" />
+                  Get Tickets
+                  {show.ticketPrice !== null &&
+                    show.ticketPrice !== undefined && (
+                      <span className="ml-1">
+                        • ${show.ticketPrice.toFixed(2)}
+                      </span>
+                    )}
+                </a>
+              </div>
             )}
           </div>
         </div>
@@ -478,7 +529,7 @@ const ShowDetailPage = () => {
                       {venue.description}
                     </p>
                   )}
-                  <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="flex gap-2 mt-3">
                     {venue.website && (
                       <a
                         href={venue.website}
@@ -518,8 +569,15 @@ const ShowDetailPage = () => {
               <div>
                 <div className="text-sm text-gray-600 mb-1">Date & Time</div>
                 <div className="text-gray-900 flex items-center gap-2">
-                  <KeenIcon icon="calendar" className="text-primary" />
-                  {formatDateTime(show.dateTime)}
+                  <KeenIcon icon="calendar" className="text-primary mr-1" />
+                  <div className="flex flex-col">
+                    <span className="font-medium">
+                      {formatDate(show.dateTime)}
+                    </span>
+                    <span className="text-sm text-gray-600">
+                      {formatTime(show.dateTime)}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -535,10 +593,46 @@ const ShowDetailPage = () => {
                   </Link>
                 </div>
               )}
+
+              {show.ticketPrice !== null && show.ticketPrice !== undefined && (
+                <div>
+                  <div className="text-sm text-gray-600 mb-1">Ticket Price</div>
+                  <div className="text-gray-900 font-semibold text-lg">
+                    ${show.ticketPrice.toFixed(2)}
+                  </div>
+                </div>
+              )}
+
+              {show.ageRestriction && (
+                <div>
+                  <div className="text-sm text-gray-600 mb-1">
+                    Age Restriction
+                  </div>
+                  <div className="text-gray-900">
+                    <span className="badge badge-light-info">
+                      {show.ageRestriction}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {show.ticketUrl && (
+                <div className="pt-3">
+                  <a
+                    href={show.ticketUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary w-full"
+                  >
+                    <KeenIcon icon="link" className="me-2" />
+                    Get Tickets
+                  </a>
+                </div>
+              )}
             </div>
 
             {!isPast && (
-              <div className="mt-6 pt-6 border-t border-gray-200">
+              <div className="pt-3">
                 <div className="grid grid-cols-2 gap-3">
                   {id && <RSVPButton showId={id} variant="button" showCount />}
                   <a
