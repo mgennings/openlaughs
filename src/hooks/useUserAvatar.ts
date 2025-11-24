@@ -1,36 +1,36 @@
 import { useEffect, useState } from 'react';
 import { useGraphQL } from '@/lib/useGraphQL';
-import { listUserProfiles } from '@/graphql/queries';
+import { getUserProfile } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
 import { useAuthContext } from '@/auth/useAuthContext';
+import { getCurrentUser } from 'aws-amplify/auth';
 import type { UserProfile } from '@/API';
 
 /**
  * Hook to fetch and return the current user's avatar URL from their profile
- * @param email - Optional email to fetch profile for. If not provided, uses currentUser from auth context
  * @returns The avatar URL string, or undefined if no avatar is set
  */
-export function useUserAvatar(email?: string) {
+export function useUserAvatar() {
   const { execute } = useGraphQL();
   const { currentUser } = useAuthContext();
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>();
 
-  const userEmail = email || currentUser?.email;
-
   useEffect(() => {
-    if (!userEmail) return;
+    if (!currentUser?.email) return;
 
     const init = async () => {
       try {
+        // Get Cognito user ID
+        const cognitoUser = await getCurrentUser();
+        const userId = cognitoUser.userId;
+
         const data = await execute<{
-          listUserProfiles: { items: (UserProfile | null)[] };
-        }>(listUserProfiles, {
-          variables: { filter: { email: { eq: userEmail } }, limit: 1 },
+          getUserProfile: UserProfile | null;
+        }>(getUserProfile, {
+          variables: { id: userId },
         });
 
-        const profile = data.listUserProfiles.items.filter(Boolean)[0] as
-          | UserProfile
-          | undefined;
+        const profile = data.getUserProfile;
 
         if (profile?.profileImageKey) {
           const url = await getPublicUrl(profile.profileImageKey);
@@ -45,7 +45,7 @@ export function useUserAvatar(email?: string) {
     };
 
     void init();
-  }, [userEmail, execute]);
+  }, [currentUser?.email, execute]);
 
   return avatarUrl;
 }

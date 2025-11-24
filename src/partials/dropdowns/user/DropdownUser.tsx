@@ -8,7 +8,8 @@ import { DropdownUserLanguages } from './DropdownUserLanguages';
 import { useSettings } from '@/providers/SettingsProvider';
 import { DefaultTooltip, KeenIcon } from '@/components';
 import { useGraphQL } from '@/lib/useGraphQL';
-import { listUserProfiles } from '@/graphql/queries';
+import { getUserProfile } from '@/graphql/queries';
+import { getCurrentUser } from 'aws-amplify/auth';
 import type { UserProfile } from '@/API';
 import { getPublicUrl } from '@/lib/storage';
 import { getInitials, getUserDisplayName } from '@/lib/userDisplay';
@@ -39,14 +40,17 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
     const init = async () => {
       const email = currentUser?.email;
       if (!email) return;
+
+      // Get Cognito user ID
+      const cognitoUser = await getCurrentUser();
+      const userId = cognitoUser.userId;
+
       const data = await execute<{
-        listUserProfiles: { items: (UserProfile | null)[] };
-      }>(listUserProfiles, {
-        variables: { filter: { email: { eq: email } }, limit: 1 },
+        getUserProfile: UserProfile | null;
+      }>(getUserProfile, {
+        variables: { id: userId },
       });
-      const prof = data.listUserProfiles.items.filter(Boolean)[0] as
-        | UserProfile
-        | undefined;
+      const prof = data.getUserProfile;
       if (prof?.profileImageKey) {
         const url = await getPublicUrl(prof.profileImageKey, 300);
         setAvatarUrl(url.toString());

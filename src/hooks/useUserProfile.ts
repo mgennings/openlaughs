@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { generateClient } from 'aws-amplify/api';
-import { listUserProfiles } from '@/graphql/queries';
+import { getUserProfile } from '@/graphql/queries';
 import { useAuthContext } from '@/auth';
 import type { UserProfile } from '@/API';
 import type { UserRole } from '@/config/constants';
@@ -37,22 +37,31 @@ export const useUserProfile = (): UseUserProfileResult => {
       setLoading(true);
       setError(null);
 
+      // Get the Cognito user ID to fetch profile by ID
+      const { getCurrentUser: getCognitoUser } = await import(
+        'aws-amplify/auth'
+      );
+      const cognitoUser = await getCognitoUser();
+      const userId = cognitoUser.userId;
+
+      // Fetch UserProfile by ID (Cognito sub)
       const result = await client.graphql({
-        query: (listUserProfiles as string).replace(/__typename/g, ''),
-        variables: {
-          filter: {
-            email: { eq: currentUser.email },
-          },
-          limit: 1,
-        },
+        query: (getUserProfile as string).replace(/__typename/g, ''),
+        variables: { id: userId },
       });
 
-      if (
-        'data' in result &&
-        result.data?.listUserProfiles?.items &&
-        result.data.listUserProfiles.items.length > 0
-      ) {
-        const userProfile = result.data.listUserProfiles.items[0];
+      if ('data' in result && result.data?.getUserProfile) {
+        const userProfile = result.data.getUserProfile;
+
+        // Security check: verify the email matches (in case of ID mismatch)
+        if (userProfile.email !== currentUser.email) {
+          console.error('Profile email mismatch - security issue detected');
+          setProfile(null);
+          setRole(null);
+          setError('Security error: Profile email mismatch');
+          return;
+        }
+
         setProfile(userProfile);
         setRole((userProfile.role as UserRole) || null);
       } else {

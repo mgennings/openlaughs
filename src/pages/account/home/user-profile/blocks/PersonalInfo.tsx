@@ -1,7 +1,7 @@
 import { KeenIcon } from '@/components';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useGraphQL } from '@/lib/useGraphQL';
-import { listUserProfiles } from '@/graphql/queries';
+import { getUserProfile } from '@/graphql/queries';
 import { createUserProfile, updateUserProfile } from '@/graphql/mutations';
 import type { UserProfile } from '@/API';
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
@@ -46,15 +46,20 @@ const PersonalInfo = () => {
         | string
         | undefined;
 
-      // Find by email; create if missing
-      const data = await execute<{
-        listUserProfiles: { items: (UserProfile | null)[] };
-      }>(listUserProfiles, {
-        variables: { filter: { email: { eq: email } }, limit: 1 },
-      });
-      let found = data.listUserProfiles.items.filter(Boolean)[0] as
-        | UserProfile
-        | undefined;
+      // Find by Cognito sub (user ID); create if missing
+      let found: UserProfile | undefined;
+      try {
+        const data = await execute<{
+          getUserProfile: UserProfile | null;
+        }>(getUserProfile, {
+          variables: { id: sub },
+        });
+        found = data.getUserProfile || undefined;
+      } catch (error: any) {
+        // Profile doesn't exist, will create below
+        found = undefined;
+      }
+
       if (!found) {
         const created = await execute<{ createUserProfile: UserProfile }>(
           createUserProfile,
@@ -76,7 +81,6 @@ const PersonalInfo = () => {
         // Migration: Update profile with name from ID token if missing
         const needsNameUpdate = !found.firstName || !found.lastName;
         if (needsNameUpdate && (tokenGivenName || tokenFamilyName)) {
-          console.log('Migrating profile with name from ID token...');
           const updated = await execute<{ updateUserProfile: UserProfile }>(
             updateUserProfile,
             {
@@ -91,7 +95,6 @@ const PersonalInfo = () => {
             },
           );
           found = updated.updateUserProfile;
-          console.log('Profile updated with name:', found);
         }
       }
       setProfile(found);

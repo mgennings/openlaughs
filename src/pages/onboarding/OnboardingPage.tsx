@@ -25,39 +25,45 @@ const OnboardingPage = () => {
     setError(null);
     setLoading(true);
 
+    console.log('[OnboardingPage] Starting role selection:', role);
+
     try {
       const userEmail = currentUser?.email;
       if (!userEmail) {
         throw new Error('User email not found. Please sign in again.');
       }
 
-      // Check if UserProfile already exists
+      // Get the Cognito user ID to use as the profile ID
+      // This ensures the profile ID matches the owner field that AppSync sets
+      const { getCurrentUser } = await import('aws-amplify/auth');
+      const { getUserProfile } = await import('@/graphql/queries');
+
+      const cognitoUser = await getCurrentUser();
+      const userId = cognitoUser.userId; // This is the Cognito sub
+
+      // Check if UserProfile already exists by trying to get by ID (Cognito sub)
       try {
-        const existingProfiles = await client.graphql({
-          query: (listUserProfiles as string).replace(/__typename/g, ''),
-          variables: {
-            filter: {
-              email: { eq: userEmail },
-            },
-            limit: 1,
-          },
+        const existingProfile = await client.graphql({
+          query: (getUserProfile as string).replace(/__typename/g, ''),
+          variables: { id: userId },
         });
 
-        if (
-          'data' in existingProfiles &&
-          existingProfiles.data?.listUserProfiles?.items?.length > 0
-        ) {
-          // Profile exists, redirect to dashboard
+        if ('data' in existingProfile && existingProfile.data?.getUserProfile) {
+          // Profile exists - redirect to dashboard
+          // Set flag to ensure RequireOnboarding uses fresh data
+          sessionStorage.setItem('fromOnboarding', 'true');
           navigate('/dashboard', { replace: true });
           return;
         }
-      } catch {
+      } catch (error: any) {
+        // If error is "not found", continue to create profile
         // Continue to create profile
-        console.log('No existing profile found, creating new one');
       }
 
       // Create UserProfile with selected role and user info from OAuth/Cognito
+      // IMPORTANT: Set the ID to the Cognito sub to match the owner field
       const input: CreateUserProfileInput = {
+        id: userId, // Use Cognito sub as the profile ID
         email: userEmail,
         role: role,
         displayName: currentUser?.fullname || currentUser?.username || '',
@@ -65,21 +71,18 @@ const OnboardingPage = () => {
         lastName: currentUser?.last_name || '',
       };
 
-      console.log('Creating UserProfile with input:', input);
-
       const result = await client.graphql({
         query: (createUserProfile as string).replace(/__typename/g, ''),
         variables: { input },
       });
 
-      console.log('GraphQL result:', result);
+      console.log('[OnboardingPage] GraphQL create result:', result);
 
       // Check for GraphQL errors (GraphQL can return 200 with errors)
       if ('errors' in result && result.errors && result.errors.length > 0) {
         const errorMessages = result.errors
           .map((e: any) => e.message || String(e))
           .join(', ');
-        console.error('GraphQL errors:', result.errors);
         throw new Error(errorMessages || 'Failed to create user profile');
       }
 
@@ -89,22 +92,15 @@ const OnboardingPage = () => {
       }
 
       if (!result.data?.createUserProfile) {
-        console.error('No createUserProfile in response:', result.data);
-        throw new Error(
-          'Failed to create user profile - no data returned. Check console for details.',
-        );
+        throw new Error('Failed to create user profile - no data returned');
       }
 
-      console.log(
-        'UserProfile created successfully:',
-        result.data.createUserProfile,
-      );
+      // Set flag to indicate we're coming from onboarding
+      // This tells RequireOnboarding to clear its cache and fetch fresh data
+      sessionStorage.setItem('fromOnboarding', 'true');
 
       // Small delay to ensure profile is available before redirect
       await new Promise(resolve => setTimeout(resolve, 500));
-
-      // If admin, add to Cognito admin group (would need Lambda trigger for this)
-      // For now, we'll handle this via the UserProfile role field
 
       // Navigate to dashboard
       navigate('/dashboard', { replace: true });

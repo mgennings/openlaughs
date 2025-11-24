@@ -21,7 +21,8 @@ import { useMenus } from '@/providers';
 import { useSettings } from '@/providers/SettingsProvider';
 import { useAuthContext } from '@/auth';
 import { useGraphQL } from '@/lib/useGraphQL';
-import { listUserProfiles } from '@/graphql/queries';
+import { getUserProfile } from '@/graphql/queries';
+import { getCurrentUser } from 'aws-amplify/auth';
 import type { UserProfile } from '@/API';
 
 const SidebarMenu = () => {
@@ -38,14 +39,17 @@ const SidebarMenu = () => {
         setIsAdmin(false);
         return;
       }
+
+      // Get Cognito user ID
+      const cognitoUser = await getCurrentUser();
+      const userId = cognitoUser.userId;
+
       const data = await execute<{
-        listUserProfiles: { items: (UserProfile | null)[] };
-      }>(listUserProfiles, {
-        variables: { filter: { email: { eq: email } }, limit: 1 },
+        getUserProfile: UserProfile | null;
+      }>(getUserProfile, {
+        variables: { id: userId },
       });
-      const prof = data.listUserProfiles.items.filter(Boolean)[0] as
-        | UserProfile
-        | undefined;
+      const prof = data.getUserProfile;
       setIsAdmin(prof?.role === 'admin' || false);
     };
     void init();

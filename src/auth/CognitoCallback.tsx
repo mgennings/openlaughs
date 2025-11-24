@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import { generateClient } from 'aws-amplify/api';
-import { listUserProfiles } from '@/graphql/queries';
+import { getUserProfile } from '@/graphql/queries';
 import { ScreenLoader } from '@/components/loaders';
 
 const client = generateClient({ authMode: 'userPool' });
@@ -109,19 +109,17 @@ const CognitoCallback = () => {
       try {
         setStatus('Checking your profile...');
 
+        // Get Cognito user ID
+        const cognitoUser = await getCurrentUser();
+        const userId = cognitoUser.userId;
+
         // Check if user has completed onboarding
         const result = await client.graphql({
-          query: (listUserProfiles as string).replace(/__typename/g, ''),
-          variables: {
-            filter: {
-              email: { eq: currentUserEmail },
-            },
-            limit: 1,
-          },
+          query: (getUserProfile as string).replace(/__typename/g, ''),
+          variables: { id: userId },
         });
 
-        const hasProfile =
-          'data' in result && result.data?.listUserProfiles?.items?.length > 0;
+        const hasProfile = 'data' in result && !!result.data?.getUserProfile;
 
         if (hasProfile) {
           // User has completed onboarding, go to dashboard
