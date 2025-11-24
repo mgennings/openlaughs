@@ -16,6 +16,7 @@ export default [
       'dist',
       'public',
       'src/components/keenicons/assets',
+      'src/ui-components',
       'amplify-codegen-temp/models/models',
     ],
   },

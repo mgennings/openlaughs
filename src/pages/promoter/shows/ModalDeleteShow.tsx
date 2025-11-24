@@ -32,19 +32,24 @@ const ModalDeleteShow = ({
             Delete Show
           </DialogTitle>
           <DialogDescription className="text-sm font-normal leading-none text-gray-700">
-            Are you sure you want to delete this show? This action cannot be undone.
+            Are you sure you want to delete this show? This action cannot be
+            undone.
           </DialogDescription>
         </DialogHeader>
         <DialogBody className="px-5 pb-5">
           <div className="bg-danger/10 border border-danger/20 rounded-lg p-4 mb-4">
             <div className="flex items-start gap-3">
-              <KeenIcon icon="information" className="text-danger text-xl mt-0.5 flex-shrink-0" />
+              <KeenIcon
+                icon="information"
+                className="text-danger text-xl mt-0.5 flex-shrink-0"
+              />
               <div className="flex-1">
                 <p className="text-sm font-medium text-gray-900 mb-1">
                   Show: {showTitle}
                 </p>
                 <p className="text-sm text-gray-600">
-                  All show information, images, and associated data will be permanently deleted.
+                  All show information, images, and associated data will be
+                  permanently deleted.
                 </p>
               </div>
             </div>
@@ -87,5 +92,3 @@ const ModalDeleteShow = ({
 };
 
 export { ModalDeleteShow };
-
-

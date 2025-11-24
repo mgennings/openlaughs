@@ -201,7 +201,10 @@ const PromoterShowDetailPage = () => {
               <KeenIcon icon="trash" className="me-2" />
               Delete Show
             </button>
-            <button className="btn btn-light" onClick={() => setIsEditing(false)}>
+            <button
+              className="btn btn-light"
+              onClick={() => setIsEditing(false)}
+            >
               Cancel
             </button>
           </div>
@@ -257,7 +260,10 @@ const PromoterShowDetailPage = () => {
             </div>
           ) : (
             <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 rounded-lg bg-primary/10 flex items-center justify-center border-2 border-gray-200">
-              <KeenIcon icon="calendar" className="text-4xl md:text-5xl text-primary" />
+              <KeenIcon
+                icon="calendar"
+                className="text-4xl md:text-5xl text-primary"
+              />
             </div>
           )}
 
@@ -272,7 +278,10 @@ const PromoterShowDetailPage = () => {
                   <span className="badge badge-light-warning">Past Show</span>
                 )}
               </div>
-              <button className="btn btn-primary" onClick={() => setIsEditing(true)}>
+              <button
+                className="btn btn-primary"
+                onClick={() => setIsEditing(true)}
+              >
                 <KeenIcon icon="notepad-edit" className="mr-2" />
                 Edit Show
               </button>
@@ -281,7 +290,9 @@ const PromoterShowDetailPage = () => {
               <div className="flex items-center gap-1">
                 <KeenIcon icon="calendar" className="text-primary" />
                 <div className="flex flex-col">
-                  <span className="font-medium">{formatDate(show.dateTime)}</span>
+                  <span className="font-medium">
+                    {formatDate(show.dateTime)}
+                  </span>
                   <span className="text-xs">{formatTime(show.dateTime)}</span>
                 </div>
               </div>
@@ -329,11 +340,12 @@ const PromoterShowDetailPage = () => {
                 >
                   <KeenIcon icon="link" />
                   Get Tickets
-                  {show.ticketPrice !== null && show.ticketPrice !== undefined && (
-                    <span className="ml-1">
-                      • ${show.ticketPrice.toFixed(2)}
-                    </span>
-                  )}
+                  {show.ticketPrice !== null &&
+                    show.ticketPrice !== undefined && (
+                      <span className="ml-1">
+                        • ${show.ticketPrice.toFixed(2)}
+                      </span>
+                    )}
                 </a>
               </div>
             )}
@@ -462,8 +474,12 @@ const PromoterShowDetailPage = () => {
                 <div className="text-gray-900 flex items-start gap-2">
                   <KeenIcon icon="calendar" className="text-primary mt-0.5" />
                   <div className="flex flex-col">
-                    <span className="font-medium">{formatDate(show.dateTime)}</span>
-                    <span className="text-sm text-gray-600">{formatTime(show.dateTime)}</span>
+                    <span className="font-medium">
+                      {formatDate(show.dateTime)}
+                    </span>
+                    <span className="text-sm text-gray-600">
+                      {formatTime(show.dateTime)}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -492,9 +508,13 @@ const PromoterShowDetailPage = () => {
 
               {show.ageRestriction && (
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Age Restriction</div>
+                  <div className="text-sm text-gray-600 mb-1">
+                    Age Restriction
+                  </div>
                   <div className="text-gray-900">
-                    <span className="badge badge-light-info">{show.ageRestriction}</span>
+                    <span className="badge badge-light-info">
+                      {show.ageRestriction}
+                    </span>
                   </div>
                 </div>
               )}

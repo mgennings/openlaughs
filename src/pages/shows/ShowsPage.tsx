@@ -21,4 +21,3 @@ const ShowsPage = () => {
 };
 
 export { ShowsPage };
-
