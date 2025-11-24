@@ -27,7 +27,7 @@ const PromoterShowsPage = () => {
     [currentUser?.email, currentUser?.username],
   );
 
-  const avatarUrl = useUserAvatar(currentUser?.email);
+  const avatarUrl = useUserAvatar();
 
   const fetchShows = async () => {
     if (!createdBy) return;

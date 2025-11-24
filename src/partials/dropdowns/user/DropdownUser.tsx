@@ -55,7 +55,7 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
         const url = await getPublicUrl(prof.profileImageKey, 300);
         setAvatarUrl(url.toString());
       }
-      setProfile(prof);
+      setProfile(prof || undefined);
     };
     void init();
   }, [currentUser?.email, execute]);
