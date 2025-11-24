@@ -8,6 +8,7 @@ import {
   ResetPasswordEnterEmail,
   Signup,
   TwoFactorAuth,
+  ForceChangePassword,
 } from './pages/jwt';
 import { AuthBrandedLayout } from '@/layouts/auth-branded';
 import { AuthLayout } from '@/layouts/auth';
@@ -35,6 +36,7 @@ const AuthPage = () => (
         path="/reset-password/changed"
         element={<ResetPasswordChanged />}
       />
+      <Route path="/force-change-password" element={<ForceChangePassword />} />
       <Route path="*" element={<Navigate to="/error/404" />} />
     </Route>
 
@@ -59,6 +61,10 @@ const AuthPage = () => (
       <Route
         path="/classic/reset-password/changed"
         element={<ResetPasswordChanged />}
+      />
+      <Route
+        path="/classic/force-change-password"
+        element={<ForceChangePassword />}
       />
       <Route path="*" element={<Navigate to="/error/404" />} />
     </Route>

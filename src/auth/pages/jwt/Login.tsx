@@ -61,6 +61,33 @@ const Login = () => {
         navigate('/dashboard', { replace: true });
       } catch (error: any) {
         console.error('Login error:', error);
+
+        // Handle NEW_PASSWORD_REQUIRED challenge
+        if (
+          error.name === 'NewPasswordRequiredException' ||
+          error.message === 'NEW_PASSWORD_REQUIRED' ||
+          error.challengeName === 'NEW_PASSWORD_REQUIRED'
+        ) {
+          // Extract session from error or use the one provided
+          const session = error.session || error.Session;
+          const email = error.email || values.email;
+
+          // Redirect to force change password page
+          navigate(
+            currentLayout?.name === 'auth-branded'
+              ? '/auth/force-change-password'
+              : '/auth/classic/force-change-password',
+            {
+              replace: true,
+              state: {
+                session,
+                email,
+              },
+            },
+          );
+          return;
+        }
+
         // Handle specific Cognito errors
         let errorMessage = 'The login details are incorrect';
         if (error.message) {

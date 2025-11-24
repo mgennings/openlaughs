@@ -21,6 +21,7 @@ import {
   fetchUserAttributes,
   fetchAuthSession,
   signInWithRedirect,
+  confirmSignIn,
   type SignInOutput,
   type SignUpOutput,
 } from 'aws-amplify/auth';
@@ -61,6 +62,11 @@ interface AuthContextProps {
     token: string,
     password: string,
     password_confirmation: string,
+  ) => Promise<void>;
+  confirmSignInWithNewPassword: (
+    session: string,
+    oldPassword: string,
+    newPassword: string,
   ) => Promise<void>;
   getUser: () => Promise<UserModel>;
   logout: () => Promise<void>;
@@ -169,6 +175,23 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     try {
       const output = await signIn({ username: email, password });
 
+      // Check if password change is required
+      if (
+        output.nextStep?.signInStep ===
+        'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED'
+      ) {
+        // Create a custom error that includes the challenge response
+        // Note: In AWS Amplify v6, the session is managed internally
+        // We just need to indicate that password change is required
+        const challengeError: any = new Error('NEW_PASSWORD_REQUIRED');
+        challengeError.name = 'NewPasswordRequiredException';
+        challengeError.challengeName = 'NEW_PASSWORD_REQUIRED';
+        challengeError.email = email;
+        // Session is managed internally by Amplify, no need to pass it
+        challengeError.session = undefined;
+        throw challengeError;
+      }
+
       if (output.isSignedIn) {
         // Fetch user attributes
         const user = await getCurrentUser();
@@ -197,6 +220,10 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         throw new Error('Sign in not completed');
       }
     } catch (error: any) {
+      // Re-throw NEW_PASSWORD_REQUIRED errors as-is
+      if (error.name === 'NewPasswordRequiredException') {
+        throw error;
+      }
       saveAuth(undefined);
       throw error;
     }
@@ -318,6 +345,50 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const confirmSignInWithNewPassword = async (
+    session: string | undefined,
+    oldPassword: string,
+    newPassword: string,
+  ) => {
+    try {
+      // In AWS Amplify v6, the session is managed internally
+      // We just need to call confirmSignIn with the new password as the challenge response
+      const output = await confirmSignIn({
+        challengeResponse: newPassword,
+      });
+
+      if (output.isSignedIn) {
+        // Fetch user attributes after successful sign in
+        const user = await getCurrentUser();
+        const attributes = await fetchUserAttributes();
+
+        const authModel: AuthModel = {
+          access_token: 'cognito-session',
+          api_token: 'cognito-session',
+        };
+
+        const userModel: UserModel = {
+          id: 0,
+          username: attributes.email || user.username || '',
+          password: undefined,
+          email: attributes.email || '',
+          first_name: attributes.given_name || attributes.name || '',
+          last_name: attributes.family_name || '',
+          fullname:
+            attributes.name ||
+            `${attributes.given_name || ''} ${attributes.family_name || ''}`.trim(),
+        };
+
+        saveAuth(authModel);
+        setCurrentUser(userModel);
+      } else {
+        throw new Error('Sign in not completed after password change');
+      }
+    } catch (error: any) {
+      throw error;
+    }
+  };
+
   const getUser = async (): Promise<UserModel> => {
     try {
       const user = await getCurrentUser();
@@ -368,6 +439,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         requestPasswordResetLink,
         resetPassword,
         changePassword,
+        confirmSignInWithNewPassword,
         getUser,
         logout,
         verify,
