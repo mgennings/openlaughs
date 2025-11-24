@@ -21,6 +21,7 @@ const PromoterShowsPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [includePastShows, setIncludePastShows] = useState(false);
 
   const createdBy = useMemo(
     () => currentUser?.email || currentUser?.username || '',
@@ -79,22 +80,59 @@ const PromoterShowsPage = () => {
     fetchShows();
   }, [createdBy]);
 
+  // Filter shows based on whether to include past shows
+  const filteredShows = useMemo(() => {
+    if (includePastShows) {
+      return shows; // Show all shows
+    }
+    const now = new Date();
+    return shows.filter(show => {
+      const showDate = new Date(show.dateTime);
+      return showDate >= now; // Only upcoming shows
+    });
+  }, [shows, includePastShows]);
+
   return (
     <Container>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900">My Shows</h2>
-        <div className="flex items-center gap-4">
-          <div className="text-gray-600 flex items-center gap-2">
-            <KeenIcon icon="calendar" />
-            <span>{shows.length} total</span>
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
+            My Shows
+          </h2>
+          <div className="flex items-center gap-4">
+            <button
+              className="btn btn-primary btn-sm md:btn-md md:text-sm md:px-4 md:py-2.5"
+              onClick={() => setIsCreateModalOpen(true)}
+            >
+              <KeenIcon
+                icon="plus"
+                className="me-2 btn-icon-sm md:btn-icon-md"
+              />
+              Create Show
+            </button>
           </div>
-          <button
-            className="btn btn-primary"
-            onClick={() => setIsCreateModalOpen(true)}
-          >
-            <KeenIcon icon="plus" className="me-2" />
-            Create Show
-          </button>
+        </div>
+        <div className="flex items-center justify-between mb-4">
+          {/* Toggle to include past shows */}
+
+          <label className="inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={includePastShows}
+              onChange={e => setIncludePastShows(e.target.checked)}
+              className="sr-only peer"
+            />
+            <div className="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+            <span className="select-none ms-3 text-sm font-medium text-gray-900">
+              Include Past Shows
+            </span>
+          </label>
+          <label className="inline-flex items-center cursor-pointer">
+            <div className="text-gray-600 flex items-center gap-2">
+              <KeenIcon icon="calendar" />
+              <span>{filteredShows.length} total</span>
+            </div>
+          </label>
         </div>
       </div>
 
@@ -122,14 +160,16 @@ const PromoterShowsPage = () => {
         </div>
       )}
 
-      {shows.length === 0 ? (
+      {filteredShows.length === 0 ? (
         <div className="text-center py-20">
           <KeenIcon icon="calendar-2" className="text-6xl text-gray-300 mb-4" />
           <h3 className="text-xl font-semibold text-gray-700 mb-2">
-            No Shows Added Yet
+            {shows.length === 0 ? 'No Shows Added Yet' : 'No Upcoming Shows'}
           </h3>
           <p className="text-gray-500 mb-6">
-            Add your first show to get started
+            {shows.length === 0
+              ? 'Add your first show to get started'
+              : 'All your shows are in the past. Check "Include Past Shows" to see them.'}
           </p>
           <button
             className="btn btn-primary"
@@ -141,11 +181,12 @@ const PromoterShowsPage = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7.5">
-          {shows
+          {filteredShows
             .sort((a, b) => {
-              // Sort by nearest showtime first (ascending date order)
               const dateA = new Date(a.dateTime).getTime();
               const dateB = new Date(b.dateTime).getTime();
+
+              // Sort all shows by date chronologically (earliest first)
               return dateA - dateB;
             })
             .map(show => {
