@@ -3,9 +3,7 @@
     "openlaughs": {
       "dependsOn": [
         {
-          "attributes": [
-            "UserPoolId"
-          ],
+          "attributes": ["UserPoolId"],
           "category": "auth",
           "resourceName": "openlaughs0fb0c848"
         }
@@ -32,6 +30,17 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
+    },
+    "whisperapi": {
+      "dependsOn": [
+        {
+          "attributes": ["Name", "Arn"],
+          "category": "function",
+          "resourceName": "whisperTranscribe"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -40,26 +49,15 @@
       "dependsOn": [],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
+        "mfaTypes": ["SMS"],
         "passwordProtectionSettings": {
           "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 8
         },
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [
-          "GOOGLE",
-          "APPLE"
-        ],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
+        "signupAttributes": ["EMAIL"],
+        "socialProviders": ["GOOGLE", "APPLE"],
+        "usernameAttributes": ["EMAIL"],
+        "verificationMechanisms": ["EMAIL"]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
@@ -70,13 +68,17 @@
       "build": true,
       "dependsOn": [
         {
-          "attributes": [
-            "BucketName"
-          ],
+          "attributes": ["BucketName"],
           "category": "storage",
           "resourceName": "s31c1a7e4e"
         }
       ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "whisperTranscribe": {
+      "build": true,
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -95,6 +97,30 @@
         {
           "category": "function",
           "resourceName": "imageResizer"
+        }
+      ]
+    },
+    "AMPLIFY_function_whisperTranscribe_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "whisperTranscribe"
+        }
+      ]
+    },
+    "AMPLIFY_function_whisperTranscribe_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "whisperTranscribe"
+        }
+      ]
+    },
+    "AMPLIFY_function_whisperTranscribe_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "whisperTranscribe"
         }
       ]
     }

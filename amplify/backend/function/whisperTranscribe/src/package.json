@@ -1,0 +1,11 @@
+{
+  "name": "whisper-transcribe",
+  "version": "1.0.0",
+  "description": "Lambda function to transcribe audio using OpenAI Whisper API",
+  "main": "index.js",
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "busboy": "^1.6.0",
+    "@aws-sdk/client-ssm": "^3.0.0"
+  }
+}

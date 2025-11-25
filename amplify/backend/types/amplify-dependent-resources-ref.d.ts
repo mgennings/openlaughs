@@ -1,37 +1,49 @@
 export type AmplifyDependentResourcesAttributes = {
-  "api": {
-    "openlaughs": {
-      "GraphQLAPIEndpointOutput": "string",
-      "GraphQLAPIIdOutput": "string",
-      "GraphQLAPIKeyOutput": "string"
-    }
-  },
-  "auth": {
-    "openlaughs0fb0c848": {
-      "AppClientID": "string",
-      "AppClientIDWeb": "string",
-      "HostedUIDomain": "string",
-      "IdentityPoolId": "string",
-      "IdentityPoolName": "string",
-      "OAuthMetadata": "string",
-      "UserPoolArn": "string",
-      "UserPoolId": "string",
-      "UserPoolName": "string"
-    }
-  },
-  "function": {
-    "imageResizer": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    }
-  },
-  "storage": {
-    "s31c1a7e4e": {
-      "BucketName": "string",
-      "Region": "string"
-    }
-  }
-}
+  api: {
+    openlaughs: {
+      GraphQLAPIEndpointOutput: 'string';
+      GraphQLAPIIdOutput: 'string';
+      GraphQLAPIKeyOutput: 'string';
+    };
+    whisperapi: {
+      ApiId: 'string';
+      ApiName: 'string';
+      RootUrl: 'string';
+    };
+  };
+  auth: {
+    openlaughs0fb0c848: {
+      AppClientID: 'string';
+      AppClientIDWeb: 'string';
+      HostedUIDomain: 'string';
+      IdentityPoolId: 'string';
+      IdentityPoolName: 'string';
+      OAuthMetadata: 'string';
+      UserPoolArn: 'string';
+      UserPoolId: 'string';
+      UserPoolName: 'string';
+    };
+  };
+  function: {
+    imageResizer: {
+      Arn: 'string';
+      LambdaExecutionRole: 'string';
+      LambdaExecutionRoleArn: 'string';
+      Name: 'string';
+      Region: 'string';
+    };
+    whisperTranscribe: {
+      Arn: 'string';
+      LambdaExecutionRole: 'string';
+      LambdaExecutionRoleArn: 'string';
+      Name: 'string';
+      Region: 'string';
+    };
+  };
+  storage: {
+    s31c1a7e4e: {
+      BucketName: 'string';
+      Region: 'string';
+    };
+  };
+};

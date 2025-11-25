@@ -61,7 +61,7 @@ const SidebarMenu = () => {
   // Filter menu items based on admin status and preview mode
   const visibleMenuConfig = useMemo(() => {
     if (!menuConfig) return [];
-    const productionItems = menuConfig.slice(0, 4); // Dashboards, Shows, Promoter, Comedians
+    const productionItems = menuConfig.slice(0, 7); // Dashboards, Shows, Promoter, Comedians
     if (!isAdmin || !settings.previewMode) {
       return productionItems;
     }

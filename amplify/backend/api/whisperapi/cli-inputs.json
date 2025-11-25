@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/whisper": {
+      "name": "/whisper",
+      "lambdaFunction": "whisperTranscribe",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

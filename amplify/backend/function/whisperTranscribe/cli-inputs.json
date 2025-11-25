@@ -1,0 +1,7 @@
+{
+  "resourceName": "whisperTranscribe",
+  "service": "Lambda",
+  "functionName": "whisperTranscribe",
+  "providerPlugin": "awscloudformation",
+  "build": true
+}

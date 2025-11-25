@@ -16,7 +16,8 @@
         "openlaughs0fb0c848": {}
       },
       "api": {
-        "openlaughs": {}
+        "openlaughs": {},
+        "whisperapi": {}
       },
       "storage": {
         "s31c1a7e4e": {}
@@ -25,6 +26,11 @@
         "imageResizer": {
           "deploymentBucketName": "amplify-openlaughs-dev-13b80-deployment",
           "s3Key": "amplify-builds/imageResizer-68634b68553366416e6d-build.zip"
+        },
+        "whisperTranscribe": {
+          "secretsPathAmplifyAppId": "dtnp2qcciqtir",
+          "deploymentBucketName": "amplify-openlaughs-dev-13b80-deployment",
+          "s3Key": "amplify-builds/whisperTranscribe-2f682b634b7979484371-build.zip"
         }
       }
     }

@@ -48,6 +48,17 @@ export const MENU_SIDEBAR: TMenuConfig = [
       },
     ],
   },
+  { heading: 'DevTools' },
+  {
+    title: 'AI Tools',
+    icon: 'technology-4',
+    children: [
+      {
+        title: 'Whisper Transcription',
+        path: '/devtools/whisper',
+      },
+    ],
+  },
   {
     heading: 'User',
   },
