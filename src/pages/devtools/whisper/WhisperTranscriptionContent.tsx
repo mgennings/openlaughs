@@ -104,6 +104,14 @@ const WhisperTranscriptionContent = () => {
       formData.append('audio', file);
 
       const apiUrl = import.meta.env.VITE_WHISPER_API_URL;
+
+      // Debug logging (remove after fixing)
+      console.log('VITE_WHISPER_API_URL:', apiUrl);
+      console.log(
+        'All VITE env vars:',
+        Object.keys(import.meta.env).filter(k => k.startsWith('VITE_')),
+      );
+
       if (!apiUrl) {
         showSnackbar(
           'Whisper API URL not configured. Please set VITE_WHISPER_API_URL in your .env file.',
