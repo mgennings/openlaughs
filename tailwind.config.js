@@ -70,7 +70,7 @@ module.exports = {
                 inverse: '#ffffff',
               },
               danger: {
-                default: '#F8285A',
+                default: '#D32F2F',
                 active: '#D81A48',
                 light: '#FFEEF3',
                 clarity: 'rgba(248, 40, 90, 0.20)',
