@@ -1,6 +1,6 @@
-import { SnackbarContent, CustomContentProps } from 'notistack';
+import { SnackbarContent, CustomContentProps, closeSnackbar } from 'notistack';
 import { forwardRef } from 'react';
-import { KeenIcon } from '@/components'; // Import your KeenIcon component
+import { KeenIcon } from '@/components';
 
 export type TSolidSnackbar =
   | 'default'
@@ -22,7 +22,7 @@ declare module 'notistack' {
 export interface ISolidSnackbarProps extends CustomContentProps {
   state: TSolidSnackbar;
   message: string;
-  id: string;
+  id: string | number;
   icon?: string;
 }
 
@@ -37,21 +37,39 @@ const rootStyles = {
   info: 'bg-info text-info-inverse',
 };
 
+// Icon mapping for each state
+const stateIcons: Record<TSolidSnackbar, string> = {
+  dark: 'information-2',
+  default: 'information-2',
+  primary: 'information-2',
+  success: 'check-circle',
+  danger: 'information-2',
+  warning: 'information-2',
+  info: 'information-2',
+};
+
 const SolidSnackbar = forwardRef<HTMLDivElement, ISolidSnackbarProps>(
   (props, ref) => {
-    const { state, icon, message } = props;
+    const { state, icon, message, id } = props;
 
     // Get the icon and styles based on the state
-    const iconName = icon || 'information-2';
+    const iconName = icon || stateIcons[state] || 'information-2';
     const rootClass = rootStyles[state] || rootStyles['primary'];
 
     return (
       <SnackbarContent ref={ref} role="alert">
         <div
-          className={`flex grow items-center gap-2.5 rounded-md py-2.5 px-3 shadow-default ${rootClass}`}
+          className={`flex grow items-center gap-2.5 rounded-lg py-3 px-4 shadow-lg ${rootClass}`}
         >
-          {iconName && <KeenIcon icon={iconName} className={`text-lg`} />}
-          <span className="text-sm">{message}</span>
+          {iconName && <KeenIcon icon={iconName} className="text-lg" />}
+          <span className="text-sm flex-1">{message}</span>
+          <button
+            onClick={() => closeSnackbar(id)}
+            className="flex items-center justify-center w-6 h-6 rounded-full hover:bg-black/10 dark:hover:bg-white/20 transition-colors -mr-1"
+            aria-label="Dismiss"
+          >
+            <KeenIcon icon="cross" className="text-sm" />
+          </button>
         </div>
       </SnackbarContent>
     );

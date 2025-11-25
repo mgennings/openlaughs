@@ -8,12 +8,13 @@ import { type PropsWithChildren } from 'react';
 const SnackbarProvider = ({ children }: PropsWithChildren) => {
   return (
     <CustomSnackbarProvider
-      autoHideDuration={2000}
+      autoHideDuration={4000}
       maxSnack={3}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       Components={{
         solid: SolidSnackbar,
       }}
+      hideIconVariant={false}
     >
       {children}
     </CustomSnackbarProvider>
