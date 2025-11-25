@@ -8,7 +8,6 @@ import { type PropsWithChildren } from 'react';
 const SnackbarProvider = ({ children }: PropsWithChildren) => {
   return (
     <CustomSnackbarProvider
-      autoHideDuration={4000}
       maxSnack={3}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       Components={{
@@ -28,6 +27,7 @@ const useSnackbar = () => {
   const showSnackbar = (
     message: string,
     variant: 'success' | 'error' | 'warning' | 'info' | 'default' = 'default',
+    duration?: number,
   ) => {
     // Map variant strings to solid snackbar states
     const stateMap: Record<
@@ -44,6 +44,7 @@ const useSnackbar = () => {
     enqueueSnackbar(message, {
       variant: 'solid',
       state: stateMap[variant],
+      autoHideDuration: duration || 4000,
     });
   };
 

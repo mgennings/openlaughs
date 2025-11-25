@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { updateShow } from '@/graphql/mutations';
-import { getShow, listVenues } from '@/graphql/queries';
+import { getShow, listVenues, listComedians } from '@/graphql/queries';
 import { ImageInput, type TImageInputFiles } from '@/components/image-input';
 import { uploadPublicImage, getPublicUrl } from '@/lib/storage';
-import type { Show, Venue, ListVenuesQuery } from '@/API';
+import type {
+  Show,
+  Venue,
+  ListVenuesQuery,
+  Comedian,
+  ListComediansQuery,
+} from '@/API';
 import { AGE_RESTRICTIONS } from '@/config/constants';
+import { Check, ChevronsUpDown, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 interface PromoterShowUpdateFormProps {
   showId: string;
@@ -31,6 +52,12 @@ const PromoterShowUpdateForm = ({
   const [ticketPrice, setTicketPrice] = useState('');
   const [ageRestriction, setAgeRestriction] = useState('');
   const [venues, setVenues] = useState<Venue[]>([]);
+  const [comedians, setComedians] = useState<Comedian[]>([]);
+  const [selectedComedianIDs, setSelectedComedianIDs] = useState<string[]>([]);
+  const [comedianSearchOpen, setComedianSearchOpen] = useState(false);
+  const [profileImageUrls, setProfileImageUrls] = useState<
+    Record<string, string>
+  >({});
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -69,6 +96,13 @@ const PromoterShowUpdateForm = ({
             const url = await getPublicUrl(show.showImageKey);
             setExistingImageUrl(url.toString());
           }
+
+          // Load existing comedian IDs
+          if (show.comedianIDs && show.comedianIDs.length > 0) {
+            setSelectedComedianIDs(
+              show.comedianIDs.filter(Boolean) as string[],
+            );
+          }
         }
 
         // Load venues
@@ -85,6 +119,39 @@ const PromoterShowUpdateForm = ({
               (a.name || '').localeCompare(b.name || ''),
             ),
           );
+        }
+
+        // Load comedians
+        const comediansResult = await client.graphql({
+          query: (listComedians as string).replace(/__typename/g, ''),
+          variables: { limit: 100 },
+        });
+
+        if ('data' in comediansResult) {
+          const items =
+            (comediansResult.data as ListComediansQuery).listComedians?.items ??
+            [];
+          const comediansList = (items.filter(Boolean) as Comedian[]).sort(
+            (a, b) => (a.stageName || '').localeCompare(b.stageName || ''),
+          );
+          setComedians(comediansList);
+
+          // Load profile images for comedians
+          const imageUrls: Record<string, string> = {};
+          for (const comedian of comediansList) {
+            if (comedian.profileImageKey) {
+              try {
+                const url = await getPublicUrl(comedian.profileImageKey);
+                imageUrls[comedian.id] = url.toString();
+              } catch (err) {
+                console.error(
+                  `Failed to load image for comedian ${comedian.id}:`,
+                  err,
+                );
+              }
+            }
+          }
+          setProfileImageUrls(imageUrls);
         }
       } catch (err: any) {
         onError?.(err?.message || 'Failed to load show');
@@ -116,6 +183,8 @@ const PromoterShowUpdateForm = ({
         description: description || null,
         dateTime: dateTime ? new Date(dateTime).toISOString() : null,
         venueID: venueID || null,
+        comedianIDs:
+          selectedComedianIDs.length > 0 ? selectedComedianIDs : null,
         showImageKey,
         ticketUrl: ticketUrl || null,
         ticketPrice: ticketPrice ? parseFloat(ticketPrice) : null,
@@ -213,6 +282,136 @@ const PromoterShowUpdateForm = ({
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label className="form-label font-normal text-gray-900">
+          Comedians
+        </label>
+        <Popover open={comedianSearchOpen} onOpenChange={setComedianSearchOpen}>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              role="combobox"
+              aria-expanded={comedianSearchOpen}
+              className="input flex items-center justify-between w-full text-left"
+            >
+              <span
+                className={
+                  selectedComedianIDs.length === 0
+                    ? 'text-gray-400'
+                    : 'text-gray-900'
+                }
+              >
+                {selectedComedianIDs.length === 0
+                  ? 'Search and select comedians...'
+                  : `${selectedComedianIDs.length} comedian${selectedComedianIDs.length > 1 ? 's' : ''} selected`}
+              </span>
+              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent
+            className="w-[var(--radix-popover-trigger-width)] p-0"
+            align="start"
+          >
+            <Command>
+              <CommandInput placeholder="Search comedians..." />
+              <CommandList>
+                <CommandEmpty>No comedians found.</CommandEmpty>
+                <CommandGroup>
+                  {comedians.map(comedian => {
+                    const isSelected = selectedComedianIDs.includes(
+                      comedian.id,
+                    );
+                    return (
+                      <CommandItem
+                        key={comedian.id}
+                        value={comedian.stageName}
+                        onSelect={() => {
+                          if (isSelected) {
+                            setSelectedComedianIDs(
+                              selectedComedianIDs.filter(
+                                id => id !== comedian.id,
+                              ),
+                            );
+                          } else {
+                            setSelectedComedianIDs([
+                              ...selectedComedianIDs,
+                              comedian.id,
+                            ]);
+                          }
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            'mr-2 h-4 w-4',
+                            isSelected ? 'opacity-100' : 'opacity-0',
+                          )}
+                        />
+                        <span>{comedian.stageName}</span>
+                        {comedian.basedIn && (
+                          <span className="ml-2 text-gray-500 text-sm">
+                            — {comedian.basedIn}
+                          </span>
+                        )}
+                      </CommandItem>
+                    );
+                  })}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+
+        {/* Selected comedians as pills */}
+        {selectedComedianIDs.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {selectedComedianIDs.map(id => {
+              const comedian = comedians.find(c => c.id === id);
+              if (!comedian) return null;
+              const imageUrl = profileImageUrls[comedian.id];
+              const initials = comedian.stageName
+                .split(' ')
+                .map(n => n[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2);
+              return (
+                <span
+                  key={id}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full border border-gray-200"
+                >
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt={comedian.stageName}
+                      className="w-6 h-6 rounded-full object-cover flex-shrink-0"
+                    />
+                  ) : (
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-semibold flex-shrink-0">
+                      {initials}
+                    </div>
+                  )}
+                  {comedian.stageName}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSelectedComedianIDs(
+                        selectedComedianIDs.filter(cid => cid !== id),
+                      )
+                    }
+                    className="text-gray-400 hover:text-gray-600 hover:bg-gray-200 rounded-full p-0.5 transition-colors"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                </span>
+              );
+            })}
+          </div>
+        )}
+        <span className="text-sm text-gray-500">
+          Select one or more comedians performing in this show
+        </span>
       </div>
 
       <div className="flex flex-col gap-1">

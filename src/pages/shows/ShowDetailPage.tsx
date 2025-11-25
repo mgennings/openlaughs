@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Container } from '@/components/container';
 import { KeenIcon, RSVPButton } from '@/components';
+import { useSnackbar } from '@/providers';
 import { generateClient } from 'aws-amplify/api';
 import { getShow, getVenue, getComedian } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
@@ -13,9 +14,13 @@ const publicClient = generateClient({ authMode: 'apiKey' });
 const ShowDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { showSnackbar } = useSnackbar();
   const [show, setShow] = useState<Show | null>(null);
   const [venue, setVenue] = useState<Venue | null>(null);
   const [comedians, setComedians] = useState<Comedian[]>([]);
+  const [profileImageUrls, setProfileImageUrls] = useState<
+    Record<string, string>
+  >({});
   const [showImageUrl, setShowImageUrl] = useState<string | null>(null);
   const [venueLogoUrl, setVenueLogoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,8 +43,7 @@ const ShowDetailPage = () => {
             query: (getShow as string).replace(/__typename/g, ''),
             variables: { id },
           });
-        } catch (e: any) {
-          // Retry with API key if userPool is not authorized for read
+        } catch {
           result = await publicClient.graphql({
             query: (getShow as string).replace(/__typename/g, ''),
             variables: { id },
@@ -50,7 +54,6 @@ const ShowDetailPage = () => {
           const showData = result.data.getShow as Show;
           setShow(showData);
 
-          // Fetch show image if available
           if (showData.showImageKey) {
             try {
               const url = await getPublicUrl(showData.showImageKey);
@@ -60,7 +63,6 @@ const ShowDetailPage = () => {
             }
           }
 
-          // Fetch venue information
           if (showData.venueID) {
             try {
               let venueResult: any;
@@ -69,7 +71,7 @@ const ShowDetailPage = () => {
                   query: (getVenue as string).replace(/__typename/g, ''),
                   variables: { id: showData.venueID },
                 });
-              } catch (e: any) {
+              } catch {
                 venueResult = await publicClient.graphql({
                   query: (getVenue as string).replace(/__typename/g, ''),
                   variables: { id: showData.venueID },
@@ -80,7 +82,6 @@ const ShowDetailPage = () => {
                 const venueData = venueResult.data.getVenue as Venue;
                 setVenue(venueData);
 
-                // Fetch venue logo if available
                 if (venueData.logoKey) {
                   try {
                     const url = await getPublicUrl(venueData.logoKey);
@@ -90,13 +91,11 @@ const ShowDetailPage = () => {
                   }
                 }
               }
-            } catch (venueErr: any) {
+            } catch (venueErr) {
               console.error('Failed to load venue:', venueErr);
-              // Don't fail the whole page if venue can't be loaded
             }
           }
 
-          // Fetch comedian information
           if (showData.comedianIDs && showData.comedianIDs.length > 0) {
             try {
               const comedianPromises = showData.comedianIDs.map(
@@ -112,7 +111,7 @@ const ShowDetailPage = () => {
                         ),
                         variables: { id: comedianId },
                       });
-                    } catch (e: any) {
+                    } catch {
                       comedianResult = await publicClient.graphql({
                         query: (getComedian as string).replace(
                           /__typename/g,
@@ -140,12 +139,29 @@ const ShowDetailPage = () => {
               );
 
               const comedianResults = await Promise.all(comedianPromises);
-              setComedians(
-                comedianResults.filter((c): c is Comedian => c !== null),
+              const validComedians = comedianResults.filter(
+                (c): c is Comedian => c !== null,
               );
-            } catch (comedianErr: any) {
+              setComedians(validComedians);
+
+              // Load profile images for comedians
+              const imageUrls: Record<string, string> = {};
+              for (const comedian of validComedians) {
+                if (comedian.profileImageKey) {
+                  try {
+                    const url = await getPublicUrl(comedian.profileImageKey);
+                    imageUrls[comedian.id] = url.toString();
+                  } catch (err) {
+                    console.error(
+                      `Failed to load image for comedian ${comedian.id}:`,
+                      err,
+                    );
+                  }
+                }
+              }
+              setProfileImageUrls(imageUrls);
+            } catch (comedianErr) {
               console.error('Failed to load comedians:', comedianErr);
-              // Don't fail the whole page if comedians can't be loaded
             }
           }
         } else {
@@ -161,31 +177,14 @@ const ShowDetailPage = () => {
     void fetchShow();
   }, [id]);
 
-  const formatDateTime = (dateTimeString: string) => {
-    try {
-      const date = new Date(dateTimeString);
-      return new Intl.DateTimeFormat('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-      }).format(date);
-    } catch {
-      return dateTimeString;
-    }
-  };
-
   const formatDate = (dateTimeString: string) => {
     try {
       const date = new Date(dateTimeString);
       return new Intl.DateTimeFormat('en-US', {
         weekday: 'long',
-        year: 'numeric',
         month: 'long',
         day: 'numeric',
+        year: 'numeric',
       }).format(date);
     } catch {
       return dateTimeString;
@@ -205,19 +204,36 @@ const ShowDetailPage = () => {
     }
   };
 
+  const formatShortDate = (dateTimeString: string) => {
+    try {
+      const date = new Date(dateTimeString);
+      return {
+        month: new Intl.DateTimeFormat('en-US', { month: 'short' })
+          .format(date)
+          .toUpperCase(),
+        day: date.getDate().toString(),
+        weekday: new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(
+          date,
+        ),
+      };
+    } catch {
+      return { month: '???', day: '??', weekday: '???' };
+    }
+  };
+
   const generateCalendarLink = () => {
     if (!show) return '';
     const startDate = new Date(show.dateTime);
-    const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // Add 2 hours
+    const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
 
-    const formatDate = (date: Date) => {
+    const formatDateForCal = (date: Date) => {
       return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     };
 
     const params = new URLSearchParams({
       action: 'TEMPLATE',
       text: show.title || 'Comedy Show',
-      dates: `${formatDate(startDate)}/${formatDate(endDate)}`,
+      dates: `${formatDateForCal(startDate)}/${formatDateForCal(endDate)}`,
       details: show.description || '',
       location: venue
         ? [venue.name, venue.address, venue.city, venue.state]
@@ -229,428 +245,543 @@ const ShowDetailPage = () => {
     return `https://calendar.google.com/calendar/render?${params.toString()}`;
   };
 
+  const generateMapsLink = () => {
+    if (!venue) return '';
+    const address = [venue.address, venue.city, venue.state, venue.postalCode]
+      .filter(Boolean)
+      .join(', ');
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  };
+
   if (loading) {
     return (
-      <Container>
-        <div className="flex items-center justify-center p-8">
-          <div
-            className="spinner-border spinner-border-sm text-primary"
-            role="status"
-          />
-          <span className="ml-2 text-gray-600">Loading show...</span>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          <span className="text-gray-600">Loading show...</span>
         </div>
-      </Container>
+      </div>
     );
   }
 
   if (error || !show) {
     return (
       <Container>
-        <div className="alert alert-danger">
-          <span>{error || 'Show not found'}</span>
+        <div className="min-h-[60vh] flex flex-col items-center justify-center">
+          <div className="w-20 h-20 rounded-full bg-danger/10 flex items-center justify-center mb-4">
+            <KeenIcon icon="information-2" className="text-4xl text-danger" />
+          </div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {error || 'Show not found'}
+          </h2>
+          <p className="text-gray-500 mb-6">
+            The show you're looking for doesn't exist or has been removed.
+          </p>
+          <Link to="/shows" className="btn btn-primary">
+            Browse All Shows
+          </Link>
         </div>
-        <Link to="/shows" className="btn btn-primary mt-4">
-          Back to Shows
-        </Link>
       </Container>
     );
   }
 
   const isPast = new Date(show.dateTime).getTime() < new Date().getTime();
   const venueFirstLetter = venue?.name?.charAt(0)?.toUpperCase() || '?';
+  const shortDate = formatShortDate(show.dateTime);
 
   return (
-    <Container>
-      {/* Header with back button */}
-      <div className="mb-6">
-        <button
-          className="btn btn-icon btn-light"
-          onClick={() => navigate('/shows')}
-        >
-          <KeenIcon icon="arrow-left" />
-        </button>
-      </div>
+    <div className="min-h-screen bg-gray-50 -mt-5">
+      {/* Hero Section */}
+      <div className="relative">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 lg:h-[550px]">
+          <div className="w-full h-full bg-gradient-to-br from-primary via-primary-dark to-gray-900" />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-gray-900/40" />
+        </div>
 
-      {/* Hero Section with Show Title and Key Info */}
-      <div className="card p-6 mb-6">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-          {/* Show Image or Placeholder */}
-          {showImageUrl ? (
-            <div className="flex-shrink-0">
-              <img
-                src={showImageUrl}
-                alt={show.title || 'Show image'}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-lg object-cover border-2 border-gray-200"
-              />
-            </div>
-          ) : (
-            <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 rounded-lg bg-primary/10 flex items-center justify-center border-2 border-gray-200">
-              <KeenIcon
-                icon="calendar"
-                className="text-4xl md:text-5xl text-primary"
-              />
-            </div>
-          )}
+        {/* Hero Content */}
+        <Container>
+          <div className="relative pt-6 pb-8">
+            {/* Back Button */}
+            <button
+              onClick={() => navigate('/shows')}
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-8"
+            >
+              <KeenIcon icon="arrow-left" className="text-lg" />
+              <span className="text-sm font-medium">Back to Shows</span>
+            </button>
 
-          {/* Show Title and Info */}
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-3">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-                {show.title}
-              </h1>
-              {isPast && (
-                <span className="badge badge-light-warning">Past Show</span>
-              )}
-            </div>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
-              <div className="flex items-center gap-1">
-                <KeenIcon icon="calendar" className="text-primary mr-1" />
-                <div className="flex flex-col">
-                  <span className="font-medium">
-                    {formatDate(show.dateTime)}
-                  </span>
-                  <span className="text-xs">{formatTime(show.dateTime)}</span>
-                </div>
-              </div>
-              {venue && (
-                <div className="flex items-center gap-2">
-                  {venueLogoUrl ? (
+            {/* Main Hero Content */}
+            <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
+              {/* Show Image */}
+              <div className="flex-shrink-0 w-full md:w-auto">
+                <div className="relative w-full md:w-72 xl:w-80 aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+                  {showImageUrl ? (
                     <img
-                      src={venueLogoUrl}
-                      alt={`${venue.name} logo`}
-                      className="w-6 h-6 rounded-full object-cover"
-                      onError={e => {
-                        const target = e.target as HTMLImageElement;
-                        const fallback = document.createElement('div');
-                        fallback.className =
-                          'w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-xs';
-                        fallback.textContent = venueFirstLetter;
-                        target.replaceWith(fallback);
-                      }}
+                      src={showImageUrl}
+                      alt={show.title || 'Show'}
+                      className="w-full"
                     />
                   ) : (
-                    <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-xs">
-                      {venueFirstLetter}
+                    <div className="w-full h-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+                      <KeenIcon
+                        icon="calendar"
+                        className="text-6xl text-white/50"
+                      />
                     </div>
                   )}
-                  <Link
-                    to={`/promoter/venues/${venue.id}`}
-                    className="text-primary hover:underline flex items-center gap-1"
-                  >
-                    {venue.name}
-                    <KeenIcon icon="arrow-top-right" className="text-xs" />
-                  </Link>
-                </div>
-              )}
-            </div>
-            {show.description && (
-              <p className="text-gray-700 line-clamp-2">{show.description}</p>
-            )}
-            {show.ticketUrl && (
-              <div className="mt-4">
-                <a
-                  href={show.ticketUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary inline-flex items-center gap-2"
-                >
-                  <KeenIcon icon="link" />
-                  Get Tickets
-                  {show.ticketPrice !== null &&
-                    show.ticketPrice !== undefined && (
-                      <span className="ml-1">
-                        • ${show.ticketPrice.toFixed(2)}
+                  {isPast && (
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full">
+                      <span className="text-sm font-medium text-white/90">
+                        Past Event
                       </span>
-                    )}
-                </a>
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-      </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Main Content */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Full Show Image */}
-          {showImageUrl && (
-            <div className="card p-0 overflow-hidden">
-              <img
-                src={showImageUrl}
-                alt={show.title || 'Show image'}
-                className="w-full h-auto"
-              />
-            </div>
-          )}
+              {/* Show Info */}
+              <div className="flex-1 text-white pt-2 md:pt-4">
+                {/* Date Badge */}
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <div className="flex flex-col items-center justify-center w-16 h-16 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                    <span className="text-xs font-bold text-primary-light tracking-wider">
+                      {shortDate.month}
+                    </span>
+                    <span className="text-2xl font-bold leading-none">
+                      {shortDate.day}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-white/70 text-sm">
+                      {shortDate.weekday} • {formatTime(show.dateTime)}
+                    </p>
+                  </div>
+                </div>
 
-          {/* About This Show */}
-          {show.description && (
-            <div className="card p-5">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                About This Show
-              </h3>
-              <p className="text-gray-700 whitespace-pre-line">
-                {show.description}
-              </p>
-            </div>
-          )}
+                {/* Title */}
+                <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold mb-4 leading-tight">
+                  {show.title}
+                </h1>
 
-          {/* Comedians Performing */}
-          {comedians && comedians.length > 0 && (
-            <div className="card p-5">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Comedians Performing
-              </h3>
-              <div className="space-y-4">
-                {comedians.map(comedian => {
-                  const yearsExp = comedian.performingSince
-                    ? new Date().getFullYear() - comedian.performingSince
-                    : null;
-
-                  return (
-                    <Link
-                      key={comedian.id}
-                      to={`/comedians/${comedian.id}`}
-                      className="flex items-start gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary text-xl flex-shrink-0">
-                        {comedian.stageName.charAt(0).toUpperCase()}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-lg font-semibold text-gray-900">
-                            {comedian.stageName}
-                          </span>
-                          {comedian.isVerified && (
-                            <KeenIcon icon="verify" className="text-success" />
-                          )}
-                          {comedian.isFeatured && (
-                            <span className="badge badge-warning badge-sm">
-                              Featured
-                            </span>
-                          )}
-                        </div>
-                        {comedian.headline && (
-                          <p className="text-sm text-gray-600 italic mb-2">
-                            "{comedian.headline}"
-                          </p>
-                        )}
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
-                          {comedian.basedIn && (
-                            <div className="flex items-center gap-1">
-                              <KeenIcon icon="geolocation" />
-                              <span>{comedian.basedIn}</span>
-                            </div>
-                          )}
-                          {yearsExp !== null && (
-                            <div className="flex items-center gap-1">
-                              <KeenIcon icon="calendar" />
-                              <span>{yearsExp} years</span>
-                            </div>
-                          )}
-                        </div>
-                        {comedian.comedyStyles &&
-                          comedian.comedyStyles.length > 0 && (
-                            <div className="flex flex-wrap gap-1 mt-2">
-                              {comedian.comedyStyles
-                                .slice(0, 3)
-                                .map((style, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="badge badge-sm badge-light"
-                                  >
-                                    {style}
-                                  </span>
-                                ))}
-                            </div>
-                          )}
-                      </div>
+                {/* Venue */}
+                {venue && (
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="flex items-center gap-2">
                       <KeenIcon
-                        icon="arrow-top-right"
-                        className="text-gray-400 flex-shrink-0"
+                        icon="geolocation"
+                        className="text-md md:text-lg text-white/60"
                       />
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Venue Information */}
-          {venue && (
-            <div className="card p-5">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Venue Information
-              </h3>
-              <div className="flex items-start gap-4">
-                {venueLogoUrl ? (
-                  <img
-                    src={venueLogoUrl}
-                    alt={`${venue.name} logo`}
-                    className="w-20 h-20 rounded-lg object-cover border-2 border-gray-200 flex-shrink-0"
-                    onError={e => {
-                      const target = e.target as HTMLImageElement;
-                      const fallback = document.createElement('div');
-                      fallback.className =
-                        'w-20 h-20 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-2xl flex-shrink-0';
-                      fallback.textContent = venueFirstLetter;
-                      target.replaceWith(fallback);
-                    }}
-                  />
-                ) : (
-                  <div className="w-20 h-20 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-2xl flex-shrink-0">
-                    {venueFirstLetter}
+                      <span className="text-white/80">{venue.name}</span>
+                    </div>
+                    {/* {venue.city && (
+                      <>
+                        <span className="text-white/40">•</span>
+                        <span className="text-white/60">
+                          {venue.city}, {venue.state}
+                        </span>
+                      </>
+                    )} */}
                   </div>
                 )}
-                <div className="flex-1">
-                  <Link
-                    to={`/promoter/venues/${venue.id}`}
-                    className="text-xl font-semibold text-primary hover:underline flex items-center gap-2 mb-2"
-                  >
-                    {venue.name}
-                    <KeenIcon icon="arrow-top-right" className="text-xs" />
-                  </Link>
-                  {venue.address && (
-                    <div className="text-gray-600 mb-1 flex items-center gap-2">
-                      <KeenIcon icon="geolocation" className="text-primary" />
-                      {venue.address}
-                    </div>
-                  )}
-                  {(venue.city || venue.state) && (
-                    <div className="text-gray-600 mb-2">
-                      {[venue.city, venue.state, venue.postalCode]
-                        .filter(Boolean)
-                        .join(', ')}
-                    </div>
-                  )}
-                  {venue.description && (
-                    <p className="text-gray-700 text-sm mt-2">
-                      {venue.description}
-                    </p>
-                  )}
-                  <div className="flex gap-2 mt-3">
-                    {venue.website && (
+
+                {/* Action Buttons */}
+                {!isPast && (
+                  <div className="flex flex-wrap items-center gap-3 mb-6">
+                    {show.ticketUrl && (
                       <a
-                        href={venue.website}
+                        href={show.ticketUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-sm btn-light"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-all shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-105"
                       >
-                        <KeenIcon icon="link" className="me-2" />
-                        Website
+                        <KeenIcon icon="ticket" className="text-lg" />
+                        Get Tickets
+                        {show.ticketPrice !== null &&
+                          show.ticketPrice !== undefined && (
+                            <span className="ml-1 px-2 py-0.5 bg-white/20 rounded-lg text-sm">
+                              ${show.ticketPrice.toFixed(0)}
+                            </span>
+                          )}
                       </a>
                     )}
-                    {venue.googleReviewsLink && (
-                      <a
-                        href={venue.googleReviewsLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-sm btn-light"
-                      >
-                        <KeenIcon icon="star" className="me-2" />
-                        Reviews
-                      </a>
+                    {id && (
+                      <RSVPButton showId={id} variant="button" showCount />
                     )}
+                    <a
+                      href={generateCalendarLink()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-medium rounded-xl transition-all border border-white/20"
+                    >
+                      <KeenIcon icon="calendar" />
+                      Add to Calendar
+                    </a>
                   </div>
+                )}
+
+                {/* Quick Stats */}
+                <div className="flex flex-wrap items-center gap-4 text-sm">
+                  {show.ageRestriction && (
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
+                      <KeenIcon icon="shield-tick" className="text-white/60" />
+                      <span className="text-white/80">
+                        {show.ageRestriction}
+                      </span>
+                    </div>
+                  )}
+                  {comedians.length > 0 && (
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
+                      <KeenIcon icon="people" className="text-white/60" />
+                      <span className="text-white/80">
+                        {comedians.length} Performer
+                        {comedians.length > 1 ? 's' : ''}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        </Container>
+      </div>
 
-        {/* Right Column - Show Details Sidebar */}
-        <div className="space-y-6">
-          <div className="card p-5">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Show Details
-            </h3>
-            <div className="space-y-3">
-              <div>
-                <div className="text-sm text-gray-600 mb-1">Date & Time</div>
-                <div className="text-gray-900 flex items-center gap-2">
-                  <KeenIcon icon="calendar" className="text-primary mr-1" />
-                  <div className="flex flex-col">
-                    <span className="font-medium">
-                      {formatDate(show.dateTime)}
+      {/* Spacer for hero */}
+      <div className="h-[120px] lg:h-[150px]" />
+
+      {/* Main Content */}
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 -mt-16 relative pb-12">
+          {/* Left Column - Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* About Section */}
+            {show.description && (
+              <div className="card shadow-lg">
+                <div className="card-body p-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <KeenIcon icon="document" className="text-primary" />
                     </span>
-                    <span className="text-sm text-gray-600">
-                      {formatTime(show.dateTime)}
+                    About This Show
+                  </h2>
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    {show.description}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Lineup Section */}
+            {comedians && comedians.length > 0 && (
+              <div className="card shadow-lg">
+                <div className="card-body p-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <span className="w-10 h-10 rounded-lg bg-warning/10 flex items-center justify-center">
+                      <KeenIcon icon="star" className="text-warning" />
                     </span>
+                    The Lineup
+                  </h2>
+                  <div className="grid gap-4">
+                    {comedians.map((comedian, index) => {
+                      const yearsExp = comedian.performingSince
+                        ? new Date().getFullYear() - comedian.performingSince
+                        : null;
+
+                      return (
+                        <Link
+                          key={comedian.id}
+                          to={`/comedians/${comedian.id}`}
+                          className="group flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-primary/5 border border-transparent hover:border-primary/20 transition-all"
+                        >
+                          {/* Order Badge */}
+                          {/* <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 group-hover:bg-primary group-hover:text-white flex items-center justify-center font-bold text-sm transition-colors">
+                            {index + 1}
+                          </div> */}
+
+                          {/* Avatar */}
+                          {profileImageUrls[comedian.id] ? (
+                            <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-gray-100">
+                              <img
+                                src={profileImageUrls[comedian.id]}
+                                alt={comedian.stageName}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-xl">
+                              {comedian.stageName
+                                .split(' ')
+                                .map(n => n[0])
+                                .join('')
+                                .toUpperCase()
+                                .slice(0, 2)}
+                            </div>
+                          )}
+
+                          {/* Info */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="font-semibold text-gray-900 group-hover:text-primary transition-colors">
+                                {comedian.stageName}
+                              </span>
+                              {comedian.isVerified && (
+                                <KeenIcon
+                                  icon="verify"
+                                  className="text-success text-sm"
+                                />
+                              )}
+                              {comedian.isFeatured && (
+                                <span className="px-2 py-0.5 bg-warning/10 text-warning text-xs font-medium rounded">
+                                  Featured
+                                </span>
+                              )}
+                            </div>
+                            {comedian.headline && (
+                              <p className="text-sm text-gray-500 truncate italic">
+                                "{comedian.headline}"
+                              </p>
+                            )}
+                            <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                              {comedian.basedIn && (
+                                <span className="text-xs text-gray-400 flex items-center gap-1">
+                                  <KeenIcon icon="geolocation" />
+                                  {comedian.basedIn}
+                                </span>
+                              )}
+                              {yearsExp !== null && yearsExp > 0 && (
+                                <span className="text-xs text-gray-400">
+                                  {yearsExp}+ years
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Arrow */}
+                          <KeenIcon
+                            icon="arrow-right"
+                            className="text-gray-300 group-hover:text-primary group-hover:translate-x-1 transition-all"
+                          />
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
+            )}
 
-              {venue && (
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">Venue</div>
-                  <Link
-                    to={`/promoter/venues/${venue.id}`}
-                    className="text-primary hover:underline flex items-center gap-1"
-                  >
-                    {venue.name}
-                    <KeenIcon icon="arrow-top-right" className="text-xs" />
-                  </Link>
-                </div>
-              )}
-
-              {show.ticketPrice !== null && show.ticketPrice !== undefined && (
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">Ticket Price</div>
-                  <div className="text-gray-900 font-semibold text-lg">
-                    ${show.ticketPrice.toFixed(2)}
-                  </div>
-                </div>
-              )}
-
-              {show.ageRestriction && (
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">
-                    Age Restriction
-                  </div>
-                  <div className="text-gray-900">
-                    <span className="badge badge-light-info">
-                      {show.ageRestriction}
+            {/* Venue Section */}
+            {venue && (
+              <div className="card shadow-lg overflow-hidden">
+                <div className="card-body p-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <span className="w-10 h-10 rounded-lg bg-info/10 flex items-center justify-center">
+                      <KeenIcon icon="geolocation" className="text-info" />
                     </span>
+                    Venue
+                  </h2>
+                  <div className="flex flex-col sm:flex-row gap-6">
+                    {/* Venue Image/Logo */}
+                    <div className="flex-shrink-0">
+                      {venueLogoUrl ? (
+                        <img
+                          src={venueLogoUrl}
+                          alt={venue.name}
+                          className="w-24 h-24 rounded-xl object-cover border-2 border-gray-100"
+                        />
+                      ) : (
+                        <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-info to-info-dark flex items-center justify-center text-white text-3xl font-bold">
+                          {venueFirstLetter}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Venue Info */}
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        {venue.name}
+                      </h3>
+                      {venue.address && (
+                        <p className="text-gray-600 mb-1">{venue.address}</p>
+                      )}
+                      {(venue.city || venue.state) && (
+                        <p className="text-gray-500 text-sm mb-4">
+                          {[venue.city, venue.state, venue.postalCode]
+                            .filter(Boolean)
+                            .join(', ')}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap gap-2">
+                        <a
+                          href={generateMapsLink()}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-sm btn-light gap-1.5"
+                        >
+                          <KeenIcon icon="map" />
+                          Get Directions
+                        </a>
+                        {venue.website && (
+                          <a
+                            href={venue.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-sm btn-light gap-1.5"
+                          >
+                            <KeenIcon icon="link" />
+                            Website
+                          </a>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {show.ticketUrl && (
-                <div className="pt-3">
-                  <a
-                    href={show.ticketUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary w-full"
-                  >
-                    <KeenIcon icon="link" className="me-2" />
-                    Get Tickets
-                  </a>
-                </div>
-              )}
-            </div>
-
-            {!isPast && (
-              <div className="pt-3">
-                <div className="grid grid-cols-2 gap-3">
-                  {id && <RSVPButton showId={id} variant="button" showCount />}
-                  <a
-                    href={generateCalendarLink()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-light w-full"
-                  >
-                    <KeenIcon icon="calendar" className="me-2" />
-                    Add to Calendar
-                  </a>
                 </div>
               </div>
             )}
           </div>
+
+          {/* Right Column - Sticky Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-5 space-y-4">
+              {/* Ticket Card */}
+              <div className="card shadow-lg overflow-hidden">
+                <div className="bg-gradient-to-br from-primary to-blue-400 p-6 text-white">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-white/90 text-lg font-medium">
+                      {isPast ? 'Event Ended' : 'Get Your Spot'}
+                    </span>
+                    {show.ticketPrice !== null &&
+                      show.ticketPrice !== undefined && (
+                        <div className="text-right">
+                          <span className="text-3xl font-bold">
+                            ${show.ticketPrice.toFixed(0)}
+                          </span>
+                          <span className="text-white/70 text-sm ml-1">
+                            /ticket
+                          </span>
+                        </div>
+                      )}
+                  </div>
+
+                  {!isPast && show.ticketUrl && (
+                    <a
+                      href={show.ticketUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-3 bg-success text-white font-semibold text-center rounded-xl hover:bg-success-active transition-colors shadow-success/30 hover:shadow-success/50 hover:scale-105"
+                    >
+                      Buy Tickets Now
+                    </a>
+                  )}
+
+                  {isPast && (
+                    <div className="text-center py-3 bg-white/10 rounded-xl">
+                      <span className="text-white/80">
+                        This event has ended
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-6 space-y-4">
+                  {/* Date & Time */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                      <KeenIcon icon="calendar" className="text-gray-600" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">
+                        {formatDate(show.dateTime)}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {formatTime(show.dateTime)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Venue */}
+                  {venue && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                        <KeenIcon
+                          icon="geolocation"
+                          className="text-gray-600"
+                        />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          {venue.name}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {venue.city}, {venue.state}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Age Restriction */}
+                  {show.ageRestriction && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                        <KeenIcon
+                          icon="shield-tick"
+                          className="text-gray-600"
+                        />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          Age Restriction
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {show.ageRestriction}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Divider */}
+                  <div className="border-t border-gray-100 pt-4">
+                    {!isPast && (
+                      <div className="grid grid-cols-2 gap-2">
+                        {id && (
+                          <RSVPButton showId={id} variant="button" showCount />
+                        )}
+                        <a
+                          href={generateCalendarLink()}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-light w-full gap-1.5"
+                        >
+                          <KeenIcon icon="calendar" />
+                          Calendar
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Share Card */}
+              <div className="card shadow-lg p-4">
+                <p className="text-sm text-gray-500 mb-3">Share this event</p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      showSnackbar('Link copied to clipboard', 'success', 1000);
+                    }}
+                    className="flex-1 btn btn-sm btn-light gap-1.5"
+                  >
+                    <KeenIcon icon="copy" />
+                    Copy Link
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 
