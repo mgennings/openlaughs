@@ -30,7 +30,7 @@
         "whisperTranscribe": {
           "secretsPathAmplifyAppId": "dtnp2qcciqtir",
           "deploymentBucketName": "amplify-openlaughs-dev-13b80-deployment",
-          "s3Key": "amplify-builds/whisperTranscribe-2f682b634b7979484371-build.zip"
+          "s3Key": "amplify-builds/whisperTranscribe-394833717a653868516f-build.zip"
         }
       }
     }
