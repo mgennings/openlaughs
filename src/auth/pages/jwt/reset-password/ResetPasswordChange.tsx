@@ -19,7 +19,7 @@ const passwordSchema = Yup.object().shape({
 
 const ResetPasswordChange = () => {
   const { currentLayout } = useLayout();
-  const { changePassword } = useAuthContext();
+  const { resetPassword } = useAuthContext();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
@@ -37,36 +37,44 @@ const ResetPasswordChange = () => {
       setLoading(true);
       setHasErrors(undefined);
 
-      const token = new URLSearchParams(window.location.search).get('token');
+      const code = new URLSearchParams(window.location.search).get('code');
       const email = new URLSearchParams(window.location.search).get('email');
 
-      if (!token || !email) {
+      if (!code || !email) {
         setHasErrors(true);
-        setStatus('Token and email properties are required');
+        setStatus('Verification code and email are required');
         setLoading(false);
         setSubmitting(false);
         return;
       }
 
       try {
-        await changePassword(
-          email,
-          token,
-          values.newPassword,
-          values.confirmPassword,
-        );
+        if (!resetPassword) {
+          throw new Error('Password reset service is not available');
+        }
+        await resetPassword(email, code, values.newPassword);
         setHasErrors(false);
         navigate(
           currentLayout?.name === 'auth-branded'
             ? '/auth/reset-password/changed'
             : '/auth/classic/reset-password/changed',
         );
-      } catch (error) {
+      } catch (error: any) {
+        let errorMessage = 'Password reset failed. Please try again.';
         if (error instanceof AxiosError && error.response) {
-          setStatus(error.response.data.message);
-        } else {
-          setStatus('Password reset failed. Please try again.');
+          errorMessage = error.response.data.message;
+        } else if (error.message) {
+          if (error.message.includes('CodeMismatchException')) {
+            errorMessage =
+              'Invalid verification code. Please check and try again.';
+          } else if (error.message.includes('ExpiredCodeException')) {
+            errorMessage =
+              'This verification code has expired. Please request a new one.';
+          } else {
+            errorMessage = error.message;
+          }
         }
+        setStatus(errorMessage);
         setHasErrors(true);
       } finally {
         setLoading(false);
