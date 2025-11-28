@@ -17,6 +17,7 @@ export default [
       'public',
       'src/components/keenicons/assets',
       'src/ui-components',
+      'src/graphql/schema.json',
       'amplify-codegen-temp/models/models',
     ],
   },
