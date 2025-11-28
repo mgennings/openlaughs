@@ -12,6 +12,7 @@ import {
   FavoriteComediansSection,
   FavoriteVenuesSection,
   SavedShowsSection,
+  ComedianProfile,
 } from './blocks';
 import { useUserProfile } from '@/hooks';
 import { useSettings } from '@/providers/SettingsProvider';
@@ -36,6 +37,7 @@ const AccountUserProfileContent = () => {
         <div className="col-span-1">
           <div className="grid gap-5 lg:gap-7.5">
             <PersonalInfo />
+            {profile?.role === 'comedian' && <ComedianProfile />}
 
             {showPreviewFeatures && (
               <>

@@ -12,7 +12,7 @@ interface ModalCreateComedianProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   createdBy: string;
-  onCreated?: () => void;
+  onCreated?: (comedianId?: string) => void;
   onError?: (message: string) => void;
 }
 
@@ -23,8 +23,8 @@ const ModalCreateComedian = ({
   onCreated,
   onError,
 }: ModalCreateComedianProps) => {
-  const handleCreated = () => {
-    onCreated?.();
+  const handleCreated = (comedianId?: string) => {
+    onCreated?.(comedianId);
     onOpenChange(false);
   };
 

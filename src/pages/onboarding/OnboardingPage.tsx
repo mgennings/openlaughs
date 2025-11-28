@@ -102,8 +102,13 @@ const OnboardingPage = () => {
       // Small delay to ensure profile is available before redirect
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Navigate to dashboard
-      navigate('/dashboard', { replace: true });
+      // If role is comedian, redirect to comedian onboarding
+      if (role === 'comedian') {
+        navigate('/onboarding/comedian', { replace: true });
+      } else {
+        // Navigate to dashboard for other roles
+        navigate('/dashboard', { replace: true });
+      }
     } catch (err: any) {
       console.error('Onboarding error:', err);
 

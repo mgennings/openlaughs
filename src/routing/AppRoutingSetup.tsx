@@ -78,7 +78,7 @@ import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
 import { RequireOnboarding } from '@/auth/RequireOnboarding';
 import { CognitoCallback } from '@/auth/CognitoCallback';
-import { OnboardingPage } from '@/pages/onboarding';
+import { OnboardingPage, ComedianOnboardingPage } from '@/pages/onboarding';
 import { Demo1Layout } from '@/layouts/demo1';
 import { ErrorsRouting } from '@/errors';
 import {
@@ -107,6 +107,10 @@ const AppRoutingSetup = (): ReactElement => {
       {/* Onboarding - Must be authenticated but doesn't require onboarding */}
       <Route element={<RequireAuth />}>
         <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route
+          path="/onboarding/comedian"
+          element={<ComedianOnboardingPage />}
+        />
       </Route>
 
       {/* Authenticated Routes - Require Onboarding */}

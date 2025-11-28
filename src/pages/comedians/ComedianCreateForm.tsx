@@ -27,7 +27,7 @@ const client = generateClient({ authMode: 'userPool' });
 
 interface ComedianCreateFormProps {
   createdBy: string;
-  onCreated?: () => void;
+  onCreated?: (comedianId?: string) => void;
   onCancelClick?: () => void;
   onError?: (message: string) => void;
 }
@@ -147,6 +147,11 @@ const ComedianCreateForm = ({
         throw new Error(result.errors[0].message);
       }
 
+      const createdComedianId =
+        'data' in result && result.data?.createComedian?.id
+          ? result.data.createComedian.id
+          : undefined;
+
       // Reset form on success
       setFormData({
         stageName: '',
@@ -156,7 +161,7 @@ const ComedianCreateForm = ({
       });
       setProfileImage([]);
       setError(null);
-      onCreated?.();
+      onCreated?.(createdComedianId);
     } catch (err: any) {
       console.error('Error creating comedian:', err);
       const errorMessage = err.message || 'Failed to create comedian';

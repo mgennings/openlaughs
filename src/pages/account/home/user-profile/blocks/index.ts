@@ -9,3 +9,4 @@ export * from './ProfileStats';
 export * from './FavoriteComedians';
 export * from './FavoriteVenues';
 export * from './SavedShows';
+export * from './ComedianProfile';
