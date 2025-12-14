@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,11 +24,8 @@ jobs:
           node-version: 20
           cache: yarn
 
-      - name: Install
+      - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Lint (check)
+      - name: Lint (no fixes)
         run: yarn lint:check
-
-      - name: Build
-        run: yarn build
