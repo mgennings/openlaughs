@@ -87,35 +87,38 @@ const CardWork = ({
           <Link
             to={titleLink || '/shows/:id'}
             title={authorName}
-            className="flex items-center grow"
+            className="flex items-center grow min-w-0 me-2"
           >
             {hasAvatarUrl ? (
               <img
                 src={avatarSrc}
-                className="rounded-full size-7 me-2 object-cover"
+                className="rounded-full size-7 me-2 object-cover flex-shrink-0"
                 alt={authorName}
                 onError={e => {
                   // Replace image with letter circle if it fails to load
                   const target = e.target as HTMLImageElement;
                   const fallback = document.createElement('div');
                   fallback.className =
-                    'rounded-full size-7 me-2 bg-primary text-white flex items-center justify-center font-semibold text-sm';
+                    'rounded-full size-7 me-2 bg-primary text-white flex items-center justify-center font-semibold text-sm flex-shrink-0';
                   fallback.textContent = firstLetter;
                   target.replaceWith(fallback);
                 }}
               />
             ) : (
-              <div className="rounded-full size-7 me-2 bg-primary text-white flex items-center justify-center font-semibold text-sm">
+              <div className="rounded-full size-7 me-2 bg-primary text-white flex items-center justify-center font-semibold text-sm flex-shrink-0">
                 {firstLetter}
               </div>
             )}
 
-            <div className="text-2sm text-gray-800 hover:text-primary mb-px line-clamp-1">
+            <div
+              className="text-2sm text-gray-800 hover:text-primary mb-px line-clamp-1 min-w-0 overflow-hidden text-ellipsis"
+              title={authorName}
+            >
               {authorName}
             </div>
           </Link>
 
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-3 items-center flex-shrink-0">
             <div className="flex gap-1 items-center">
               <KeenIcon icon="heart" className="text-base text-gray-500" />
               <span className="text-2sm text-gray-800 py-2">{likes}</span>

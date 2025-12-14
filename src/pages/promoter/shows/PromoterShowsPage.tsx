@@ -8,12 +8,14 @@ import { listShows } from '@/graphql/queries';
 import { getPublicUrl } from '@/lib/storage';
 import type { ListShowsQuery, Show } from '@/API';
 import { useAuthContext } from '@/auth/useAuthContext';
-import { useUserAvatar } from '@/hooks';
+import { useUserAvatar, useUserProfile } from '@/hooks';
+import { getUserDisplayName } from '@/lib/userDisplay';
 
 const client = generateClient({ authMode: 'userPool' });
 
 const PromoterShowsPage = () => {
   const { currentUser } = useAuthContext();
+  const { profile } = useUserProfile();
   const [shows, setShows] = useState<Show[]>([]);
   const [showImageUrls, setShowImageUrls] = useState<Record<string, string>>(
     {},
@@ -29,6 +31,23 @@ const PromoterShowsPage = () => {
   );
 
   const avatarUrl = useUserAvatar();
+
+  const displayName = useMemo(
+    () =>
+      getUserDisplayName({
+        firstName: profile?.firstName || currentUser?.first_name,
+        lastName: profile?.lastName || currentUser?.last_name,
+        email: currentUser?.email,
+        shortLastName: true,
+      }),
+    [
+      profile?.firstName,
+      profile?.lastName,
+      currentUser?.first_name,
+      currentUser?.last_name,
+      currentUser?.email,
+    ],
+  );
 
   const fetchShows = async () => {
     if (!createdBy) return;
@@ -198,9 +217,7 @@ const PromoterShowsPage = () => {
                   dateTime={show.dateTime}
                   image={'1.jpg'}
                   showImageUrl={showImageUrls[show.id]}
-                  authorName={
-                    currentUser?.fullname || currentUser?.username || 'Me'
-                  }
+                  authorName={displayName}
                   authorAvatar={'300-1.png'}
                   authorAvatarUrl={avatarUrl}
                   titleLink={`/promoter/shows/${show.id}`}
