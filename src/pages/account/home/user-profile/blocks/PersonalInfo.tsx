@@ -6,7 +6,7 @@ import { createUserProfile, updateUserProfile } from '@/graphql/mutations';
 import type { UserProfile } from '@/API';
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { getPublicUrl, uploadPublicImage } from '@/lib/storage';
-import { US_STATES } from '@/config/constants';
+import { US_STATES, ROLE_OPTIONS, type UserRole } from '@/config/constants';
 
 const PersonalInfo = () => {
   const { execute } = useGraphQL();
@@ -215,6 +215,26 @@ const PersonalInfo = () => {
     [profile],
   );
 
+  const roleInfo = useMemo(() => {
+    const role = profile?.role as UserRole | undefined;
+    return role ? ROLE_OPTIONS.find(r => r.role === role) : null;
+  }, [profile?.role]);
+
+  const getRoleBadgeColor = (role: UserRole | undefined): string => {
+    switch (role) {
+      case 'comedian':
+        return 'badge-info';
+      case 'fan':
+        return 'badge-success';
+      case 'promoter':
+        return 'badge-warning';
+      case 'admin':
+        return 'badge-danger';
+      default:
+        return 'badge-light';
+    }
+  };
+
   const onAvatarSelected = async (file: File) => {
     if (!profile) return;
     const ext = file.name.split('.').pop() || 'jpg';
@@ -231,7 +251,16 @@ const PersonalInfo = () => {
   return (
     <div className="card min-w-full" id="personal-info-card">
       <div className="card-header">
-        <h3 className="card-title">Personal Info</h3>
+        <div className="flex items-center gap-2">
+          <h3 className="card-title">Personal Info</h3>
+          {roleInfo && (
+            <span
+              className={`badge badge-sm badge-outline ${getRoleBadgeColor(profile?.role as UserRole)}`}
+            >
+              {roleInfo.emoji} {roleInfo.title}
+            </span>
+          )}
+        </div>
         <div className="flex items-center gap-2 ml-auto">
           {!isEditing ? (
             <button

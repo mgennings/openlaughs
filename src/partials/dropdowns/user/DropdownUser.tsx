@@ -13,6 +13,7 @@ import { getCurrentUser } from 'aws-amplify/auth';
 import type { UserProfile } from '@/API';
 import { getPublicUrl } from '@/lib/storage';
 import { getInitials, getUserDisplayName } from '@/lib/userDisplay';
+import { ROLE_OPTIONS, type UserRole } from '@/config/constants';
 import {
   MenuItem,
   MenuLink,
@@ -78,6 +79,26 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
     return profile?.role === 'admin';
   }, [profile?.role]);
 
+  const roleInfo = useMemo(() => {
+    const role = profile?.role as UserRole | undefined;
+    return role ? ROLE_OPTIONS.find(r => r.role === role) : null;
+  }, [profile?.role]);
+
+  const getRoleBadgeColor = (role: UserRole | undefined): string => {
+    switch (role) {
+      case 'comedian':
+        return 'badge-info';
+      case 'fan':
+        return 'badge-success';
+      case 'promoter':
+        return 'badge-warning';
+      case 'admin':
+        return 'badge-danger';
+      default:
+        return 'badge-light';
+    }
+  };
+
   const buildHeader = () => {
     const userName = getUserDisplayName({
       firstName: profile?.firstName || currentUser?.first_name,
@@ -107,12 +128,21 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
             </div>
           )}
           <div className="flex flex-col min-w-0 flex-1">
-            <Link
-              to="/account/home/user-profile"
-              className="text-sm text-gray-800 hover:text-primary font-semibold leading-normal truncate"
-            >
-              {userName}
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                to="/account/home/user-profile"
+                className="text-sm text-gray-800 hover:text-primary font-semibold leading-normal truncate"
+              >
+                {userName}
+              </Link>
+              {roleInfo && (
+                <span
+                  className={`badge badge-xs badge-outline ${getRoleBadgeColor(profile?.role as UserRole)} flex-shrink-0`}
+                >
+                  {roleInfo.emoji} {roleInfo.title}
+                </span>
+              )}
+            </div>
             {userEmail && (
               <a
                 href={`mailto:${userEmail}`}
