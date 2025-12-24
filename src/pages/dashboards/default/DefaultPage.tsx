@@ -1,5 +1,10 @@
 import { useUserProfile } from '@/hooks';
-import { Demo1LightSidebarPage, FanDashboardPage } from '../';
+import {
+  Demo1LightSidebarPage,
+  FanDashboardPage,
+  ComedianDashboardPage,
+  PromoterDashboardPage,
+} from '../';
 import { KeenIcon } from '@/components';
 import type { UserRole } from '@/config/constants';
 
@@ -58,12 +63,10 @@ const DefaultPage = () => {
       return <FanDashboardPage />;
 
     case 'comedian':
-      // TODO: Create comedian dashboard
-      return <FanDashboardPage />; // Fallback to fan for now
+      return <ComedianDashboardPage />;
 
     case 'promoter':
-      // TODO: Create promoter dashboard
-      return <Demo1LightSidebarPage />; // Current business dashboard
+      return <PromoterDashboardPage />;
 
     case 'admin':
       return <Demo1LightSidebarPage />; // Current admin dashboard

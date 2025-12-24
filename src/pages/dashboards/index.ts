@@ -5,3 +5,5 @@ export * from './demo3';
 export * from './demo4';
 export * from './demo5';
 export * from './fan';
+export * from './comedian';
+export * from './promoter';
