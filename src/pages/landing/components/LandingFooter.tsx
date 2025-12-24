@@ -95,7 +95,7 @@ const LandingFooter = () => {
           <p>
             Powered by AWS Amplify • Built with React & TypeScript •
             <a
-              href="https://github.com/matthewgennings/openlaughs"
+              href="https://github.com/mgennings/openlaughs"
               className="hover:text-white transition-colors ml-1"
             >
               Open Source
