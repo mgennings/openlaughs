@@ -8,6 +8,7 @@ import { createUserProfile } from '@/graphql/mutations';
 import { listUserProfiles } from '@/graphql/queries';
 import type { CreateUserProfileInput } from '@/API';
 import { ROLE_OPTIONS, type UserRole } from '@/config/constants';
+import { AdminPasswordModal } from './AdminPasswordModal';
 
 const client = generateClient({ authMode: 'userPool' });
 
@@ -17,10 +18,37 @@ const OnboardingPage = () => {
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showAdminPasswordModal, setShowAdminPasswordModal] = useState(false);
+  const [adminPasswordVerified, setAdminPasswordVerified] = useState(false);
 
   const handleSelectRole = async (role: UserRole) => {
     if (loading) return;
 
+    // If admin role is selected, show password modal first
+    if (role === 'admin' && !adminPasswordVerified) {
+      setShowAdminPasswordModal(true);
+      return;
+    }
+
+    // Proceed with role selection
+    await proceedWithRoleSelection(role);
+  };
+
+  const handleAdminPasswordVerified = () => {
+    setAdminPasswordVerified(true);
+    // Proceed with admin role selection after password is verified
+    void proceedWithRoleSelection('admin');
+  };
+
+  const handleAdminPasswordModalClose = (open: boolean) => {
+    setShowAdminPasswordModal(open);
+    // Reset verification state if modal is closed without verification
+    if (!open && !adminPasswordVerified) {
+      setSelectedRole(null);
+    }
+  };
+
+  const proceedWithRoleSelection = async (role: UserRole) => {
     setSelectedRole(role);
     setError(null);
     setLoading(true);
@@ -219,6 +247,12 @@ const OnboardingPage = () => {
           </p>
         </div>
       </Container>
+
+      <AdminPasswordModal
+        open={showAdminPasswordModal}
+        onOpenChange={handleAdminPasswordModalClose}
+        onPasswordVerified={handleAdminPasswordVerified}
+      />
     </div>
   );
 };
